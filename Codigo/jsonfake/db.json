@@ -7,7 +7,7 @@
               "login": "carlos.silva",
               "senha": "senha123",
               "dataNascimento": "1990-05-15",
-              "telefone": "11 98765-4321",
+              "telefone": "(11)98765-4321",
               "email": "carlos.silva@example.com",
               "logradouro": "Rua das Flores",
               "numero": 123,
@@ -23,7 +23,7 @@
               "login": "ana.oliveira",
               "senha": "senha456",
               "dataNascimento": "1985-09-23",
-              "telefone": "21 99876-5432",
+              "telefone": "(21)99876-5432",
               "email": "ana.oliveira@example.com",
               "logradouro": "Avenida Central",
               "numero": 456,
@@ -39,7 +39,7 @@
               "login": "joao.souza",
               "senha": "senha789",
               "dataNascimento": "2000-12-08",
-              "telefone": "31 91234-5678",
+              "telefone": "(31)91234-5678",
               "email": "joao.souza@example.com",
               "logradouro": "Praça da Paz",
               "numero": 789,
@@ -48,5 +48,55 @@
               "cep": "34567-890",
               "uf": "MG"
             }
+    ],
+    "admsuportes": [
+        [
+            {
+              "id": 1,
+              "nome": "Mariana Santos",
+              "cpf": "321.654.987-33",
+              "login": "mariana.santos",
+              "senha": "senha321",
+              "telefone": "(41)99876-1234",
+              "email": "mariana.santos@example.com",
+              "logradouro": "Rua das Palmeiras",
+              "numero": 56,
+              "complemento": "Bloco B, Apto 302",
+              "bairro": "Santa Clara",
+              "cep": "45678-901",
+              "uf": "PR"
+            },
+            {
+              "id": 2,
+              "nome": "Ricardo Mendes",
+              "cpf": "654.321.987-44",
+              "login": "ricardo.mendes",
+              "senha": "senha654",
+              "telefone": "(62)98765-7890",
+              "email": "ricardo.mendes@example.com",
+              "logradouro": "Avenida dos Ipês",
+              "numero": 220,
+              "complemento": "Conjunto 3",
+              "bairro": "Setor Sul",
+              "cep": "56789-012",
+              "uf": "GO"
+            },
+            {
+              "id": 3,
+              "nome": "Fernanda Almeida",
+              "cpf": "789.123.456-55",
+              "login": "fernanda.almeida",
+              "senha": "senha987",
+              "telefone": "(81)91234-8765",
+              "email": "fernanda.almeida@example.com",
+              "logradouro": "Travessa do Sol",
+              "numero": 33,
+              "complemento": "Casa 2",
+              "bairro": "Boa Vista",
+              "cep": "67890-123",
+              "uf": "PE"
+            }
+          ]
+          
     ]
 }
