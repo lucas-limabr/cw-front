@@ -49,7 +49,7 @@
               "uf": "MG"
             }
     ],
-    "admsuportes": [
+    "admsuportes": 
         [
             {
               "id": 1,
@@ -96,7 +96,69 @@
               "cep": "67890-123",
               "uf": "PE"
             }
-          ]
+          ],
           
+    "empresas":[
+        {
+            "id": 1,
+            "razaosocial": "Volkswagen",
+            "cnpj": "12.345.678/0001-91",
+            "telefone": "(11) 912345678",
+            "logradouro": "Rua das Flores",
+            "numero": "123",
+            "complemento": "Apto 101",
+            "bairro": "Jardim das Palmeiras",
+            "cep": "12345-678",
+            "uf": "SP"
+        },
+        {
+            "id": 2,
+            "razaosocial": "Fiat",
+            "cnpj": "98.765.432/0001-45",
+            "telefone": "(31) 31987654321",
+            "logradouro": "Alameda dos Ipês",
+            "numero": "789",
+            "complemento": "Casa 2",
+            "bairro": "Vila Nova",
+            "cep": "56789-012",
+            "uf": "MG"
+        },
+        {
+            "id": 3,
+            "razaosocial": "Honda",
+            "cnpj": "23.456.789/0001-32",
+            "telefone": "(21) 998765432",
+            "logradouro": "Avenida Central",
+            "numero": "456",
+            "complemento": "Bloco B",
+            "bairro": "Centro",
+            "cep": "98765-432",
+            "uf": "RJ"
+        }
+    ],
+    
+    "admempresas":[
+        {
+            "id": 1,
+            "login": "12.345.678/0001-91",
+            "senha": "Xyz12!",
+            "nomerepresentlegal": "Mariana Oliveira",
+            "idempresa": 1
+
+        },
+        {
+            "id": 2,
+            "login": "98.765.432/0001-45",
+            "senha": "Abc#45",
+            "nomerepresentlegal": "Pedro Souza",
+            "idempresa": 3
+        },
+        {
+            "id": 3,
+            "login": "23.456.789/0001-32",
+            "senha": "K9Lm@1",
+            "nomerepresentlegal": "Julia Santos",
+            "idempresa": 2
+        }
     ]
 }
