@@ -242,5 +242,19 @@
       "cep": "34567-890",
       "uf": "MG"
     }
+  ],
+  "acessorios": [
+    {
+      "id": 1,
+      "acessorio": "Teto Solar Elétrico"
+    },
+    {
+      "id": 2,
+      "acessorio": "Câmera de ré"
+    },
+    {
+      "id": 3,
+      "acessorio": "Rodas esportivas"
+    }
   ]
 }
