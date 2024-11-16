@@ -1,164 +1,152 @@
 {
-    "clientes": [
-            {
-              "id": 1,
-              "nome": "Carlos Silva",
-              "cpf": "123.456.789-00",
-              "login": "carlos.silva",
-              "senha": "senha123",
-              "dataNascimento": "1990-05-15",
-              "telefone": "(11)98765-4321",
-              "email": "carlos.silva@example.com",
-              "logradouro": "Rua das Flores",
-              "numero": 123,
-              "complemento": "Apto 45",
-              "bairro": "Jardim Primavera",
-              "cep": "12345-678",
-              "uf": "SP"
-            },
-            {
-              "id": 2,
-              "nome": "Ana Oliveira",
-              "cpf": "987.654.321-11",
-              "login": "ana.oliveira",
-              "senha": "senha456",
-              "dataNascimento": "1985-09-23",
-              "telefone": "(21)99876-5432",
-              "email": "ana.oliveira@example.com",
-              "logradouro": "Avenida Central",
-              "numero": 456,
-              "complemento": "Sala 12",
-              "bairro": "Centro",
-              "cep": "23456-789",
-              "uf": "RJ"
-            },
-            {
-              "id": 3,
-              "nome": "João Souza",
-              "cpf": "456.789.123-22",
-              "login": "joao.souza",
-              "senha": "senha789",
-              "dataNascimento": "2000-12-08",
-              "telefone": "(31)91234-5678",
-              "email": "joao.souza@example.com",
-              "logradouro": "Praça da Paz",
-              "numero": 789,
-              "complemento": "Casa",
-              "bairro": "Bela Vista",
-              "cep": "34567-890",
-              "uf": "MG"
-            }
-    ],
-    "admsuportes": 
-        [
-            {
-              "id": 1,
-              "nome": "Mariana Santos",
-              "cpf": "321.654.987-33",
-              "login": "mariana.santos",
-              "senha": "senha321",
-              "telefone": "(41)99876-1234",
-              "email": "mariana.santos@example.com",
-              "logradouro": "Rua das Palmeiras",
-              "numero": 56,
-              "complemento": "Bloco B, Apto 302",
-              "bairro": "Santa Clara",
-              "cep": "45678-901",
-              "uf": "PR"
-            },
-            {
-              "id": 2,
-              "nome": "Ricardo Mendes",
-              "cpf": "654.321.987-44",
-              "login": "ricardo.mendes",
-              "senha": "senha654",
-              "telefone": "(62)98765-7890",
-              "email": "ricardo.mendes@example.com",
-              "logradouro": "Avenida dos Ipês",
-              "numero": 220,
-              "complemento": "Conjunto 3",
-              "bairro": "Setor Sul",
-              "cep": "56789-012",
-              "uf": "GO"
-            },
-            {
-              "id": 3,
-              "nome": "Fernanda Almeida",
-              "cpf": "789.123.456-55",
-              "login": "fernanda.almeida",
-              "senha": "senha987",
-              "telefone": "(81)91234-8765",
-              "email": "fernanda.almeida@example.com",
-              "logradouro": "Travessa do Sol",
-              "numero": 33,
-              "complemento": "Casa 2",
-              "bairro": "Boa Vista",
-              "cep": "67890-123",
-              "uf": "PE"
-            }
-          ],
-          
-    "empresas":[
-        {
-            "id": 1,
-            "razaosocial": "Volkswagen",
-            "cnpj": "12.345.678/0001-91",
-            "telefone": "(11) 912345678",
-            "logradouro": "Rua das Flores",
-            "numero": "123",
-            "complemento": "Apto 101",
-            "bairro": "Jardim das Palmeiras",
-            "cep": "12345-678",
-            "uf": "SP"
-        },
-        {
-            "id": 2,
-            "razaosocial": "Fiat",
-            "cnpj": "98.765.432/0001-45",
-            "telefone": "(31) 31987654321",
-            "logradouro": "Alameda dos Ipês",
-            "numero": "789",
-            "complemento": "Casa 2",
-            "bairro": "Vila Nova",
-            "cep": "56789-012",
-            "uf": "MG"
-        },
-        {
-            "id": 3,
-            "razaosocial": "Honda",
-            "cnpj": "23.456.789/0001-32",
-            "telefone": "(21) 998765432",
-            "logradouro": "Avenida Central",
-            "numero": "456",
-            "complemento": "Bloco B",
-            "bairro": "Centro",
-            "cep": "98765-432",
-            "uf": "RJ"
-        }
-    ],
-    
-    "admempresas":[
-        {
-            "id": 1,
-            "login": "12.345.678/0001-91",
-            "senha": "Xyz12!",
-            "nomerepresentlegal": "Mariana Oliveira",
-            "idempresa": 1
-
-        },
-        {
-            "id": 2,
-            "login": "98.765.432/0001-45",
-            "senha": "Abc#45",
-            "nomerepresentlegal": "Pedro Souza",
-            "idempresa": 3
-        },
-        {
-            "id": 3,
-            "login": "23.456.789/0001-32",
-            "senha": "K9Lm@1",
-            "nomerepresentlegal": "Julia Santos",
-            "idempresa": 2
-        }
-    ]
+  "admempresas": [
+    {
+      "id": 1,
+      "login": "admempresa1",
+      "senha": "senhaAdm1",
+      "nomerepresentlegal": "Luiz Fernandes",
+      "dataNascimento": "1975-03-12",
+      "telefone": "(11)99876-5432",
+      "email": "luiz.fernandes@example.com",
+      "logradouro": "Rua do Comercio",
+      "numero": "101",
+      "complemento": "Sala 501",
+      "bairro": "Centro",
+      "cep": "12345-678",
+      "uf": "SP",
+      "idempresa": 1
+    },
+    {
+      "id": 2,
+      "login": "admempresa2",
+      "senha": "senhaAdm2",
+      "nomerepresentlegal": "Maria Clara",
+      "dataNascimento": "1980-07-22",
+      "telefone": "(21)98765-4321",
+      "email": "maria.clara@example.com",
+      "logradouro": "Avenida Brasil",
+      "numero": "456",
+      "complemento": "Bloco A",
+      "bairro": "Vila Nova",
+      "cep": "23456-789",
+      "uf": "RJ",
+      "idempresa": 2
+    },
+    {
+      "id": 3,
+      "login": "admempresa3",
+      "senha": "senhaAdm3",
+      "nomerepresentlegal": "Carlos Lima",
+      "dataNascimento": "1985-11-10",
+      "telefone": "(31)91234-5678",
+      "email": "carlos.lima@example.com",
+      "logradouro": "Praça da Paz",
+      "numero": "789",
+      "complemento": "Apto 202",
+      "bairro": "Bela Vista",
+      "cep": "34567-890",
+      "uf": "MG",
+      "idempresa": 3
+    }
+  ],
+  "gestores": [
+    {
+      "id": 1,
+      "nome": "Joana Pereira",
+      "cpf": "321.654.987-00",
+      "login": "joana.pereira",
+      "senha": "senhaGest1",
+      "telefone": "(47)98765-1234",
+      "email": "joana.pereira@example.com",
+      "logradouro": "Rua das Palmeiras",
+      "numero": "25",
+      "complemento": "Casa 1",
+      "bairro": "Jardim Florido",
+      "cep": "45678-901",
+      "uf": "SC",
+      "idempresa": 1
+    },
+    {
+      "id": 2,
+      "nome": "Felipe Araújo",
+      "cpf": "654.987.321-22",
+      "login": "felipe.araujo",
+      "senha": "senhaGest2",
+      "telefone": "(62)91234-8765",
+      "email": "felipe.araujo@example.com",
+      "logradouro": "Alameda das Acácias",
+      "numero": "50",
+      "complemento": "Bloco C",
+      "bairro": "Setor Central",
+      "cep": "56789-012",
+      "uf": "GO",
+      "idempresa": 2
+    },
+    {
+      "id": 3,
+      "nome": "Renata Borges",
+      "cpf": "987.654.321-44",
+      "login": "renata.borges",
+      "senha": "senhaGest3",
+      "telefone": "(81)98765-4321",
+      "email": "renata.borges@example.com",
+      "logradouro": "Travessa do Sol",
+      "numero": "15",
+      "complemento": "Casa 3",
+      "bairro": "Boa Vista",
+      "cep": "67890-123",
+      "uf": "PE",
+      "idempresa": 3
+    }
+  ],
+  "vendedores": [
+    {
+      "id": 1,
+      "nome": "Lucas Ferreira",
+      "cpf": "123.987.654-55",
+      "login": "lucas.ferreira",
+      "senha": "senhaVend1",
+      "telefone": "(11)97654-3210",
+      "email": "lucas.ferreira@example.com",
+      "logradouro": "Rua do Comércio",
+      "numero": "45",
+      "complemento": "Apto 12",
+      "bairro": "Centro",
+      "cep": "12345-678",
+      "uf": "SP",
+      "idempresa": 1
+    },
+    {
+      "id": 2,
+      "nome": "Paula Santos",
+      "cpf": "456.123.789-66",
+      "login": "paula.santos",
+      "senha": "senhaVend2",
+      "telefone": "(31)91234-8765",
+      "email": "paula.santos@example.com",
+      "logradouro": "Avenida dos Estados",
+      "numero": "98",
+      "complemento": "Bloco A",
+      "bairro": "Vila Nova",
+      "cep": "34567-890",
+      "uf": "MG",
+      "idempresa": 2
+    },
+    {
+      "id": 3,
+      "nome": "Bruno Oliveira",
+      "cpf": "789.456.123-77",
+      "login": "bruno.oliveira",
+      "senha": "senhaVend3",
+      "telefone": "(21)97654-1234",
+      "email": "bruno.oliveira@example.com",
+      "logradouro": "Rua da União",
+      "numero": "67",
+      "complemento": "Casa",
+      "bairro": "Centro",
+      "cep": "23456-789",
+      "uf": "RJ",
+      "idempresa": 3
+    }
+  ]
 }
