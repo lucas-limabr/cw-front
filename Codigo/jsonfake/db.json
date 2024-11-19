@@ -256,5 +256,33 @@
       "id": 3,
       "acessorio": "Rodas esportivas"
     }
+  ],
+  "fabricantes":[
+    {
+      "id": 1,
+      "nome": "Volkswagen"
+    },
+    {
+      "id": 2,
+      "nome": "Toyota"
+    },
+    {
+      "id": 3,
+      "nome": "BMW"
+    }
+  ],
+  "modelo":[
+    {
+      "id": 1,
+      "nome": "Virtus"
+    },
+    {
+      "id": 2,
+      "nome": "Corolla Cross"
+    },
+    {
+      "id": 3,
+      "nome": "X3"
+    }
   ]
 }
