@@ -193,6 +193,21 @@
       "idconcessionaria": 3
     }
   ],
+  "concessionarias": [
+  	{
+		"id": "",
+      		"razaoSocial": "",
+      		"cnpj": "",
+      		"telefone": "",
+      		"email": "",
+      		"logradouro": "",
+      		"numero": "",
+      		"complemento": "",
+      		"bairro": "",
+      		"cep": "",
+      		"uf": ""	
+	}
+  ],
   "clientes": [
     {
       "id": 1,
@@ -271,7 +286,7 @@
       "nome": "BMW"
     }
   ],
-  "modelo":[
+  "modeloveiculos":[
     {
       "id": 1,
       "nome": "Virtus"
@@ -284,5 +299,92 @@
       "id": 3,
       "nome": "X3"
     }
+  ],
+  "veiculos": [
+	{
+		"id": "",
+		"vin":"",
+		"precoAtual": "",
+		"cor": "",
+		"condicao": "",
+		"vendido": "",
+		"garantia": ""
+	}
+  ],
+    "veiculousados": [
+	{
+		"id": "",
+		"vin":"",
+		"precoAtual": "",
+		"cor": "",
+		"condicao": "",
+		"vendido": "",
+		"garantia": "",
+		"quilometragem": "",
+		"dataUltimaRevisao": "",
+		"numeroProprietario": "",
+		"laudoVistoria": "",
+		"documentacao": "",
+		"manuntencao": "",
+		"sinistroAcidente": ""
+	}
+  ],
+  "acessorio": [
+  	{
+		"id": "",
+		"descricao": ""
+	}
+  ], 
+  "itensseries": [
+  	{
+		"id": "",
+		"descricao": ""
+	}
+  ],
+  "concessionaria": [
+  	{
+		"id": "",
+		"descricao": ""
+	}
+  ], 
+  "carro": [
+  	{
+		"id": "",
+		"categoria": "",
+		"transmissao": "",
+		"potencia": ""
+	}
+  ],
+  "moto": [
+	{
+		"id": "",
+		"categoria": "",
+		"qtdMarcha": "",
+		"tipoMotor": "",
+		"cilindrada": ""
+	}
+  ],
+  "modeloveiculos": [
+  	{
+		"id": "",
+		"tipo": "",
+		"anoFabricacao": "",
+		"precoBase": "",
+		"fotosModelo": "",
+		"somenteVenda": "",
+		"requerTestdrive": ""
+	}
+  ],
+  "": [
+  	{
+		"": "",
+		"": ""
+	}
+  ],
+  "": [
+  	{
+		"": "",
+		"": ""
+	}
   ]
 }
