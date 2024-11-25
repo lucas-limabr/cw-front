@@ -46,7 +46,7 @@
       "login": "admempresa1",
       "senha": "senhaAdm1",
       "nomerepresentlegal": "Luiz Fernandes",
-      "dataNascimento": "1975-03-12",
+      "datanascimento": "1975-03-12",
       "telefone": "(11)99876-5432",
       "email": "luiz.fernandes@example.com",
       "logradouro": "Rua do Comercio",
@@ -62,7 +62,7 @@
       "login": "admempresa2",
       "senha": "senhaAdm2",
       "nomerepresentlegal": "Maria Clara",
-      "dataNascimento": "1980-07-22",
+      "datanascimento": "1980-07-22",
       "telefone": "(21)98765-4321",
       "email": "maria.clara@example.com",
       "logradouro": "Avenida Brasil",
@@ -78,7 +78,7 @@
       "login": "admempresa3",
       "senha": "senhaAdm3",
       "nomerepresentlegal": "Carlos Lima",
-      "dataNascimento": "1985-11-10",
+      "datanascimento": "1985-11-10",
       "telefone": "(31)91234-5678",
       "email": "carlos.lima@example.com",
       "logradouro": "Praça da Paz",
@@ -194,19 +194,48 @@
     }
   ],
   "concessionarias": [
-  	{
-		"id": "",
-      		"razaoSocial": "",
-      		"cnpj": "",
-      		"telefone": "",
-      		"email": "",
-      		"logradouro": "",
-      		"numero": "",
-      		"complemento": "",
-      		"bairro": "",
-      		"cep": "",
-      		"uf": ""	
-	}
+    {
+      "id": 1,
+      "razaoSocial": "Auto Vendas Premium LTDA",
+      "cnpj": "12.345.678/0001-99",
+      "telefone": "(11) 98765-4321",
+      "email": "contato@autovendaspremium.com",
+      "logradouro": "Avenida Paulista",
+      "numero": "1000",
+      "complemento": "Sala 101",
+      "bairro": "Bela Vista",
+      "cep": "01310-100",
+      "uf": "SP",
+      "idempresa": "1"
+    },
+    {
+      "id": 2,
+      "razaoSocial": "Super Veículos Brasil SA",
+      "cnpj": "98.765.432/0001-55",
+      "telefone": "(21) 99876-5432",
+      "email": "suporte@superveiculosbr.com",
+      "logradouro": "Rua das Flores",
+      "numero": "500",
+      "complemento": "Loja A",
+      "bairro": "Centro",
+      "cep": "20031-020",
+      "uf": "RJ",
+      "idempresa": "2"
+    },
+    {
+      "id": 3,
+      "razaoSocial": "Carros e Companhia EIRELI",
+      "cnpj": "56.789.012/0001-44",
+      "telefone": "(31) 91234-5678",
+      "email": "vendas@carrosecia.com",
+      "logradouro": "Avenida do Contorno",
+      "numero": "2500",
+      "complemento": "Andar 2",
+      "bairro": "Savassi",
+      "cep": "30110-920",
+      "uf": "MG",
+      "idempresa": "3"
+    }
   ],
   "clientes": [
     {
@@ -215,7 +244,7 @@
       "cpf": "123.456.789-00",
       "login": "carlos.silva",
       "senha": "senha123",
-      "dataNascimento": "1990-05-15",
+      "datanascimento": "1990-05-15",
       "telefone": "(11)98765-4321",
       "email": "carlos.silva@example.com",
       "logradouro": "Rua das Flores",
@@ -231,7 +260,7 @@
       "cpf": "987.654.321-11",
       "login": "ana.oliveira",
       "senha": "senha456",
-      "dataNascimento": "1985-09-23",
+      "datanascimento": "1985-09-23",
       "telefone": "(21)99876-5432",
       "email": "ana.oliveira@example.com",
       "logradouro": "Avenida Central",
@@ -247,7 +276,7 @@
       "cpf": "456.789.123-22",
       "login": "joao.souza",
       "senha": "senha789",
-      "dataNascimento": "2000-12-08",
+      "datanascimento": "2000-12-08",
       "telefone": "(31)91234-5678",
       "email": "joao.souza@example.com",
       "logradouro": "Praça da Paz",
@@ -265,14 +294,28 @@
     },
     {
       "id": 2,
-      "acessorio": "Câmera de ré"
+      "acessorio": "Câmera de Ré"
     },
     {
       "id": 3,
-      "acessorio": "Rodas esportivas"
+      "acessorio": "Rodas Esportivas"
     }
   ],
-  "fabricantes":[
+  "itensseries": [
+    {
+      "id": 1,
+      "descricao": "Ar condicionado digital"
+    },
+    {
+      "id": 2,
+      "descricao": "Sistema de som premium"
+    },
+    {
+      "id": 3,
+      "descricao": "Banco em couro"
+    }
+  ],
+  "fabricantes": [
     {
       "id": 1,
       "nome": "Volkswagen"
@@ -286,105 +329,213 @@
       "nome": "BMW"
     }
   ],
-  "modeloveiculos":[
+  "veiculos": [
     {
       "id": 1,
-      "nome": "Virtus"
+      "vin": "1HGCM82633A123456",
+      "precoAtual": "85000.00",
+      "cor": "Preto",
+      "condicao": "Novo",
+      "vendido": "Não",
+      "garantia": "5 anos",
+      "idmodeloveiculo": "1",
+      "idconcessionaria": "1"
     },
     {
       "id": 2,
-      "nome": "Corolla Cross"
+      "vin": "2FTRX18W7XCA12345",
+      "precoAtual": "45000.00",
+      "cor": "Prata",
+      "condicao": "Usado",
+      "vendido": "Sim",
+      "garantia": "1 ano",
+      "idmodeloveiculo": "2",
+      "idconcessionaria": "2"
     },
     {
       "id": 3,
-      "nome": "X3"
+      "vin": "JH4KA9650MC123456",
+      "precoAtual": "67000.00",
+      "cor": "Azul",
+      "condicao": "Novo",
+      "vendido": "Não",
+      "garantia": "3 anos",
+      "idmodeloveiculo": "3",
+      "idconcessionaria": "3"
     }
   ],
-  "veiculos": [
-	{
-		"id": "",
-		"vin":"",
-		"precoAtual": "",
-		"cor": "",
-		"condicao": "",
-		"vendido": "",
-		"garantia": ""
-	}
+  "veiculousados": [
+    {
+      "id": 1,
+      "vin": "1HGCM82633A654321",
+      "precoAtual": "32000.00",
+      "cor": "Vermelho",
+      "condicao": "Usado",
+      "vendido": "Sim",
+      "garantia": "6 meses",
+      "quilometragem": "75000",
+      "dataUltimaRevisao": "2024-09-15",
+      "numeroProprietario": "2",
+      "laudoVistoria": "Aprovado",
+      "documentacao": "Regular",
+      "manuntencao": "Troca de óleo, revisão completa",
+      "sinistroAcidente": "Não",
+      "idmodeloveiculo": "1",
+      "idconcessionaria": "1"
+    },
+    {
+      "id": 2,
+      "vin": "2FTRX18W7XCA54321",
+      "precoAtual": "28000.00",
+      "cor": "Branco",
+      "condicao": "Usado",
+      "vendido": "Não",
+      "garantia": "3 meses",
+      "quilometragem": "105000",
+      "dataUltimaRevisao": "2024-10-01",
+      "numeroProprietario": "3",
+      "laudoVistoria": "Aprovado",
+      "documentacao": "Regular",
+      "manuntencao": "Revisão do motor, troca de pneus",
+      "sinistroAcidente": "Sim, reparos realizados",
+      "idmodeloveiculo": "2",
+      "idconcessionaria": "2"
+    },
+    {
+      "id": 3,
+      "vin": "JH4KA9650MC987654",
+      "precoAtual": "37000.00",
+      "cor": "Prata",
+      "condicao": "Usado",
+      "vendido": "Não",
+      "garantia": "1 ano",
+      "quilometragem": "62000",
+      "dataUltimaRevisao": "2024-08-20",
+      "numeroProprietario": "1",
+      "laudoVistoria": "Aprovado",
+      "documentacao": "Regular",
+      "manuntencao": "Troca de pastilhas de freio",
+      "sinistroAcidente": "Não",
+      "idmodeloveiculo": "3",
+      "idconcessionaria": "3"
+    }
   ],
-    "veiculousados": [
-	{
-		"id": "",
-		"vin":"",
-		"precoAtual": "",
-		"cor": "",
-		"condicao": "",
-		"vendido": "",
-		"garantia": "",
-		"quilometragem": "",
-		"dataUltimaRevisao": "",
-		"numeroProprietario": "",
-		"laudoVistoria": "",
-		"documentacao": "",
-		"manuntencao": "",
-		"sinistroAcidente": ""
-	}
+  "carros": [
+    {
+      "id": 1,
+      "categoria": "Sedan",
+      "transmissao": "Automática",
+      "potencia": "150 CV"
+    },
+    {
+      "id": 2,
+      "categoria": "SUV",
+      "transmissao": "Manual",
+      "potencia": "200 CV"
+    },
+    {
+      "id": 3,
+      "categoria": "Hatch",
+      "transmissao": "Automática",
+      "potencia": "120 CV"
+    }
   ],
-  "acessorio": [
-  	{
-		"id": "",
-		"descricao": ""
-	}
-  ], 
-  "itensseries": [
-  	{
-		"id": "",
-		"descricao": ""
-	}
-  ],
-  "concessionaria": [
-  	{
-		"id": "",
-		"descricao": ""
-	}
-  ], 
-  "carro": [
-  	{
-		"id": "",
-		"categoria": "",
-		"transmissao": "",
-		"potencia": ""
-	}
-  ],
-  "moto": [
-	{
-		"id": "",
-		"categoria": "",
-		"qtdMarcha": "",
-		"tipoMotor": "",
-		"cilindrada": ""
-	}
+  "motos": [
+    {
+      "id": 1,
+      "categoria": "Esportiva",
+      "qtdMarcha": "6",
+      "tipoMotor": "4 tempos",
+      "cilindrada": "1000cc"
+    },
+    {
+      "id": 2,
+      "categoria": "Cruiser",
+      "qtdMarcha": "5",
+      "tipoMotor": "V2",
+      "cilindrada": "1600cc"
+    },
+    {
+      "id": 3,
+      "categoria": "Street",
+      "qtdMarcha": "5",
+      "tipoMotor": "2 tempos",
+      "cilindrada": "250cc"
+    }
   ],
   "modeloveiculos": [
-  	{
-		"id": "",
-		"tipo": "",
-		"anoFabricacao": "",
-		"precoBase": "",
-		"fotosModelo": "",
-		"somenteVenda": "",
-		"requerTestdrive": ""
-	}
+    {
+      "id": 1,
+      "tipo": "Sedan",
+      "anoFabricacao": "2024",
+      "precoBase": "95000.00",
+      "fotosModelo": "./fotoveiculo1",
+      "somenteVenda": "Sim",
+      "requerTestdrive": "Não"
+    },
+    {
+      "id": 2,
+      "tipo": "SUV",
+      "anoFabricacao": "2023",
+      "precoBase": "120000.00",
+      "fotosModelo": "./fotoveiculo2",
+      "somenteVenda": "Não",
+      "requerTestdrive": "Sim"
+    },
+    {
+      "id": 3,
+      "tipo": "Hatch",
+      "anoFabricacao": "2022",
+      "precoBase": "68000.00",
+      "fotosModelo": "./fotoveiculo3",
+      "somenteVenda": "Sim",
+      "requerTestdrive": "Não"
+    }
   ],
-  "": [
-  	{
-		"": "",
-		"": ""
-	}
+  "agendamentotestdrives": [
+    {
+      "id": 1,
+      "dataAgendada": "2024-12-05",
+      "horaAgendada": "13:00",
+      "dataEntregue": "2024-12-05",
+      "horaEntregue": "14:00"
+    },
+    {
+      "id": 2,
+      "dataAgendada": "2024-12-06",
+      "horaAgendada": "16:30",
+      "dataEntregue": "2024-12-06",
+      "horaEntregue": "17:00"
+    },
+    {
+      "id": 3,
+      "dataAgendada": "2024-12-07",
+      "horaAgendada": "10:15",
+      "dataEntregue": "2024-12-07",
+      "horaEntregue": "11:00"
+    }
   ],
-  "": [
-  	{
-		"": "",
-		"": ""
-	}
+  "compras": [
+    {
+      "id": 1,
+      "data": "2024-11-20",
+      "formaPag": "Cartão de Crédito",
+      "desconto": "10%",
+      "aprovada": "Sim"
+    },
+    {
+      "id": 2,
+      "data": "2024-11-21",
+      "formaPag": "Boleto Bancário",
+      "desconto": "5%",
+      "aprovada": "Não"
+    },
+    {
+      "id": 3,
+      "data": "2024-11-22",
+      "formaPag": "Dinheiro",
+      "desconto": "0%",
+      "aprovada": "Sim"
+    }
   ]
 }
