@@ -1,14 +1,19 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
+import React from 'react';
+import 'bootswatch/dist/flatly/bootstrap.css';
+import 'toastr/build/toastr.min';
+import 'toastr/build/toastr.css';
+import Navbar from './components/navbar.js';
+import Rotas from './routes.js';
 
-function App() {
-  return (
-    <div className='App'>
-      <Button variant='contained'>Hello World</Button>
-      
-     
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <div className='container'>
+        <Rotas />
+        <Navbar />
+      </div>
+    );
+  }
 }
 
-export default App;
+export default App;
