@@ -1,21 +1,47 @@
 import React from "react";
-import CadastroCliente from './views/listagem-cliente';
-import ListagemCliente from './views/cadastro-cliente';
 
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import CadastroFabricante from "./views/cadastro-fabricante";
+import CadastroModelo from "./views/cadastro-modelo";
+import CadastroVeiculo from "./views/cadastro-veiculo";
+import CadastroVendedor from "./views/cadastro-vendedor";
+
+import ListagemFabricante from "./views/listagem-fabricante";
+import ListagemModelo from "./views/listagem-modelo";
+import ListagemVeiculo from "./views/listagem-veiculo";
+import ListagemVendedor from "./views/listagem-vendedor";
+
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 function Rotas(props) {
     return (
         <BrowserRouter>
             <Routes>
                 <Route
-                    path='/cadastro-usuarios/:idParam?'
-                    element={<CadastroCliente />}
+                    path="/cadastro-fabricante/:idParam?"
+                    element={<CadastroFabricante />}
                 />
-                <Route path='/cadastro-cursos/:idParam?' element={<ListagemCliente />} />
                 <Route
-                    path='/cadastro-professores/:idParam?'
-                    element={<ListagemCliente />}
+                    path="/cadastro-modelo/:idParam?"
+                    element={<CadastroModelo />}
+                />
+                <Route
+                    path="/cadastro-veiculo/:idParam?"
+                    element={<CadastroVeiculo />}
+                />
+                <Route
+                    path="/cadastro-vendedor/:idParam?"
+                    element={<CadastroVendedor />}
+                />
+
+                <Route
+                    path="/listagem-fabricante"
+                    element={<ListagemFabricante />}
+                />
+                <Route path="/listagem-modelo" element={<ListagemModelo />} />
+                <Route path="/listagem-veiculo" element={<ListagemVeiculo />} />
+                <Route
+                    path="/listagem-vendedor"
+                    element={<ListagemVendedor />}
                 />
             </Routes>
         </BrowserRouter>
