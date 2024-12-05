@@ -1,39 +1,55 @@
-import React from 'react';
-import 'bootswatch/dist/flatly/bootstrap.css';
+import React from "react";
+import "bootswatch/dist/flatly/bootstrap.css";
 
-import NavbarItem from './navbarItem';
+import NavbarItem from "./navbarItem";
 
 function Navbar(props) {
     return (
-        <div className='navbar navbar-expand-lg fixed-top navbar-dark bg-primary'>
-            <div className='container'>
-                <a href='/' className='navbar-brand'>
+        <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+            <div className="container">
+                <a href="/" className="navbar-brand">
                     ConcessWeb
                 </a>
                 <button
-                    className='navbar-toggler'
-                    type='button'
-                    data-toggle='collapse'
-                    data-target='#navbarResponsive'
-                    aria-controls='navbarResponsive'
-                    aria-expanded='false'
-                    aria-label='Toggle navigation'
+                    className="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
                 >
-                    <span className='navbar-toggler-icon'></span>
+                    <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className='collapse navbar-collapse' id='navbarResponsive'>
-                    <ul className='navbar-nav'>
+
+                <div className="collapse navbar-collapse" id="navbarResponsive">
+                    <ul className="navbar-nav">
                         <NavbarItem
-                            render='true'
-                            href='/listagem-fabricante'
-                            label='Fabricante'
+                            render="true"
+                            href="/listagem-fabricante"
+                            label="Fabricantes"
                         />
                     </ul>
-                    <ul className='navbar-nav'>
+
+                    <ul className="navbar-nav">
                         <NavbarItem
-                            render='true'
-                            href='/listagem-cliente'
-                            label='Cliente'
+                            render="true"
+                            href="/listagem-modelo"
+                            label="Modelos"
+                        />
+                    </ul>
+                    <ul className="navbar-nav">
+                        <NavbarItem
+                            render="true"
+                            href="/listagem-veiculo"
+                            label="Veiculos"
+                        />
+                    </ul>
+                    <ul className="navbar-nav">
+                        <NavbarItem
+                            render="true"
+                            href="/listagem-vendedor"
+                            label="Vendedores"
                         />
                     </ul>
                 </div>
