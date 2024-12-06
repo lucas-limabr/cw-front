@@ -43,6 +43,13 @@ function Rotas(props) {
                     path="/listagem-vendedor"
                     element={<ListagemVendedor />}
                 />
+
+
+                <Route
+                    path='/listagem-fabricante/:idParam?'
+                    element={<ListagemFabricante />}
+                />
+
             </Routes>
         </BrowserRouter>
     );
