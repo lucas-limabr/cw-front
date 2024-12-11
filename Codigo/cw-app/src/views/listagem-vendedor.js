@@ -8,6 +8,11 @@ import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
+import axios from 'axios';
+import { BASE_URL } from '../config/axios';
+
+const baseURL = `${BASE_URL}/vendedores`;
+
 function ListagemVendedor() {
 
     // const cadastrar = () => {
@@ -15,6 +20,14 @@ function ListagemVendedor() {
     // };
 
     const [dados, setDados] = React.useState(null);
+
+    React.useEffect(() => {
+        axios.get(baseURL).then((response) => {
+            setDados(response.data.vendedores);
+        });
+    }, []);
+    
+    if (!dados) return null;
 
     return (
         <div className='container'>
@@ -24,8 +37,8 @@ function ListagemVendedor() {
                         <div className='bs-component'>
                             <button
                                 type='button'
-                                class='btn btn-warning'
-                            //onClick={() => cadastrar()}
+                                className='btn btn-warning'
+                                //onClick={() => cadastrar()}
                             >
                                 Novo Vendedor
                             </button>
@@ -40,31 +53,32 @@ function ListagemVendedor() {
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            <Stack spacing={1} padding={0} direction='row'>
-                                                <IconButton
-                                                    aria-label='edit'
-                                                    digo                 //onClick={() => editar(dado.id)}
-                                                >
-                                                    <EditIcon />
-                                                </IconButton>
-                                                <IconButton
-                                                    aria-label='delete'
-                                                //onClick={() => excluir(dado.id)}
-                                                >
-                                                    <DeleteIcon />
-                                                </IconButton>
-                                            </Stack>
-                                        </td>
-                                    </tr>
+                                    {dados.map((dado) => (
+                                        <tr key={dado.id}>
+                                            <td>{dado.nome}</td>
+                                            <td>{dado.cpf}</td>
+                                            <td>{dado.telefone}</td>
+                                            <td>{dado.email}</td>
+                                            <td>
+                                                <Stack spacing={1} padding={0} direction='row'>
+                                                    <IconButton
+                                                        aria-label='edit'
+                                                        //onClick={() => editar(dado.id)}
+                                                    >
+                                                        <EditIcon />
+                                                    </IconButton>
+                                                    <IconButton
+                                                        aria-label='delete'
+                                                        //onClick={() => excluir(dado.id)}
+                                                    >
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </Stack>
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
-                            </table>{' '}
+                            </table>
                         </div>
                     </div>
                 </div>
