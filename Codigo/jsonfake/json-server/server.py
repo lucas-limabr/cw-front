@@ -9,6 +9,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def response(self, code, content_type, message):
         self.send_response(code)
         self.send_header("Content-type", content_type)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
         self.end_headers()
         self.wfile.write(message.encode("utf-8"))
 
@@ -27,3 +30,4 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 with socketserver.TCPServer(("", PORT), Handler) as httpd:
     print(f"Port: {PORT}")
     httpd.serve_forever()
+
