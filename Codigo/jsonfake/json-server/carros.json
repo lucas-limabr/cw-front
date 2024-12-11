@@ -1,0 +1,22 @@
+{
+"carros": [
+    {
+      "id": 1,
+      "categoria": "Sedan",
+      "transmissao": "Automática",
+      "potencia": "150 CV"
+    },
+    {
+      "id": 2,
+      "categoria": "SUV",
+      "transmissao": "Manual",
+      "potencia": "200 CV"
+    },
+    {
+      "id": 3,
+      "categoria": "Hatch",
+      "transmissao": "Automática",
+      "potencia": "120 CV"
+    }
+  ]
+}

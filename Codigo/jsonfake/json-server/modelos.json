@@ -1,0 +1,16 @@
+{
+"modelos": [
+    {
+      "id": 1,
+      "nome": "Honda Civic"
+    },
+    {
+      "id": 2,
+      "nome": "Jeep Compass"
+    },
+    {
+      "id": 3,
+      "nome": "Hyundai HB20"
+    }
+  ]
+}

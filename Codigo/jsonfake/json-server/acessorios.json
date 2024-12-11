@@ -1,0 +1,16 @@
+{
+"acessorios": [
+    {
+      "id": 1,
+      "acessorio": "Teto Solar Elétrico"
+    },
+    {
+      "id": 2,
+      "acessorio": "Câmera de Ré"
+    },
+    {
+      "id": 3,
+      "acessorio": "Rodas Esportivas"
+    }
+  ]
+}
