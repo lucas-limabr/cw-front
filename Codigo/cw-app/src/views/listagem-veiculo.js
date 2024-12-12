@@ -2,27 +2,31 @@ import React from 'react';
 
 import Card from '../components/card';
 
-
+import { useNavigate } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { mensagemSucesso, mensagemErro } from '../components/toastr';
 
 import axios from 'axios';
-import { BASE_URL } from '../../config/axios.js';
+import { BASE_URL } from '../config/axios.js';
 
 const baseURL = `${BASE_URL}/veiculos`;
 
 function ListagemVeiculo() {
 
     const navigate = useNavigate();
-    
+
+    const [dados, setDados] = React.useState(null);
+
     const cadastrar = () => {
         navigate(`/cadastro-categorias`);
     };
 
-    const [dados, setDados] = React.useState(null);
-
+    const editar = (id) => {
+        navigate(`/cadastro-categorias/${id}`);
+    };
 
     async function excluir(id) {
         let data = JSON.stringify({ id });
@@ -83,7 +87,25 @@ function ListagemVeiculo() {
                                 <tbody>
                                     {dados.map((dado) => (
                                         <tr key={dado.id}>
-                                            <td>{dado.nome}</td>
+                                           <td>{dado.vin}</td>
+                                            <td>
+                                                <Stack spacing={1} padding={0} direction='row'>
+                                                    <IconButton
+                                                        aria-label='edit'
+                                                        onClick={() => editar(dado.id)}
+                                                    >
+                                                        <EditIcon />
+                                                    </IconButton>
+                                                    <IconButton
+                                                        aria-label='delete'
+                                                        onClick={() => excluir(dado.id)}
+                                                    >
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </Stack>
+                                            </td>
+
+                                            <td>{dado.precoAtual}</td>
                                             <td>
                                                 <Stack spacing={1} padding={0} direction='row'>
                                                     <IconButton
@@ -102,7 +124,7 @@ function ListagemVeiculo() {
                                             </td>
                                         </tr>
                                     ))}
-                                </tbody>
+                                </tbody> 
                             </table>{' '}
                         </div>
                     </div>
