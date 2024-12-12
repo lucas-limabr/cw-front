@@ -8,13 +8,53 @@ import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
+import axios from 'axios';
+import { BASE_URL } from '../../config/axios.js';
+
+const baseURL = `${BASE_URL}/veiculos`;
+
 function ListagemVeiculo() {
 
-    // const cadastrar = () => {
-    //     navigate(`/cadastro-categorias`);
-    // };
+    const navigate = useNavigate();
+    
+    const cadastrar = () => {
+        navigate(`/cadastro-categorias`);
+    };
 
     const [dados, setDados] = React.useState(null);
+
+
+    async function excluir(id) {
+        let data = JSON.stringify({ id });
+        let url = `${baseURL}/${id}`;
+        console.log(url);
+        await axios
+            .delete(url, data, {
+                headers: { 'Content-Type': 'application/json' },
+            })
+            .then(function (response) {
+                mensagemSucesso(`Modelo excluído com sucesso!`);
+                setDados(
+                    dados.filter((dado) => {
+                        return dado.id !== id;
+                    })
+                );
+            })
+            .catch(function (error) {
+                mensagemErro(`Erro ao excluir o modelo`);
+            });
+    }
+
+
+
+    React.useEffect(() => {
+        axios.get(baseURL).then((response) => {
+            setDados(response.data);
+        });
+    }, []);
+
+    if (!dados) return null;
+
 
     return (
         <div className='container'>
@@ -25,7 +65,7 @@ function ListagemVeiculo() {
                             <button
                                 type='button'
                                 class='btn btn-warning'
-                            //onClick={() => cadastrar()}
+                                onClick={() => cadastrar()}
                             >
                                 Novo Vendedor
                             </button>
@@ -41,30 +81,27 @@ function ListagemVeiculo() {
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            <Stack spacing={1} padding={0} direction='row'>
-                                                <IconButton
-                                                    aria-label='edit'
-                                                    digo                 //onClick={() => editar(dado.id)}
-                                                >
-                                                    <EditIcon />
-                                                </IconButton>
-                                                <IconButton
-                                                    aria-label='delete'
-                                                //onClick={() => excluir(dado.id)}
-                                                >
-                                                    <DeleteIcon />
-                                                </IconButton>
-                                            </Stack>
-                                        </td>
-                                    </tr>
+                                    {dados.map((dado) => (
+                                        <tr key={dado.id}>
+                                            <td>{dado.nome}</td>
+                                            <td>
+                                                <Stack spacing={1} padding={0} direction='row'>
+                                                    <IconButton
+                                                        aria-label='edit'
+                                                        onClick={() => editar(dado.id)}
+                                                    >
+                                                        <EditIcon />
+                                                    </IconButton>
+                                                    <IconButton
+                                                        aria-label='delete'
+                                                        onClick={() => excluir(dado.id)}
+                                                    >
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </Stack>
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>{' '}
                         </div>
