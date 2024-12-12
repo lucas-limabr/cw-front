@@ -10,12 +10,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import { mensagemSucesso, mensagemErro } from '../components/toastr';
 
 import axios from 'axios';
-import { BASE_URL } from '../config/axios.js';
+import { BASE_URL } from '../config/axios';
 
 const baseURL = `${BASE_URL}/veiculos`;
-
-import axios from 'axios';
-import { BASE_URL } from '../config/axios';
 
 function ListagemVeiculo() {
 
@@ -28,7 +25,7 @@ function ListagemVeiculo() {
             setDados(response.data.veiculos);
         });
     }, []);
-    
+
     if (!dados) return null;
 
     return (
@@ -66,13 +63,13 @@ function ListagemVeiculo() {
                                                 <Stack spacing={1} padding={0} direction='row'>
                                                     <IconButton
                                                         aria-label='edit'
-                                                        //onClick={() => editar(dado.id)}
+                                                    //onClick={() => editar(dado.id)}
                                                     >
                                                         <EditIcon />
                                                     </IconButton>
                                                     <IconButton
                                                         aria-label='delete'
-                                                        //onClick={() => excluir(dado.id)}
+                                                    //onClick={() => excluir(dado.id)}
                                                     >
                                                         <DeleteIcon />
                                                     </IconButton>
