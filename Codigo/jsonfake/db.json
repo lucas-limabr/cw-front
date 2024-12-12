@@ -18,6 +18,47 @@
       "razaoSocial": "SuperCar Veículos S.A.",
       "cnpj": "34.567.890/0001-23",
       "telefone": "(21)98765-4321",
+      "empresas": [
+        {
+          "id": 1,
+          "razaoSocial": "AutoPrime Veículos Ltda.",
+          "cnpj": "23.456.789/0001-12",
+          "telefone": "(11)91234-5678",
+          "email": "contato@autoprime.com",
+          "logradouro": "Avenida dos Autonomistas",
+          "numero": "1500",
+          "complemento": "Loja 10",
+          "bairro": "Vila Yara",
+          "cep": "06020-905",
+          "uf": "SP"
+        },
+        {
+          "id": 2,
+          "razaoSocial": "SuperCar Veículos S.A.",
+          "cnpj": "34.567.890/0001-23",
+          "telefone": "(21)98765-4321",
+          "email": "vendas@supercar.com",
+          "logradouro": "Rua da Independência",
+          "numero": "300",
+          "complemento": "Piso Térreo",
+          "bairro": "Barra da Tijuca",
+          "cep": "22640-100",
+          "uf": "RJ"
+        },
+        {
+          "id": 3,
+          "razaoSocial": "TopCar Motors Eireli",
+          "cnpj": "45.678.901/0001-34",
+          "telefone": "(31)93456-7890",
+          "email": "contato@topcarmotors.com",
+          "logradouro": "Avenida do Contorno",
+          "numero": "2500",
+          "complemento": "Loja 15",
+          "bairro": "Funcionários",
+          "cep": "30110-017",
+          "uf": "MG"
+        }
+      ],
       "email": "vendas@supercar.com",
       "logradouro": "Rua da Independência",
       "numero": "300",
@@ -538,15 +579,18 @@
       "aprovada": "Sim"
     }
   ],
-
-  "modelos" : [
-    { "id" : 1,
-    "nome" : "Honda Civic"            
+  "modelos": [
+    {
+      "id": 1,
+      "nome": "Honda Civic"
     },
-    { "id" : 2,
-      "nome" : "Jeep Compass"            
+    {
+      "id": 2,
+      "nome": "Jeep Compass"
     },
-    { "id" : 3,
-      "nome" : "Hyundai HB20"            
-    }]
+    {
+      "id": 3,
+      "nome": "Hyundai HB20"
+    }
+  ]
 }

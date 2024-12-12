@@ -8,6 +8,11 @@ import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
+import axios from 'axios';
+import { BASE_URL } from '../config/axios';
+
+const baseURL = `${BASE_URL}/fabricantes`;
+
 function ListagemFabricante() {
 
     // const cadastrar = () => {
@@ -15,6 +20,14 @@ function ListagemFabricante() {
     // };
 
     const [dados, setDados] = React.useState(null);
+
+    React.useEffect(() => {
+        axios.get(baseURL).then((response) => {
+            setDados(response.data.fabricantes);
+        });
+    }, []);
+
+    if (!dados) return null;
 
     return (
         <div className='container'>
@@ -24,10 +37,10 @@ function ListagemFabricante() {
                         <div className='bs-component'>
                             <button
                                 type='button'
-                                class='btn btn-warning'
+                                className='btn btn-warning'
                             //onClick={() => cadastrar()}
                             >
-                                Nova Fabricante
+                                Novo Fabricante
                             </button>
                             <table className='table table-hover'>
                                 <thead>
@@ -37,28 +50,29 @@ function ListagemFabricante() {
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <Stack spacing={1} padding={0} direction='row'>
-                                                <IconButton
-                                                    aria-label='edit'
-                                                    digo                 //onClick={() => editar(dado.id)}
-                                                >
-                                                    <EditIcon />
-                                                </IconButton>
-                                                <IconButton
-                                                    aria-label='delete'
-                                                //onClick={() => excluir(dado.id)}
-                                                >
-                                                    <DeleteIcon />
-                                                </IconButton>
-                                            </Stack>
-                                        </td>
-                                    </tr>
+                                    {dados.map((fabricante) => (
+                                        <tr key={fabricante.id}>
+                                            <td>{fabricante.nome}</td>
+                                            <td>
+                                                <Stack spacing={1} padding={0} direction='row'>
+                                                    <IconButton
+                                                        aria-label='edit'
+                                                    //onClick={() => editar(fabricante.id)}
+                                                    >
+                                                        <EditIcon />
+                                                    </IconButton>
+                                                    <IconButton
+                                                        aria-label='delete'
+                                                    //onClick={() => excluir(fabricante.id)}
+                                                    >
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </Stack>
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
-                            </table>{' '}
+                            </table>
                         </div>
                     </div>
                 </div>

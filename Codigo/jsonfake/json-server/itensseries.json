@@ -1,0 +1,16 @@
+{
+"itensseries": [
+    {
+      "id": 1,
+      "descricao": "Ar condicionado digital"
+    },
+    {
+      "id": 2,
+      "descricao": "Sistema de som premium"
+    },
+    {
+      "id": 3,
+      "descricao": "Banco em couro"
+    }
+  ]
+}

@@ -13,26 +13,25 @@ import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
-/*import axios from 'axios';
-import { BASE_URL } from '../config/axios';*/
+import axios from 'axios';
+import { BASE_URL } from '../config/axios';
 
-// const baseURL = `${BASE_URL}/modelos`;
+const baseURL = `${BASE_URL}/modelos`;
 
 function ListagemModelos() {
+
   const navigate = useNavigate();
 
   const cadastrar = () => {
     navigate(`/cadastro-modelo`);
   };
 
-  /*
   const editar = (id) => {
     navigate(`/cadastro-modelos/${id}`);
-  }; */
+  };
 
   const [dados, setDados] = React.useState(null);
 
-  /*
   async function excluir(id) {
     let data = JSON.stringify({ id });
     let url = `${baseURL}/${id}`;
@@ -53,17 +52,15 @@ function ListagemModelos() {
         mensagemErro(`Erro ao excluir o modelo`);
       });
   }
- */
 
-/*
   React.useEffect(() => {
     axios.get(baseURL).then((response) => {
-      setDados(response.data);
+      setDados(response.data.modelos);
     });
   }, []);
 
   if (!dados) return null;
-*/
+
   return (
     <div className='container'>
       <Card title='Listagem de modelos'>
@@ -84,7 +81,7 @@ function ListagemModelos() {
                     <th scope='col'>Ações</th>
                   </tr>
                 </thead>
-                {/* <tbody>
+                <tbody>
                   {dados.map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.nome}</td>
@@ -106,7 +103,7 @@ function ListagemModelos() {
                       </td>
                     </tr>
                   ))}
-                </tbody> */}
+                </tbody>
               </table>{' '}
             </div>
           </div>

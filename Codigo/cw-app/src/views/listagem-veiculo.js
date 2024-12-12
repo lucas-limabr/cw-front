@@ -14,51 +14,22 @@ import { BASE_URL } from '../config/axios.js';
 
 const baseURL = `${BASE_URL}/veiculos`;
 
+import axios from 'axios';
+import { BASE_URL } from '../config/axios';
+
 function ListagemVeiculo() {
 
     const navigate = useNavigate();
 
     const [dados, setDados] = React.useState(null);
 
-    const cadastrar = () => {
-        navigate(`/cadastro-categorias`);
-    };
-
-    const editar = (id) => {
-        navigate(`/cadastro-categorias/${id}`);
-    };
-
-    async function excluir(id) {
-        let data = JSON.stringify({ id });
-        let url = `${baseURL}/${id}`;
-        console.log(url);
-        await axios
-            .delete(url, data, {
-                headers: { 'Content-Type': 'application/json' },
-            })
-            .then(function (response) {
-                mensagemSucesso(`Modelo excluído com sucesso!`);
-                setDados(
-                    dados.filter((dado) => {
-                        return dado.id !== id;
-                    })
-                );
-            })
-            .catch(function (error) {
-                mensagemErro(`Erro ao excluir o modelo`);
-            });
-    }
-
-
-
     React.useEffect(() => {
         axios.get(baseURL).then((response) => {
-            setDados(response.data);
+            setDados(response.data.veiculos);
         });
     }, []);
-
+    
     if (!dados) return null;
-
 
     return (
         <div className='container'>
@@ -68,8 +39,7 @@ function ListagemVeiculo() {
                         <div className='bs-component'>
                             <button
                                 type='button'
-                                class='btn btn-warning'
-                                onClick={() => cadastrar()}
+                                className='btn btn-warning'
                             >
                                 Novo Vendedor
                             </button>
@@ -77,7 +47,7 @@ function ListagemVeiculo() {
                                 <thead>
                                     <tr>
                                         <th scope='col'>VIN</th>
-                                        <th scope='col'>Preco Atual</th>
+                                        <th scope='col'>Preço Atual</th>
                                         <th scope='col'>Cor</th>
                                         <th scope='col'>Condição</th>
                                         <th scope='col'>Garantia</th>
@@ -87,36 +57,22 @@ function ListagemVeiculo() {
                                 <tbody>
                                     {dados.map((dado) => (
                                         <tr key={dado.id}>
-                                           <td>{dado.vin}</td>
-                                            <td>
-                                                <Stack spacing={1} padding={0} direction='row'>
-                                                    <IconButton
-                                                        aria-label='edit'
-                                                        onClick={() => editar(dado.id)}
-                                                    >
-                                                        <EditIcon />
-                                                    </IconButton>
-                                                    <IconButton
-                                                        aria-label='delete'
-                                                        onClick={() => excluir(dado.id)}
-                                                    >
-                                                        <DeleteIcon />
-                                                    </IconButton>
-                                                </Stack>
-                                            </td>
-
+                                            <td>{dado.vin}</td>
                                             <td>{dado.precoAtual}</td>
+                                            <td>{dado.cor}</td>
+                                            <td>{dado.condicao}</td>
+                                            <td>{dado.garantia}</td>
                                             <td>
                                                 <Stack spacing={1} padding={0} direction='row'>
                                                     <IconButton
                                                         aria-label='edit'
-                                                        onClick={() => editar(dado.id)}
+                                                        //onClick={() => editar(dado.id)}
                                                     >
                                                         <EditIcon />
                                                     </IconButton>
                                                     <IconButton
                                                         aria-label='delete'
-                                                        onClick={() => excluir(dado.id)}
+                                                        //onClick={() => excluir(dado.id)}
                                                     >
                                                         <DeleteIcon />
                                                     </IconButton>
@@ -124,8 +80,8 @@ function ListagemVeiculo() {
                                             </td>
                                         </tr>
                                     ))}
-                                </tbody> 
-                            </table>{' '}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
