@@ -52,6 +52,14 @@ function Navbar(props) {
                             label="Vendedores"
                         />
                     </ul>
+
+                    <ul className="navbar-nav">
+                        <NavbarItem
+                            render="true"
+                            href="/listagem-agendamento-test-drives"
+                            label="Test-drive"
+                        />
+                    </ul>
                 </div>
             </div>
         </div>

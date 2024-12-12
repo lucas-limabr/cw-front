@@ -9,6 +9,7 @@ import ListagemFabricante from "./views/listagem-fabricante";
 import ListagemModelo from "./views/listagem-modelo";
 import ListagemVeiculo from "./views/listagem-veiculo";
 import ListagemVendedor from "./views/listagem-vendedor";
+import ListagemAgendamentoTestDrive from "./views/listagem-agendamento-test-drives";
 
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
@@ -46,8 +47,13 @@ function Rotas(props) {
 
 
                 <Route
-                    path='/listagem-fabricante/:idParam?'
+                    path='/listagem-fabricante'
                     element={<ListagemFabricante />}
+                />
+
+                <Route
+                    path='/listagem-agendamento-test-drives'
+                    element={<ListagemAgendamentoTestDrive />}
                 />
 
             </Routes>
