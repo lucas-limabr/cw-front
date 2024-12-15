@@ -56,7 +56,7 @@ function Navbar(props) {
                     <ul className="navbar-nav">
                         <NavbarItem
                             render="true"
-                            href="/listagem-agendamento-test-drives"
+                            href="/listagem-agendamento-test-drive"
                             label="Test-drive"
                         />
                     </ul>
