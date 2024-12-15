@@ -33,6 +33,7 @@ function ListagemGestor() {
             <Card title='Listagem de Gestores'>
                 <div className='row'>
                     <div className='col-lg-12'>
+                    <br/>
                         <div className='bs-component'>
                             <button
                                 type='button'

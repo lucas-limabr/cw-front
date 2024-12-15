@@ -34,6 +34,7 @@ function ListagemCompra() {
             <Card title='Listagem de Compras'>
                 <div className='row'>
                     <div className='col-lg-12'>
+                    <br/>
                         <div className='bs-component'>
                             <table className='table table-hover'>
                                 <thead>

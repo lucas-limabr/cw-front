@@ -34,6 +34,7 @@ function ListagemFabricante() {
             <Card title='Listagem de Fabricantes'>
                 <div className='row'>
                     <div className='col-lg-12'>
+                    <br/>
                         <div className='bs-component'>
                             <button
                                 type='button'
