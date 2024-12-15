@@ -34,6 +34,7 @@ function ListagemVendedor() {
             <Card title='Listagem de Vendedores'>
                 <div className='row'>
                     <div className='col-lg-12'>
+                    <br/>
                         <div className='bs-component'>
                             <button
                                 type='button'
