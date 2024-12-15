@@ -11,9 +11,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 import { BASE_URL } from '../config/axios';
 
-const baseURL = `${BASE_URL}/fabricantes`;
+const baseURL = `${BASE_URL}/concessionarias`;
 
-function ListagemFabricante() {
+function ListagemConcessionaria() {
 
     // const cadastrar = () => {
     //     navigate(`/cadastro-categorias`);
@@ -23,7 +23,7 @@ function ListagemFabricante() {
 
     React.useEffect(() => {
         axios.get(baseURL).then((response) => {
-            setDados(response.data.fabricantes);
+            setDados(response.data.concessionarias);
         });
     }, []);
 
@@ -40,19 +40,30 @@ function ListagemFabricante() {
                                 className='btn btn-warning'
                             //onClick={() => cadastrar()}
                             >
-                                Novo Fabricante
+                                Nova Concessionaria
                             </button>
                             <table className='table table-hover'>
                                 <thead>
                                     <tr>
-                                        <th scope='col'>Nome</th>
-                                        <th scope='col'>Ações</th>
+                                        <th scope='col'>Razão Social</th>
+                                        <th scope='col'>CNPJ</th>
+                                        <th scope='col'>Telefone</th>
+                                        <th scope='col'>E-mail</th>
+                                        <th scope='col'>Bairro</th>
+                                        <th scope='col'>CEP</th>
+                                        <th scope='col'>UF</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {dados.map((dado) => (
                                         <tr key={dado.id}>
-                                            <td>{dado.nome}</td>
+                                            <td>{dado.razaoSocial}</td>
+                                            <td>{dado.cnpj}</td>
+                                            <td>{dado.telefone}</td>
+                                            <td>{dado.email}</td>
+                                            <td>{dado.bairro}</td>
+                                            <td>{dado.cep}</td>
+                                            <td>{dado.uf}</td>
                                             <td>
                                                 <Stack spacing={1} padding={0} direction='row'>
                                                     <IconButton
@@ -81,4 +92,4 @@ function ListagemFabricante() {
     );
 }
 
-export default ListagemFabricante;
+export default ListagemConcessionaria;

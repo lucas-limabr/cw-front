@@ -63,7 +63,7 @@ function ListagemModelos() {
 
   return (
     <div className='container'>
-      <Card title='Listagem de modelos'>
+      <Card title='Listagem de Modelos'>
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
