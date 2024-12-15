@@ -41,7 +41,7 @@ function ListagemAgendamentoTestDrive() {
                                 className='btn btn-warning'
                                 //onClick={() => cadastrar()}
                             >
-                                Novo Vendedor
+                                Novo Test-Drive
                             </button>
                             <table className='table table-hover'>
                                 <thead>
