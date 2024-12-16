@@ -39,7 +39,7 @@ function ListagemVeiculo() {
                                 type='button'
                                 className='btn btn-warning'
                             >
-                                Novo Vendedor
+                                Novo Veículo
                             </button>
                             <table className='table table-hover'>
                                 <thead>
