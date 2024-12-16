@@ -1,0 +1,52 @@
+{
+    "clientes": [
+    {
+      "id": 1,
+      "nome": "Carlos Silva",
+      "cpf": "123.456.789-00",
+      "login": "carlos.silva",
+      "senha": "senha123",
+      "datanascimento": "1990-05-15",
+      "telefone": "(11)98765-4321",
+      "email": "carlos.silva@example.com",
+      "logradouro": "Rua das Flores",
+      "numero": "123",
+      "complemento": "Apto 45",
+      "bairro": "Jardim Primavera",
+      "cep": "12345-678",
+      "uf": "SP"
+    },
+    {
+      "id": 2,
+      "nome": "Ana Oliveira",
+      "cpf": "987.654.321-11",
+      "login": "ana.oliveira",
+      "senha": "senha456",
+      "datanascimento": "1985-09-23",
+      "telefone": "(21)99876-5432",
+      "email": "ana.oliveira@example.com",
+      "logradouro": "Avenida Central",
+      "numero": "456",
+      "complemento": "Sala 12",
+      "bairro": "Centro",
+      "cep": "23456-789",
+      "uf": "RJ"
+    },
+    {
+      "id": 3,
+      "nome": "João Souza",
+      "cpf": "456.789.123-22",
+      "login": "joao.souza",
+      "senha": "senha789",
+      "datanascimento": "2000-12-08",
+      "telefone": "(31)91234-5678",
+      "email": "joao.souza@example.com",
+      "logradouro": "Praça da Paz",
+      "numero": "789",
+      "complemento": "Casa",
+      "bairro": "Bela Vista",
+      "cep": "34567-890",
+      "uf": "MG"
+    }
+  ]
+}
