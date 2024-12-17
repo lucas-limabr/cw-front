@@ -34,6 +34,13 @@ function ListagemCompra() {
           <div className="col-lg-12">
             <br />
             <div className="bs-component">
+              <button
+                type="button"
+                className="btn btn-warning"
+                //onClick={() => cadastrar()}
+              >
+                Nova Compra
+              </button>
               <table className="table table-hover">
                 <thead>
                   <tr>
