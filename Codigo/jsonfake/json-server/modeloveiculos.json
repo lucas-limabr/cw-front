@@ -1,31 +1,29 @@
-{
-"modeloveiculos": [
-    {
-      "id": 1,
-      "tipo": "Sedan",
-      "anoFabricacao": "2024",
-      "precoBase": "95000.00",
-      "fotosModelo": "./fotoveiculo1",
-      "somenteVenda": "Sim",
-      "requerTestdrive": "Não"
-    },
-    {
-      "id": 2,
-      "tipo": "SUV",
-      "anoFabricacao": "2023",
-      "precoBase": "120000.00",
-      "fotosModelo": "./fotoveiculo2",
-      "somenteVenda": "Não",
-      "requerTestdrive": "Sim"
-    },
-    {
-      "id": 3,
-      "tipo": "Hatch",
-      "anoFabricacao": "2022",
-      "precoBase": "68000.00",
-      "fotosModelo": "./fotoveiculo3",
-      "somenteVenda": "Sim",
-      "requerTestdrive": "Não"
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "tipo": "Sedan",
+    "anoFabricacao": "2024",
+    "precoBase": "95000.00",
+    "fotosModelo": "./fotoveiculo1",
+    "somenteVenda": "Sim",
+    "requerTestdrive": "Não"
+  },
+  {
+    "id": 2,
+    "tipo": "SUV",
+    "anoFabricacao": "2023",
+    "precoBase": "120000.00",
+    "fotosModelo": "./fotoveiculo2",
+    "somenteVenda": "Não",
+    "requerTestdrive": "Sim"
+  },
+  {
+    "id": 3,
+    "tipo": "Hatch",
+    "anoFabricacao": "2022",
+    "precoBase": "68000.00",
+    "fotosModelo": "./fotoveiculo3",
+    "somenteVenda": "Sim",
+    "requerTestdrive": "Não"
+  }
+]

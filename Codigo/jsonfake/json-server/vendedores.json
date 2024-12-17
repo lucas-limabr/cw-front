@@ -1,55 +1,53 @@
-{
-"vendedores": [
-    {
-      "id": 1,
-      "nome": "Lucas Ferreira",
-      "cpf": "123.987.654-55",
-      "login": "lucas.ferreira",
-      "senha": "senhaVend1",
-      "telefone": "(11)97654-3210",
-      "email": "lucas.ferreira@example.com",
-      "logradouro": "Rua do Comércio",
-      "numero": "45",
-      "complemento": "Apto 12",
-      "bairro": "Centro",
-      "cep": "12345-678",
-      "uf": "SP",
-      "idempresa": 1,
-      "idconcessionaria": 1
-    },
-    {
-      "id": 2,
-      "nome": "Paula Santos",
-      "cpf": "456.123.789-66",
-      "login": "paula.santos",
-      "senha": "senhaVend2",
-      "telefone": "(31)91234-8765",
-      "email": "paula.santos@example.com",
-      "logradouro": "Avenida dos Estados",
-      "numero": "98",
-      "complemento": "Bloco A",
-      "bairro": "Vila Nova",
-      "cep": "34567-890",
-      "uf": "MG",
-      "idempresa": 2,
-      "idconcessionaria": 2
-    },
-    {
-      "id": 3,
-      "nome": "Bruno Oliveira",
-      "cpf": "789.456.123-77",
-      "login": "bruno.oliveira",
-      "senha": "senhaVend3",
-      "telefone": "(21)97654-1234",
-      "email": "bruno.oliveira@example.com",
-      "logradouro": "Rua da União",
-      "numero": "67",
-      "complemento": "Casa",
-      "bairro": "Centro",
-      "cep": "23456-789",
-      "uf": "RJ",
-      "idempresa": 3,
-      "idconcessionaria": 3
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "nome": "Lucas Ferreira",
+    "cpf": "123.987.654-55",
+    "login": "lucas.ferreira",
+    "senha": "senhaVend1",
+    "telefone": "(11)97654-3210",
+    "email": "lucas.ferreira@example.com",
+    "logradouro": "Rua do Comércio",
+    "numero": "45",
+    "complemento": "Apto 12",
+    "bairro": "Centro",
+    "cep": "12345-678",
+    "uf": "SP",
+    "idempresa": 1,
+    "idconcessionaria": 1
+  },
+  {
+    "id": 2,
+    "nome": "Paula Santos",
+    "cpf": "456.123.789-66",
+    "login": "paula.santos",
+    "senha": "senhaVend2",
+    "telefone": "(31)91234-8765",
+    "email": "paula.santos@example.com",
+    "logradouro": "Avenida dos Estados",
+    "numero": "98",
+    "complemento": "Bloco A",
+    "bairro": "Vila Nova",
+    "cep": "34567-890",
+    "uf": "MG",
+    "idempresa": 2,
+    "idconcessionaria": 2
+  },
+  {
+    "id": 3,
+    "nome": "Bruno Oliveira",
+    "cpf": "789.456.123-77",
+    "login": "bruno.oliveira",
+    "senha": "senhaVend3",
+    "telefone": "(21)97654-1234",
+    "email": "bruno.oliveira@example.com",
+    "logradouro": "Rua da União",
+    "numero": "67",
+    "complemento": "Casa",
+    "bairro": "Centro",
+    "cep": "23456-789",
+    "uf": "RJ",
+    "idempresa": 3,
+    "idconcessionaria": 3
+  }
+]

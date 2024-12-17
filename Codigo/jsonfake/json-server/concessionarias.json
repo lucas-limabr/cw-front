@@ -1,96 +1,44 @@
-{
-"concessionarias": [
-    {
-      "id": 1,
-      "razaoSocial": "Auto Vendas Premium LTDA",
-      "cnpj": "12.345.678/0001-99",
-      "telefone": "(11) 98765-4321",
-      "email": "contato@autovendaspremium.com",
-      "logradouro": "Avenida Paulista",
-      "numero": "1000",
-      "complemento": "Sala 101",
-      "bairro": "Bela Vista",
-      "cep": "01310-100",
-      "uf": "SP",
-      "idempresa": "1"
-    },
-    {
-      "id": 2,
-      "razaoSocial": "Super Veículos Brasil SA",
-      "cnpj": "98.765.432/0001-55",
-      "telefone": "(21) 99876-5432",
-      "email": "suporte@superveiculosbr.com",
-      "logradouro": "Rua das Flores",
-      "numero": "500",
-      "complemento": "Loja A",
-      "bairro": "Centro",
-      "cep": "20031-020",
-      "uf": "RJ",
-      "idempresa": "2"
-    },
-    {
-      "id": 3,
-      "razaoSocial": "Carros e Companhia EIRELI",
-      "cnpj": "56.789.012/0001-44",
-      "telefone": "(31) 91234-5678",
-      "email": "vendas@carrosecia.com",
-      "logradouro": "Avenida do Contorno",
-      "numero": "2500",
-      "complemento": "Andar 2",
-      "bairro": "Savassi",
-      "cep": "30110-920",
-      "uf": "MG",
-      "idempresa": "3"
-    }
-  ],
-  "clientes": [
-    {
-      "id": 1,
-      "nome": "Carlos Silva",
-      "cpf": "123.456.789-00",
-      "login": "carlos.silva",
-      "senha": "senha123",
-      "datanascimento": "1990-05-15",
-      "telefone": "(11)98765-4321",
-      "email": "carlos.silva@example.com",
-      "logradouro": "Rua das Flores",
-      "numero": "123",
-      "complemento": "Apto 45",
-      "bairro": "Jardim Primavera",
-      "cep": "12345-678",
-      "uf": "SP"
-    },
-    {
-      "id": 2,
-      "nome": "Ana Oliveira",
-      "cpf": "987.654.321-11",
-      "login": "ana.oliveira",
-      "senha": "senha456",
-      "datanascimento": "1985-09-23",
-      "telefone": "(21)99876-5432",
-      "email": "ana.oliveira@example.com",
-      "logradouro": "Avenida Central",
-      "numero": "456",
-      "complemento": "Sala 12",
-      "bairro": "Centro",
-      "cep": "23456-789",
-      "uf": "RJ"
-    },
-    {
-      "id": 3,
-      "nome": "João Souza",
-      "cpf": "456.789.123-22",
-      "login": "joao.souza",
-      "senha": "senha789",
-      "datanascimento": "2000-12-08",
-      "telefone": "(31)91234-5678",
-      "email": "joao.souza@example.com",
-      "logradouro": "Praça da Paz",
-      "numero": "789",
-      "complemento": "Casa",
-      "bairro": "Bela Vista",
-      "cep": "34567-890",
-      "uf": "MG"
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "razaoSocial": "Auto Vendas Premium LTDA",
+    "cnpj": "12.345.678/0001-99",
+    "telefone": "(11) 98765-4321",
+    "email": "contato@autovendaspremium.com",
+    "logradouro": "Avenida Paulista",
+    "numero": "1000",
+    "complemento": "Sala 101",
+    "bairro": "Bela Vista",
+    "cep": "01310-100",
+    "uf": "SP",
+    "idempresa": "1"
+  },
+  {
+    "id": 2,
+    "razaoSocial": "Super Veículos Brasil SA",
+    "cnpj": "98.765.432/0001-55",
+    "telefone": "(21) 99876-5432",
+    "email": "suporte@superveiculosbr.com",
+    "logradouro": "Rua das Flores",
+    "numero": "500",
+    "complemento": "Loja A",
+    "bairro": "Centro",
+    "cep": "20031-020",
+    "uf": "RJ",
+    "idempresa": "2"
+  },
+  {
+    "id": 3,
+    "razaoSocial": "Carros e Companhia EIRELI",
+    "cnpj": "56.789.012/0001-44",
+    "telefone": "(31) 91234-5678",
+    "email": "vendas@carrosecia.com",
+    "logradouro": "Avenida do Contorno",
+    "numero": "2500",
+    "complemento": "Andar 2",
+    "bairro": "Savassi",
+    "cep": "30110-920",
+    "uf": "MG",
+    "idempresa": "3"
+  }
+]

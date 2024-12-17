@@ -20,77 +20,54 @@ import ListagemCliente from "./views/listagem-cliente";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 function Rotas(props) {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route
-                    path="/cadastro-fabricante/:idParam?"
-                    element={<CadastroFabricante />}
-                />
-                <Route
-                    path="/cadastro-modelo/:idParam?"
-                    element={<CadastroModelo />}
-                />
-                <Route
-                    path="/cadastro-veiculo/:idParam?"
-                    element={<CadastroVeiculo />}
-                />
-                <Route
-                    path="/cadastro-vendedor/:idParam?"
-                    element={<CadastroVendedor />}
-                />
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/cadastro-fabricante/:idParam?"
+          element={<CadastroFabricante />}
+        />
+        <Route path="/cadastro-modelo/:idParam?" element={<CadastroModelo />} />
+        <Route
+          path="/cadastro-veiculo/:idParam?"
+          element={<CadastroVeiculo />}
+        />
+        <Route
+          path="/cadastro-vendedor/:idParam?"
+          element={<CadastroVendedor />}
+        />
 
-                <Route
-                    path="/listagem-fabricante"
-                    element={<ListagemFabricante />}
-                />
+        <Route path="/listagem-fabricante" element={<ListagemFabricante />} />
 
-                <Route
-                    path="/cadastro-cliente/:idParam?"
-                    element={<CadastroCliente />}
-                />
+        <Route
+          path="/cadastro-cliente/:idParam?"
+          element={<CadastroCliente />}
+        />
 
-                <Route path="/listagem-modelo" element={<ListagemModelo />} />
-                <Route path="/listagem-veiculo" element={<ListagemVeiculo />} />
-                <Route
-                    path="/listagem-vendedor"
-                    element={<ListagemVendedor />}
-                />
+        <Route path="/listagem-modelo" element={<ListagemModelo />} />
+        <Route path="/listagem-veiculo" element={<ListagemVeiculo />} />
+        <Route path="/listagem-vendedor" element={<ListagemVendedor />} />
 
+        <Route path="/listagem-fabricante" element={<ListagemFabricante />} />
 
-                <Route
-                    path='/listagem-fabricante'
-                    element={<ListagemFabricante />}
-                />
+        <Route
+          path="/listagem-agendamento-test-drive"
+          element={<ListagemAgendamentoTestDrive />}
+        />
 
-                <Route
-                    path='/listagem-agendamento-test-drive'
-                    element={<ListagemAgendamentoTestDrive />}
-                />
+        <Route path="/listagem-cliente" element={<ListagemCliente />} />
 
-                <Route
-                    path='/listagem-cliente'
-                    element={<ListagemCliente />}
-                />
+        <Route
+          path="/listagem-concessionaria"
+          element={<ListagemConcessionaria />}
+        />
 
-                <Route
-                    path='/listagem-concessionaria'
-                    element={<ListagemConcessionaria />}
-                />
+        <Route path="/listagem-gestor" element={<ListagemGestor />} />
 
-                <Route
-                    path='/listagem-gestor'
-                    element={<ListagemGestor />}
-                />
-
-                <Route
-                    path='/listagem-compra'
-                    element={<ListagemCompra />}
-                />
-
-            </Routes>
-        </BrowserRouter>
-    );
+        <Route path="/listagem-compra" element={<ListagemCompra />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default Rotas;

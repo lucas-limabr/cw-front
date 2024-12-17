@@ -1,52 +1,50 @@
-{
-"admempresas": [
-    {
-      "id": 1,
-      "login": "admempresa1",
-      "senha": "senhaAdm1",
-      "nomerepresentlegal": "Luiz Fernandes",
-      "datanascimento": "1975-03-12",
-      "telefone": "(11)99876-5432",
-      "email": "luiz.fernandes@example.com",
-      "logradouro": "Rua do Comercio",
-      "numero": "101",
-      "complemento": "Sala 501",
-      "bairro": "Centro",
-      "cep": "12345-678",
-      "uf": "SP",
-      "idempresa": 1
-    },
-    {
-      "id": 2,
-      "login": "admempresa2",
-      "senha": "senhaAdm2",
-      "nomerepresentlegal": "Maria Clara",
-      "datanascimento": "1980-07-22",
-      "telefone": "(21)98765-4321",
-      "email": "maria.clara@example.com",
-      "logradouro": "Avenida Brasil",
-      "numero": "456",
-      "complemento": "Bloco A",
-      "bairro": "Vila Nova",
-      "cep": "23456-789",
-      "uf": "RJ",
-      "idempresa": 2
-    },
-    {
-      "id": 3,
-      "login": "admempresa3",
-      "senha": "senhaAdm3",
-      "nomerepresentlegal": "Carlos Lima",
-      "datanascimento": "1985-11-10",
-      "telefone": "(31)91234-5678",
-      "email": "carlos.lima@example.com",
-      "logradouro": "Praça da Paz",
-      "numero": "789",
-      "complemento": "Apto 202",
-      "bairro": "Bela Vista",
-      "cep": "34567-890",
-      "uf": "MG",
-      "idempresa": 3
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "login": "admempresa1",
+    "senha": "senhaAdm1",
+    "nomerepresentlegal": "Luiz Fernandes",
+    "datanascimento": "1975-03-12",
+    "telefone": "(11)99876-5432",
+    "email": "luiz.fernandes@example.com",
+    "logradouro": "Rua do Comercio",
+    "numero": "101",
+    "complemento": "Sala 501",
+    "bairro": "Centro",
+    "cep": "12345-678",
+    "uf": "SP",
+    "idempresa": 1
+  },
+  {
+    "id": 2,
+    "login": "admempresa2",
+    "senha": "senhaAdm2",
+    "nomerepresentlegal": "Maria Clara",
+    "datanascimento": "1980-07-22",
+    "telefone": "(21)98765-4321",
+    "email": "maria.clara@example.com",
+    "logradouro": "Avenida Brasil",
+    "numero": "456",
+    "complemento": "Bloco A",
+    "bairro": "Vila Nova",
+    "cep": "23456-789",
+    "uf": "RJ",
+    "idempresa": 2
+  },
+  {
+    "id": 3,
+    "login": "admempresa3",
+    "senha": "senhaAdm3",
+    "nomerepresentlegal": "Carlos Lima",
+    "datanascimento": "1985-11-10",
+    "telefone": "(31)91234-5678",
+    "email": "carlos.lima@example.com",
+    "logradouro": "Praça da Paz",
+    "numero": "789",
+    "complemento": "Apto 202",
+    "bairro": "Bela Vista",
+    "cep": "34567-890",
+    "uf": "MG",
+    "idempresa": 3
+  }
+]
