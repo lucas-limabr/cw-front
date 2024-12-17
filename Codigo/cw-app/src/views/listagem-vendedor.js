@@ -10,7 +10,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
 import { BASE_URL } from "../config/axios";
 
-const baseURL = `${BASE_URL}/vendedores`;
+const baseURL = `${BASE_URL}/listagem-vendedor`;
 
 function ListagemVendedor() {
   // const cadastrar = () => {

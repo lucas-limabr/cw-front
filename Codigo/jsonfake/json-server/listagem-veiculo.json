@@ -2,6 +2,8 @@
   {
     "id": 1,
     "vin": "1HGCM82633A123456",
+    "nome": "Civic",
+    "marca": "Honda",
     "precoAtual": "85000.00",
     "cor": "Preto",
     "condicao": "Novo",
@@ -13,6 +15,8 @@
   {
     "id": 2,
     "vin": "2FTRX18W7XCA12345",
+    "nome": "Civic",
+    "marca": "Honda",
     "precoAtual": "45000.00",
     "cor": "Prata",
     "condicao": "Usado",
@@ -24,6 +28,8 @@
   {
     "id": 3,
     "vin": "JH4KA9650MC123456",
+    "nome": "Compass",
+    "marca": "Jeep",
     "precoAtual": "67000.00",
     "cor": "Azul",
     "condicao": "Novo",

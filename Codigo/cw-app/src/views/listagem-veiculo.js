@@ -12,7 +12,7 @@ import { mensagemSucesso, mensagemErro } from "../components/toastr";
 import axios from "axios";
 import { BASE_URL } from "../config/axios";
 
-const baseURL = `${BASE_URL}/veiculos`;
+const baseURL = `${BASE_URL}/listagem-veiculo`;
 
 function ListagemVeiculo() {
   const navigate = useNavigate();
@@ -40,7 +40,9 @@ function ListagemVeiculo() {
               <table className="table table-hover">
                 <thead>
                   <tr>
-                    <th scope="col">VIN</th>
+                    <th scope="col">Chassi</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Marca</th>
                     <th scope="col">Preço Atual</th>
                     <th scope="col">Cor</th>
                     <th scope="col">Condição</th>
@@ -52,6 +54,8 @@ function ListagemVeiculo() {
                   {dados.map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.vin}</td>
+                      <td>{dado.nome}</td>
+                      <td>{dado.marca}</td>
                       <td>{dado.precoAtual}</td>
                       <td>{dado.cor}</td>
                       <td>{dado.condicao}</td>

@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "marca": "Honda",
+    "nome": "Civic"
+  },
+  {
+    "id": 2,
+    "marca": "Jeep",
+    "nome": "Compass"
+  },
+  {
+    "id": 3,
+    "marca": "Hyundai",
+    "nome": "HB20"
+  }
+]

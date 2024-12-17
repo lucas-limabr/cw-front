@@ -69,12 +69,12 @@ function Navbar(props) {
           </ul>
 
           <ul className="navbar-nav">
-            <NavbarItem
-              render="true"
-              href="/listagem-cliente"
-              label="Clientes"
-            />
-          </ul>
+                        <NavbarItem
+                            render="true"
+                            href="/listagem-cliente"
+                            label="Clientes"
+                        />
+                    </ul> 
 
           <ul className="navbar-nav">
             <NavbarItem
