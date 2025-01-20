@@ -2,15 +2,15 @@
 "modelos": [
     {
       "id": 1,
-      "nome": "Honda Civic"
+      "nome": "Civic"
     },
     {
       "id": 2,
-      "nome": "Jeep Compass"
+      "nome": "Compass"
     },
     {
       "id": 3,
-      "nome": "Hyundai HB20"
+      "nome": "HB20"
     }
   ]
 }
