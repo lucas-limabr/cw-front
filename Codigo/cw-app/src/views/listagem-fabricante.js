@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Import do useNavigate
+import { useNavigate } from "react-router-dom";
 
 import Card from "../components/card";
 
@@ -14,9 +14,8 @@ import { BASE_URL } from "../config/axios";
 const baseURL = `${BASE_URL}/listagem-fabricante`;
 
 function ListagemFabricante() {
-  const navigate = useNavigate(); // Inicialização do navigate
+  const navigate = useNavigate();
 
-  // Função para redirecionar para a página de cadastro de fabricantes
   const cadastrar = () => {
     navigate(`/cadastro-fabricante`);
   };

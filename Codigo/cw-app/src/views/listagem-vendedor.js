@@ -17,17 +17,14 @@ function ListagemVendedor() {
   const navigate = useNavigate();
   const [dados, setDados] = React.useState(null);
 
-  // Navegação para cadastro de novo vendedor
   const cadastrar = () => {
     navigate(`/cadastro-vendedor`);
   };
 
-  // Navegação para editar vendedor
-  const editar = (id) => {
-    navigate(`/cadastro-vendedor/${id}`);
-  };
+  //const editar = (id) => {
+  //  navigate(`/cadastro-vendedor/${id}`);
+  //};
 
-  // Função para excluir vendedor
   async function excluir(id) {
     let data = JSON.stringify({ id });
     let url = `${baseURL}/${id}`;
@@ -66,7 +63,7 @@ function ListagemVendedor() {
               <button
                 type="button"
                 className="btn btn-warning"
-                onClick={cadastrar} // Ativando a navegação para cadastro
+                onClick={cadastrar}
               >
                 Novo Vendedor
               </button>
@@ -91,13 +88,13 @@ function ListagemVendedor() {
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton
                             aria-label="edit"
-                            onClick={() => editar(dado.id)} // Ativando a navegação para edição
+                            //onClick={() => editar(dado.id)} // Ativando a navegação para edição
                           >
                             <EditIcon />
                           </IconButton>
                           <IconButton
                             aria-label="delete"
-                            onClick={() => excluir(dado.id)} // Excluindo vendedor
+                            //onClick={() => excluir(dado.id)} // Excluindo vendedor
                           >
                             <DeleteIcon />
                           </IconButton>

@@ -25,17 +25,14 @@ function ListagemVeiculo() {
     });
   }, []);
 
-  // Função para navegação ao cadastro de veículo
   const cadastrar = () => {
     navigate(`/cadastro-veiculo`);
   };
 
-  // Função para editar veículo
   const editar = (id) => {
     navigate(`/cadastro-veiculos/${id}`);
   };
 
-  // Função para excluir veículo
   async function excluir(id) {
     let data = JSON.stringify({ id });
     let url = `${baseURL}/${id}`;
@@ -68,7 +65,7 @@ function ListagemVeiculo() {
               <button
                 type="button"
                 className="btn btn-warning"
-                onClick={() => cadastrar()} // Navega para cadastro de veículo
+                onClick={() => cadastrar()}
               >
                 Novo Veículo
               </button>

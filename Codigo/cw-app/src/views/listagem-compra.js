@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import Card from "../components/card";
 
@@ -13,9 +14,11 @@ import { BASE_URL } from "../config/axios";
 const baseURL = `${BASE_URL}/listagem-compra`;
 
 function ListagemCompra() {
-  // const cadastrar = () => {
-  //     navigate(`/cadastro-categorias`);
-  // };
+  const navigate = useNavigate();
+
+  const cadastrar = () => {
+    navigate(`/cadastro-categorias`);
+  };
 
   const [dados, setDados] = React.useState(null);
 
@@ -37,7 +40,7 @@ function ListagemCompra() {
               <button
                 type="button"
                 className="btn btn-warning"
-                //onClick={() => cadastrar()}
+                onClick={() => cadastrar()}
               >
                 Nova Compra
               </button>
