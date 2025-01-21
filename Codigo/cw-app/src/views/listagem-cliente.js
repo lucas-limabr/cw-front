@@ -21,7 +21,7 @@ function ListagemCliente() {
 
   React.useEffect(() => {
     axios.get(baseURL).then((response) => {
-      setDados(response.data);
+      setDados(response.data.clientes);
     });
   }, []);
 
