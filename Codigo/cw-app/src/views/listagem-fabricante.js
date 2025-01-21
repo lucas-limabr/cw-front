@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; // Import do useNavigate
 
 import Card from "../components/card";
 
@@ -13,9 +14,12 @@ import { BASE_URL } from "../config/axios";
 const baseURL = `${BASE_URL}/listagem-fabricante`;
 
 function ListagemFabricante() {
-  // const cadastrar = () => {
-  //     navigate(`/cadastro-categorias`);
-  // };
+  const navigate = useNavigate(); // Inicialização do navigate
+
+  // Função para redirecionar para a página de cadastro de fabricantes
+  const cadastrar = () => {
+    navigate(`/cadastro-fabricante`);
+  };
 
   const [dados, setDados] = React.useState(null);
 
@@ -37,7 +41,7 @@ function ListagemFabricante() {
               <button
                 type="button"
                 className="btn btn-warning"
-                //onClick={() => cadastrar()}
+                onClick={() => cadastrar()} // Usando a função cadastrar
               >
                 Novo Fabricante
               </button>

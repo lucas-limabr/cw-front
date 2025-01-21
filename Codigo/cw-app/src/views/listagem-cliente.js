@@ -1,21 +1,21 @@
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
 import Card from "../components/card";
-
 import Stack from "@mui/material/Stack";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-
 import axios from "axios";
 import { BASE_URL } from "../config/axios";
 
 const baseURL = `${BASE_URL}/listagem-cliente`;
 
 function ListagemCliente() {
-  // const cadastrar = () => {
-  //     navigate(`/cadastro-cliente`);
-  // };
+  const navigate = useNavigate();
+
+  const cadastrar = () => {
+    navigate(`/cadastro-cliente`);
+  };
 
   const [dados, setDados] = React.useState(null);
 
@@ -37,7 +37,7 @@ function ListagemCliente() {
               <button
                 type="button"
                 className="btn btn-warning"
-                //onClick={() => cadastrar()}
+                onClick={() => cadastrar()}
               >
                 Novo Cliente
               </button>
@@ -64,13 +64,13 @@ function ListagemCliente() {
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton
                             aria-label="edit"
-                            //onClick={() => editar(dado.id)}
+                          //onClick={() => editar(dado.id)}
                           >
                             <EditIcon />
                           </IconButton>
                           <IconButton
                             aria-label="delete"
-                            //onClick={() => excluir(dado.id)}
+                          //onClick={() => excluir(dado.id)}
                           >
                             <DeleteIcon />
                           </IconButton>

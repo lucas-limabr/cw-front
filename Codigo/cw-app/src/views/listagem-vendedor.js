@@ -9,15 +9,44 @@ import EditIcon from "@mui/icons-material/Edit";
 
 import axios from "axios";
 import { BASE_URL } from "../config/axios";
+import { useNavigate } from "react-router-dom";
 
 const baseURL = `${BASE_URL}/listagem-vendedor`;
 
 function ListagemVendedor() {
-  // const cadastrar = () => {
-  //     navigate(`/cadastro-categorias`);
-  // };
-
+  const navigate = useNavigate();
   const [dados, setDados] = React.useState(null);
+
+  // Navegação para cadastro de novo vendedor
+  const cadastrar = () => {
+    navigate(`/cadastro-vendedor`);
+  };
+
+  // Navegação para editar vendedor
+  const editar = (id) => {
+    navigate(`/cadastro-vendedor/${id}`);
+  };
+
+  // Função para excluir vendedor
+  async function excluir(id) {
+    let data = JSON.stringify({ id });
+    let url = `${baseURL}/${id}`;
+    await axios
+      .delete(url, data, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then(function (response) {
+        alert("Vendedor excluído com sucesso!");
+        setDados(
+          dados.filter((dado) => {
+            return dado.id !== id;
+          })
+        );
+      })
+      .catch(function (error) {
+        alert("Erro ao excluir o vendedor");
+      });
+  }
 
   React.useEffect(() => {
     axios.get(baseURL).then((response) => {
@@ -37,7 +66,7 @@ function ListagemVendedor() {
               <button
                 type="button"
                 className="btn btn-warning"
-                //onClick={() => cadastrar()}
+                onClick={cadastrar} // Ativando a navegação para cadastro
               >
                 Novo Vendedor
               </button>
@@ -62,13 +91,13 @@ function ListagemVendedor() {
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton
                             aria-label="edit"
-                            //onClick={() => editar(dado.id)}
+                            onClick={() => editar(dado.id)} // Ativando a navegação para edição
                           >
                             <EditIcon />
                           </IconButton>
                           <IconButton
                             aria-label="delete"
-                            //onClick={() => excluir(dado.id)}
+                            onClick={() => excluir(dado.id)} // Excluindo vendedor
                           >
                             <DeleteIcon />
                           </IconButton>

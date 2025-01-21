@@ -4,8 +4,6 @@ import Card from "../components/card";
 
 import { mensagemSucesso, mensagemErro } from "../components/toastr";
 
-//import '../custom.css';
-
 import { useNavigate } from "react-router-dom";
 
 import Stack from "@mui/material/Stack";
@@ -21,16 +19,19 @@ const baseURL = `${BASE_URL}/listagem-modelo`;
 function ListagemModelos() {
   const navigate = useNavigate();
 
+  // Função de navegação para cadastro de modelo
   const cadastrar = () => {
     navigate(`/cadastro-modelo`);
   };
 
+  // Função de navegação para editar modelo
   const editar = (id) => {
     navigate(`/cadastro-modelos/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);
 
+  // Função para excluir um modelo
   async function excluir(id) {
     let data = JSON.stringify({ id });
     let url = `${baseURL}/${id}`;
@@ -52,12 +53,14 @@ function ListagemModelos() {
       });
   }
 
+  // Carregar os dados na primeira renderização
   React.useEffect(() => {
     axios.get(baseURL).then((response) => {
       setDados(response.data);
     });
   }, []);
 
+  // Se não houver dados, não renderiza nada
   if (!dados) return null;
 
   return (
@@ -69,8 +72,8 @@ function ListagemModelos() {
             <div className="bs-component">
               <button
                 type="button"
-                class="btn btn-warning"
-                onClick={() => cadastrar()}
+                className="btn btn-warning"
+                onClick={() => cadastrar()} // Redireciona para cadastro de modelo
               >
                 Novo Modelo
               </button>
@@ -91,13 +94,13 @@ function ListagemModelos() {
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton
                             aria-label="edit"
-                            onClick={() => editar(dado.id)}
+                            //onClick={() => editar(dado.id)} // Redireciona para edição do modelo
                           >
                             <EditIcon />
                           </IconButton>
                           <IconButton
                             aria-label="delete"
-                            onClick={() => excluir(dado.id)}
+                            //onClick={() => excluir(dado.id)} // Exclui o modelo
                           >
                             <DeleteIcon />
                           </IconButton>
@@ -106,7 +109,7 @@ function ListagemModelos() {
                     </tr>
                   ))}
                 </tbody>
-              </table>{" "}
+              </table>
             </div>
           </div>
         </div>

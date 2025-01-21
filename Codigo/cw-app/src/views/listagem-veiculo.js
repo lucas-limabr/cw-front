@@ -25,16 +25,51 @@ function ListagemVeiculo() {
     });
   }, []);
 
+  // Função para navegação ao cadastro de veículo
+  const cadastrar = () => {
+    navigate(`/cadastro-veiculo`);
+  };
+
+  // Função para editar veículo
+  const editar = (id) => {
+    navigate(`/cadastro-veiculos/${id}`);
+  };
+
+  // Função para excluir veículo
+  async function excluir(id) {
+    let data = JSON.stringify({ id });
+    let url = `${baseURL}/${id}`;
+    await axios
+      .delete(url, data, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then(function (response) {
+        mensagemSucesso(`Veículo excluído com sucesso!`);
+        setDados(
+          dados.filter((dado) => {
+            return dado.id !== id;
+          }),
+        );
+      })
+      .catch(function (error) {
+        mensagemErro(`Erro ao excluir o veículo`);
+      });
+  }
+
   if (!dados) return null;
 
   return (
     <div className="container">
-      <Card title="Listagem de Veiculos">
+      <Card title="Listagem de Veículos">
         <div className="row">
           <div className="col-lg-12">
             <br />
             <div className="bs-component">
-              <button type="button" className="btn btn-warning">
+              <button
+                type="button"
+                className="btn btn-warning"
+                onClick={() => cadastrar()} // Navega para cadastro de veículo
+              >
                 Novo Veículo
               </button>
               <table className="table table-hover">
@@ -64,13 +99,13 @@ function ListagemVeiculo() {
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton
                             aria-label="edit"
-                            //onClick={() => editar(dado.id)}
+                            //onClick={() => editar(dado.id)} // Navega para editar
                           >
                             <EditIcon />
                           </IconButton>
                           <IconButton
                             aria-label="delete"
-                            //onClick={() => excluir(dado.id)}
+                            //onClick={() => excluir(dado.id)} // Exclui veículo
                           >
                             <DeleteIcon />
                           </IconButton>
