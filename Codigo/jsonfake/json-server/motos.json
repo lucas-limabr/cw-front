@@ -1,25 +1,23 @@
-{
-"motos": [
-    {
-      "id": 1,
-      "categoria": "Esportiva",
-      "qtdMarcha": "6",
-      "tipoMotor": "4 tempos",
-      "cilindrada": "1000cc"
-    },
-    {
-      "id": 2,
-      "categoria": "Cruiser",
-      "qtdMarcha": "5",
-      "tipoMotor": "V2",
-      "cilindrada": "1600cc"
-    },
-    {
-      "id": 3,
-      "categoria": "Street",
-      "qtdMarcha": "5",
-      "tipoMotor": "2 tempos",
-      "cilindrada": "250cc"
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "categoria": "Esportiva",
+    "qtdMarcha": "6",
+    "tipoMotor": "4 tempos",
+    "cilindrada": "1000cc"
+  },
+  {
+    "id": 2,
+    "categoria": "Cruiser",
+    "qtdMarcha": "5",
+    "tipoMotor": "V2",
+    "cilindrada": "1600cc"
+  },
+  {
+    "id": 3,
+    "categoria": "Street",
+    "qtdMarcha": "5",
+    "tipoMotor": "2 tempos",
+    "cilindrada": "250cc"
+  }
+]

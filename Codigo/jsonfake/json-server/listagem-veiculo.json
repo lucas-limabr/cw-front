@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "vin": "1HGCM82633A123456",
+    "nome": "Civic",
+    "marca": "Honda",
+    "precoAtual": "85000.00",
+    "cor": "Preto",
+    "condicao": "Novo",
+    "vendido": "Não",
+    "garantia": "5 anos",
+    "idmodeloveiculo": "1",
+    "idconcessionaria": "1"
+  },
+  {
+    "id": 2,
+    "vin": "2FTRX18W7XCA12345",
+    "nome": "Civic",
+    "marca": "Honda",
+    "precoAtual": "45000.00",
+    "cor": "Prata",
+    "condicao": "Usado",
+    "vendido": "Sim",
+    "garantia": "1 ano",
+    "idmodeloveiculo": "2",
+    "idconcessionaria": "2"
+  },
+  {
+    "id": 3,
+    "vin": "JH4KA9650MC123456",
+    "nome": "Compass",
+    "marca": "Jeep",
+    "precoAtual": "67000.00",
+    "cor": "Azul",
+    "condicao": "Novo",
+    "vendido": "Não",
+    "garantia": "3 anos",
+    "idmodeloveiculo": "3",
+    "idconcessionaria": "3"
+  }
+]

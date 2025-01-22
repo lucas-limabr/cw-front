@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "data": "2024-11-20",
+    "formaPag": "Cartão de Crédito",
+    "desconto": "10%",
+    "aprovada": "Sim"
+  },
+  {
+    "id": 2,
+    "data": "2024-11-21",
+    "formaPag": "Boleto Bancário",
+    "desconto": "5%",
+    "aprovada": "Não"
+  },
+  {
+    "id": 3,
+    "data": "2024-11-22",
+    "formaPag": "Dinheiro",
+    "desconto": "0%",
+    "aprovada": "Sim"
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "razaoSocial": "Auto Vendas Premium LTDA",
+    "cnpj": "12.345.678/0001-99",
+    "telefone": "(11) 98765-4321",
+    "email": "contato@autovendaspremium.com",
+    "logradouro": "Avenida Paulista",
+    "numero": "1000",
+    "complemento": "Sala 101",
+    "bairro": "Bela Vista",
+    "cep": "01310-100",
+    "uf": "SP",
+    "idempresa": "1"
+  },
+  {
+    "id": 2,
+    "razaoSocial": "Super Veículos Brasil SA",
+    "cnpj": "98.765.432/0001-55",
+    "telefone": "(21) 99876-5432",
+    "email": "suporte@superveiculosbr.com",
+    "logradouro": "Rua das Flores",
+    "numero": "500",
+    "complemento": "Loja A",
+    "bairro": "Centro",
+    "cep": "20031-020",
+    "uf": "RJ",
+    "idempresa": "2"
+  },
+  {
+    "id": 3,
+    "razaoSocial": "Carros e Companhia EIRELI",
+    "cnpj": "56.789.012/0001-44",
+    "telefone": "(31) 91234-5678",
+    "email": "vendas@carrosecia.com",
+    "logradouro": "Avenida do Contorno",
+    "numero": "2500",
+    "complemento": "Andar 2",
+    "bairro": "Savassi",
+    "cep": "30110-920",
+    "uf": "MG",
+    "idempresa": "3"
+  }
+]
