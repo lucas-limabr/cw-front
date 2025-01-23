@@ -1,14 +1,14 @@
 [
   {
     "id": 1,
-    "acessorio": "Teto Solar Elétrico"
+    "descricao": "Caixa de som"
   },
   {
     "id": 2,
-    "acessorio": "Câmera de Ré"
+    "descricao": "Câmera de Ré"
   },
   {
     "id": 3,
-    "acessorio": "Rodas Esportivas"
+    "descricao": "Rodas Esportivas"
   }
 ]

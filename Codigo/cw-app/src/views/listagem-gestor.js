@@ -51,12 +51,7 @@ function ListagemGestor() {
                     <th scope="col">CPF</th>
                     <th scope="col">Telefone</th>
                     <th scope="col">E-mail</th>
-                    <th scope="col">Logradouro</th>
-                    <th scope="col">Numero</th>
-                    <th scope="col">Complemento</th>
-                    <th scope="col">Bairro</th>
-                    <th scope="col">CEP</th>
-                    <th scope="col">UF</th>
+                    <th scope="col">Concessionária</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -66,12 +61,7 @@ function ListagemGestor() {
                       <td>{dado.cpf}</td>
                       <td>{dado.telefone}</td>
                       <td>{dado.email}</td>
-                      <td>{dado.logradouro}</td>
-                      <td>{dado.numero}</td>
-                      <td>{dado.complemento}</td>
-                      <td>{dado.bairro}</td>
-                      <td>{dado.cep}</td>
-                      <td>{dado.uf}</td>
+                      <td>{dado.razaoSocialConcessionaria}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton

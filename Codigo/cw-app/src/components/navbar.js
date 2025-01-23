@@ -34,6 +34,40 @@ function Navbar(props) {
           <ul className="navbar-nav">
             <NavbarItem render="true" href="/listagem-modelo" label="Modelos" />
           </ul>
+
+          <ul className="navbar-nav">
+            <NavbarItem
+              render="true"
+              href="/listagem-empresa"
+              label="Empresas"
+            />
+          </ul>
+
+          <ul className="navbar-nav">
+            <NavbarItem
+              render="true"
+              href="/listagem-concessionaria"
+              label="Concessionarias"
+            />
+          </ul>
+
+          <ul className="navbar-nav">
+            <NavbarItem
+              render="true"
+              href="/listagem-item-serie"
+              label="Itens séries"
+            />
+          </ul>
+
+          {/* <ul className="navbar-nav">
+            <NavbarItem
+              render="true"
+              href="/listagem-acessorio"
+              label="Acessórios"
+            />
+          </ul> */}
+
+
           <ul className="navbar-nav">
             <NavbarItem
               render="true"
@@ -58,23 +92,16 @@ function Navbar(props) {
           </ul>
 
           <ul className="navbar-nav">
-            <NavbarItem
-              render="true"
-              href="/listagem-concessionaria"
-              label="Concessionarias"
-            />
-          </ul>
-          <ul className="navbar-nav">
             <NavbarItem render="true" href="/listagem-compra" label="Compras" />
           </ul>
 
           <ul className="navbar-nav">
-                        <NavbarItem
-                            render="true"
-                            href="/listagem-cliente"
-                            label="Clientes"
-                        />
-                    </ul> 
+            <NavbarItem
+              render="true"
+              href="/listagem-cliente"
+              label="Clientes"
+            />
+          </ul>
 
           <ul className="navbar-nav">
             <NavbarItem

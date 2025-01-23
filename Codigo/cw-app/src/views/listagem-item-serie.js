@@ -2,6 +2,10 @@ import React from "react";
 
 import Card from "../components/card";
 
+import { mensagemSucesso, mensagemErro } from "../components/toastr";
+
+import { useNavigate } from "react-router-dom";
+
 import Stack from "@mui/material/Stack";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -9,53 +13,59 @@ import EditIcon from "@mui/icons-material/Edit";
 
 import axios from "axios";
 import { BASE_URL } from "../config/axios";
-import { useNavigate } from "react-router-dom";
 
-const baseURL = `${BASE_URL}/listagem-vendedor`;
+const baseURL = `${BASE_URL}/itensseries`;
 
-function ListagemVendedor() {
+function ListagemItensSeries() {
   const navigate = useNavigate();
-  const [dados, setDados] = React.useState(null);
 
+  // Função de navegação para cadastro de modelo
   const cadastrar = () => {
-    navigate(`/cadastro-vendedor`);
+    navigate(`/cadastro-item-serie`);
   };
 
-  //const editar = (id) => {
-  //  navigate(`/cadastro-vendedor/${id}`);
-  //};
+  // Função de navegação para editar modelo
+  const editar = (id) => {
+    navigate(`/cadastro-item-serie/${id}`);
+  };
 
+  const [dados, setDados] = React.useState(null);
+
+  // Função para excluir um modelo
   async function excluir(id) {
     let data = JSON.stringify({ id });
     let url = `${baseURL}/${id}`;
+    console.log(url);
     await axios
       .delete(url, data, {
         headers: { "Content-Type": "application/json" },
       })
       .then(function (response) {
-        alert("Vendedor excluído com sucesso!");
+        mensagemSucesso(`Item de série excluído com sucesso!`);
         setDados(
           dados.filter((dado) => {
             return dado.id !== id;
-          })
+          }),
         );
       })
       .catch(function (error) {
-        alert("Erro ao excluir o vendedor");
+        mensagemErro(`Erro ao excluir o item de série`);
       });
   }
 
+  // Carregar os dados na primeira renderização
   React.useEffect(() => {
     axios.get(baseURL).then((response) => {
       setDados(response.data);
     });
   }, []);
 
+  // Se não houver dados, não renderiza nada
   if (!dados) return null;
 
   return (
     <div className="container">
-      <Card title="Listagem de Vendedores">
+      <Card title="Listagem de Itens de Série">
         <div className="row">
           <div className="col-lg-12">
             <br />
@@ -63,40 +73,31 @@ function ListagemVendedor() {
               <button
                 type="button"
                 className="btn btn-warning"
-                onClick={cadastrar}
+                onClick={() => cadastrar()} // Redireciona para cadastro de modelo
               >
-                Novo Vendedor
+                Novo Modelo
               </button>
               <table className="table table-hover">
                 <thead>
                   <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">CPF</th>
-                    <th scope="col">Telefone</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Concessionária</th>
-                    <th scope="col">Ações</th>
+                    <th scope="col">Descrição</th>
                   </tr>
                 </thead>
                 <tbody>
                   {dados.map((dado) => (
                     <tr key={dado.id}>
-                      <td>{dado.nome}</td>
-                      <td>{dado.cpf}</td>
-                      <td>{dado.telefone}</td>
-                      <td>{dado.email}</td>
-                      <td>{dado.razaoSocialConcessionaria}</td>
+                      <td>{dado.descricao}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton
                             aria-label="edit"
-                            //onClick={() => editar(dado.id)} // Ativando a navegação para edição
+                            //onClick={() => editar(dado.id)} // Redireciona para edição do modelo
                           >
                             <EditIcon />
                           </IconButton>
                           <IconButton
                             aria-label="delete"
-                            //onClick={() => excluir(dado.id)} // Excluindo vendedor
+                            //onClick={() => excluir(dado.id)} // Exclui o modelo
                           >
                             <DeleteIcon />
                           </IconButton>
@@ -114,4 +115,4 @@ function ListagemVendedor() {
   );
 }
 
-export default ListagemVendedor;
+export default ListagemItensSeries;

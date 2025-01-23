@@ -50,7 +50,9 @@ function ListagemCompra() {
                     <th scope="col">Data</th>
                     <th scope="col">Forma de Pagamento</th>
                     <th scope="col">Desconto</th>
-                    <th scope="col">Aprovada</th>
+                    <th scope="col">CPF do Cliente</th>
+                    <th scope="col">Concessionária</th>
+                    <th scope="col">Veículo</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -59,7 +61,25 @@ function ListagemCompra() {
                       <td>{dado.data}</td>
                       <td>{dado.formaPag}</td>
                       <td>{dado.desconto}</td>
-                      <td>{dado.aprovada}</td>
+                      <td>{dado.cpfCliente}</td>
+                      <td>{dado.razaoSocialConcessionaria}</td>
+                      <td>{dado.modeloVeiculo}</td>
+                      <td>
+                        <Stack spacing={1} padding={0} direction="row">
+                          <IconButton
+                            aria-label="edit"
+                          //onClick={() => editar(dado.id)}
+                          >
+                            <EditIcon />
+                          </IconButton>
+                          <IconButton
+                            aria-label="delete"
+                          //onClick={() => excluir(dado.id)}
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        </Stack>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
