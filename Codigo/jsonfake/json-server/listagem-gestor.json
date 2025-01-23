@@ -13,7 +13,9 @@
     "bairro": "Jardim Florido",
     "cep": "45678-901",
     "uf": "SC",
-    "idempresa": 1
+    "idempresa": 1,
+    "idconcessionaria": 1,
+    "razaoSocialConcessionaria": "Auto Vendas Premium LTDA"
   },
   {
     "id": 2,
@@ -29,7 +31,9 @@
     "bairro": "Setor Central",
     "cep": "56789-012",
     "uf": "GO",
-    "idempresa": 2
+    "idempresa": 2,
+    "idconcessionaria": 2,
+    "razaoSocialConcessionaria": "Super Veículos Brasil SA"
   },
   {
     "id": 3,
@@ -45,6 +49,8 @@
     "bairro": "Boa Vista",
     "cep": "67890-123",
     "uf": "PE",
-    "idempresa": 3
+    "idempresa": 3,
+    "idconcessionaria": 3,
+    "razaoSocialConcessionaria": "Carros e Companhia EIRELI"
   }
 ]

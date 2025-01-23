@@ -4,20 +4,35 @@
     "data": "2024-11-20",
     "formaPag": "Cartão de Crédito",
     "desconto": "10%",
-    "aprovada": "Sim"
+    "idCliente": 1,
+    "cpfCliente": "123.456.789-00",
+    "idModelo": 1,
+    "modeloVeiculo": "Civic",
+    "idConcessionaria": 1,
+    "razaoSocialConcessionaria": "Auto Vendas Premium LTDA"
   },
   {
     "id": 2,
     "data": "2024-11-21",
     "formaPag": "Boleto Bancário",
     "desconto": "5%",
-    "aprovada": "Não"
+    "idCliente": 2,
+    "cpfCliente": "987.654.321-11",
+    "idModelo": 2,
+    "modeloVeiculo": "Compass",
+    "idConcessionaria": 3,
+    "razaoSocialConcessionaria": "Carros e Companhia EIRELI"
   },
   {
     "id": 3,
     "data": "2024-11-22",
     "formaPag": "Dinheiro",
     "desconto": "0%",
-    "aprovada": "Sim"
+    "idCliente": 3,
+    "cpfCliente": "456.789.123-22",
+    "idModelo": 3,
+    "modeloVeiculo": "HB20",
+    "idConcessionaria": 2,
+    "razaoSocialConcessionaria": "Super Veículos Brasil SA"
   }
 ]

@@ -1,17 +1,17 @@
 [
   {
     "id": 1,
-    "marca": "Honda",
-    "nome": "Civic"
+    "fabricante": "Honda",
+    "modelo": "Civic"
   },
   {
     "id": 2,
-    "marca": "Jeep",
-    "nome": "Compass"
+    "fabricante": "Jeep",
+    "modelo": "Compass"
   },
   {
     "id": 3,
-    "marca": "Hyundai",
-    "nome": "HB20"
+    "fabricante": "Hyundai",
+    "modelo": "HB20"
   }
 ]

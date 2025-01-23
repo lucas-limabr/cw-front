@@ -49,8 +49,10 @@ function ListagemAgendamentoTestDrive() {
                   <tr>
                     <th scope="col">Data Agendada</th>
                     <th scope="col">Hora Agendada</th>
-                    <th scope="col">Data Entregue</th>
                     <th scope="col">Hora Entregue</th>
+                    <th scope="col">CPF do Cliente</th>
+                    <th scope="col">Concessionaria</th>
+                    <th scope="col">Modelo</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -58,8 +60,10 @@ function ListagemAgendamentoTestDrive() {
                     <tr key={dado.id}>
                       <td>{dado.dataAgendada}</td>
                       <td>{dado.horaAgendada}</td>
-                      <td>{dado.dataEntregue}</td>
                       <td>{dado.horaEntregue}</td>
+                      <td>{dado.cpfCliente}</td>
+                      <td>{dado.razaoSocialConcessionaria}</td>
+                      <td>{dado.modeloVeiculo}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton

@@ -14,7 +14,8 @@
     "cep": "12345-678",
     "uf": "SP",
     "idempresa": 1,
-    "idconcessionaria": 1
+    "idconcessionaria": 1,
+    "razaoSocialConcessionaria": "Auto Vendas Premium LTDA"
   },
   {
     "id": 2,
@@ -30,8 +31,9 @@
     "bairro": "Vila Nova",
     "cep": "34567-890",
     "uf": "MG",
-    "idempresa": 3,
-    "idconcessionaria": 3
+    "idempresa": 2,
+    "idconcessionaria": 2,
+    "razaoSocialConcessionaria": "Super Veículos Brasil SA"
   },
   {
     "id": 3,
@@ -48,6 +50,7 @@
     "cep": "23456-789",
     "uf": "RJ",
     "idempresa": 3,
-    "idconcessionaria": 3
+    "idconcessionaria": 3,
+    "razaoSocialConcessionaria": "Carros e Companhia EIRELI"
   }
 ]

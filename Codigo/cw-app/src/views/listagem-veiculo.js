@@ -73,36 +73,34 @@ function ListagemVeiculo() {
                 <thead>
                   <tr>
                     <th scope="col">Chassi</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Marca</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Fabricante</th>
                     <th scope="col">Preço Atual</th>
-                    <th scope="col">Cor</th>
                     <th scope="col">Condição</th>
-                    <th scope="col">Garantia</th>
+                    <th scope="col">Concessionaria</th>
                     <th scope="col">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
                   {dados.map((dado) => (
                     <tr key={dado.id}>
-                      <td>{dado.vin}</td>
-                      <td>{dado.nome}</td>
-                      <td>{dado.marca}</td>
+                      <td>{dado.chassi}</td>
+                      <td>{dado.modelo}</td>
+                      <td>{dado.fabricante}</td>
                       <td>{dado.precoAtual}</td>
-                      <td>{dado.cor}</td>
                       <td>{dado.condicao}</td>
-                      <td>{dado.garantia}</td>
+                      <td>{dado.razaoSocialConcessionaria}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton
                             aria-label="edit"
-                            //onClick={() => editar(dado.id)} // Navega para editar
+                          //onClick={() => editar(dado.id)} // Navega para editar
                           >
                             <EditIcon />
                           </IconButton>
                           <IconButton
                             aria-label="delete"
-                            //onClick={() => excluir(dado.id)} // Exclui veículo
+                          //onClick={() => excluir(dado.id)} // Exclui veículo
                           >
                             <DeleteIcon />
                           </IconButton>
