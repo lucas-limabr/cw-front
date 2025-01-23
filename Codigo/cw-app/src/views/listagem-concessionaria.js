@@ -17,7 +17,7 @@ function ListagemConcessionaria() {
   const navigate = useNavigate();
   
   const cadastrar = () => {
-    navigate(`/cadastro-categorias`);
+    navigate(`/cadastro-concessionaria`);
   };
 
   const [dados, setDados] = React.useState(null);

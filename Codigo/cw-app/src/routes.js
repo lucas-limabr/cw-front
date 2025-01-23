@@ -5,6 +5,9 @@ import CadastroModelo from "./views/cadastro-modelo";
 import CadastroVeiculo from "./views/cadastro-veiculo";
 import CadastroVendedor from "./views/cadastro-vendedor";
 import CadastroCliente from "./views/cadastro-cliente";
+import CadastroGestor from "./views/cadastro-gestor.js";
+import CadastroTestDrive from "./views/cadastro-agendamento-test-drive.js";
+import CadastroConcessionaria from "./views/cadastro-concessionaria";
 import CadastroItemSerie from "./views/cadastro-item-serie";
 import CadastroAcessorio from "./views/cadastro-acessorio";
 import CadastroEmpresa from "./views/cadastro-empresa";
@@ -29,6 +32,11 @@ function Rotas(props) {
   return (
     <BrowserRouter>
       <Routes>
+
+        <Route
+          path="/cadastro-concessionaria/:idParam?"
+          element={<CadastroConcessionaria />}
+        />
         <Route
           path="/cadastro-fabricante/:idParam?"
           element={<CadastroFabricante />}
@@ -46,6 +54,7 @@ function Rotas(props) {
           path="/cadastro-veiculo/:idParam?"
           element={<CadastroVeiculo />}
         />
+
         <Route
           path="/cadastro-vendedor/:idParam?"
           element={<CadastroVendedor />}
@@ -61,6 +70,11 @@ function Rotas(props) {
         <Route
           path="/cadastro-cliente/:idParam?"
           element={<CadastroCliente />}
+        />
+
+        <Route
+          path="/cadastro-gestor/:idParam?"
+          element={<CadastroGestor />}
         />
 
         <Route path="/listagem-modelo" element={<ListagemModelo />} />

@@ -17,7 +17,7 @@ function ListagemGestor() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-categorias`);
+    navigate(`/cadastro-gestor`);
   };
 
   const [dados, setDados] = React.useState(null);
@@ -51,7 +51,7 @@ function ListagemGestor() {
                     <th scope="col">CPF</th>
                     <th scope="col">Telefone</th>
                     <th scope="col">E-mail</th>
-                    <th scope="col">Concessionária</th>
+                    <th scope="col">Razão social Concessionaria</th>
                   </tr>
                 </thead>
                 <tbody>
