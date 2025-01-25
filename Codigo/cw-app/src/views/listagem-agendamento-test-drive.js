@@ -17,7 +17,7 @@ function ListagemAgendamentoTestDrive() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-categorias`);
+    navigate(`/cadastro-testdrive`);
   };
 
   const [dados, setDados] = React.useState(null);

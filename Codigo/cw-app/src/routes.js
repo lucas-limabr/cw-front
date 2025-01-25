@@ -6,11 +6,11 @@ import CadastroVeiculo from "./views/cadastro-veiculo";
 import CadastroVendedor from "./views/cadastro-vendedor";
 import CadastroCliente from "./views/cadastro-cliente";
 import CadastroGestor from "./views/cadastro-gestor.js";
-import CadastroTestDrive from "./views/cadastro-agendamento-test-drive.js";
+import CadastroTestDrive from "./views/cadastro-testdrive";
 import CadastroConcessionaria from "./views/cadastro-concessionaria";
 import CadastroItemSerie from "./views/cadastro-item-serie";
-import CadastroAcessorio from "./views/cadastro-acessorio";
 import CadastroEmpresa from "./views/cadastro-empresa";
+import CadastroCompra from "./views/cadastro-compra.js";
 
 import ListagemFabricante from "./views/listagem-fabricante";
 import ListagemModelo from "./views/listagem-modelo";
@@ -23,7 +23,6 @@ import ListagemConcessionaria from "./views/listagem-concessionaria";
 import ListagemCliente from "./views/listagem-cliente";
 import ListagemItensSeries from "./views/listagem-item-serie";
 import ListagemEmpresa from "./views/listagem-empresa";
-import ListagemAcessorios from "./views/listagem-acessorio";
 
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
@@ -47,8 +46,8 @@ function Rotas(props) {
           element={<CadastroItemSerie />}
         />
         <Route
-          path="/cadastro-acessorio/:idParam?"
-          element={<CadastroAcessorio />}
+          path="/cadastro-testdrive/:idParam?"
+          element={<CadastroTestDrive />}
         />
         <Route
           path="/cadastro-veiculo/:idParam?"
@@ -65,6 +64,11 @@ function Rotas(props) {
           element={<CadastroEmpresa />}
         />
 
+        <Route
+          path="/cadastro-compra/:idParam?"
+          element={<CadastroCompra />}
+        />
+
         <Route path="/listagem-fabricante" element={<ListagemFabricante />} />
 
         <Route
@@ -79,7 +83,6 @@ function Rotas(props) {
 
         <Route path="/listagem-modelo" element={<ListagemModelo />} />
         <Route path="/listagem-item-serie" element={<ListagemItensSeries />} />
-        <Route path="/listagem-acessorio" element={<ListagemAcessorios />} />
         <Route path="/listagem-veiculo" element={<ListagemVeiculo />} />
         <Route path="/listagem-vendedor" element={<ListagemVendedor />} />
 
@@ -96,7 +99,7 @@ function Rotas(props) {
           path="/listagem-empresa"
           element={<ListagemEmpresa />}
         />
-       
+
         <Route
           path="/listagem-concessionaria"
           element={<ListagemConcessionaria />}

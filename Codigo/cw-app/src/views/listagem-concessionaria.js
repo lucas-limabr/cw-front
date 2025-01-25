@@ -51,9 +51,7 @@ function ListagemConcessionaria() {
                     <th scope="col">CNPJ</th>
                     <th scope="col">Telefone</th>
                     <th scope="col">E-mail</th>
-                    <th scope="col">Bairro</th>
-                    <th scope="col">CEP</th>
-                    <th scope="col">UF</th>
+                    <th scope="col">Empresa</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -63,9 +61,7 @@ function ListagemConcessionaria() {
                       <td>{dado.cnpj}</td>
                       <td>{dado.telefone}</td>
                       <td>{dado.email}</td>
-                      <td>{dado.bairro}</td>
-                      <td>{dado.cep}</td>
-                      <td>{dado.uf}</td>
+                      <td>{dado.razaoSocialEmpresa}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton

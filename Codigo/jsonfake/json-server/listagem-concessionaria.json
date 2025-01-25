@@ -11,7 +11,8 @@
     "bairro": "Bela Vista",
     "cep": "01310-100",
     "uf": "SP",
-    "idempresa": "1"
+    "idempresa": "1",
+    "razaoSocialEmpresa": "AutoPrime Veículos Ltda"
   },
   {
     "id": 2,
@@ -25,7 +26,8 @@
     "bairro": "Centro",
     "cep": "20031-020",
     "uf": "RJ",
-    "idempresa": "2"
+    "idempresa": "2",
+    "razaoSocialEmpresa": "SuperCar Veículos S.A."
   },
   {
     "id": 3,
@@ -39,6 +41,7 @@
     "bairro": "Savassi",
     "cep": "30110-920",
     "uf": "MG",
-    "idempresa": "3"
+    "idempresa": "3",
+    "razaoSocialEmpresa": "TopCar Motors Eireli"
   }
 ]

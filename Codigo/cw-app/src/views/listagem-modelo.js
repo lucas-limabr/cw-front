@@ -80,16 +80,16 @@ function ListagemModelos() {
               <table className="table table-hover">
                 <thead>
                   <tr>
-                    <th scope="col">Modelo</th>
-                    <th scope="col">Fabricante</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Marca</th>
                     <th scope="col">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
                   {dados.map((dado) => (
                     <tr key={dado.id}>
-                      <td>{dado.modelo}</td>
-                      <td>{dado.fabricante}</td>
+                      <td>{dado.nome}</td>
+                      <td>{dado.marca}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton

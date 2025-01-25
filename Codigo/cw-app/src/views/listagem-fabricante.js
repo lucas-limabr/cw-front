@@ -42,7 +42,7 @@ function ListagemFabricante() {
                 className="btn btn-warning"
                 onClick={() => cadastrar()} // Usando a função cadastrar
               >
-                Novo Fabricante
+                Nova Fabricante
               </button>
               <table className="table table-hover">
                 <thead>

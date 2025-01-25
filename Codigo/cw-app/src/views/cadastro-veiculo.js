@@ -17,22 +17,22 @@ function CadastroVeiculo() {
   const baseURL = `${BASE_URL}/listagem-veiculo`;
 
   const [id, setId] = useState('');
-  const [vin, setVin] = useState('');
-  const [nome, setNome] = useState('');
-  const [marca, setMarca] = useState('');
+  const [chassi, setChassi] = useState('');
+  const [modelo, setNome] = useState('');
+  const [fabricante, setMarca] = useState('');
   const [precoAtual, setPrecoAtual] = useState('');
   const [cor, setCor] = useState('');
   const [condicao, setCondicao] = useState('');
   const [vendido, setVendido] = useState('');
   const [garantia, setGarantia] = useState('');
   const [idModeloVeiculo, setIdModeloVeiculo] = useState('');
-  const [idConcessionaria, setIdConcessionaria] = useState('');
+  const [concessionaria, setIdConcessionaria] = useState('');
 
   const [dados, setDados] = useState(null);
 
   function inicializar() {
     setId('');
-    setVin('');
+    setChassi('');
     setNome('');
     setMarca('');
     setPrecoAtual('');
@@ -47,16 +47,16 @@ function CadastroVeiculo() {
   async function salvar() {
     const data = {
       id,
-      vin,
-      nome,
-      marca,
+      chassi,
+      modelo,
+      fabricante,
       precoAtual,
       cor,
       condicao,
       vendido,
       garantia,
       idModeloVeiculo,
-      idConcessionaria,
+      concessionaria,
     };
 
     try {
@@ -64,12 +64,12 @@ function CadastroVeiculo() {
         await axios.post(baseURL, data, {
           headers: { 'Content-Type': 'application/json' },
         });
-        mensagemSucesso(`Veículo ${nome} cadastrado com sucesso!`);
+        mensagemSucesso(`Veículo ${modelo} cadastrado com sucesso!`);
       } else {
         await axios.put(`${baseURL}/${idParam}`, data, {
           headers: { 'Content-Type': 'application/json' },
         });
-        mensagemSucesso(`Veículo ${nome} alterado com sucesso!`);
+        mensagemSucesso(`Veículo ${modelo} alterado com sucesso!`);
       }
       navigate('/listagem-veiculos');
     } catch (error) {
@@ -83,9 +83,9 @@ function CadastroVeiculo() {
         const response = await axios.get(`${baseURL}/${idParam}`);
         const veiculo = response.data;
         setId(veiculo.id);
-        setVin(veiculo.vin);
-        setNome(veiculo.nome);
-        setMarca(veiculo.marca);
+        setChassi(veiculo.chassi);
+        setNome(veiculo.modelo);
+        setMarca(veiculo.fabricante);
         setPrecoAtual(veiculo.precoAtual);
         setCor(veiculo.cor);
         setCondicao(veiculo.condicao);
@@ -113,31 +113,31 @@ function CadastroVeiculo() {
           <div className='col-lg-12'>
             <br />
             <div className='bs-component'>
-              <FormGroup label='VIN: *' htmlFor='inputVin'>
+              <FormGroup label='Chassi: *' htmlFor='inputVin'>
                 <input
                   type='text'
                   id='inputVin'
-                  value={vin}
+                  value={chassi}
                   className='form-control'
-                  onChange={(e) => setVin(e.target.value)}
+                  onChange={(e) => setChassi(e.target.value)}
                 />
               </FormGroup>
               <br />
-              <FormGroup label='Nome: *' htmlFor='inputNome'>
+              <FormGroup label='Modelo: *' htmlFor='inputModelo'>
                 <input
                   type='text'
-                  id='inputNome'
-                  value={nome}
+                  id='inputModelo'
+                  value={modelo}
                   className='form-control'
                   onChange={(e) => setNome(e.target.value)}
                 />
               </FormGroup>
               <br />
-              <FormGroup label='Marca: *' htmlFor='inputMarca'>
+              <FormGroup label='Fabricante: *' htmlFor='inputFabricante'>
                 <input
                   type='text'
-                  id='inputMarca'
-                  value={marca}
+                  id='inputFabricante'
+                  value={fabricante}
                   className='form-control'
                   onChange={(e) => setMarca(e.target.value)}
                 />
@@ -193,21 +193,12 @@ function CadastroVeiculo() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label='ID Modelo de Veículo: *' htmlFor='inputIdModeloVeiculo'>
-                <input
-                  type='text'
-                  id='inputIdModeloVeiculo'
-                  value={idModeloVeiculo}
-                  className='form-control'
-                  onChange={(e) => setIdModeloVeiculo(e.target.value)}
-                />
-              </FormGroup>
               <br />
-              <FormGroup label='ID Concessionária: *' htmlFor='inputIdConcessionaria'>
+              <FormGroup label='Concessionária: *' htmlFor='inputConcessionaria'>
                 <input
                   type='text'
-                  id='inputIdConcessionaria'
-                  value={idConcessionaria}
+                  id='inputConcessionaria'
+                  value={concessionaria}
                   className='form-control'
                   onChange={(e) => setIdConcessionaria(e.target.value)}
                 />

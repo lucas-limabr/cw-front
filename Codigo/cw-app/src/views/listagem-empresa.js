@@ -21,7 +21,7 @@ function ListagemEmpresa() {
 
     // Função de navegação para cadastro de modelo
     const cadastrar = () => {
-        navigate(`/listagem-empresa`);
+        navigate(`/cadastro-empresa`);
     };
 
     // Função de navegação para editar modelo
@@ -75,7 +75,7 @@ function ListagemEmpresa() {
                                 className="btn btn-warning"
                                 onClick={() => cadastrar()} // Redireciona para cadastro de modelo
                             >
-                                Novo Modelo
+                                Nova Empresa
                             </button>
                             <table className="table table-hover">
                                 <thead>

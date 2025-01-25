@@ -75,7 +75,7 @@ function ListagemItensSeries() {
                 className="btn btn-warning"
                 onClick={() => cadastrar()} // Redireciona para cadastro de modelo
               >
-                Novo Modelo
+                Novo Item de Série
               </button>
               <table className="table table-hover">
                 <thead>

@@ -8,8 +8,6 @@ import FormGroup from '../components/form-group';
 
 import { mensagemSucesso, mensagemErro } from '../components/toastr';
 
-//import '../custom.css';
-
 import axios from 'axios';
 import { BASE_URL } from '../config/axios';
 
@@ -31,9 +29,7 @@ function CadastroGestor() {
   const [bairro, setBairro] = useState('');
   const [cep, setCep] = useState('');
   const [uf, setUf] = useState('');
-  const [idEmpresa, setIdEmpresa] = useState('');
-  const [idConcessionaria, setIdConcessionaria] = useState('');
-  const [razaoSocialConcessionaria, setRazaoSocialConcessionaria] = useState('');
+  const [concessionaria, setConcessionaria] = useState('');
   
 
   const [dados, setDados] = useState(null);
@@ -52,9 +48,7 @@ function CadastroGestor() {
     setBairro('');
     setCep('');
     setUf('');
-    setIdEmpresa('');
-    setIdConcessionaria('');
-    setRazaoSocialConcessionaria('');
+    setConcessionaria('');
   }
 
   async function salvar() {
@@ -72,9 +66,7 @@ function CadastroGestor() {
       bairro,
       cep,
       uf,
-      idEmpresa,
-      idConcessionaria,
-      razaoSocialConcessionaria
+      concessionaria
     };
 
     try {
@@ -113,9 +105,7 @@ function CadastroGestor() {
         setBairro(gestor.bairro);
         setCep(gestor.cep);
         setUf(gestor.uf);
-        setIdEmpresa(gestor.idEmpresa);
-        setIdConcessionaria(gestor.idConcessionaria);
-        setRazaoSocialConcessionaria(gestor.razaoSocialConcessionaria);
+        setConcessionaria(gestor.concessionaria);
         setDados(gestor);
       } catch (error) {
         mensagemErro('Erro ao carregar os dados do gestor.');
@@ -197,7 +187,7 @@ function CadastroGestor() {
                 <input
                   type='text'
                   id='inputLogradouro'
-                  value={login}
+                  value={logradouro}
                   className='form-control'
                   onChange={(e) => setLogradouro(e.target.value)}
                 />
@@ -207,7 +197,7 @@ function CadastroGestor() {
                 <input
                   type='text'
                   id='inputNumero'
-                  value={login}
+                  value={numero}
                   className='form-control'
                   onChange={(e) => setNumero(e.target.value)}
                 />
@@ -217,7 +207,7 @@ function CadastroGestor() {
                 <input
                   type='text'
                   id='inputComplemento'
-                  value={login}
+                  value={complemento}
                   className='form-control'
                   onChange={(e) => setComplemento(e.target.value)}
                 />
@@ -228,7 +218,7 @@ function CadastroGestor() {
                 <input
                   type='text'
                   id='inputBairro'
-                  value={login}
+                  value={bairro}
                   className='form-control'
                   onChange={(e) => setBairro(e.target.value)}
                 />
@@ -239,7 +229,7 @@ function CadastroGestor() {
                 <input
                   type='text'
                   id='inputCep'
-                  value={login}
+                  value={cep}
                   className='form-control'
                   onChange={(e) => setCep(e.target.value)}
                 />
@@ -249,44 +239,21 @@ function CadastroGestor() {
                 <input
                   type='text'
                   id='inputUf'
-                  value={login}
+                  value={uf}
                   className='form-control'
                   onChange={(e) => setUf(e.target.value)}
                 />
                 
-              </FormGroup><br/>
+              </FormGroup><br/><br/>
 
-              <FormGroup label='ID empresa *' htmlFor='inputIdEmpresa'>
+
+              <FormGroup label='Concessionária *' htmlFor='setConcessionaria'>
                 <input
                   type='text'
-                  id='inputIdEmpresa'
-                  value={login}
+                  id='setConcessionaria'
+                  value={concessionaria}
                   className='form-control'
-                  onChange={(e) => setIdEmpresa(e.target.value)}
-                />
-                
-              </FormGroup><br/>
-
-
-              <FormGroup label='ID concessionaria *' htmlFor='inputIdConcessionaria'>
-                <input
-                  type='text'
-                  id='inputIdConcessionaria'
-                  value={login}
-                  className='form-control'
-                  onChange={(e) => setIdConcessionaria(e.target.value)}
-                />
-                
-              </FormGroup><br/>
-
-
-              <FormGroup label='Razão Social *' htmlFor='inputRazaoSocial'>
-                <input
-                  type='text'
-                  id='inputRazaoSocial'
-                  value={login}
-                  className='form-control'
-                  onChange={(e) => setRazaoSocialConcessionaria(e.target.value)}
+                  onChange={(e) => setConcessionaria(e.target.value)}
                 />
                 
               </FormGroup><br/>

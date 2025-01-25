@@ -59,8 +59,8 @@ function CadastroModelo() {
         const response = await axios.get(`${baseURL}/${idParam}`);
         const veiculo = response.data;
         setId(veiculo.id);
-        setMarca(veiculo.marca);
         setNome(veiculo.nome);
+        setMarca(veiculo.marca);
         setDados(veiculo);
       } catch (error) {
         mensagemErro('Erro ao carregar os dados do veículo.');
@@ -81,6 +81,16 @@ function CadastroModelo() {
           <div className='col-lg-12'>
             <br />
             <div className='bs-component'>
+              <FormGroup label='Nome: *' htmlFor='inputNome'>
+                <input
+                  type='text'
+                  id='inputNome'
+                  value={nome}
+                  className='form-control'
+                  onChange={(e) => setNome(e.target.value)}
+                />
+              </FormGroup>
+
               <FormGroup label='Marca: *' htmlFor='inputMarca'>
                 <input
                   type='text'
@@ -91,15 +101,6 @@ function CadastroModelo() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label='Nome: *' htmlFor='inputNome'>
-                <input
-                  type='text'
-                  id='inputNome'
-                  value={nome}
-                  className='form-control'
-                  onChange={(e) => setNome(e.target.value)}
-                />
-              </FormGroup>
               <br />
               <Stack spacing={1} padding={1} direction='row'>
                 <button onClick={salvar} type='button' className='btn btn-success'>

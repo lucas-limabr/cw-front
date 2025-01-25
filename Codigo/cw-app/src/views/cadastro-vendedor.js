@@ -29,6 +29,7 @@ function CadastroVendedor() {
   const [bairro, setBairro] = useState('');
   const [cep, setCep] = useState('');
   const [uf, setUf] = useState('');
+  const [concessionaria, setConcessionaria] = useState('');
   const [dados, setDados] = useState(null);
 
   function inicializar() {
@@ -45,6 +46,7 @@ function CadastroVendedor() {
     setBairro('');
     setCep('');
     setUf('');
+    setConcessionaria('');
   }
 
   async function salvar() {
@@ -62,6 +64,7 @@ function CadastroVendedor() {
       bairro,
       cep,
       uf,
+      concessionaria
     };
 
     try {
@@ -100,6 +103,7 @@ function CadastroVendedor() {
         setBairro(vendedor.bairro);
         setCep(vendedor.cep);
         setUf(vendedor.uf);
+        setConcessionaria(vendedor.concessionaria);
         setDados(vendedor);
       } catch (error) {
         mensagemErro('Erro ao carregar os dados do vendedor.');
@@ -230,11 +234,20 @@ function CadastroVendedor() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label='UF: *' htmlFor='inputUf'>
+              <FormGroup label='UF: *' htmlFor='inputConcessionaria'>
                 <input
                   type='text'
-                  id='inputUf'
+                  id='inputConcessionaria'
                   value={uf}
+                  className='form-control'
+                  onChange={(e) => setUf(e.target.value)}
+                />
+              </FormGroup>
+              <FormGroup label='Concessionária: *' htmlFor='inputConcessionaria'>
+                <input
+                  type='text'
+                  id='inputConcessionaria'
+                  value={concessionaria}
                   className='form-control'
                   onChange={(e) => setUf(e.target.value)}
                 />

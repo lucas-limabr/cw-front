@@ -26,7 +26,7 @@ function CadastroConcessionaria() {
   const [bairro, setBairro] = useState('');
   const [cep, setCep] = useState('');
   const [uf, setUf] = useState('');
-  const [idEmpresa, setIdEmpresa] = useState('');
+  const [empresa, setIdEmpresa] = useState('');
     
 
   const [dados, setDados] = useState(null);
@@ -57,7 +57,7 @@ function CadastroConcessionaria() {
       bairro,
       cep,
       uf,
-      idEmpresa,
+      empresa,
     };
 
     try {
@@ -93,7 +93,7 @@ function CadastroConcessionaria() {
         setBairro(concessionaria.bairro);
         setCep(concessionaria.cep);
         setUf(concessionaria.uf);
-        setIdEmpresa(concessionaria.idEmpresa);
+        setIdEmpresa(concessionaria.empresa);
         setDados(concessionaria);
       } catch (error) {
         mensagemErro('Erro ao carregar os dados da concessionária.');
@@ -194,11 +194,11 @@ function CadastroConcessionaria() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label='ID Empresa: *' htmlFor='inputIdEmpresa'>
+              <FormGroup label='Empresa: *' htmlFor='inputIdEmpresa'>
                 <input
                   type='text'
                   id='inputIdEmpresa'
-                  value={idEmpresa}
+                  value={empresa}
                   className='form-control'
                   onChange={(e) => setIdEmpresa(e.target.value)}
                 />

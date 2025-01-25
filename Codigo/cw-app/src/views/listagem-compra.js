@@ -17,7 +17,7 @@ function ListagemCompra() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-categorias`);
+    navigate(`/cadastro-compra`);
   };
 
   const [dados, setDados] = React.useState(null);
