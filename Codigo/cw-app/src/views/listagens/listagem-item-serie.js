@@ -1,8 +1,8 @@
 import React from "react";
 
-import Card from "../components/card";
+import Card from "../../components/card";
 
-import { mensagemSucesso, mensagemErro } from "../components/toastr";
+import { mensagemSucesso, mensagemErro } from "../../components/toastr";
 
 import { useNavigate } from "react-router-dom";
 
@@ -12,29 +12,26 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
 import axios from "axios";
-import { BASE_URL } from "../config/axios";
+import { BASE_URL } from "../../config/axios";
 
-const baseURL = `${BASE_URL}/itensseries`;
+const baseURL = `${BASE_URL}/itemseries`;
 
 function ListagemItensSeries() {
   const navigate = useNavigate();
 
-  // Função de navegação para cadastro de modelo
   const cadastrar = () => {
     navigate(`/cadastro-item-serie`);
   };
 
-  // Função de navegação para editar modelo
   const editar = (id) => {
     navigate(`/cadastro-item-serie/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);
 
-  // Função para excluir um modelo
   async function excluir(id) {
     let data = JSON.stringify({ id });
-    let url = `${baseURL}/${id}`;
+    let url = `${baseURL}/delete/${id}`;
     console.log(url);
     await axios
       .delete(url, data, {
@@ -53,14 +50,12 @@ function ListagemItensSeries() {
       });
   }
 
-  // Carregar os dados na primeira renderização
   React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
+    axios.get(`${baseURL}/read`).then((response) => {
       setDados(response.data);
     });
   }, []);
 
-  // Se não houver dados, não renderiza nada
   if (!dados) return null;
 
   return (
@@ -73,7 +68,7 @@ function ListagemItensSeries() {
               <button
                 type="button"
                 className="btn btn-warning"
-                onClick={() => cadastrar()} // Redireciona para cadastro de modelo
+                onClick={() => cadastrar()}
               >
                 Novo Item de Série
               </button>
@@ -91,13 +86,13 @@ function ListagemItensSeries() {
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton
                             aria-label="edit"
-                            //onClick={() => editar(dado.id)} // Redireciona para edição do modelo
+                            onClick={() => editar(dado.id)}
                           >
                             <EditIcon />
                           </IconButton>
                           <IconButton
                             aria-label="delete"
-                            //onClick={() => excluir(dado.id)} // Exclui o modelo
+                            onClick={() => excluir(dado.id)}
                           >
                             <DeleteIcon />
                           </IconButton>

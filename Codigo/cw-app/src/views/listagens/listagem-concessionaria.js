@@ -1,7 +1,10 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
-import Card from "../components/card";
+import Card from "../../components/card";
+
+import { mensagemSucesso, mensagemErro } from "../../components/toastr";
+
+import { useNavigate } from "react-router-dom";
 
 import Stack from "@mui/material/Stack";
 import { IconButton } from "@mui/material";
@@ -9,21 +12,46 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
 import axios from "axios";
-import { BASE_URL } from "../config/axios";
+import { BASE_URL } from "../../config/axios";
 
-const baseURL = `${BASE_URL}/listagem-gestor`;
+const baseURL = `${BASE_URL}/concessionarias`;
 
-function ListagemGestor() {
+function ListagemConcessionarias() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-gestor`);
+    navigate(`/cadastro-concessionaria`);
+  };
+
+  const editar = (id) => {
+    navigate(`/cadastro-concessionaria/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);
 
+  async function excluir(id) {
+    let data = JSON.stringify({ id });
+    let url = `${baseURL}/delete/${id}`;
+    console.log(url);
+    await axios
+      .delete(url, data, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then(function (response) {
+        mensagemSucesso(`Concessionária excluída com sucesso!`);
+        setDados(
+          dados.filter((dado) => {
+            return dado.id !== id;
+          }),
+        );
+      })
+      .catch(function (error) {
+        mensagemErro(`Erro ao excluir a concessionária`);
+      });
+  }
+
   React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
+    axios.get(`${baseURL}/read`).then((response) => {
       setDados(response.data);
     });
   }, []);
@@ -32,7 +60,7 @@ function ListagemGestor() {
 
   return (
     <div className="container">
-      <Card title="Listagem de Gestores">
+      <Card title="Listagem de Concessionárias">
         <div className="row">
           <div className="col-lg-12">
             <br />
@@ -42,37 +70,38 @@ function ListagemGestor() {
                 className="btn btn-warning"
                 onClick={() => cadastrar()}
               >
-                Novo Gestor
+                Nova Concessionária
               </button>
               <table className="table table-hover">
                 <thead>
                   <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">CPF</th>
+                    <th scope="col">Razão Social</th>
+                    <th scope="col">CNPJ</th>
                     <th scope="col">Telefone</th>
-                    <th scope="col">E-mail</th>
-                    <th scope="col">Concessionária</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Endereço</th>
+                    <th scope="col">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
                   {dados.map((dado) => (
                     <tr key={dado.id}>
-                      <td>{dado.nome}</td>
-                      <td>{dado.cpf}</td>
+                      <td>{dado.razaoSocial}</td>
+                      <td>{dado.cnpj}</td>
                       <td>{dado.telefone}</td>
                       <td>{dado.email}</td>
-                      <td>{dado.razaoSocialConcessionaria}</td>
+                      <td>{`${dado.logradouro}, ${dado.numero} ${dado.complemento}, ${dado.bairro} - ${dado.uf} - ${dado.cep}`}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton
                             aria-label="edit"
-                          //onClick={() => editar(fabricante.id)}
+                            onClick={() => editar(dado.id)}
                           >
                             <EditIcon />
                           </IconButton>
                           <IconButton
                             aria-label="delete"
-                          //onClick={() => excluir(fabricante.id)}
+                            onClick={() => excluir(dado.id)}
                           >
                             <DeleteIcon />
                           </IconButton>
@@ -90,4 +119,4 @@ function ListagemGestor() {
   );
 }
 
-export default ListagemGestor;
+export default ListagemConcessionarias;

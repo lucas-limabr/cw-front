@@ -1,6 +1,7 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-import Card from "../components/card";
+import Card from "../../components/card";
 
 import Stack from "@mui/material/Stack";
 import { IconButton } from "@mui/material";
@@ -8,45 +9,42 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
 import axios from "axios";
-import { BASE_URL } from "../config/axios";
-import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../config/axios";
 
-const baseURL = `${BASE_URL}/listagem-vendedor`;
+const baseURL = `${BASE_URL}/fabricantes`;
 
-function ListagemVendedor() {
+function ListagemFabricante() {
   const navigate = useNavigate();
-  const [dados, setDados] = React.useState(null);
 
   const cadastrar = () => {
-    navigate(`/cadastro-vendedor`);
+    navigate(`/cadastro-fabricante`);
   };
 
-  //const editar = (id) => {
-  //  navigate(`/cadastro-vendedor/${id}`);
-  //};
+  const editar = (id) => {
+    navigate(`/cadastro-fabricante/${id}`);
+  };
 
-  async function excluir(id) {
+  const excluir = async (id) => {
     let data = JSON.stringify({ id });
-    let url = `${baseURL}/${id}`;
+    let url = `${baseURL}/delete/${id}`;
+    console.log(url);
     await axios
       .delete(url, data, {
         headers: { "Content-Type": "application/json" },
       })
       .then(function (response) {
-        alert("Vendedor excluído com sucesso!");
-        setDados(
-          dados.filter((dado) => {
-            return dado.id !== id;
-          })
-        );
+        alert("Fabricante excluído com sucesso!");
+        setDados(dados.filter((dado) => dado.id !== id));
       })
       .catch(function (error) {
-        alert("Erro ao excluir o vendedor");
+        alert("Erro ao excluir o fabricante");
       });
-  }
+  };
+
+  const [dados, setDados] = React.useState(null);
 
   React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
+    axios.get(`${baseURL}/read`).then((response) => {
       setDados(response.data);
     });
   }, []);
@@ -55,7 +53,7 @@ function ListagemVendedor() {
 
   return (
     <div className="container">
-      <Card title="Listagem de Vendedores">
+      <Card title="Listagem de Fabricantes">
         <div className="row">
           <div className="col-lg-12">
             <br />
@@ -63,18 +61,14 @@ function ListagemVendedor() {
               <button
                 type="button"
                 className="btn btn-warning"
-                onClick={cadastrar}
+                onClick={() => cadastrar()}
               >
-                Novo Vendedor
+                Novo Fabricante
               </button>
               <table className="table table-hover">
                 <thead>
                   <tr>
                     <th scope="col">Nome</th>
-                    <th scope="col">CPF</th>
-                    <th scope="col">Telefone</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Concessionária</th>
                     <th scope="col">Ações</th>
                   </tr>
                 </thead>
@@ -82,21 +76,17 @@ function ListagemVendedor() {
                   {dados.map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.nome}</td>
-                      <td>{dado.cpf}</td>
-                      <td>{dado.telefone}</td>
-                      <td>{dado.email}</td>
-                      <td>{dado.razaoSocialConcessionaria}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton
                             aria-label="edit"
-                            //onClick={() => editar(dado.id)} // Ativando a navegação para edição
+                            onClick={() => editar(dado.id)}
                           >
                             <EditIcon />
                           </IconButton>
                           <IconButton
                             aria-label="delete"
-                            //onClick={() => excluir(dado.id)} // Excluindo vendedor
+                            onClick={() => excluir(dado.id)}
                           >
                             <DeleteIcon />
                           </IconButton>
@@ -114,4 +104,4 @@ function ListagemVendedor() {
   );
 }
 
-export default ListagemVendedor;
+export default ListagemFabricante;

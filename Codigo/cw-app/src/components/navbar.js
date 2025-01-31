@@ -4,6 +4,20 @@ import "bootswatch/dist/flatly/bootstrap.css";
 import NavbarItem from "./navbarItem";
 
 function Navbar(props) {
+  const navbarItems = [
+    { href: "/listagem-gestor", label: "Gestores" },
+    { href: "/listagem-vendedor", label: "Vendedores" },
+    { href: "/listagem-fabricante", label: "Fabricantes" },
+    { href: "/listagem-modelo", label: "Modelos" },
+    { href: "/listagem-empresa", label: "Empresas" },
+    { href: "/listagem-concessionaria", label: "Concessionarias" },
+    { href: "/listagem-item-serie", label: "Itens de Série" },
+    { href: "/listagem-veiculo", label: "Veículos" },
+    { href: "/listagem-testdrive", label: "Test-drive" },
+    { href: "/listagem-compra", label: "Compras" },
+    { href: "/listagem-cliente", label: "Clientes" },
+  ];
+
   return (
     <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
       <div className="container">
@@ -23,84 +37,11 @@ function Navbar(props) {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarResponsive">
-          <ul className="navbar-nav">
-            <NavbarItem
-              render="true"
-              href="/listagem-fabricante"
-              label="Fabricantes"
-            />
-          </ul>
-
-          <ul className="navbar-nav">
-            <NavbarItem render="true" href="/listagem-modelo" label="Modelos" />
-          </ul>
-
-          <ul className="navbar-nav">
-            <NavbarItem
-              render="true"
-              href="/listagem-empresa"
-              label="Empresas"
-            />
-          </ul>
-
-          <ul className="navbar-nav">
-            <NavbarItem
-              render="true"
-              href="/listagem-concessionaria"
-              label="Concessionarias"
-            />
-          </ul>
-
-          <ul className="navbar-nav">
-            <NavbarItem
-              render="true"
-              href="/listagem-item-serie"
-              label="Itens séries"
-            />
-          </ul>
-
-          <ul className="navbar-nav">
-            <NavbarItem
-              render="true"
-              href="/listagem-veiculo"
-              label="Veículos"
-            />
-          </ul>
-          <ul className="navbar-nav">
-            <NavbarItem
-              render="true"
-              href="/listagem-vendedor"
-              label="Vendedores"
-            />
-          </ul>
-
-          <ul className="navbar-nav">
-            <NavbarItem
-              render="true"
-              href="/listagem-agendamento-test-drive"
-              label="Test-drive"
-            />
-          </ul>
-
-          <ul className="navbar-nav">
-            <NavbarItem render="true" href="/listagem-compra" label="Compras" />
-          </ul>
-
-          <ul className="navbar-nav">
-            <NavbarItem
-              render="true"
-              href="/listagem-cliente"
-              label="Clientes"
-            />
-          </ul>
-
-          <ul className="navbar-nav">
-            <NavbarItem
-              render="true"
-              href="/listagem-gestor"
-              label="Gestores"
-            />
-          </ul>
+          {navbarItems.map((item, index) => (
+            <ul className="navbar-nav" key={index}>
+              <NavbarItem render="true" href={item.href} label={item.label} />
+            </ul>
+          ))}
         </div>
       </div>
     </div>

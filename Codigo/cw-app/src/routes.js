@@ -1,113 +1,61 @@
 import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import CadastroFabricante from "./views/cadastro-fabricante";
-import CadastroModelo from "./views/cadastro-modelo";
-import CadastroVeiculo from "./views/cadastro-veiculo";
-import CadastroVendedor from "./views/cadastro-vendedor";
-import CadastroCliente from "./views/cadastro-cliente";
-import CadastroGestor from "./views/cadastro-gestor.js";
-import CadastroTestDrive from "./views/cadastro-testdrive";
-import CadastroConcessionaria from "./views/cadastro-concessionaria";
-import CadastroItemSerie from "./views/cadastro-item-serie";
-import CadastroEmpresa from "./views/cadastro-empresa";
-import CadastroCompra from "./views/cadastro-compra.js";
+import CadastroAcessorio from "./views/cadastros/cadastro-acessorio.js";
+import CadastroCliente from "./views/cadastros/cadastro-cliente.js";
+import CadastroCompra from "./views/cadastros/cadastro-compra.js";
+import CadastroConcessionaria from "./views/cadastros/cadastro-concessionaria.js";
+import CadastroEmpresa from "./views/cadastros/cadastro-empresa.js";
+import CadastroFabricante from "./views/cadastros/cadastro-fabricante.js";
+import CadastroGestor from "./views/cadastros/cadastro-gestor.js";
+import CadastroItemSerie from "./views/cadastros/cadastro-item-serie.js";
+import CadastroModelo from "./views/cadastros/cadastro-modelo.js";
+import CadastroTestDrive from "./views/cadastros/cadastro-testdrive.js";
+import CadastroVeiculo from "./views/cadastros/cadastro-veiculo.js";
+import CadastroVendedor from "./views/cadastros/cadastro-vendedor.js";
 
-import ListagemFabricante from "./views/listagem-fabricante";
-import ListagemModelo from "./views/listagem-modelo";
-import ListagemVeiculo from "./views/listagem-veiculo";
-import ListagemVendedor from "./views/listagem-vendedor";
-import ListagemAgendamentoTestDrive from "./views/listagem-agendamento-test-drive";
-import ListagemCompra from "./views/listagem-compra";
-import ListagemGestor from "./views/listagem-gestor";
-import ListagemConcessionaria from "./views/listagem-concessionaria";
-import ListagemCliente from "./views/listagem-cliente";
-import ListagemItensSeries from "./views/listagem-item-serie";
-import ListagemEmpresa from "./views/listagem-empresa";
+import ListagemAcessorio from "./views/listagens/listagem-acessorio.js";
+import ListagemCliente from "./views/listagens/listagem-cliente.js";
+import ListagemCompra from "./views/listagens/listagem-compra.js";
+import ListagemConcessionaria from "./views/listagens/listagem-concessionaria.js";
+import ListagemEmpresa from "./views/listagens/listagem-empresa.js";
+import ListagemFabricante from "./views/listagens/listagem-fabricante.js";
+import ListagemGestor from "./views/listagens/listagem-gestor.js";
+import ListagemItensSeries from "./views/listagens/listagem-item-serie.js";
+import ListagemModelo from "./views/listagens/listagem-modelo.js";
+import ListagemTestDrive from "./views/listagens/listagem-testdrive.js";
+import ListagemVeiculo from "./views/listagens/listagem-veiculo.js";
+import ListagemVendedor from "./views/listagens/listagem-vendedor.js";
 
-import { Route, Routes, BrowserRouter } from "react-router-dom";
-
-
-function Rotas(props) {
+function Rotas() {
   return (
     <BrowserRouter>
       <Routes>
-
-        <Route
-          path="/cadastro-concessionaria/:idParam?"
-          element={<CadastroConcessionaria />}
-        />
-        <Route
-          path="/cadastro-fabricante/:idParam?"
-          element={<CadastroFabricante />}
-        />
+        <Route path="/cadastro-acessorio/:idParam?" element={<CadastroAcessorio />} />
+        <Route path="/cadastro-cliente/:idParam?" element={<CadastroCliente />} />
+        <Route path="/cadastro-compra/:idParam?" element={<CadastroCompra />} />
+        <Route path="/cadastro-concessionaria/:idParam?" element={<CadastroConcessionaria />} />
+        <Route path="/cadastro-empresa/:idParam?" element={<CadastroEmpresa />} />
+        <Route path="/cadastro-fabricante/:idParam?" element={<CadastroFabricante />} />
+        <Route path="/cadastro-gestor/:idParam?" element={<CadastroGestor />} />
+        <Route path="/cadastro-item-serie/:idParam?" element={<CadastroItemSerie />} />
         <Route path="/cadastro-modelo/:idParam?" element={<CadastroModelo />} />
-        <Route
-          path="/cadastro-item-serie/:idParam?"
-          element={<CadastroItemSerie />}
-        />
-        <Route
-          path="/cadastro-testdrive/:idParam?"
-          element={<CadastroTestDrive />}
-        />
-        <Route
-          path="/cadastro-veiculo/:idParam?"
-          element={<CadastroVeiculo />}
-        />
+        <Route path="/cadastro-testdrive/:idParam?" element={<CadastroTestDrive />} />
+        <Route path="/cadastro-veiculo/:idParam?" element={<CadastroVeiculo />} />
+        <Route path="/cadastro-vendedor/:idParam?" element={<CadastroVendedor />} />
 
-        <Route
-          path="/cadastro-vendedor/:idParam?"
-          element={<CadastroVendedor />}
-        />
-
-        <Route
-          path="/cadastro-empresa/:idParam?"
-          element={<CadastroEmpresa />}
-        />
-
-        <Route
-          path="/cadastro-compra/:idParam?"
-          element={<CadastroCompra />}
-        />
-
+        <Route path="/listagem-acessorio" element={<ListagemAcessorio />} />
+        <Route path="/listagem-cliente" element={<ListagemCliente />} />
+        <Route path="/listagem-compra" element={<ListagemCompra />} />
+        <Route path="/listagem-concessionaria" element={<ListagemConcessionaria />} />
+        <Route path="/listagem-empresa" element={<ListagemEmpresa />} />
         <Route path="/listagem-fabricante" element={<ListagemFabricante />} />
-
-        <Route
-          path="/cadastro-cliente/:idParam?"
-          element={<CadastroCliente />}
-        />
-
-        <Route
-          path="/cadastro-gestor/:idParam?"
-          element={<CadastroGestor />}
-        />
-
-        <Route path="/listagem-modelo" element={<ListagemModelo />} />
+        <Route path="/listagem-gestor" element={<ListagemGestor />} />
         <Route path="/listagem-item-serie" element={<ListagemItensSeries />} />
+        <Route path="/listagem-modelo" element={<ListagemModelo />} />
+        <Route path="/listagem-testdrive" element={<ListagemTestDrive />} />
         <Route path="/listagem-veiculo" element={<ListagemVeiculo />} />
         <Route path="/listagem-vendedor" element={<ListagemVendedor />} />
-
-        <Route path="/listagem-fabricante" element={<ListagemFabricante />} />
-
-        <Route
-          path="/listagem-agendamento-test-drive"
-          element={<ListagemAgendamentoTestDrive />}
-        />
-
-        <Route path="/listagem-cliente" element={<ListagemCliente />} />
-
-        <Route
-          path="/listagem-empresa"
-          element={<ListagemEmpresa />}
-        />
-
-        <Route
-          path="/listagem-concessionaria"
-          element={<ListagemConcessionaria />}
-        />
-
-        <Route path="/listagem-gestor" element={<ListagemGestor />} />
-
-        <Route path="/listagem-compra" element={<ListagemCompra />} />
       </Routes>
     </BrowserRouter>
   );

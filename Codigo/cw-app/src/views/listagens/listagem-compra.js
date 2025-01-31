@@ -1,47 +1,44 @@
 import React from "react";
 
-import Card from "../components/card";
+import Card from "../../components/card";
+
+import { mensagemSucesso, mensagemErro } from "../../components/toastr";
 
 import { useNavigate } from "react-router-dom";
+
 import Stack from "@mui/material/Stack";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { mensagemSucesso, mensagemErro } from "../components/toastr";
 
 import axios from "axios";
-import { BASE_URL } from "../config/axios";
+import { BASE_URL } from "../../config/axios";
 
-const baseURL = `${BASE_URL}/listagem-veiculo`;
+const baseURL = `${BASE_URL}/compras`;
 
-function ListagemVeiculo() {
+function ListagemCompras() {
   const navigate = useNavigate();
 
-  const [dados, setDados] = React.useState(null);
-
-  React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
-      setDados(response.data);
-    });
-  }, []);
-
   const cadastrar = () => {
-    navigate(`/cadastro-veiculo`);
+    navigate(`/cadastro-compra`);
   };
 
   const editar = (id) => {
-    navigate(`/cadastro-veiculos/${id}`);
+    navigate(`/cadastro-compra/${id}`);
   };
+
+  const [dados, setDados] = React.useState(null);
 
   async function excluir(id) {
     let data = JSON.stringify({ id });
-    let url = `${baseURL}/${id}`;
+    let url = `${baseURL}/delete/${id}`;
+    console.log(url);
     await axios
       .delete(url, data, {
         headers: { "Content-Type": "application/json" },
       })
       .then(function (response) {
-        mensagemSucesso(`Veículo excluído com sucesso!`);
+        mensagemSucesso(`Compra excluída com sucesso!`);
         setDados(
           dados.filter((dado) => {
             return dado.id !== id;
@@ -49,15 +46,21 @@ function ListagemVeiculo() {
         );
       })
       .catch(function (error) {
-        mensagemErro(`Erro ao excluir o veículo`);
+        mensagemErro(`Erro ao excluir a compra`);
       });
   }
+
+  React.useEffect(() => {
+    axios.get(`${baseURL}/read`).then((response) => {
+      setDados(response.data);
+    });
+  }, []);
 
   if (!dados) return null;
 
   return (
     <div className="container">
-      <Card title="Listagem de Veículos">
+      <Card title="Listagem de Compras">
         <div className="row">
           <div className="col-lg-12">
             <br />
@@ -67,40 +70,40 @@ function ListagemVeiculo() {
                 className="btn btn-warning"
                 onClick={() => cadastrar()}
               >
-                Novo Veículo
+                Nova Compra
               </button>
               <table className="table table-hover">
                 <thead>
                   <tr>
-                    <th scope="col">Chassi</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Forma de Pagamento</th>
+                    <th scope="col">Desconto</th>
+                    <th scope="col">Cliente</th>
                     <th scope="col">Modelo</th>
-                    <th scope="col">Fabricante</th>
-                    <th scope="col">Preço Atual</th>
-                    <th scope="col">Condição</th>
-                    <th scope="col">Concessionaria</th>
+                    <th scope="col">Concessionária</th>
                     <th scope="col">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
                   {dados.map((dado) => (
                     <tr key={dado.id}>
-                      <td>{dado.chassi}</td>
-                      <td>{dado.modelo}</td>
-                      <td>{dado.fabricante}</td>
-                      <td>{dado.precoAtual}</td>
-                      <td>{dado.condicao}</td>
+                      <td>{dado.data}</td>
+                      <td>{dado.formaPag}</td>
+                      <td>{dado.desconto}</td>
+                      <td>{`${dado.cpfCliente}`}</td>
+                      <td>{dado.modeloVeiculo}</td>
                       <td>{dado.razaoSocialConcessionaria}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton
                             aria-label="edit"
-                          //onClick={() => editar(dado.id)} // Navega para editar
+                            onClick={() => editar(dado.id)}
                           >
                             <EditIcon />
                           </IconButton>
                           <IconButton
                             aria-label="delete"
-                          //onClick={() => excluir(dado.id)} // Exclui veículo
+                            onClick={() => excluir(dado.id)}
                           >
                             <DeleteIcon />
                           </IconButton>
@@ -118,4 +121,4 @@ function ListagemVeiculo() {
   );
 }
 
-export default ListagemVeiculo;
+export default ListagemCompras;

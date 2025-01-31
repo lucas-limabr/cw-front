@@ -1,7 +1,10 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
-import Card from "../components/card";
+import Card from "../../components/card";
+
+import { mensagemSucesso, mensagemErro } from "../../components/toastr";
+
+import { useNavigate } from "react-router-dom";
 
 import Stack from "@mui/material/Stack";
 import { IconButton } from "@mui/material";
@@ -9,21 +12,46 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
 import axios from "axios";
-import { BASE_URL } from "../config/axios";
+import { BASE_URL } from "../../config/axios";
 
-const baseURL = `${BASE_URL}/listagem-compra`;
+const baseURL = `${BASE_URL}/testdrives`;
 
-function ListagemCompra() {
+function ListagemTestDrive() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-compra`);
+    navigate(`/cadastro-testdrive`);
+  };
+
+  const editar = (id) => {
+    navigate(`/cadastro-testdrive/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);
 
+  async function excluir(id) {
+    let data = JSON.stringify({ id });
+    let url = `${baseURL}/delete/${id}`;
+    console.log(url);
+    await axios
+      .delete(url, data, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then(function (response) {
+        mensagemSucesso(`Test Drive excluído com sucesso!`);
+        setDados(
+          dados.filter((dado) => {
+            return dado.id !== id;
+          }),
+        );
+      })
+      .catch(function (error) {
+        mensagemErro(`Erro ao excluir o Test Drive`);
+      });
+  }
+
   React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
+    axios.get(`${baseURL}/read`).then((response) => {
       setDados(response.data);
     });
   }, []);
@@ -32,7 +60,7 @@ function ListagemCompra() {
 
   return (
     <div className="container">
-      <Card title="Listagem de Compras">
+      <Card title="Listagem de Test Drives">
         <div className="row">
           <div className="col-lg-12">
             <br />
@@ -42,39 +70,42 @@ function ListagemCompra() {
                 className="btn btn-warning"
                 onClick={() => cadastrar()}
               >
-                Nova Compra
+                Novo Test Drive
               </button>
               <table className="table table-hover">
                 <thead>
                   <tr>
-                    <th scope="col">Data</th>
-                    <th scope="col">Forma de Pagamento</th>
-                    <th scope="col">Desconto</th>
-                    <th scope="col">CPF do Cliente</th>
-                    <th scope="col">Concessionária</th>
+                    <th scope="col">Cliente</th>
                     <th scope="col">Veículo</th>
+                    <th scope="col">Data Agendada</th>
+                    <th scope="col">Hora Agendada</th>
+                    <th scope="col">Data Entregue</th>
+                    <th scope="col">Hora Entregue</th>
+                    <th scope="col">Concessionária</th>
+                    <th scope="col">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
                   {dados.map((dado) => (
                     <tr key={dado.id}>
-                      <td>{dado.data}</td>
-                      <td>{dado.formaPag}</td>
-                      <td>{dado.desconto}</td>
                       <td>{dado.cpfCliente}</td>
-                      <td>{dado.razaoSocialConcessionaria}</td>
                       <td>{dado.modeloVeiculo}</td>
+                      <td>{dado.dataAgendada}</td>
+                      <td>{dado.horaAgendada}</td>
+                      <td>{dado.dataEntregue}</td>
+                      <td>{dado.horaEntregue}</td>
+                      <td>{dado.razaoSocialConcessionaria}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton
                             aria-label="edit"
-                          //onClick={() => editar(dado.id)}
+                            onClick={() => editar(dado.id)}
                           >
                             <EditIcon />
                           </IconButton>
                           <IconButton
                             aria-label="delete"
-                          //onClick={() => excluir(dado.id)}
+                            onClick={() => excluir(dado.id)}
                           >
                             <DeleteIcon />
                           </IconButton>
@@ -92,4 +123,4 @@ function ListagemCompra() {
   );
 }
 
-export default ListagemCompra;
+export default ListagemTestDrive;
