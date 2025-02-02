@@ -254,7 +254,7 @@ function CadastroVendedor() {
                   id="inputConcessionaria"
                   value={concessionaria}
                   className="form-control"
-                  onChange={(e) => setUf(e.target.value)}
+                  onChange={(e) => setConcessionaria(e.target.value)}
                 />
               </FormGroup>
               <br />

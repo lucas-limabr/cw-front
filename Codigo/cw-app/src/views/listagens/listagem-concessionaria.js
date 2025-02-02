@@ -76,6 +76,7 @@ function ListagemConcessionarias() {
                 <thead>
                   <tr>
                     <th scope="col">Razão Social</th>
+                    <th scope="col">Empresa</th>
                     <th scope="col">CNPJ</th>
                     <th scope="col">Telefone</th>
                     <th scope="col">Email</th>
@@ -87,6 +88,7 @@ function ListagemConcessionarias() {
                   {dados.map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.razaoSocial}</td>
+                      <td>{dado.razaoSocialEmpresa}</td>
                       <td>{dado.cnpj}</td>
                       <td>{dado.telefone}</td>
                       <td>{dado.email}</td>
