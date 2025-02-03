@@ -12,16 +12,28 @@ import axios from "axios";
 import { BASE_URL } from "../../config/axios";
 
 const baseURL = `${BASE_URL}/modelos`;
+const marcasURL = `${BASE_URL}/fabricantes`; // Endpoint para buscar as marcas
 
 function CadastroModelo() {
   const { idParam } = useParams();
   const navigate = useNavigate();
 
   const [id, setId] = useState("");
-  const [marca, setMarca] = useState("");
+  const [marca, setMarca] = useState(""); 
   const [nome, setNome] = useState("");
 
   const [dados, setDados] = useState(null);
+  const [marcas, setMarcas] = useState([]); // Estado para armazenar as marcas
+
+  // Função para buscar marcas disponíveis no servidor
+  async function carregarMarcas() {
+    try {
+      const response = await axios.get(`${marcasURL}/read`);
+      setMarcas(response.data); 
+    } catch (error) {
+      console.error("Erro ao carregar marcas:", error);
+    }
+  }
 
   function inicializar() {
     setId("");
@@ -32,13 +44,13 @@ function CadastroModelo() {
   async function salvar() {
     const data = {
       id,
-      marca,
+      marca, 
       nome,
     };
 
     try {
       if (!idParam) {
-        await axios.post(`${baseURL}/create/${idParam}`, data, {
+        await axios.post(`${baseURL}/create`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Veículo ${nome} cadastrado com sucesso!`);
@@ -61,7 +73,7 @@ function CadastroModelo() {
         const veiculo = response.data;
         setId(veiculo.id);
         setNome(veiculo.nome);
-        setMarca(veiculo.marca);
+        setMarca(veiculo.marca); // Preencher o select com a marca correta
         setDados(veiculo);
       } catch (error) {
         mensagemErro("Erro ao carregar os dados do veículo.");
@@ -72,7 +84,8 @@ function CadastroModelo() {
   }
 
   useEffect(() => {
-    buscar();
+    carregarMarcas(); // Buscar marcas ao carregar a página
+    buscar(); // Buscar dados do veículo se for edição
   }, [idParam]);
 
   return (
@@ -93,13 +106,19 @@ function CadastroModelo() {
               </FormGroup>
               <br />
               <FormGroup label="Marca: *" htmlFor="inputMarca">
-                <input
-                  type="text"
+                <select
                   id="inputMarca"
                   value={marca}
                   className="form-control"
                   onChange={(e) => setMarca(e.target.value)}
-                />
+                >
+                  <option value="">Selecione uma marca</option>
+                  {marcas.map((m) => (
+                    <option key={m.id} value={m.nome}>
+                      {m.nome}
+                    </option>
+                  ))}
+                </select>
               </FormGroup>
               <br />
               <Stack spacing={1} padding={1} direction="row">

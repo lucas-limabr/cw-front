@@ -12,6 +12,7 @@ import axios from "axios";
 import { BASE_URL } from "../../config/axios";
 
 const baseURL = `${BASE_URL}/gestores`;
+const concessionariasURL = `${BASE_URL}/concessionarias`; 
 
 function CadastroGestor() {
   const { idParam } = useParams();
@@ -33,6 +34,16 @@ function CadastroGestor() {
   const [concessionaria, setConcessionaria] = useState("");
 
   const [dados, setDados] = useState(null);
+  const [concessionarias, setConcessionarias] = useState([]);
+
+  async function carregarConcessionarias() {
+    try {
+      const response = await axios.get(`${concessionariasURL}/read`);
+      setConcessionarias(response.data); 
+    } catch (error) {
+      console.error("Erro ao carregar concessionárias:", error);
+    }
+  }
 
   function inicializar() {
     setId("");
@@ -116,6 +127,7 @@ function CadastroGestor() {
   }
 
   useEffect(() => {
+    carregarConcessionarias();
     buscar();
   }, [idParam]);
 
@@ -246,14 +258,20 @@ function CadastroGestor() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Concessionária *" htmlFor="setConcessionaria">
-                <input
-                  type="text"
-                  id="setConcessionaria"
+              <FormGroup label="Concessionária: *" htmlFor="inputConcessionaria">
+                <select
+                  id="inputConcessionaria"
                   value={concessionaria}
                   className="form-control"
                   onChange={(e) => setConcessionaria(e.target.value)}
-                />
+                >
+                  <option value="">Selecione uma concessionária</option>
+                  {concessionarias.map((m) => (
+                    <option key={m.id} value={m.razaoSocial}>
+                      {m.razaoSocial}
+                    </option>
+                  ))}
+                </select>
               </FormGroup>
               <br />
               <Stack spacing={1} padding={1} direction="row">

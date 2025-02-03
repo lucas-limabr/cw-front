@@ -75,13 +75,11 @@ function ListagemTestDrive() {
               <table className="table table-hover">
                 <thead>
                   <tr>
-                    <th scope="col">Cliente</th>
-                    <th scope="col">Veículo</th>
+                    <th scope="col">CPF Cliente</th>
+                    <th scope="col">Modelo veículo</th>
+                    <th scope="col">Concessionária</th>
                     <th scope="col">Data Agendada</th>
                     <th scope="col">Hora Agendada</th>
-                    <th scope="col">Data Entregue</th>
-                    <th scope="col">Hora Entregue</th>
-                    <th scope="col">Concessionária</th>
                     <th scope="col">Ações</th>
                   </tr>
                 </thead>
@@ -90,11 +88,9 @@ function ListagemTestDrive() {
                     <tr key={dado.id}>
                       <td>{dado.cpfCliente}</td>
                       <td>{dado.modeloVeiculo}</td>
+                       <td>{dado.razaoSocialConcessionaria}</td>
                       <td>{dado.dataAgendada}</td>
                       <td>{dado.horaAgendada}</td>
-                      <td>{dado.dataEntregue}</td>
-                      <td>{dado.horaEntregue}</td>
-                      <td>{dado.razaoSocialConcessionaria}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton

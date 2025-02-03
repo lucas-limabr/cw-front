@@ -12,6 +12,8 @@ import axios from "axios";
 import { BASE_URL } from "../../config/axios";
 
 const baseURL = `${BASE_URL}/veiculos`;
+const modelosURL = `${BASE_URL}/modelos`; // Endpoint para buscar as marcas
+const fabricantesURL = `${BASE_URL}/fabricantes`;
 
 function CadastroVeiculo() {
   const { idParam } = useParams();
@@ -19,30 +21,47 @@ function CadastroVeiculo() {
 
   const [id, setId] = useState("");
   const [chassi, setChassi] = useState("");
-  const [modelo, setNome] = useState("");
-  const [fabricante, setMarca] = useState("");
+  const [modelo, setModelo] = useState("");
+  const [fabricante, setFabricante] = useState("");
   const [precoAtual, setPrecoAtual] = useState("");
   const [cor, setCor] = useState("");
   const [condicao, setCondicao] = useState("");
   const [vendido, setVendido] = useState("");
   const [garantia, setGarantia] = useState("");
-  const [idModeloVeiculo, setIdModeloVeiculo] = useState("");
-  const [concessionaria, setIdConcessionaria] = useState("");
 
   const [dados, setDados] = useState(null);
+  const [modelos, setModelos] = useState([]);
+  const [fabricantes, setFabricantes] = useState([]);
+
+  // Função para buscar modelos disponíveis no servidor
+  async function carregarModelos() {
+    try {
+      const response = await axios.get(`${modelosURL}/read`);
+      setModelos(response.data);
+    } catch (error) {
+      console.error("Erro ao carregar modelos:", error);
+    }
+  }
+
+  async function carregarFabricantes() {
+    try {
+      const response = await axios.get(`${fabricantesURL}/read`);
+      setFabricantes(response.data);
+    } catch (error) {
+      console.error("Erro ao carregar modelos:", error);
+    }
+  }
 
   function inicializar() {
     setId("");
     setChassi("");
-    setNome("");
-    setMarca("");
+    setModelo("");
+    setFabricante("");
     setPrecoAtual("");
     setCor("");
     setCondicao("");
     setVendido("");
     setGarantia("");
-    setIdModeloVeiculo("");
-    setIdConcessionaria("");
   }
 
   async function salvar() {
@@ -55,9 +74,7 @@ function CadastroVeiculo() {
       cor,
       condicao,
       vendido,
-      garantia,
-      idModeloVeiculo,
-      concessionaria,
+      garantia
     };
 
     try {
@@ -85,15 +102,13 @@ function CadastroVeiculo() {
         const veiculo = response.data;
         setId(veiculo.id);
         setChassi(veiculo.chassi);
-        setNome(veiculo.modelo);
-        setMarca(veiculo.fabricante);
+        setModelo(veiculo.modelo);
+        setFabricante(veiculo.fabricante);
         setPrecoAtual(veiculo.precoAtual);
         setCor(veiculo.cor);
         setCondicao(veiculo.condicao);
         setVendido(veiculo.vendido);
         setGarantia(veiculo.garantia);
-        setIdModeloVeiculo(veiculo.idmodeloveiculo);
-        setIdConcessionaria(veiculo.idconcessionaria);
         setDados(veiculo);
       } catch (error) {
         mensagemErro("Erro ao carregar os dados do veículo.");
@@ -104,6 +119,8 @@ function CadastroVeiculo() {
   }
 
   useEffect(() => {
+    carregarFabricantes();
+    carregarModelos();
     buscar();
   }, [idParam]);
 
@@ -125,23 +142,35 @@ function CadastroVeiculo() {
               </FormGroup>
               <br />
               <FormGroup label="Modelo: *" htmlFor="inputModelo">
-                <input
-                  type="text"
+                <select
                   id="inputModelo"
                   value={modelo}
                   className="form-control"
-                  onChange={(e) => setNome(e.target.value)}
-                />
+                  onChange={(e) => setModelo(e.target.value)}
+                >
+                  <option value="">Selecione um modelo</option>
+                  {modelos.map((m) => (
+                    <option key={m.id} value={m.nome}>
+                      {m.nome}
+                    </option>
+                  ))}
+                </select>
               </FormGroup>
               <br />
               <FormGroup label="Fabricante: *" htmlFor="inputFabricante">
-                <input
-                  type="text"
+                <select
                   id="inputFabricante"
                   value={fabricante}
                   className="form-control"
-                  onChange={(e) => setMarca(e.target.value)}
-                />
+                  onChange={(e) => setFabricante(e.target.value)}
+                >
+                  <option value="">Selecione uma fabricante</option>
+                  {fabricantes.map((m) => (
+                    <option key={m.id} value={m.nome}>
+                      {m.nome}
+                    </option>
+                  ))}
+                </select>
               </FormGroup>
               <br />
               <FormGroup label="Preço Atual: *" htmlFor="inputPrecoAtual">
@@ -191,19 +220,6 @@ function CadastroVeiculo() {
                   value={garantia}
                   className="form-control"
                   onChange={(e) => setGarantia(e.target.value)}
-                />
-              </FormGroup>
-              <br />
-              <FormGroup
-                label="Concessionária: *"
-                htmlFor="inputConcessionaria"
-              >
-                <input
-                  type="text"
-                  id="inputConcessionaria"
-                  value={concessionaria}
-                  className="form-control"
-                  onChange={(e) => setIdConcessionaria(e.target.value)}
                 />
               </FormGroup>
               <br />

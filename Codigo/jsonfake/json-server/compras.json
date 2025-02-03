@@ -9,7 +9,8 @@
     "idModelo": 1,
     "modeloVeiculo": "Civic",
     "idConcessionaria": 1,
-    "razaoSocialConcessionaria": "Auto Vendas Premium LTDA"
+    "razaoSocialConcessionaria": "Auto Vendas Premium LTDA",
+    "chassiVeiculo": "1HGCM82633A123456"
   },
   {
     "id": 2,
@@ -21,7 +22,8 @@
     "idModelo": 2,
     "modeloVeiculo": "Compass",
     "idConcessionaria": 3,
-    "razaoSocialConcessionaria": "Carros e Companhia EIRELI"
+    "razaoSocialConcessionaria": "Carros e Companhia EIRELI",
+    "chassiVeiculo": "JH4KA9650MC123456"
   },
   {
     "id": 3,
@@ -33,6 +35,7 @@
     "idModelo": 3,
     "modeloVeiculo": "HB20",
     "idConcessionaria": 2,
-    "razaoSocialConcessionaria": "Super Veículos Brasil SA"
+    "razaoSocialConcessionaria": "Super Veículos Brasil SA",
+    "chassiVeiculo": "2FTRX18W7XCA12345"
   }
 ]

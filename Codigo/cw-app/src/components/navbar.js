@@ -11,7 +11,7 @@ function Navbar(props) {
     { href: "/listagem-modelo", label: "Modelos" },
     { href: "/listagem-empresa", label: "Empresas" },
     { href: "/listagem-concessionaria", label: "Concessionarias" },
-    { href: "/listagem-item-serie", label: "Itens de Série" },
+    { href: "/listagem-item-serie", label: "Itens" },
     { href: "/listagem-veiculo", label: "Veículos" },
     { href: "/listagem-testdrive", label: "Test-drive" },
     { href: "/listagem-compra", label: "Compras" },

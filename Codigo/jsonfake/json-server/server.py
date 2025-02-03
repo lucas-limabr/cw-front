@@ -18,7 +18,11 @@ class JSONHandler:
                     if record_id:
                         return next((item for item in data if item["id"] == record_id), None)
                     return data
-            except Exception:
+            except json.JSONDecodeError:
+                print("Erro ao ler o JSON. O formato pode estar incorreto.")
+                return None
+            except FileNotFoundError:
+                print("Arquivo não encontrado.")
                 return None
         return None
 

@@ -27,7 +27,7 @@ function ListagemModelos() {
     navigate(`/cadastro-modelo/${id}`);
   };
 
-  const [dados, setDados] = React.useState(null);
+  const [dados, setDados] = React.useState([]);
 
   async function excluir(id) {
     let data = JSON.stringify({ id });

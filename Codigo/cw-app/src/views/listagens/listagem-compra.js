@@ -77,9 +77,9 @@ function ListagemCompras() {
                   <tr>
                     <th scope="col">Data</th>
                     <th scope="col">Forma de Pagamento</th>
-                    <th scope="col">Desconto</th>
                     <th scope="col">Cliente</th>
-                    <th scope="col">Modelo</th>
+                    <th scope="col">Modelo Veículo</th>
+                    <th scope="col">Chassi</th>
                     <th scope="col">Concessionária</th>
                     <th scope="col">Ações</th>
                   </tr>
@@ -89,9 +89,9 @@ function ListagemCompras() {
                     <tr key={dado.id}>
                       <td>{dado.data}</td>
                       <td>{dado.formaPag}</td>
-                      <td>{dado.desconto}</td>
-                      <td>{`${dado.cpfCliente}`}</td>
+                      <td>{dado.cpfCliente}</td>
                       <td>{dado.modeloVeiculo}</td>
+                      <td>{dado.chassiVeiculo}</td>
                       <td>{dado.razaoSocialConcessionaria}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction="row">
