@@ -47,12 +47,12 @@ function CadastroEmpresa() {
 
     try {
       if (!idParam) {
-        await axios.post(`${baseURL}/create/${idParam}`, data, {
+        await axios.post(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Empresa ${razaoSocial} cadastrada com sucesso!`);
       } else {
-        await axios.put(`${baseURL}/update/${idParam}`, data, {
+        await axios.put(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Empresa ${razaoSocial} alterada com sucesso!`);
@@ -66,7 +66,7 @@ function CadastroEmpresa() {
   async function buscar() {
     if (idParam) {
       try {
-        const response = await axios.get(`${baseURL}/read/${idParam}`);
+        const response = await axios.get(`${baseURL}/${idParam}`);
         const empresa = response.data;
         setId(empresa.id);
         setRazaoSocial(empresa.razaoSocial);
