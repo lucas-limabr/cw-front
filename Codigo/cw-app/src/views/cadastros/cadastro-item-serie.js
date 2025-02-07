@@ -35,12 +35,12 @@ function CadastroItemSerie() {
 
     try {
       if (!idParam) {
-        await axios.post(`${baseURL}/create/${idParam}`, data, {
+        await axios.post(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Item de série ${descricao} cadastrado com sucesso!`);
       } else {
-        await axios.put(`${baseURL}/update/${idParam}`, data, {
+        await axios.put(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Item de série ${descricao} alterado com sucesso!`);
@@ -54,7 +54,7 @@ function CadastroItemSerie() {
   async function buscar() {
     if (idParam) {
       try {
-        const response = await axios.get(`${baseURL}/read/${idParam}`);
+        const response = await axios.get(`${baseURL}/${idParam}`);
         const item_serie = response.data;
         setId(item_serie.id);
         setDescricao(item_serie.descricao);

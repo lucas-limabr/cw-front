@@ -35,17 +35,17 @@ function CadastroFabricante() {
 
     try {
       if (!idParam) {
-        await axios.post(`${baseURL}/create/${idParam}`, data, {
+        await axios.post(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Fabricante ${nome} cadastrado com sucesso!`);
       } else {
-        await axios.put(`${baseURL}/update/${idParam}`, data, {
+        await axios.put(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Fabricante ${nome} alterado com sucesso!`);
       }
-      navigate("/listagem-fabricantes");
+      navigate("/listagem-fabricante");
     } catch (error) {
       mensagemErro(error.response?.data || "Erro ao salvar fabricante.");
     }
@@ -54,7 +54,7 @@ function CadastroFabricante() {
   async function buscar() {
     if (idParam) {
       try {
-        const response = await axios.get(`${baseURL}/read/${idParam}`);
+        const response = await axios.get(`${baseURL}/${idParam}`);
         const fabricante = response.data;
         setId(fabricante.id);
         setNome(fabricante.nome);

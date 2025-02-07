@@ -31,7 +31,7 @@ function CadastroTestDrive() {
 
   async function carregarModelos() {
     try {
-      const response = await axios.get(`${modelosURL}/read`);
+      const response = await axios.get(`${modelosURL}`);
       setModelos(response.data);
     } catch (error) {
       console.error("Erro ao carregar modelos:", error);
@@ -50,7 +50,7 @@ function CadastroTestDrive() {
   useEffect(() => {
     async function carregarClientes() {
       try {
-        const response = await axios.get(`${clientesURL}/read`); // Ajuste conforme a API
+        const response = await axios.get(`${clientesURL}`); // Ajuste conforme a API
         const clientesFormatados = response.data.map((cliente) => ({
           value: cliente.cpf,
           label: cliente.cpf,
@@ -67,7 +67,7 @@ function CadastroTestDrive() {
   async function buscar() {
     if (idParam) {
       try {
-        const response = await axios.get(`${baseURL}/read/${idParam}`);
+        const response = await axios.get(`${baseURL}/${idParam}`);
         const test_drive = response.data;
         setId(test_drive.id);
         setModelo(test_drive.modeloVeiculo);
@@ -96,17 +96,17 @@ function CadastroTestDrive() {
 
     try {
       if (!idParam) {
-        await axios.post(`${baseURL}/create`, data, {
+        await axios.post(`${baseURL}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Test drive cadastrado com sucesso!`);
       } else {
-        await axios.put(`${baseURL}/update/${idParam}`, data, {
+        await axios.put(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Test drive atualizado com sucesso!`);
       }
-      navigate("/listagem-testdrives");
+      navigate("/listagem-testdrive");
     } catch (error) {
       mensagemErro(error.response?.data || "Erro ao salvar test drive.");
     }

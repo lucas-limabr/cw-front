@@ -59,19 +59,19 @@ function CadastroConcessionaria() {
 
     try {
       if (!idParam) {
-        await axios.post(`${baseURL}/create/${idParam}`, data, {
+        await axios.post(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(
           `Concessionária ${razaoSocial} cadastrada com sucesso!`,
         );
       } else {
-        await axios.put(`${baseURL}/update/${idParam}`, data, {
+        await axios.put(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Concessionária ${razaoSocial} alterado com sucesso!`);
       }
-      navigate("/listagem-concessionária");
+      navigate("/listagem-concessionaria");
     } catch (error) {
       mensagemErro(error.response?.data || "Erro ao salvar concessionária.");
     }
@@ -80,7 +80,7 @@ function CadastroConcessionaria() {
   async function buscar() {
     if (idParam) {
       try {
-        const response = await axios.get(`${baseURL}/read/${idParam}`);
+        const response = await axios.get(`${baseURL}/${idParam}`);
         const concessionaria = response.data;
         setId(concessionaria.id);
         setRazaoSocial(concessionaria.razaoSocial);

@@ -31,7 +31,7 @@ function ListagemConcessionarias() {
 
   async function excluir(id) {
     let data = JSON.stringify({ id });
-    let url = `${baseURL}/delete/${id}`;
+    let url = `${baseURL}/${id}`;
     console.log(url);
     await axios
       .delete(url, data, {
@@ -51,7 +51,7 @@ function ListagemConcessionarias() {
   }
 
   React.useEffect(() => {
-    axios.get(`${baseURL}/read`).then((response) => {
+    axios.get(`${baseURL}`).then((response) => {
       setDados(response.data);
     });
   }, []);

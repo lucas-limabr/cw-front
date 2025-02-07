@@ -38,7 +38,7 @@ function CadastroGestor() {
 
   async function carregarConcessionarias() {
     try {
-      const response = await axios.get(`${concessionariasURL}/read`);
+      const response = await axios.get(`${concessionariasURL}`);
       setConcessionarias(response.data); 
     } catch (error) {
       console.error("Erro ao carregar concessionárias:", error);
@@ -82,17 +82,17 @@ function CadastroGestor() {
 
     try {
       if (!idParam) {
-        await axios.post(`${baseURL}/create/${idParam}`, data, {
+        await axios.post(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Gestor ${nome} cadastrado com sucesso!`);
       } else {
-        await axios.put(`${baseURL}/update/${idParam}`, data, {
+        await axios.put(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Gestor ${nome} alterado com sucesso!`);
       }
-      navigate("/listagem-clientes");
+      navigate("/listagem-gestor");
     } catch (error) {
       mensagemErro(error.response?.data || "Erro ao salvar gestor.");
     }
@@ -101,7 +101,7 @@ function CadastroGestor() {
   async function buscar() {
     if (idParam) {
       try {
-        const response = await axios.get(`${baseURL}/read/${idParam}`);
+        const response = await axios.get(`${baseURL}/${idParam}`);
         const gestor = response.data;
         setId(gestor.id);
         setNome(gestor.nome);

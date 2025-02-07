@@ -73,17 +73,17 @@ function CadastroCliente() {
 
     try {
       if (!idParam) {
-        await axios.post(`${baseURL}/create/${idParam}`, data, {
+        await axios.post(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Cliente ${nome} cadastrado com sucesso!`);
       } else {
-        await axios.put(`${baseURL}/update/${idParam}`, data, {
+        await axios.put(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Cliente ${nome} alterado com sucesso!`);
       }
-      navigate("/listagem-clientes");
+      navigate("/listagem-cliente");
     } catch (error) {
       mensagemErro(error.response?.data || "Erro ao salvar cliente.");
     }
@@ -92,7 +92,7 @@ function CadastroCliente() {
   async function buscar() {
     if (idParam) {
       try {
-        const response = await axios.get(`${baseURL}/read/${idParam}`);
+        const response = await axios.get(`${baseURL}/${idParam}`);
         const cliente = response.data;
         setId(cliente.id);
         setNome(cliente.nome);
