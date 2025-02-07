@@ -161,6 +161,7 @@ function CadastroCompra() {
                 <select
                   id="inputModelo"
                   value={modelo}
+                  selected = {modelo}
                   className="form-control"
                   onChange={(e) => setModelo(e.target.value)}
                 >
@@ -177,6 +178,7 @@ function CadastroCompra() {
                 <Select
                   options={cpfClientes}
                   value={cpfCliente}
+                  selected = {cpfCliente}
                   onChange={setCpfCliente}
                   placeholder="Selecione um CPF"
                   isSearchable
@@ -186,6 +188,7 @@ function CadastroCompra() {
               <FormGroup label="Chassi do veículo: *">
                 <Select
                   options={chassiVeiculos}
+                  selected = {chassi}
                   value={chassiVeiculo}
                   onChange={setCpfCliente}
                   placeholder="Selecione um Chassi"
