@@ -15,25 +15,40 @@ class JSONHandler:
             try:
                 with open(self.file_name, "r", encoding="utf-8") as file:
                     data = json.load(file)
-                    if record_id:
+                    if record_id is not None:
                         return next((item for item in data if item["id"] == record_id), None)
                     return data
-            except json.JSONDecodeError:
-                print("Erro ao ler o JSON. O formato pode estar incorreto.")
-                return None
-            except FileNotFoundError:
-                print("Arquivo não encontrado.")
-                return None
+            except (json.JSONDecodeError, FileNotFoundError):
+                return []
+        return []
+
+    def write(self, data):
+        with open(self.file_name, "w", encoding="utf-8") as file:
+            json.dump(data, file, indent=4, ensure_ascii=False)
+
+    def post(self, new_data):
+        data = self.read()
+        new_data["id"] = max([item["id"] for item in data], default=0) + 1
+        data.append(new_data)
+        self.write(data)
+        return new_data
+
+    def put(self, record_id, updated_data):
+        data = self.read()
+        for item in data:
+            if item["id"] == record_id:
+                item.update(updated_data)
+                self.write(data)
+                return item
         return None
 
-    def create(self, new_data):
-        pass
-
-    def update(self, record_id, updated_data):
-        pass
-
     def delete(self, record_id):
-        pass
+        data = self.read()
+        new_data = [item for item in data if item["id"] != record_id]
+        if len(new_data) < len(data):
+            self.write(new_data)
+            return True
+        return False
 
 class Handler(http.server.SimpleHTTPRequestHandler):
     def response(self, code, content_type, message):
@@ -43,50 +58,68 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Content-Type")
         self.end_headers()
+        if isinstance(message, dict) or isinstance(message, list):
+            message = json.dumps(message)
         self.wfile.write(message.encode("utf-8"))
 
+    def do_OPTIONS(self):
+        self.response(200, "text/plain", "")
+
     def do_GET(self):
-        self.handle_request("GET")
-
-    def do_POST(self):
-        self.handle_request("POST")
-
-    def do_PUT(self):
-        self.handle_request("PUT")
-
-    def do_DELETE(self):
-        self.handle_request("DELETE")
-
-    def handle_request(self, method):
-        match = re.match(r"/([a-zA-Z0-9_-]+)/([^/]+)(?:/(\d+))?", self.path)
-        
+        match = re.match(r"/([^/]+)(?:/(\d+))?", self.path)
         if match:
             entity = match.group(1)
-            action = match.group(2)
-            record_id = match.group(3)
-            file_name = f"{entity}.json"
-
-            handler = JSONHandler(file_name)
-            
-            if action == "read":
-                if record_id:
-                    data = handler.read(int(record_id))
-                    if data is None:
-                        self.response(404, "text/plain", "Record not found!")
-                        return
-                else:
-                    data = handler.read()
-                    if data is None:
-                        self.response(404, "text/plain", "File not found!")
-                        return
-                self.response(200, "application/json", json.dumps(data))
-            
-            elif action in ["create", "update", "delete"]:
-                self.response(200, "text/plain", f"{action.capitalize()} action simulated!")
-        
+            record_id = int(match.group(2)) if match.group(2) else None
+            handler = JSONHandler(f"{entity}.json")
+            data = handler.read(record_id)
+            if data is not None:
+                self.response(200, "application/json", data)
+            else:
+                self.response(404, "application/json", {"error": "Registro não encontrado"})
         else:
-            self.response(404, "text/plain", "Endpoint not found!")
+            self.response(404, "application/json", {"error": "Rota inválida"})
+
+    def do_POST(self):
+        match = re.match(r"/([^/]+)", self.path)
+        if match:
+            entity = match.group(1)
+            handler = JSONHandler(f"{entity}.json")
+            content_length = int(self.headers["Content-Length"])
+            post_data = json.loads(self.rfile.read(content_length).decode("utf-8"))
+            new_record = handler.post(post_data)
+            self.response(201, "application/json", new_record)
+        else:
+            self.response(400, "application/json", {"error": "Rota inválida"})
+
+    def do_PUT(self):
+        match = re.match(r"/([^/]+)/(\d+)", self.path)
+        if match:
+            entity = match.group(1)
+            record_id = int(match.group(2))
+            handler = JSONHandler(f"{entity}.json")
+            content_length = int(self.headers["Content-Length"])
+            update_data = json.loads(self.rfile.read(content_length).decode("utf-8"))
+            updated_record = handler.put(record_id, update_data)
+            if updated_record:
+                self.response(200, "application/json", updated_record)
+            else:
+                self.response(404, "application/json", {"error": "Registro não encontrado"})
+        else:
+            self.response(400, "application/json", {"error": "Rota inválida"})
+
+    def do_DELETE(self):
+        match = re.match(r"/([^/]+)/(\d+)", self.path)
+        if match:
+            entity = match.group(1)
+            record_id = int(match.group(2))
+            handler = JSONHandler(f"{entity}.json")
+            if handler.delete(record_id):
+                self.response(200, "application/json", {"message": "Registro deletado com sucesso"})
+            else:
+                self.response(404, "application/json", {"error": "Registro não encontrado"})
+        else:
+            self.response(400, "application/json", {"error": "Rota inválida"})
 
 with socketserver.TCPServer(("", PORT), Handler) as httpd:
-    print(f"Server running on port {PORT}")
+    print(f"Servidor rodando na porta {PORT}")
     httpd.serve_forever()
