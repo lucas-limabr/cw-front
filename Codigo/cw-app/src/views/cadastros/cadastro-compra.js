@@ -187,7 +187,7 @@ function CadastroCompra() {
                 <Select
                   options={chassiVeiculos}
                   value={chassiVeiculo}
-                  onChange={setCpfCliente}
+                  onChange={setChassiVeiculo}
                   placeholder="Selecione um Chassi"
                   isSearchable
                 />
