@@ -188,8 +188,7 @@ function CadastroCompra() {
               <FormGroup label="Chassi do veículo: *">
                 <Select
                   options={chassiVeiculos}
-                  selected = {chassiVeiculo}
-                  value={chassi}
+                  value={chassiVeiculo}
                   onChange={setChassiVeiculo}
                   placeholder="Selecione um Chassi"
                   isSearchable
