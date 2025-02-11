@@ -22,7 +22,12 @@ function CadastroEmpresa() {
   const [cnpj, setCnpj] = useState("");
   const [telefone, setTelefone] = useState("");
   const [uf, setUf] = useState("");
+  const [email, setEmail] = useState("");
   const [logradouro, setLogradouro] = useState("");
+  const [complemento, setComplemento] = useState("");
+  const [cep, setCep] = useState("");
+  const [numero, setNumero] = useState("");
+  const [bairro, setBairro] = useState("");
 
   const [dados, setDados] = useState(null);
 
@@ -30,9 +35,14 @@ function CadastroEmpresa() {
     setId("");
     setRazaoSocial("");
     setCnpj("");
-    setTelefone();
-    setUf();
-    setLogradouro();
+    setTelefone("");
+    setEmail("");
+    setLogradouro("");
+    setNumero("");
+    setComplemento("");
+    setBairro("");
+    setCep("");
+    setUf("");
   }
 
   async function salvar() {
@@ -41,18 +51,23 @@ function CadastroEmpresa() {
       razaoSocial,
       cnpj,
       telefone,
-      uf,
+      email,
       logradouro,
+      numero,
+      complemento,
+      bairro,
+      cep,
+      uf
     };
 
     try {
       if (!idParam) {
-        await axios.post(`${baseURL}/create/${idParam}`, data, {
+        await axios.post(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Empresa ${razaoSocial} cadastrada com sucesso!`);
       } else {
-        await axios.put(`${baseURL}/update/${idParam}`, data, {
+        await axios.put(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Empresa ${razaoSocial} alterada com sucesso!`);
@@ -66,14 +81,20 @@ function CadastroEmpresa() {
   async function buscar() {
     if (idParam) {
       try {
-        const response = await axios.get(`${baseURL}/read/${idParam}`);
+        const response = await axios.get(`${baseURL}/${idParam}`);
         const empresa = response.data;
         setId(empresa.id);
         setRazaoSocial(empresa.razaoSocial);
         setCnpj(empresa.cnpj);
         setTelefone(empresa.telefone);
-        setUf(empresa.uf);
+        setEmail(empresa.email);
         setLogradouro(empresa.logradouro);
+        setNumero(empresa.numero);
+        setComplemento(empresa.complemento);
+        setBairro(empresa.bairro);
+        setCep(empresa.cep);
+        setUf(empresa.uf);
+        
       } catch (error) {
         mensagemErro("Erro ao carregar os dados da empresa.");
       }
@@ -122,6 +143,63 @@ function CadastroEmpresa() {
                   onChange={(e) => setTelefone(e.target.value)}
                 />
               </FormGroup>
+              <br/>
+              
+              <FormGroup label="E-mail: *" htmlFor="inputEmail">
+                <input
+                  type="text"
+                  id="inputEmail"
+                  value={email}
+                  className="form-control"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </FormGroup>
+              <br/>
+              <FormGroup label="Logradouro: *" htmlFor="inputLogradouro">
+                <input
+                  type="text"
+                  id="inputLogradouro"
+                  value={logradouro}
+                  className="form-control"
+                  onChange={(e) => setLogradouro(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+
+              <FormGroup label="Número: *" htmlFor="inputNumero">
+                <input
+                  type="text"
+                  id="inputNumero"
+                  value={numero}
+                  className="form-control"
+                  onChange={(e) => setNumero(e.target.value)}
+                />
+              </FormGroup>
+
+              <br />
+
+              <FormGroup label="Complemento: *" htmlFor="inputComplemento">
+                <input
+                  type="text"
+                  id="inputComplemento"
+                  value={complemento}
+                  className="form-control"
+                  onChange={(e) => setComplemento(e.target.value)}
+                />
+              </FormGroup>
+              
+              <br />
+
+              <FormGroup label="Bairro: *" htmlFor="inputBairro">
+                <input
+                  type="text"
+                  id="inputBairro"
+                  value={bairro}
+                  className="form-control"
+                  onChange={(e) => setBairro(e.target.value)}
+                />
+              </FormGroup>
+              
               <br />
               <FormGroup label="UF: *" htmlFor="inputUf">
                 <input
@@ -130,16 +208,6 @@ function CadastroEmpresa() {
                   value={uf}
                   className="form-control"
                   onChange={(e) => setUf(e.target.value)}
-                />
-              </FormGroup>
-              <br />
-              <FormGroup label="Logradouro: *" htmlFor="inputLogradouro">
-                <input
-                  type="text"
-                  id="inputLogradouro"
-                  value={uf}
-                  className="form-control"
-                  onChange={(e) => setLogradouro(e.target.value)}
                 />
               </FormGroup>
               <br />

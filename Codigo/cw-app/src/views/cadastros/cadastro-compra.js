@@ -57,12 +57,12 @@ function CadastroCompra() {
 
     try {
       if (!idParam) {
-        await axios.post(`${baseURL}/create`, dadosCompra, {
+        await axios.post(`${baseURL}`, dadosCompra, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Compra realizada com sucesso.`);
       } else {
-        await axios.put(`${baseURL}/update/${idParam}`, dadosCompra, {
+        await axios.put(`${baseURL}/${idParam}`, dadosCompra, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Compra atualizada com sucesso.`);
@@ -76,7 +76,7 @@ function CadastroCompra() {
 
   async function carregarModelos() {
     try {
-      const response = await axios.get(`${modelosURL}/read`);
+      const response = await axios.get(`${modelosURL}`);
       setModelos(response.data);
     } catch (error) {
       console.error("Erro ao carregar modelos:", error);
@@ -87,7 +87,7 @@ function CadastroCompra() {
   useEffect(() => {
     async function carregarClientes() {
       try {
-        const response = await axios.get(`${clientesURL}/read`); // Ajuste conforme a API
+        const response = await axios.get(`${clientesURL}`); // Ajuste conforme a API
         const clientesFormatados = response.data.map((cliente) => ({
           value: cliente.cpf,
           label: cliente.cpf,
@@ -100,7 +100,7 @@ function CadastroCompra() {
 
     async function carregarChassis() {
       try {
-        const response = await axios.get(`${chassiURL}/read`); // Ajuste conforme a API
+        const response = await axios.get(`${chassiURL}`); // Ajuste conforme a API
         const chassisFormatados = response.data.map((chassi) => ({
           value: chassi.chassi,
           label: chassi.chassi,
@@ -118,7 +118,7 @@ function CadastroCompra() {
   async function buscar() {
     if (idParam) {
       try {
-        const response = await axios.get(`${baseURL}/read/${idParam}`);
+        const response = await axios.get(`${baseURL}/${idParam}`);
         const compra = response.data;
         setId(compra.id);
         setData(compra.data);
@@ -161,6 +161,7 @@ function CadastroCompra() {
                 <select
                   id="inputModelo"
                   value={modelo}
+                  selected = {modelo}
                   className="form-control"
                   onChange={(e) => setModelo(e.target.value)}
                 >
@@ -177,6 +178,7 @@ function CadastroCompra() {
                 <Select
                   options={cpfClientes}
                   value={cpfCliente}
+                  selected = {cpfCliente}
                   onChange={setCpfCliente}
                   placeholder="Selecione um CPF"
                   isSearchable
@@ -187,7 +189,7 @@ function CadastroCompra() {
                 <Select
                   options={chassiVeiculos}
                   value={chassiVeiculo}
-                  onChange={setCpfCliente}
+                  onChange={setChassiVeiculo}
                   placeholder="Selecione um Chassi"
                   isSearchable
                 />

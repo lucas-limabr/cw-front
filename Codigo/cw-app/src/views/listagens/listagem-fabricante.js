@@ -26,7 +26,7 @@ function ListagemFabricante() {
 
   const excluir = async (id) => {
     let data = JSON.stringify({ id });
-    let url = `${baseURL}/delete/${id}`;
+    let url = `${baseURL}/${id}`;
     console.log(url);
     await axios
       .delete(url, data, {
@@ -44,7 +44,7 @@ function ListagemFabricante() {
   const [dados, setDados] = React.useState(null);
 
   React.useEffect(() => {
-    axios.get(`${baseURL}/read`).then((response) => {
+    axios.get(`${baseURL}`).then((response) => {
       setDados(response.data);
     });
   }, []);

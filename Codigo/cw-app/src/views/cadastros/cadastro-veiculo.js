@@ -40,7 +40,7 @@ function CadastroVeiculo() {
   // Função para buscar modelos disponíveis no servidor
   async function carregarModelos() {
     try {
-      const response = await axios.get(`${modelosURL}/read`);
+      const response = await axios.get(`${modelosURL}`);
       setModelos(response.data);
     } catch (error) {
       console.error("Erro ao carregar modelos:", error);
@@ -49,7 +49,7 @@ function CadastroVeiculo() {
 
   async function carregarFabricantes() {
     try {
-      const response = await axios.get(`${fabricantesURL}/read`);
+      const response = await axios.get(`${fabricantesURL}`);
       setFabricantes(response.data);
     } catch (error) {
       console.error("Erro ao carregar modelos:", error);
@@ -91,17 +91,17 @@ function CadastroVeiculo() {
 
     try {
       if (!idParam) {
-        await axios.post(`${baseURL}/create/${idParam}`, data, {
+        await axios.post(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Veículo ${modelo} cadastrado com sucesso!`);
       } else {
-        await axios.put(`${baseURL}/update/${idParam}`, data, {
+        await axios.put(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Veículo ${modelo} alterado com sucesso!`);
       }
-      navigate("/listagem-veiculos");
+      navigate("/listagem-veiculo");
     } catch (error) {
       mensagemErro(error.response?.data || "Erro ao salvar veículo.");
     }
@@ -110,7 +110,7 @@ function CadastroVeiculo() {
   async function buscar() {
     if (idParam) {
       try {
-        const response = await axios.get(`${baseURL}/read/${idParam}`);
+        const response = await axios.get(`${baseURL}/${idParam}`);
         const veiculo = response.data;
         setId(veiculo.id);
         setChassi(veiculo.chassi);

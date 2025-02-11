@@ -31,17 +31,17 @@ function CadastroAcessorio() {
 
     try {
       if (!idParam) {
-        await axios.post(`${baseURL}/create/${idParam}`, data, {
+        await axios.post(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Acessório ${descricao} cadastrado com sucesso!`);
       } else {
-        await axios.put(`${baseURL}/update/${idParam}`, data, {
+        await axios.put(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Acessório ${descricao} alterado com sucesso!`);
       }
-      navigate("/listagem-acessorios");
+      navigate("/listagem-acessorio");
     } catch (error) {
       mensagemErro(error.response?.data || "Erro ao salvar acessório.");
     }
@@ -50,7 +50,7 @@ function CadastroAcessorio() {
   async function buscar() {
     if (idParam) {
       try {
-        const response = await axios.get(`${baseURL}/read/${idParam}`);
+        const response = await axios.get(`${baseURL}/${idParam}`);
         const acessorio = response.data;
         setId(acessorio.id);
         setDescricao(acessorio.descricao);

@@ -28,7 +28,7 @@ function CadastroModelo() {
   // Função para buscar marcas disponíveis no servidor
   async function carregarMarcas() {
     try {
-      const response = await axios.get(`${marcasURL}/read`);
+      const response = await axios.get(`${marcasURL}`);
       setMarcas(response.data); 
     } catch (error) {
       console.error("Erro ao carregar marcas:", error);
@@ -50,26 +50,26 @@ function CadastroModelo() {
 
     try {
       if (!idParam) {
-        await axios.post(`${baseURL}/create`, data, {
+        await axios.post(`${baseURL}`, data, {
           headers: { "Content-Type": "application/json" },
         });
-        mensagemSucesso(`Veículo ${nome} cadastrado com sucesso!`);
+        mensagemSucesso(`Modelo ${nome} cadastrado com sucesso!`);
       } else {
-        await axios.put(`${baseURL}/update/${idParam}`, data, {
+        await axios.put(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" },
         });
-        mensagemSucesso(`Veículo ${nome} alterado com sucesso!`);
+        mensagemSucesso(`Modelo ${nome} alterado com sucesso!`);
       }
-      navigate("/listagem-veiculos");
+      navigate("/listagem-modelo");
     } catch (error) {
-      mensagemErro(error.response?.data || "Erro ao salvar veículo.");
+      mensagemErro(error.response?.data || "Erro ao salvar modelo.");
     }
   }
 
   async function buscar() {
     if (idParam) {
       try {
-        const response = await axios.get(`${baseURL}/read/${idParam}`);
+        const response = await axios.get(`${baseURL}/${idParam}`);
         const veiculo = response.data;
         setId(veiculo.id);
         setNome(veiculo.nome);

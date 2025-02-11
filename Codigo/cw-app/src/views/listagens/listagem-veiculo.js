@@ -20,7 +20,7 @@ function ListagemVeiculo() {
   const [dados, setDados] = React.useState(null);
 
   React.useEffect(() => {
-    axios.get(`${baseURL}/read`).then((response) => {
+    axios.get(`${baseURL}`).then((response) => {
       setDados(response.data);
     });
   }, []);
@@ -35,7 +35,7 @@ function ListagemVeiculo() {
 
   async function excluir(id) {
     let data = JSON.stringify({ id });
-    let url = `${baseURL}/delete/${id}`;
+    let url = `${baseURL}/${id}`;
     await axios
       .delete(url, data, {
         headers: { "Content-Type": "application/json" },
@@ -77,7 +77,7 @@ function ListagemVeiculo() {
                     <th scope="col">Fabricante</th>
                     <th scope="col">Preço Atual</th>
                     <th scope="col">Condição</th>
-                    <th scope="col">Concessionaria</th>
+                    <th scope="col">Concessionária</th>
                     <th scope="col">Ações</th>
                   </tr>
                 </thead>
