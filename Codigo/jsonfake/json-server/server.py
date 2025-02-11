@@ -35,6 +35,19 @@ class JSONHandler:
     def delete(self, record_id):
         pass
 
+    def put(self, record_id, updated_data):
+        data = self.read()
+        for item in data:
+            if item["id"] == record_id:
+                item.update(updated_data)
+                # Se a condição for "Novo", remove atributos exclusivos de usados
+                if item.get("condicao") == "Novo":
+                    for campo in ["quilometragem", "documentacao", "sinistro"]:
+                        item.pop(campo, None)  # Remove sem erro se não existir
+                self.write(data)
+                return item
+        return None
+
 class Handler(http.server.SimpleHTTPRequestHandler):
     def response(self, code, content_type, message):
         self.send_response(code)

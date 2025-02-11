@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import CadastroVeiculoUsado from "./sub-cadastro-veiculo";
 
 import Stack from "@mui/material/Stack";
 
@@ -28,6 +29,9 @@ function CadastroVeiculo() {
   const [condicao, setCondicao] = useState("");
   const [vendido, setVendido] = useState("");
   const [garantia, setGarantia] = useState("");
+  const [quilometragem, setQuilometragem] = useState("");
+  const [documentacao, setDocumentacao] = useState("");
+  const [sinistro, setSinistro] = useState("");
 
   const [dados, setDados] = useState(null);
   const [modelos, setModelos] = useState([]);
@@ -62,6 +66,9 @@ function CadastroVeiculo() {
     setCondicao("");
     setVendido("");
     setGarantia("");
+    setQuilometragem("");
+    setDocumentacao("");
+    setSinistro("");
   }
 
   async function salvar() {
@@ -74,7 +81,12 @@ function CadastroVeiculo() {
       cor,
       condicao,
       vendido,
-      garantia
+      garantia,
+      ...(condicao === "Usado" && {
+        quilometragem,
+        documentacao,
+        sinistro
+      })
     };
 
     try {
@@ -109,6 +121,9 @@ function CadastroVeiculo() {
         setCondicao(veiculo.condicao);
         setVendido(veiculo.vendido);
         setGarantia(veiculo.garantia);
+        setQuilometragem(veiculo.quilometragem);
+        setDocumentacao(veiculo.documentacao);
+        setSinistro(veiculo.sinistro);
         setDados(veiculo);
       } catch (error) {
         mensagemErro("Erro ao carregar os dados do veículo.");
@@ -193,16 +208,6 @@ function CadastroVeiculo() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Condição: *" htmlFor="inputCondicao">
-                <input
-                  type="text"
-                  id="inputCondicao"
-                  value={condicao}
-                  className="form-control"
-                  onChange={(e) => setCondicao(e.target.value)}
-                />
-              </FormGroup>
-              <br />
               <FormGroup label="Vendido: *" htmlFor="inputVendido">
                 <input
                   type="text"
@@ -223,6 +228,40 @@ function CadastroVeiculo() {
                 />
               </FormGroup>
               <br />
+              <FormGroup label="Condição: *" htmlFor="inputCondicao">
+                <div>
+                  <label>
+                    <input
+                      type="radio"
+                      value="Novo"
+                      checked={condicao === "Novo"}
+                      onChange={() => setCondicao("Novo")}
+                    />
+                    Novo
+                  </label>
+                  <label style={{ marginLeft: "20px" }}>
+                    <input
+                      type="radio"
+                      value="Usado"
+                      checked={condicao === "Usado"}
+                      onChange={() => setCondicao("Usado")}
+                    />
+                    Usado
+                  </label>
+                </div>
+              </FormGroup>
+              <br />
+              {condicao === "Usado" && (
+                <CadastroVeiculoUsado
+                  quilometragem={quilometragem}
+                  setQuilometragem={setQuilometragem}
+                  documentacao={documentacao}
+                  setDocumentacao={setDocumentacao}
+                  sinistro={sinistro}
+                  setSinistro={setSinistro}
+                />
+              )}
+
               <Stack spacing={1} padding={1} direction="row">
                 <button
                   onClick={salvar}
