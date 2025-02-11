@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import CadastroVeiculoUsado from "./sub-cadastro-veiculo";
+import CadastroVeiculoUsado from "./cadastro-veiculo-usado";
 
 import Stack from "@mui/material/Stack";
 
@@ -11,10 +11,13 @@ import { mensagemSucesso, mensagemErro } from "../../components/toastr";
 
 import axios from "axios";
 import { BASE_URL } from "../../config/axios";
+import CadastroVeiculoCarro from "./cadastro-veiculo-carro";
+import CadastroVeiculoMoto from "./cadastro-veiculo-moto";
 
 const baseURL = `${BASE_URL}/veiculos`;
 const modelosURL = `${BASE_URL}/modelos`; // Endpoint para buscar as marcas
 const fabricantesURL = `${BASE_URL}/fabricantes`;
+const concessionariasURL = `${BASE_URL}/concessionarias`;
 
 function CadastroVeiculo() {
   const { idParam } = useParams();
@@ -26,16 +29,27 @@ function CadastroVeiculo() {
   const [fabricante, setFabricante] = useState("");
   const [precoAtual, setPrecoAtual] = useState("");
   const [cor, setCor] = useState("");
+  const [razaoSocialConcessionaria, setConcessionaria] = useState("");
   const [condicao, setCondicao] = useState("");
+  const [tipo, setTipo] = useState("");
   const [vendido, setVendido] = useState("");
   const [garantia, setGarantia] = useState("");
+
+  //para veiculos usados
   const [quilometragem, setQuilometragem] = useState("");
   const [documentacao, setDocumentacao] = useState("");
   const [sinistro, setSinistro] = useState("");
 
+  //para carros
+  const [potencia, setPotencia] = useState("");
+
+  //para motos
+  const [cilindrada, setCilindrada] = useState("");
+
   const [dados, setDados] = useState(null);
   const [modelos, setModelos] = useState([]);
   const [fabricantes, setFabricantes] = useState([]);
+  const [concessionarias, setConcessionarias] = useState([]);
 
   // Função para buscar modelos disponíveis no servidor
   async function carregarModelos() {
@@ -56,6 +70,15 @@ function CadastroVeiculo() {
     }
   }
 
+  async function carregarConcessionarias() {
+    try {
+      const response = await axios.get(`${concessionariasURL}`);
+      setConcessionarias(response.data);
+    } catch (error) {
+      console.error("Erro ao carregar concessionárias:", error);
+    }
+  }
+
   function inicializar() {
     setId("");
     setChassi("");
@@ -63,12 +86,15 @@ function CadastroVeiculo() {
     setFabricante("");
     setPrecoAtual("");
     setCor("");
+    setConcessionaria("");
     setCondicao("");
     setVendido("");
     setGarantia("");
     setQuilometragem("");
     setDocumentacao("");
     setSinistro("");
+    setPotencia("");
+    setCilindrada("");
   }
 
   async function salvar() {
@@ -79,13 +105,21 @@ function CadastroVeiculo() {
       fabricante,
       precoAtual,
       cor,
+      razaoSocialConcessionaria,
       condicao,
+      tipo,
       vendido,
       garantia,
       ...(condicao === "Usado" && {
         quilometragem,
         documentacao,
         sinistro
+      }),
+      ...(tipo === "Carro" && {
+        potencia
+      }),
+      ...(tipo === "Moto" && {
+        cilindrada
       })
     };
 
@@ -118,12 +152,19 @@ function CadastroVeiculo() {
         setFabricante(veiculo.fabricante);
         setPrecoAtual(veiculo.precoAtual);
         setCor(veiculo.cor);
+        setConcessionaria(veiculo.razaoSocialConcessionaria);
         setCondicao(veiculo.condicao);
+        setTipo(veiculo.tipo);
         setVendido(veiculo.vendido);
         setGarantia(veiculo.garantia);
+
         setQuilometragem(veiculo.quilometragem);
         setDocumentacao(veiculo.documentacao);
         setSinistro(veiculo.sinistro);
+
+        setPotencia(veiculo.potencia);
+        setCilindrada(veiculo.cilindrada);
+        
         setDados(veiculo);
       } catch (error) {
         mensagemErro("Erro ao carregar os dados do veículo.");
@@ -136,6 +177,7 @@ function CadastroVeiculo() {
   useEffect(() => {
     carregarFabricantes();
     carregarModelos();
+    carregarConcessionarias();
     buscar();
   }, [idParam]);
 
@@ -188,6 +230,22 @@ function CadastroVeiculo() {
                 </select>
               </FormGroup>
               <br />
+              <FormGroup label="Concessionária: *" htmlFor="inputConcessionaria">
+                <select
+                  id="inputConcessionaria"
+                  value={razaoSocialConcessionaria}
+                  className="form-control"
+                  onChange={(e) => setConcessionaria(e.target.value)}
+                >
+                  <option value="">Selecione uma concessionária</option>
+                  {concessionarias.map((m) => (
+                    <option key={m.id} value={m.razaoSocialConcessionaria}>
+                      {m.razaoSocial}
+                    </option>
+                  ))}
+                </select>
+              </FormGroup>
+              <br />
               <FormGroup label="Preço Atual: *" htmlFor="inputPrecoAtual">
                 <input
                   type="number"
@@ -228,7 +286,7 @@ function CadastroVeiculo() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Condição: *" htmlFor="inputCondicao">
+              <FormGroup label="Condição: *" htmlFor="inputTipo">
                 <div>
                   <label>
                     <input
@@ -261,7 +319,44 @@ function CadastroVeiculo() {
                   setSinistro={setSinistro}
                 />
               )}
-
+              <br />
+              <FormGroup label="Tipo: *" htmlFor="inputTipo">
+                <div>
+                  <label>
+                    <input
+                      type="radio"
+                      value="Carro"
+                      checked={tipo === "Carro"}
+                      onChange={() => setTipo("Carro")}
+                    />
+                    Carro
+                  </label>
+                  <label style={{ marginLeft: "20px" }}>
+                    <input
+                      type="radio"
+                      value="Moto"
+                      checked={tipo === "Moto"}
+                      onChange={() => setTipo("Moto")}
+                    />
+                    Moto
+                  </label>
+                </div>
+              </FormGroup>
+              <br />
+              {tipo === "Carro" && (
+                <CadastroVeiculoCarro
+                  potencia={potencia}
+                  setPotencia={setPotencia}
+                />
+              )}
+              <br />
+              {tipo === "Moto" && (
+                <CadastroVeiculoMoto
+                  cilindrada={cilindrada}
+                  setCilindrada={setCilindrada}
+                />
+              )}
+              <br />
               <Stack spacing={1} padding={1} direction="row">
                 <button
                   onClick={salvar}
