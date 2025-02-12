@@ -1,20 +1,24 @@
 [
   {
     "id": 1,
-    "categoria": "Sedan",
-    "transmissao": "Automática",
-    "potencia": "150 CV"
+    "categoriaCarro" : "Sedan",
+    "tipoMotorCarro" : "2.0 Flex",
+    "potencia": "150 CV",
+    "transmissaoCarro" : "Automática"
+    
   },
   {
     "id": 2,
-    "categoria": "SUV",
-    "transmissao": "Manual",
-    "potencia": "200 CV"
+    "categoriaCarro" : "Hatch",
+    "tipoMotorCarro" : "1.0 Kappa Flex",
+    "potencia": "200 CV",
+    "transmissaoCarro" : "Manual"
   },
   {
     "id": 3,
-    "categoria": "Hatch",
-    "transmissao": "Automática",
-    "potencia": "120 CV"
+    "categoriaCarro" : "SUV",
+    "tipoMotorCarro" : "1.3 Turbo Flex T270",
+    "potencia": "120 CV",
+    "transmissaoCarro" : "Automática"
   }
 ]
