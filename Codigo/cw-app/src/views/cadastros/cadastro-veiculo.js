@@ -35,10 +35,14 @@ function CadastroVeiculo() {
   const [vendido, setVendido] = useState("");
   const [garantia, setGarantia] = useState("");
 
+
   //para veiculos usados
   const [quilometragem, setQuilometragem] = useState("");
   const [documentacao, setDocumentacao] = useState("");
   const [sinistro, setSinistro] = useState("");
+  const [laudoVistoria, setLaudoVistoria] = useState("");
+  const [manutencao, setManutencao] = useState("");
+  
 
   //para carros
   const [potencia, setPotencia] = useState("");
@@ -102,6 +106,9 @@ function CadastroVeiculo() {
     setQuilometragem("");
     setDocumentacao("");
     setSinistro("");
+    setLaudoVistoria("");
+    setManutencao("");
+    
 
     //moto
     setCilindrada("");
@@ -133,15 +140,15 @@ function CadastroVeiculo() {
       ...(condicao === "Usado" && {
         quilometragem,
         documentacao,
-        sinistro
+        sinistro,
+        manutencao,
+        laudoVistoria
       }),
       ...(tipo === "Carro" && {
         categoriaCarro,
         potencia,
         tipoMotorCarro,
         transmissaoCarro,
-        
-        
         
       }),
       ...(tipo === "Moto" && {
@@ -150,8 +157,6 @@ function CadastroVeiculo() {
         tipoMotorMoto,
         qtdMarcha,
         transmissaoMoto
-
-
       })
     };
 
@@ -193,6 +198,8 @@ function CadastroVeiculo() {
         setQuilometragem(veiculo.quilometragem);
         setDocumentacao(veiculo.documentacao);
         setSinistro(veiculo.sinistro);
+        setManutencao(veiculo.manutencao);
+        setLaudoVistoria(veiculo.laudoVistoria);
 
         //para motos e carros
         setPotencia(veiculo.potencia);
@@ -239,6 +246,16 @@ function CadastroVeiculo() {
                 />
               </FormGroup>
               <br />
+              
+              <FormGroup label="Foto: *" htmlFor="inputFoto">
+                <input
+                  type="file"
+                  id="inputFoto"
+                  className="form-control" 
+                />
+              </FormGroup>
+              <br />
+              
               <FormGroup label="Modelo: *" htmlFor="inputModelo">
                 <select
                   id="inputModelo"
@@ -358,6 +375,10 @@ function CadastroVeiculo() {
                   setDocumentacao={setDocumentacao}
                   sinistro={sinistro}
                   setSinistro={setSinistro}
+                  laudoVistoria={laudoVistoria}
+                  setLaudoVistoria={setLaudoVistoria}
+                  manutencao={manutencao}
+                  setManutencao={setManutencao}
                 />
               )}
               <br />

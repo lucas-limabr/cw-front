@@ -76,5 +76,27 @@
         "quilometragem": "5000",
         "documentacao": "Boa ",
         "sinistro": "Leve"
+    },
+    {
+        "id": 6,
+        "chassi": "31FNAWANF21334D",
+        "modelo": "Civic",
+        "fabricante": "Honda",
+        "precoAtual": "9999",
+        "cor": "vermelho",
+        "razaoSocialConcessionaria": "Auto Vendas Premium LTDA",
+        "condicao": "Usado",
+        "tipo": "Carro",
+        "vendido": "Não",
+        "garantia": "5 anos",
+        "quilometragem": "3002",
+        "documentacao": "Em dia",
+        "sinistro": "Leve amassado ",
+        "manutencao": "Nada a Informar",
+        "laudoVistoria": "ok",
+        "categoriaCarro": "Sedan",
+        "potencia": "400",
+        "tipoMotorCarro": "2.0 Flex",
+        "transmissaoCarro": "Automatica"
     }
 ]
