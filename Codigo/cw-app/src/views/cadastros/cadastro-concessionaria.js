@@ -27,6 +27,7 @@ function CadastroConcessionaria() {
   const [bairro, setBairro] = useState("");
   const [cep, setCep] = useState("");
   const [uf, setUf] = useState("");
+  const [complemento, setComplemento] = useState("");  // Adicionado o estado para complemento
 
   const [dados, setDados] = useState(null);
 
@@ -41,6 +42,7 @@ function CadastroConcessionaria() {
     setBairro("");
     setCep("");
     setUf("");
+    setComplemento("");  // Limpeza do campo complemento
   }
 
   async function salvar() {
@@ -55,6 +57,7 @@ function CadastroConcessionaria() {
       bairro,
       cep,
       uf,
+      complemento,  // Incluído o campo complemento
     };
 
     try {
@@ -92,6 +95,7 @@ function CadastroConcessionaria() {
         setBairro(concessionaria.bairro);
         setCep(concessionaria.cep);
         setUf(concessionaria.uf);
+        setComplemento(concessionaria.complemento);  // Carregar complemento
         setDados(concessionaria);
       } catch (error) {
         mensagemErro("Erro ao carregar os dados da concessionária.");
@@ -173,6 +177,26 @@ function CadastroConcessionaria() {
                   value={numero}
                   className="form-control"
                   onChange={(e) => setNumero(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Complemento:" htmlFor="inputComplemento">
+                <input
+                  type="text"
+                  id="inputComplemento"
+                  value={complemento}
+                  className="form-control"
+                  onChange={(e) => setComplemento(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Bairro: *" htmlFor="inputBairro">
+                <input
+                  type="text"
+                  id="inputBairro"
+                  value={bairro}
+                  className="form-control"
+                  onChange={(e) => setBairro(e.target.value)}
                 />
               </FormGroup>
               <br />

@@ -8,8 +8,6 @@ import FormGroup from "../../components/form-group";
 
 import { mensagemSucesso, mensagemErro } from "../../components/toastr";
 
-//import '../custom.css';
-
 import axios from "axios";
 import { BASE_URL } from "../../config/axios";
 
@@ -73,7 +71,7 @@ function CadastroCliente() {
 
     try {
       if (!idParam) {
-        await axios.post(`${baseURL}/${idParam}`, data, {
+        await axios.post(`${baseURL}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Cliente ${nome} cadastrado com sucesso!`);
@@ -202,6 +200,66 @@ function CadastroCliente() {
                   value={email}
                   className="form-control"
                   onChange={(e) => setEmail(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Logradouro: *" htmlFor="inputLogradouro">
+                <input
+                  type="text"
+                  id="inputLogradouro"
+                  value={logradouro}
+                  className="form-control"
+                  onChange={(e) => setLogradouro(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Número: *" htmlFor="inputNumero">
+                <input
+                  type="text"
+                  id="inputNumero"
+                  value={numero}
+                  className="form-control"
+                  onChange={(e) => setNumero(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Complemento: *" htmlFor="inputComplemento">
+                <input
+                  type="text"
+                  id="inputComplemento"
+                  value={complemento}
+                  className="form-control"
+                  onChange={(e) => setComplemento(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Bairro: *" htmlFor="inputBairro">
+                <input
+                  type="text"
+                  id="inputBairro"
+                  value={bairro}
+                  className="form-control"
+                  onChange={(e) => setBairro(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="CEP: *" htmlFor="inputCep">
+                <input
+                  type="text"
+                  id="inputCep"
+                  value={cep}
+                  className="form-control"
+                  onChange={(e) => setCep(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="UF: *" htmlFor="inputUf">
+                <input
+                  type="text"
+                  id="inputUf"
+                  value={uf}
+                  className="form-control"
+                  onChange={(e) => setUf(e.target.value)}
                 />
               </FormGroup>
               <br />
