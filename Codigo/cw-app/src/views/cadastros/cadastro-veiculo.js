@@ -32,7 +32,6 @@ function CadastroVeiculo() {
   const [razaoSocialConcessionaria, setConcessionaria] = useState("");
   const [condicao, setCondicao] = useState("");
   const [tipo, setTipo] = useState("");
-  const [vendido, setVendido] = useState("");
   const [garantia, setGarantia] = useState("");
 
 
@@ -101,7 +100,6 @@ function CadastroVeiculo() {
     setCor("");
     setConcessionaria("");
     setCondicao("");
-    setVendido("");
     setGarantia("");
     setQuilometragem("");
     setDocumentacao("");
@@ -135,7 +133,6 @@ function CadastroVeiculo() {
       razaoSocialConcessionaria,
       condicao,
       tipo,
-      vendido,
       garantia,
       ...(condicao === "Usado" && {
         quilometragem,
@@ -192,7 +189,6 @@ function CadastroVeiculo() {
         setConcessionaria(veiculo.razaoSocialConcessionaria);
         setCondicao(veiculo.condicao);
         setTipo(veiculo.tipo);
-        setVendido(veiculo.vendido);
         setGarantia(veiculo.garantia);
 
         setQuilometragem(veiculo.quilometragem);
@@ -247,7 +243,7 @@ function CadastroVeiculo() {
               </FormGroup>
               <br />
               
-              <FormGroup label="Foto: *" htmlFor="inputFoto">
+              <FormGroup label="Foto: " htmlFor="inputFoto">
                 <input
                   type="file"
                   id="inputFoto"
@@ -324,16 +320,7 @@ function CadastroVeiculo() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Vendido: *" htmlFor="inputVendido">
-                <input
-                  type="text"
-                  id="inputVendido"
-                  value={vendido}
-                  className="form-control"
-                  onChange={(e) => setVendido(e.target.value)}
-                />
-              </FormGroup>
-              <br />
+              
               <FormGroup label="Garantia: *" htmlFor="inputGarantia">
                 <input
                   type="text"
