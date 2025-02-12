@@ -101,6 +101,10 @@ function CadastroConcessionaria() {
     }
   }
 
+  function cancelar() {
+    navigate(`/listagem-concessionaria/`);
+  }
+
   useEffect(() => {
     buscar();
   }, [idParam]);
@@ -201,7 +205,7 @@ function CadastroConcessionaria() {
                   Salvar
                 </button>
                 <button
-                  onClick={inicializar}
+                  onClick={cancelar}
                   type="button"
                   className="btn btn-danger"
                 >

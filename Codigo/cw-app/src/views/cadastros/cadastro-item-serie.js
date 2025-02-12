@@ -51,6 +51,10 @@ function CadastroItemSerie() {
     }
   }
 
+  function cancelar() {
+    navigate(`/listagem-item-serie/`);
+  }
+
   async function buscar() {
     if (idParam) {
       try {
@@ -97,7 +101,7 @@ function CadastroItemSerie() {
                   Salvar
                 </button>
                 <button
-                  onClick={inicializar}
+                  onClick={cancelar}
                   type="button"
                   className="btn btn-danger"
                 >

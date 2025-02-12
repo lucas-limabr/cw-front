@@ -83,6 +83,10 @@ function CadastroVendedor() {
     }
   }
 
+  function cancelar() {
+    navigate(`/listagem-vendedor/`);
+  }
+
   async function buscar() {
     if (idParam) {
       try {
@@ -250,7 +254,7 @@ function CadastroVendedor() {
                   Salvar
                 </button>
                 <button
-                  onClick={inicializar}
+                  onClick={cancelar}
                   type="button"
                   className="btn btn-danger"
                 >

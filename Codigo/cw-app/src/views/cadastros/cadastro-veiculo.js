@@ -141,6 +141,10 @@ function CadastroVeiculo() {
     }
   }
 
+  function cancelar() {
+    navigate(`/listagem-veiculo/`);
+  }
+
   async function buscar() {
     if (idParam) {
       try {
@@ -366,7 +370,7 @@ function CadastroVeiculo() {
                   Salvar
                 </button>
                 <button
-                  onClick={inicializar}
+                  onClick={cancelar}
                   type="button"
                   className="btn btn-danger"
                 >

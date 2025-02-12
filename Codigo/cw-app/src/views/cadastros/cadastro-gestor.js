@@ -98,6 +98,10 @@ function CadastroGestor() {
     }
   }
 
+  function cancelar() {
+    navigate(`/listagem-gestor/`);
+  }
+
   async function buscar() {
     if (idParam) {
       try {
@@ -283,7 +287,7 @@ function CadastroGestor() {
                   Salvar
                 </button>
                 <button
-                  onClick={inicializar}
+                  onClick={cancelar}
                   type="button"
                   className="btn btn-danger"
                 >

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Select from "react-select";
 
 import Stack from "@mui/material/Stack";
 
@@ -12,217 +11,273 @@ import { mensagemSucesso, mensagemErro } from "../../components/toastr";
 import axios from "axios";
 import { BASE_URL } from "../../config/axios";
 
-const baseURL = `${BASE_URL}/compras`;
-const clientesURL = `${BASE_URL}/clientes`;
-const modelosURL = `${BASE_URL}/modelos`;
-const chassiURL = `${BASE_URL}/veiculos`;
+const baseURL = `${BASE_URL}/gestores`;
+const concessionariasURL = `${BASE_URL}/concessionarias`; // URL para buscar as concessionárias
 
-function CadastroCompra() {
-  const { idParam } = useParams();
+function CadastroGestor() {
+  const { idParam } = useParams(); // Pega o parâmetro da URL para editar ou cadastrar
   const navigate = useNavigate();
 
-  const [id, setId] = useState("");
-  const [data, setData] = useState("");
-  const [formaPag, setFormaPag] = useState("");
-  const [modelo, setModelo] = useState("");
-  const [desconto, setDesconto] = useState("");
-  const [cpfCliente, setCpfCliente] = useState("");
-  const [cpfClientes, setCpfClientes] = useState([]);
-  const [chassiVeiculo, setChassiVeiculo] = useState([]);
-  const [modelos, setModelos] = useState([]);
-  const [chassiVeiculos, setChassiVeiculos] = useState([]);
-  const [dados, setDados] = useState(null);
+  const [nome, setNome] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [login, setLogin] = useState("");
+  const [senha, setSenha] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [email, setEmail] = useState("");
+  const [logradouro, setLogradouro] = useState("");
+  const [numero, setNumero] = useState("");
+  const [complemento, setComplemento] = useState("");
+  const [bairro, setBairro] = useState("");
+  const [cep, setCep] = useState("");
+  const [uf, setUf] = useState("");
+  const [concessionaria, setConcessionaria] = useState("");
 
-  function inicializar() {
-    setId("");
-    setData("");
-    setFormaPag("");
-    setModelo("");
-    setDesconto("");
-    setCpfCliente("");
-    setChassiVeiculo("");
+  const [concessionarias, setConcessionarias] = useState([]);
+
+  // Função para carregar as concessionárias
+  async function carregarConcessionarias() {
+    try {
+      const response = await axios.get(concessionariasURL);
+      setConcessionarias(response.data); 
+    } catch (error) {
+      console.error("Erro ao carregar concessionárias:", error);
+    }
   }
 
+  // Função para inicializar os campos do formulário
+  function inicializar() {
+    setNome("");
+    setCpf("");
+    setLogin("");
+    setSenha("");
+    setTelefone("");
+    setEmail("");
+    setLogradouro("");
+    setNumero("");
+    setComplemento("");
+    setBairro("");
+    setCep("");
+    setUf("");
+    setConcessionaria("");
+  }
+
+  // Função para salvar os dados no backend
   async function salvar() {
-    const dadosCompra = {
-      id,
-      data,
-      formaPag,
-      modelo,
-      desconto,
-      cpfCliente,
-      cpfCliente: cpfCliente ? cpfCliente.value : "",
-      chassiVeiculo: chassiVeiculo ? chassiVeiculo.value : "",
+    const data = {
+      nome,
+      cpf,
+      login,
+      senha,
+      telefone,
+      email,
+      logradouro,
+      numero,
+      complemento,
+      bairro,
+      cep,
+      uf,
+      concessionaria,
     };
 
     try {
       if (!idParam) {
-        await axios.post(`${baseURL}`, dadosCompra, {
+        // Cadastrar novo gestor
+        await axios.post(`${baseURL}`, data, {
           headers: { "Content-Type": "application/json" },
         });
-        mensagemSucesso(`Compra realizada com sucesso.`);
+        mensagemSucesso(`Gestor ${nome} cadastrado com sucesso!`);
       } else {
-        await axios.put(`${baseURL}/${idParam}`, dadosCompra, {
+        // Atualizar gestor
+        await axios.put(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" },
         });
-        mensagemSucesso(`Compra atualizada com sucesso.`);
+        mensagemSucesso(`Gestor ${nome} alterado com sucesso!`);
       }
-      navigate("/listagem-compra");
+      navigate("/listagem-gestor");
     } catch (error) {
-      // Exiba uma mensagem de erro ao invés de um erro fatal
-      mensagemErro(error.response?.data || "Erro ao salvar a compra.");
+      mensagemErro(error.response?.data || "Erro ao salvar gestor.");
     }
   }
 
-  async function carregarModelos() {
-    try {
-      const response = await axios.get(`${modelosURL}`);
-      setModelos(response.data);
-    } catch (error) {
-      console.error("Erro ao carregar modelos:", error);
-    }
+  // Função de cancelamento
+  function cancelar() {
+    navigate(`/listagem-gestor/`);
   }
 
-  //  Carregar os clientes do JSON
-  useEffect(() => {
-    async function carregarClientes() {
-      try {
-        const response = await axios.get(`${clientesURL}`); // Ajuste conforme a API
-        const clientesFormatados = response.data.map((cliente) => ({
-          value: cliente.cpf,
-          label: cliente.cpf,
-        }));
-        setCpfClientes(clientesFormatados);
-      } catch (error) {
-        mensagemErro("Erro ao carregar os clientes.");
-      }
-    }
-
-    async function carregarChassis() {
-      try {
-        const response = await axios.get(`${chassiURL}`); // Ajuste conforme a API
-        const chassisFormatados = response.data.map((chassi) => ({
-          value: chassi.chassi,
-          label: chassi.chassi,
-        }));
-        setChassiVeiculos(chassisFormatados);
-      } catch (error) {
-        mensagemErro("Erro ao carregar os chassis.");
-      }
-    }
-
-    carregarClientes();
-    carregarChassis();
-  }, []);
-
+  // Função para buscar os dados de um gestor se idParam existir
   async function buscar() {
     if (idParam) {
       try {
         const response = await axios.get(`${baseURL}/${idParam}`);
-        const compra = response.data;
-        setId(compra.id);
-        setData(compra.data);
-        setFormaPag(compra.formaPag);
-        setDesconto(compra.desconto);
-        setModelo(compra.modeloVeiculo);
-        setCpfCliente(compra.cpfCliente);
-        setChassiVeiculo(compra.chassiVeiculo);
-        setDados(compra);
+        const gestor = response.data;
+        setNome(gestor.nome);
+        setCpf(gestor.cpf);
+        setLogin(gestor.login);
+        setSenha(gestor.senha);
+        setTelefone(gestor.telefone);
+        setEmail(gestor.email);
+        setLogradouro(gestor.logradouro);
+        setNumero(gestor.numero);
+        setComplemento(gestor.complemento);
+        setBairro(gestor.bairro);
+        setCep(gestor.cep);
+        setUf(gestor.uf);
+        setConcessionaria(gestor.razaoSocialConcessionaria);
       } catch (error) {
-        mensagemErro("Erro ao carregar os dados da compra.");
+        mensagemErro("Erro ao carregar os dados do gestor.");
       }
     } else {
       inicializar();
     }
   }
 
+  // Carrega os dados ao iniciar o componente
   useEffect(() => {
-    carregarModelos();
+    carregarConcessionarias();
     buscar();
   }, [idParam]);
 
   return (
     <div className="container">
-      <Card title="Cadastro de Compra">
+      <Card title="Cadastro de Gestor">
         <div className="row">
           <div className="col-lg-12">
             <br />
             <div className="bs-component">
-              <FormGroup label="Data: *" htmlFor="inputData">
+              <FormGroup label="Nome: *" htmlFor="inputNome">
                 <input
                   type="text"
-                  id="inputData"
-                  value={data}
+                  id="inputNome"
+                  value={nome}
                   className="form-control"
-                  onChange={(e) => setData(e.target.value)}
+                  onChange={(e) => setNome(e.target.value)}
                 />
               </FormGroup>
-              <FormGroup label="Modelo: *" htmlFor="inputModelo">
-                <select
-                  id="inputModelo"
-                  value={modelo}
-                  selected = {modelo}
+              <br />
+              <FormGroup label="CPF: *" htmlFor="inputCpf">
+                <input
+                  type="text"
+                  id="inputCpf"
+                  value={cpf}
                   className="form-control"
-                  onChange={(e) => setModelo(e.target.value)}
+                  onChange={(e) => setCpf(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Login: *" htmlFor="inputLogin">
+                <input
+                  type="text"
+                  id="inputLogin"
+                  value={login}
+                  className="form-control"
+                  onChange={(e) => setLogin(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Senha: *" htmlFor="inputSenha">
+                <input
+                  type="password"
+                  id="inputSenha"
+                  value={senha}
+                  className="form-control"
+                  onChange={(e) => setSenha(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Telefone: *" htmlFor="inputTelefone">
+                <input
+                  type="text"
+                  id="inputTelefone"
+                  value={telefone}
+                  className="form-control"
+                  onChange={(e) => setTelefone(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Email: *" htmlFor="inputEmail">
+                <input
+                  type="email"
+                  id="inputEmail"
+                  value={email}
+                  className="form-control"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Logradouro: *" htmlFor="inputLogradouro">
+                <input
+                  type="text"
+                  id="inputLogradouro"
+                  value={logradouro}
+                  className="form-control"
+                  onChange={(e) => setLogradouro(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Número: *" htmlFor="inputNumero">
+                <input
+                  type="text"
+                  id="inputNumero"
+                  value={numero}
+                  className="form-control"
+                  onChange={(e) => setNumero(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Complemento: *" htmlFor="inputComplemento">
+                <input
+                  type="text"
+                  id="inputComplemento"
+                  value={complemento}
+                  className="form-control"
+                  onChange={(e) => setComplemento(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Bairro: *" htmlFor="inputBairro">
+                <input
+                  type="text"
+                  id="inputBairro"
+                  value={bairro}
+                  className="form-control"
+                  onChange={(e) => setBairro(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="CEP *" htmlFor="inputCep">
+                <input
+                  type="text"
+                  id="inputCep"
+                  value={cep}
+                  className="form-control"
+                  onChange={(e) => setCep(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="UF *" htmlFor="inputUf">
+                <input
+                  type="text"
+                  id="inputUf"
+                  value={uf}
+                  className="form-control"
+                  onChange={(e) => setUf(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Concessionária: *" htmlFor="inputConcessionaria">
+                <select
+                  id="inputConcessionaria"
+                  value={concessionaria}
+                  className="form-control"
+                  onChange={(e) => setConcessionaria(e.target.value)}
                 >
-                  <option value="">Selecione um modelo</option>
-                  {modelos.map((m) => (
-                    <option key={m.id} value={m.nome}>
-                      {m.nome}
+                  <option value="">Selecione uma concessionária</option>
+                  {concessionarias.map((m) => (
+                    <option key={m.id} value={m.razaoSocial}>
+                      {m.razaoSocial}
                     </option>
                   ))}
                 </select>
-              </FormGroup>
-              <br />
-              <FormGroup label="CPF do Cliente: *">
-                <Select
-                  options={cpfClientes}
-                  value={cpfCliente}
-                  selected = {cpfCliente}
-                  onChange={setCpfCliente}
-                  placeholder="Selecione um CPF"
-                  isSearchable
-                />
-              </FormGroup>
-              <br />
-              <FormGroup label="Chassi do veículo: *">
-                <Select
-                  options={chassiVeiculos}
-                  value={chassiVeiculo}
-                  onChange={setChassiVeiculo}
-                  placeholder="Selecione um Chassi"
-                  isSearchable
-                />
-              </FormGroup>
-              <br />
-              <FormGroup label="Forma de pagamento: *" htmlFor="inputFormaPag">
-                <input
-                  type="text"
-                  id="inputFormaPag"
-                  value={formaPag}
-                  className="form-control"
-                  onChange={(e) => setFormaPag(e.target.value)}
-                />
-              </FormGroup>
-              <br />
-              <FormGroup label="Desconto: *" htmlFor="inputDesconto">
-                <input
-                  type="text"
-                  id="inputDesconto"
-                  value={desconto}
-                  className="form-control"
-                  onChange={(e) => setDesconto(e.target.value)}
-                />
-              </FormGroup>
-              <br />
-              <FormGroup label="CPF do Cliente: *" htmlFor="inputCpfCliente">
-                <input
-                  type="text"
-                  id="inputCpfCliente"
-                  value={cpfCliente}
-                  className="form-control"
-                  onChange={(e) => setCpfCliente(e.target.value)}
-                />
               </FormGroup>
               <br />
               <Stack spacing={1} padding={1} direction="row">
@@ -234,7 +289,7 @@ function CadastroCompra() {
                   Salvar
                 </button>
                 <button
-                  onClick={inicializar}
+                  onClick={cancelar}
                   type="button"
                   className="btn btn-danger"
                 >
@@ -249,4 +304,4 @@ function CadastroCompra() {
   );
 }
 
-export default CadastroCompra;
+export default CadastroGestor;

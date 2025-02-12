@@ -89,6 +89,10 @@ function CadastroCliente() {
     }
   }
 
+  function cancelar() {
+    navigate(`/listagem-cliente/`);
+  }
+
   async function buscar() {
     if (idParam) {
       try {
@@ -210,7 +214,7 @@ function CadastroCliente() {
                   Salvar
                 </button>
                 <button
-                  onClick={inicializar}
+                  onClick={cancelar}
                   type="button"
                   className="btn btn-danger"
                 >
