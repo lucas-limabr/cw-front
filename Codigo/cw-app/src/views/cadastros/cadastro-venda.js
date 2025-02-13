@@ -175,7 +175,7 @@ function CadastroCompra() {
 
   // Função para cancelar
   function cancelar() {
-    navigate("/listagem-compras");
+    navigate("/listagem-venda");
   }
 
   return (

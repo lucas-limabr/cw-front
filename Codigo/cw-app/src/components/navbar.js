@@ -14,7 +14,7 @@ function Navbar(props) {
     { href: "/listagem-item-serie", label: "Itens" },
     { href: "/listagem-veiculo", label: "Veículos" },
     { href: "/listagem-testdrive", label: "Test-drive" },
-    { href: "/listagem-venda", label: "Compras" },
+    { href: "/listagem-venda", label: "Vendas" },
     { href: "/listagem-cliente", label: "Clientes" },
   ];
 

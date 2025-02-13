@@ -41,7 +41,7 @@ function CadastroVeiculo() {
   const [sinistro, setSinistro] = useState("");
   const [laudoVistoria, setLaudoVistoria] = useState("");
   const [manutencao, setManutencao] = useState("");
-  
+
 
   //para carros
   const [potencia, setPotencia] = useState("");
@@ -55,8 +55,8 @@ function CadastroVeiculo() {
   const [qtdMarcha, setQtdMarcha] = useState("");
   const [cilindrada, setCilindrada] = useState("");
   const [transmissaoMoto, setTransmissaoMoto] = useState("");
-  
-  
+
+
 
   const [dados, setDados] = useState(null);
   const [modelos, setModelos] = useState([]);
@@ -106,7 +106,7 @@ function CadastroVeiculo() {
     setSinistro("");
     setLaudoVistoria("");
     setManutencao("");
-    
+
 
     //moto
     setCilindrada("");
@@ -137,35 +137,47 @@ function CadastroVeiculo() {
       ...(condicao === "Usado" && {
         quilometragem,
         documentacao,
-        sinistro,
-        manutencao,
-        laudoVistoria
+        sinistro
       }),
-      ...(tipo === "Carro" && {
-        categoriaCarro,
-        potencia,
-        tipoMotorCarro,
-        transmissaoCarro,
-        
-      }),
-      ...(tipo === "Moto" && {
-        categoriaMoto,
-        cilindrada,
-        tipoMotorMoto,
-        qtdMarcha,
-        transmissaoMoto
-      })
+      ...(tipo === "Carro"
+        ? {
+          categoriaCarro,
+          potencia,
+          tipoMotorCarro,
+          transmissaoCarro
+        }
+        : {
+          categoriaCarro: null, // Removendo atributos de Carro se for Moto
+          potencia: null,
+          tipoMotorCarro: null,
+          transmissaoCarro: null
+        }),
+      ...(tipo === "Moto"
+        ? {
+          categoriaMoto,
+          cilindrada,
+          tipoMotorMoto,
+          qtdMarcha,
+          transmissaoMoto
+        }
+        : {
+          categoriaMoto: null, // Removendo atributos de Moto se for Carro
+          cilindrada: null,
+          tipoMotorMoto: null,
+          qtdMarcha: null,
+          transmissaoMoto: null
+        })
     };
 
     try {
       if (!idParam) {
         await axios.post(`${baseURL}/${idParam}`, data, {
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json" }
         });
         mensagemSucesso(`Veículo ${modelo} cadastrado com sucesso!`);
       } else {
         await axios.put(`${baseURL}/${idParam}`, data, {
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json" }
         });
         mensagemSucesso(`Veículo ${modelo} alterado com sucesso!`);
       }
@@ -174,6 +186,7 @@ function CadastroVeiculo() {
       mensagemErro(error.response?.data || "Erro ao salvar veículo.");
     }
   }
+
 
   function cancelar() {
     navigate(`/listagem-veiculo/`);
@@ -212,7 +225,7 @@ function CadastroVeiculo() {
         setTipoMotorMoto(veiculo.tipoMotorMoto);
         setCategoriaMoto(veiculo.tipoMotorMoto);
         setQtdMarcha(veiculo.qtdMarcha);
-        
+
         setDados(veiculo);
       } catch (error) {
         mensagemErro("Erro ao carregar os dados do veículo.");
@@ -246,16 +259,16 @@ function CadastroVeiculo() {
                 />
               </FormGroup>
               <br />
-              
+
               <FormGroup label="Foto: " htmlFor="inputFoto">
                 <input
                   type="file"
                   id="inputFoto"
-                  className="form-control" 
+                  className="form-control"
                 />
               </FormGroup>
               <br />
-              
+
               <FormGroup label="Modelo: *" htmlFor="inputModelo">
                 <select
                   id="inputModelo"
@@ -324,7 +337,7 @@ function CadastroVeiculo() {
                 />
               </FormGroup>
               <br />
-              
+
               <FormGroup label="Garantia: *" htmlFor="inputGarantia">
                 <input
                   type="text"
@@ -398,29 +411,29 @@ function CadastroVeiculo() {
               <br />
               {tipo === "Carro" && (
                 <CadastroVeiculoCarro
-                potencia={potencia}
-                setPotencia={setPotencia}
-                categoriaCarro={categoriaCarro}
-                setCategoriaCarro={setCategoriaCarro}
-                transmissaoCarro={transmissaoCarro}
-                setTransmissaoCarro={setTransmissaoCarro}
-                tipoMotorCarro={tipoMotorCarro}
-                setTipoMotorCarro={setTipoMotorCarro}
+                  potencia={potencia}
+                  setPotencia={setPotencia}
+                  categoriaCarro={categoriaCarro}
+                  setCategoriaCarro={setCategoriaCarro}
+                  transmissaoCarro={transmissaoCarro}
+                  setTransmissaoCarro={setTransmissaoCarro}
+                  tipoMotorCarro={tipoMotorCarro}
+                  setTipoMotorCarro={setTipoMotorCarro}
                 />
               )}
               <br />
               {tipo === "Moto" && (
                 <CadastroVeiculoMoto
-                cilindrada={cilindrada}
-                setCilindrada={setCilindrada}
-                categoriaMoto={categoriaMoto}
-                setCategoriaMoto={setCategoriaMoto}
-                transmissaoMoto={transmissaoMoto}
-                setTransmissaoMoto={setTransmissaoMoto}
-                tipoMotorMoto={tipoMotorMoto}
-                setTipoMotorMoto={setTipoMotorMoto}
-                qtdMarcha={qtdMarcha}
-                setQtdMarcha={setQtdMarcha}
+                  cilindrada={cilindrada}
+                  setCilindrada={setCilindrada}
+                  categoriaMoto={categoriaMoto}
+                  setCategoriaMoto={setCategoriaMoto}
+                  transmissaoMoto={transmissaoMoto}
+                  setTransmissaoMoto={setTransmissaoMoto}
+                  tipoMotorMoto={tipoMotorMoto}
+                  setTipoMotorMoto={setTipoMotorMoto}
+                  qtdMarcha={qtdMarcha}
+                  setQtdMarcha={setQtdMarcha}
                 />
               )}
               <br />

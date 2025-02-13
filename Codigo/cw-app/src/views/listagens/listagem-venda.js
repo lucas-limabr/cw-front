@@ -60,7 +60,7 @@ function ListagemCompras() {
 
   return (
     <div className="container">
-      <Card title="Listagem de Compras">
+      <Card title="Listagem de Vendas">
         <div className="row">
           <div className="col-lg-12">
             <br />
