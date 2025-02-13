@@ -15,6 +15,7 @@ const baseURL = `${BASE_URL}/compras`;
 const clientesURL = `${BASE_URL}/clientes`;
 const modelosURL = `${BASE_URL}/modelos`;
 const concessionariasURL = `${BASE_URL}/concessionarias`;
+const chassiURL = `${BASE_URL}/veiculos`;
 
 function CadastroCompra() {
   const { idParam } = useParams();
@@ -24,7 +25,8 @@ function CadastroCompra() {
   const [clientes, setClientes] = useState([]);
   const [modelos, setModelos] = useState([]);
   const [concessionarias, setConcessionarias] = useState([]);
-  
+  const [chassiVeiculos, setChassiVeiculos] = useState([]);
+
   const [id, setId] = useState("");
   const [data, setData] = useState("");
   const [formaPag, setFormaPag] = useState("");
@@ -99,6 +101,20 @@ function CadastroCompra() {
       }
     }
 
+    async function carregarChassis() {
+      try {
+        const response = await axios.get(`${chassiURL}`); // Ajuste conforme a API
+        const chassisFormatados = response.data.map((chassi) => ({
+          value: chassi.chassi,
+          label: chassi.chassi,
+        }));
+        setChassiVeiculos(chassisFormatados);
+      } catch (error) {
+        mensagemErro("Erro ao carregar os chassis.");
+      }
+    }
+
+    carregarChassis();
     carregarClientes();
     carregarModelos();
     carregarConcessionarias();
@@ -213,21 +229,30 @@ function CadastroCompra() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Modelo: *">
-                <input
-                  type="text"
+              <FormGroup label="Modelo: *" htmlFor="inputModelo">
+                <select
+                  id="inputModelo"
                   value={modeloVeiculo}
+                  selected={modeloVeiculo}
                   className="form-control"
                   onChange={(e) => setModeloVeiculo(e.target.value)}
-                />
+                >
+                  <option value="">Selecione um modelo</option>
+                  {modelos.map((m) => (
+                    <option key={m.id} value={m.nome}>
+                      {m.nome}
+                    </option>
+                  ))}
+                </select>
               </FormGroup>
               <br />
-              <FormGroup label="Chassi do Veículo: *">
-                <input
-                  type="text"
+              <FormGroup label="Chassi do veículo: *">
+                <Select
+                  options={chassiVeiculos}
                   value={chassiVeiculo}
-                  className="form-control"
-                  onChange={(e) => setChassiVeiculo(e.target.value)}
+                  onChange={setChassiVeiculo}
+                  placeholder="Selecione um Chassi"
+                  isSearchable
                 />
               </FormGroup>
               <br />
