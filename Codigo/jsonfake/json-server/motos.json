@@ -1,23 +1,27 @@
 [
   {
     "id": 1,
-    "categoria": "Esportiva",
+    "categoriaMoto": "Street",
     "qtdMarcha": "6",
-    "tipoMotor": "4 tempos",
-    "cilindrada": "1000cc"
+    "tipoMotorMoto": "4 tempos",
+    "cilindrada": "1000cc",
+     "transmissaoMoto": "Manual"
   },
   {
     "id": 2,
-    "categoria": "Cruiser",
+    "categoriaMoto": "trail",
     "qtdMarcha": "5",
-    "tipoMotor": "V2",
-    "cilindrada": "1600cc"
+    "tipoMotorMoto": "V2",
+    "cilindrada": "1600cc",
+    "transmissaoMoto": "Manual"
+
   },
   {
     "id": 3,
-    "categoria": "Street",
+    "categoriaMoto":"esportiva",
     "qtdMarcha": "5",
-    "tipoMotor": "2 tempos",
-    "cilindrada": "250cc"
+    "tipoMotorMoto": "2 tempos",
+    "cilindrada": "250cc",
+    "transmissaoMoto" : "Manual"
   }
 ]

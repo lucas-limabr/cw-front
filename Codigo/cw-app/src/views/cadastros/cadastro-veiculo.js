@@ -32,19 +32,31 @@ function CadastroVeiculo() {
   const [razaoSocialConcessionaria, setConcessionaria] = useState("");
   const [condicao, setCondicao] = useState("");
   const [tipo, setTipo] = useState("");
-  const [vendido, setVendido] = useState("");
   const [garantia, setGarantia] = useState("");
+
 
   //para veiculos usados
   const [quilometragem, setQuilometragem] = useState("");
   const [documentacao, setDocumentacao] = useState("");
   const [sinistro, setSinistro] = useState("");
+  const [laudoVistoria, setLaudoVistoria] = useState("");
+  const [manutencao, setManutencao] = useState("");
+  
 
   //para carros
   const [potencia, setPotencia] = useState("");
+  const [categoriaCarro, setCategoriaCarro] = useState("");
+  const [tipoMotorCarro, setTipoMotorCarro] = useState("");
+  const [transmissaoCarro, setTransmissaoCarro] = useState("");
 
   //para motos
+  const [categoriaMoto, setCategoriaMoto] = useState("");
+  const [tipoMotorMoto, setTipoMotorMoto] = useState("");
+  const [qtdMarcha, setQtdMarcha] = useState("");
   const [cilindrada, setCilindrada] = useState("");
+  const [transmissaoMoto, setTransmissaoMoto] = useState("");
+  
+  
 
   const [dados, setDados] = useState(null);
   const [modelos, setModelos] = useState([]);
@@ -88,13 +100,26 @@ function CadastroVeiculo() {
     setCor("");
     setConcessionaria("");
     setCondicao("");
-    setVendido("");
     setGarantia("");
     setQuilometragem("");
     setDocumentacao("");
     setSinistro("");
-    setPotencia("");
+    setLaudoVistoria("");
+    setManutencao("");
+    
+
+    //moto
     setCilindrada("");
+    setCategoriaMoto("");
+    setQtdMarcha("");
+    setTransmissaoMoto("");
+    setTipoMotorMoto("");
+
+    //carro
+    setCategoriaCarro("");
+    setTransmissaoCarro("");
+    setPotencia("");
+    setTipoMotorCarro("");
   }
 
   async function salvar() {
@@ -108,18 +133,27 @@ function CadastroVeiculo() {
       razaoSocialConcessionaria,
       condicao,
       tipo,
-      vendido,
       garantia,
       ...(condicao === "Usado" && {
         quilometragem,
         documentacao,
-        sinistro
+        sinistro,
+        manutencao,
+        laudoVistoria
       }),
       ...(tipo === "Carro" && {
-        potencia
+        categoriaCarro,
+        potencia,
+        tipoMotorCarro,
+        transmissaoCarro,
+        
       }),
       ...(tipo === "Moto" && {
-        cilindrada
+        categoriaMoto,
+        cilindrada,
+        tipoMotorMoto,
+        qtdMarcha,
+        transmissaoMoto
       })
     };
 
@@ -159,15 +193,25 @@ function CadastroVeiculo() {
         setConcessionaria(veiculo.razaoSocialConcessionaria);
         setCondicao(veiculo.condicao);
         setTipo(veiculo.tipo);
-        setVendido(veiculo.vendido);
         setGarantia(veiculo.garantia);
 
         setQuilometragem(veiculo.quilometragem);
         setDocumentacao(veiculo.documentacao);
         setSinistro(veiculo.sinistro);
+        setManutencao(veiculo.manutencao);
+        setLaudoVistoria(veiculo.laudoVistoria);
 
+        //para motos e carros
         setPotencia(veiculo.potencia);
         setCilindrada(veiculo.cilindrada);
+        setCategoriaCarro(veiculo.categoriaCarro);
+        setCategoriaMoto(veiculo.categoriaMoto);
+        setTransmissaoCarro(veiculo.transmissaoCarro);
+        setTransmissaoMoto(veiculo.transmissaoMoto);
+        setTipoMotorCarro(veiculo.tipoMotorCarro);
+        setTipoMotorMoto(veiculo.tipoMotorMoto);
+        setCategoriaMoto(veiculo.tipoMotorMoto);
+        setQtdMarcha(veiculo.qtdMarcha);
         
         setDados(veiculo);
       } catch (error) {
@@ -202,6 +246,16 @@ function CadastroVeiculo() {
                 />
               </FormGroup>
               <br />
+              
+              <FormGroup label="Foto: " htmlFor="inputFoto">
+                <input
+                  type="file"
+                  id="inputFoto"
+                  className="form-control" 
+                />
+              </FormGroup>
+              <br />
+              
               <FormGroup label="Modelo: *" htmlFor="inputModelo">
                 <select
                   id="inputModelo"
@@ -270,16 +324,7 @@ function CadastroVeiculo() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Vendido: *" htmlFor="inputVendido">
-                <input
-                  type="text"
-                  id="inputVendido"
-                  value={vendido}
-                  className="form-control"
-                  onChange={(e) => setVendido(e.target.value)}
-                />
-              </FormGroup>
-              <br />
+              
               <FormGroup label="Garantia: *" htmlFor="inputGarantia">
                 <input
                   type="text"
@@ -321,6 +366,10 @@ function CadastroVeiculo() {
                   setDocumentacao={setDocumentacao}
                   sinistro={sinistro}
                   setSinistro={setSinistro}
+                  laudoVistoria={laudoVistoria}
+                  setLaudoVistoria={setLaudoVistoria}
+                  manutencao={manutencao}
+                  setManutencao={setManutencao}
                 />
               )}
               <br />
@@ -349,15 +398,29 @@ function CadastroVeiculo() {
               <br />
               {tipo === "Carro" && (
                 <CadastroVeiculoCarro
-                  potencia={potencia}
-                  setPotencia={setPotencia}
+                potencia={potencia}
+                setPotencia={setPotencia}
+                categoriaCarro={categoriaCarro}
+                setCategoriaCarro={setCategoriaCarro}
+                transmissaoCarro={transmissaoCarro}
+                setTransmissaoCarro={setTransmissaoCarro}
+                tipoMotorCarro={tipoMotorCarro}
+                setTipoMotorCarro={setTipoMotorCarro}
                 />
               )}
               <br />
               {tipo === "Moto" && (
                 <CadastroVeiculoMoto
-                  cilindrada={cilindrada}
-                  setCilindrada={setCilindrada}
+                cilindrada={cilindrada}
+                setCilindrada={setCilindrada}
+                categoriaMoto={categoriaMoto}
+                setCategoriaMoto={setCategoriaMoto}
+                transmissaoMoto={transmissaoMoto}
+                setTransmissaoMoto={setTransmissaoMoto}
+                tipoMotorMoto={tipoMotorMoto}
+                setTipoMotorMoto={setTipoMotorMoto}
+                qtdMarcha={qtdMarcha}
+                setQtdMarcha={setQtdMarcha}
                 />
               )}
               <br />
