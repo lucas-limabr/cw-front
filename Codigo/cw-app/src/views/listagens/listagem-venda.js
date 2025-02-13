@@ -16,7 +16,7 @@ import { BASE_URL } from "../../config/axios";
 
 const baseURL = `${BASE_URL}/compras`;
 
-function ListagemCompras() {
+function ListagemVenda() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
@@ -121,4 +121,4 @@ function ListagemCompras() {
   );
 }
 
-export default ListagemCompras;
+export default ListagemVenda;

@@ -17,7 +17,7 @@ const modelosURL = `${BASE_URL}/modelos`;
 const concessionariasURL = `${BASE_URL}/concessionarias`;
 const chassiURL = `${BASE_URL}/veiculos`;
 
-function CadastroCompra() {
+function CadastroVenda() {
   const { idParam } = useParams();
   const navigate = useNavigate();
 
@@ -49,8 +49,8 @@ function CadastroCompra() {
           setDesconto(compra.desconto);
           setCpfCliente({ value: compra.cpfCliente, label: compra.cpfCliente });
           setModeloVeiculo(compra.modeloVeiculo);
-          setChassiVeiculo(compra.chassiVeiculo);
-          setConcessionaria({ value: compra.idConcessionaria, label: compra.razaoSocialConcessionaria });
+          setChassiVeiculo({ value: compra.chassiVeiculo, label: compra.chassiVeiculo });
+          setConcessionaria({ value: compra.razaoSocialConcessionaria, label: compra.razaoSocialConcessionaria });
           setDados(compra);
         } catch (error) {
           mensagemErro("Erro ao carregar os dados da compra.");
@@ -141,8 +141,8 @@ function CadastroCompra() {
       desconto,
       cpfCliente: cpfCliente ? cpfCliente.value : "",
       modeloVeiculo,
-      chassiVeiculo,
-      idConcessionaria: concessionaria ? concessionaria.value : "",
+      chassiVeiculo: chassiVeiculo ? chassiVeiculo.label : "",
+      razaoSocialConcessionaria: concessionaria ? concessionaria.label : "",
     };
 
     try {
@@ -246,8 +246,9 @@ function CadastroCompra() {
                 </select>
               </FormGroup>
               <br />
-              <FormGroup label="Chassi do veículo: *">
+              <FormGroup label="Chassi do veículo: *" htmlFor="inputChassi">
                 <Select
+                  id="inputConcessionaria"
                   options={chassiVeiculos}
                   value={chassiVeiculo}
                   onChange={setChassiVeiculo}
@@ -256,13 +257,13 @@ function CadastroCompra() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Concessionária: *">
+              <FormGroup label="Concessionária: *" htmlFor="inputConcessionaria">
                 <Select
+                  id="inputConcessionaria"
                   options={concessionarias}
                   value={concessionaria}
                   onChange={setConcessionaria}
                   placeholder="Selecione uma concessionária"
-                  isSearchable
                 />
               </FormGroup>
               <br />
@@ -282,4 +283,4 @@ function CadastroCompra() {
   );
 }
 
-export default CadastroCompra;
+export default CadastroVenda;

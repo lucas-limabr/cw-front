@@ -137,7 +137,9 @@ function CadastroVeiculo() {
       ...(condicao === "Usado" && {
         quilometragem,
         documentacao,
-        sinistro
+        sinistro,
+        manutencao,
+        laudoVistoria
       }),
       ...(tipo === "Carro"
         ? {

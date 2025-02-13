@@ -1,41 +1,41 @@
 [
-  {
-    "id": 1,
-    "data": "2024-11-20",
-    "formaPag": "Cartão de Crédito",
-    "desconto": "10%",
-    "idCliente": 1,
-    "cpfCliente": "123.456.789-00",
-    "idModelo": 1,
-    "modeloVeiculo": "Civic",
-    "idConcessionaria": 1,
-    "razaoSocialConcessionaria": "Auto Vendas Premium LTDA",
-    "chassiVeiculo": "1HGCM82633A123456"
-  },
-  {
-    "id": 2,
-    "data": "2024-11-21",
-    "formaPag": "Boleto Bancário",
-    "desconto": "5%",
-    "idCliente": 2,
-    "cpfCliente": "987.654.321-11",
-    "idModelo": 2,
-    "modeloVeiculo": "Compass",
-    "idConcessionaria": 3,
-    "razaoSocialConcessionaria": "Carros e Companhia EIRELI",
-    "chassiVeiculo": "JH4KA9650MC123456"
-  },
-  {
-    "id": 3,
-    "data": "2024-11-22",
-    "formaPag": "Dinheiro",
-    "desconto": "0%",
-    "idCliente": 3,
-    "cpfCliente": "456.789.123-22",
-    "idModelo": 3,
-    "modeloVeiculo": "HB20",
-    "idConcessionaria": 2,
-    "razaoSocialConcessionaria": "Super Veículos Brasil SA",
-    "chassiVeiculo": "2FTRX18W7XCA12345"
-  }
+    {
+        "id": 1,
+        "data": "2024-11-20",
+        "formaPag": "Cartão de Crédito",
+        "desconto": "10%",
+        "idCliente": 1,
+        "cpfCliente": "123.456.789-00",
+        "idModelo": 1,
+        "modeloVeiculo": "Civic",
+        "idConcessionaria": 1,
+        "razaoSocialConcessionaria": "Auto Vendas Premium LTDA",
+        "chassiVeiculo": "1HGCM82633A123456"
+    },
+    {
+        "id": 2,
+        "data": "2024-11-21",
+        "formaPag": "Boleto Bancário",
+        "desconto": "5%",
+        "idCliente": 2,
+        "cpfCliente": "987.654.321-11",
+        "idModelo": 2,
+        "modeloVeiculo": "Compass",
+        "idConcessionaria": 3,
+        "razaoSocialConcessionaria": "Carros e Companhia EIRELI",
+        "chassiVeiculo": "JH4KA9650MC123456"
+    },
+    {
+        "id": 3,
+        "data": "2024-11-22",
+        "formaPag": "Dinheiro",
+        "desconto": "0%",
+        "idCliente": 3,
+        "cpfCliente": "456.789.123-22",
+        "idModelo": 3,
+        "modeloVeiculo": "HB20",
+        "idConcessionaria": 2,
+        "razaoSocialConcessionaria": "Super Veículos Brasil SA",
+        "chassiVeiculo": "2FTRX18W7XCA12345"
+    }
 ]
