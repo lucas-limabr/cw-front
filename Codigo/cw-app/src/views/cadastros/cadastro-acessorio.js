@@ -47,6 +47,10 @@ function CadastroAcessorio() {
     }
   }
 
+  function cancelar() {
+    navigate(`/listagem-acessorio/`);
+  }
+
   async function buscar() {
     if (idParam) {
       try {
@@ -93,7 +97,7 @@ function CadastroAcessorio() {
                   Salvar
                 </button>
                 <button
-                  onClick={inicializar}
+                  onClick={cancelar}
                   type="button"
                   className="btn btn-danger"
                 >

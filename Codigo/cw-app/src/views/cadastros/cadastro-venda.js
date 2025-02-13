@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import Select from "react-select";
 
 import Stack from "@mui/material/Stack";
-
 import Card from "../../components/card";
 import FormGroup from "../../components/form-group";
 
@@ -15,54 +14,129 @@ import { BASE_URL } from "../../config/axios";
 const baseURL = `${BASE_URL}/compras`;
 const clientesURL = `${BASE_URL}/clientes`;
 const modelosURL = `${BASE_URL}/modelos`;
-const chassiURL = `${BASE_URL}/veiculos`;
+const concessionariasURL = `${BASE_URL}/concessionarias`;
 
 function CadastroCompra() {
   const { idParam } = useParams();
   const navigate = useNavigate();
 
+  const [dados, setDados] = useState(null);
+  const [clientes, setClientes] = useState([]);
+  const [modelos, setModelos] = useState([]);
+  const [concessionarias, setConcessionarias] = useState([]);
+  
   const [id, setId] = useState("");
   const [data, setData] = useState("");
   const [formaPag, setFormaPag] = useState("");
-  const [modelo, setModelo] = useState("");
   const [desconto, setDesconto] = useState("");
-  const [cpfCliente, setCpfCliente] = useState("");
-  const [cpfClientes, setCpfClientes] = useState([]);
-  const [chassiVeiculo, setChassiVeiculo] = useState([]);
-  const [modelos, setModelos] = useState([]);
-  const [chassiVeiculos, setChassiVeiculos] = useState([]);
-  const [dados, setDados] = useState(null);
+  const [cpfCliente, setCpfCliente] = useState(null);
+  const [modeloVeiculo, setModeloVeiculo] = useState("");
+  const [chassiVeiculo, setChassiVeiculo] = useState("");
+  const [concessionaria, setConcessionaria] = useState(null);
 
-  function inicializar() {
+  // Carregar os dados das compras ou resetar os campos
+  useEffect(() => {
+    async function buscar() {
+      if (idParam) {
+        try {
+          const response = await axios.get(`${baseURL}/${idParam}`);
+          const compra = response.data;
+          setId(compra.id);
+          setData(compra.data);
+          setFormaPag(compra.formaPag);
+          setDesconto(compra.desconto);
+          setCpfCliente({ value: compra.cpfCliente, label: compra.cpfCliente });
+          setModeloVeiculo(compra.modeloVeiculo);
+          setChassiVeiculo(compra.chassiVeiculo);
+          setConcessionaria({ value: compra.idConcessionaria, label: compra.razaoSocialConcessionaria });
+          setDados(compra);
+        } catch (error) {
+          mensagemErro("Erro ao carregar os dados da compra.");
+        }
+      } else {
+        // Limpa os campos se não houver idParam
+        limparCampos();
+      }
+    }
+
+    buscar();
+  }, [idParam]);
+
+  // Carregar clientes, modelos e concessionárias
+  useEffect(() => {
+    async function carregarClientes() {
+      try {
+        const response = await axios.get(clientesURL);
+        const clientesFormatados = response.data.map((cliente) => ({
+          value: cliente.cpf,
+          label: cliente.cpf,
+        }));
+        setClientes(clientesFormatados);
+      } catch (error) {
+        mensagemErro("Erro ao carregar clientes.");
+      }
+    }
+
+    async function carregarModelos() {
+      try {
+        const response = await axios.get(modelosURL);
+        setModelos(response.data);
+      } catch (error) {
+        mensagemErro("Erro ao carregar modelos.");
+      }
+    }
+
+    async function carregarConcessionarias() {
+      try {
+        const response = await axios.get(concessionariasURL);
+        const concessionariasFormatadas = response.data.map((concessionaria) => ({
+          value: concessionaria.id,
+          label: concessionaria.razaoSocial,
+        }));
+        setConcessionarias(concessionariasFormatadas);
+      } catch (error) {
+        mensagemErro("Erro ao carregar concessionárias.");
+      }
+    }
+
+    carregarClientes();
+    carregarModelos();
+    carregarConcessionarias();
+  }, []);
+
+  // Função para limpar os campos
+  function limparCampos() {
     setId("");
     setData("");
     setFormaPag("");
-    setModelo("");
     setDesconto("");
-    setCpfCliente("");
+    setCpfCliente(null);
+    setModeloVeiculo("");
     setChassiVeiculo("");
+    setConcessionaria(null);
   }
 
+  // Função para salvar os dados da compra
   async function salvar() {
-    const dadosCompra = {
+    const dataCompra = {
       id,
       data,
       formaPag,
-      modelo,
       desconto,
-      cpfCliente,
       cpfCliente: cpfCliente ? cpfCliente.value : "",
-      chassiVeiculo: chassiVeiculo ? chassiVeiculo.value : "",
+      modeloVeiculo,
+      chassiVeiculo,
+      idConcessionaria: concessionaria ? concessionaria.value : "",
     };
 
     try {
       if (!idParam) {
-        await axios.post(`${baseURL}`, dadosCompra, {
+        await axios.post(`${baseURL}`, dataCompra, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Venda realizada com sucesso.`);
       } else {
-        await axios.put(`${baseURL}/${idParam}`, dadosCompra, {
+        await axios.put(`${baseURL}/${idParam}`, dataCompra, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Venda atualizada com sucesso.`);
@@ -83,63 +157,10 @@ function CadastroCompra() {
     }
   }
 
-  //  Carregar os clientes do JSON
-  useEffect(() => {
-    async function carregarClientes() {
-      try {
-        const response = await axios.get(`${clientesURL}`); // Ajuste conforme a API
-        const clientesFormatados = response.data.map((cliente) => ({
-          value: cliente.cpf,
-          label: cliente.cpf,
-        }));
-        setCpfClientes(clientesFormatados);
-      } catch (error) {
-        mensagemErro("Erro ao carregar os clientes.");
-      }
-    }
-
-    async function carregarChassis() {
-      try {
-        const response = await axios.get(`${chassiURL}`); // Ajuste conforme a API
-        const chassisFormatados = response.data.map((chassi) => ({
-          value: chassi.chassi,
-          label: chassi.chassi,
-        }));
-        setChassiVeiculos(chassisFormatados);
-      } catch (error) {
-        mensagemErro("Erro ao carregar os chassis.");
-      }
-    }
-
-    carregarClientes();
-    carregarChassis();
-  }, []);
-
-  async function buscar() {
-    if (idParam) {
-      try {
-        const response = await axios.get(`${baseURL}/${idParam}`);
-        const venda = response.data;
-        setId(venda.id);
-        setData(venda.data);
-        setFormaPag(venda.formaPag);
-        setDesconto(venda.desconto);
-        setModelo(venda.modeloVeiculo);
-        setCpfCliente(venda.cpfCliente);
-        setChassiVeiculo(venda.chassiVeiculo);
-        setDados(venda);
-      } catch (error) {
-        mensagemErro("Erro ao carregar os dados da venda.");
-      }
-    } else {
-      inicializar();
-    }
+  // Função para cancelar
+  function cancelar() {
+    navigate("/listagem-compras");
   }
-
-  useEffect(() => {
-    carregarModelos();
-    buscar();
-  }, [idParam]);
 
   return (
     <div className="container">
@@ -150,59 +171,26 @@ function CadastroCompra() {
             <div className="bs-component">
               <FormGroup label="Data: *" htmlFor="inputData">
                 <input
-                  type="text"
+                  type="date"
                   id="inputData"
                   value={data}
                   className="form-control"
                   onChange={(e) => setData(e.target.value)}
                 />
               </FormGroup>
-              <FormGroup label="Modelo: *" htmlFor="inputModelo">
+              <br />
+              <FormGroup label="Forma de Pagamento: *" htmlFor="inputFormaPag">
                 <select
-                  id="inputModelo"
-                  value={modelo}
-                  selected={modelo}
-                  className="form-control"
-                  onChange={(e) => setModelo(e.target.value)}
-                >
-                  <option value="">Selecione um modelo</option>
-                  {modelos.map((m) => (
-                    <option key={m.id} value={m.nome}>
-                      {m.nome}
-                    </option>
-                  ))}
-                </select>
-              </FormGroup>
-              <br />
-              <FormGroup label="CPF do Cliente: *">
-                <Select
-                  options={cpfClientes}
-                  value={cpfCliente}
-                  selected={cpfCliente}
-                  onChange={setCpfCliente}
-                  placeholder="Selecione um CPF"
-                  isSearchable
-                />
-              </FormGroup>
-              <br />
-              <FormGroup label="Chassi do veículo: *">
-                <Select
-                  options={chassiVeiculos}
-                  value={chassiVeiculo}
-                  onChange={setChassiVeiculo}
-                  placeholder="Selecione um Chassi"
-                  isSearchable
-                />
-              </FormGroup>
-              <br />
-              <FormGroup label="Forma de pagamento: *" htmlFor="inputFormaPag">
-                <input
-                  type="text"
                   id="inputFormaPag"
                   value={formaPag}
                   className="form-control"
                   onChange={(e) => setFormaPag(e.target.value)}
-                />
+                >
+                  <option value="">Selecione</option>
+                  <option value="Cartão de Crédito">Cartão de Crédito</option>
+                  <option value="Boleto Bancário">Boleto Bancário</option>
+                  <option value="Dinheiro">Dinheiro</option>
+                </select>
               </FormGroup>
               <br />
               <FormGroup label="Desconto: *" htmlFor="inputDesconto">
@@ -215,29 +203,49 @@ function CadastroCompra() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="CPF do Cliente: *" htmlFor="inputCpfCliente">
+              <FormGroup label="CPF do Cliente: *">
+                <Select
+                  options={clientes}
+                  value={cpfCliente}
+                  onChange={setCpfCliente}
+                  placeholder="Selecione um CPF"
+                  isSearchable
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Modelo: *">
                 <input
                   type="text"
-                  id="inputCpfCliente"
-                  value={cpfCliente}
+                  value={modeloVeiculo}
                   className="form-control"
-                  onChange={(e) => setCpfCliente(e.target.value)}
+                  onChange={(e) => setModeloVeiculo(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Chassi do Veículo: *">
+                <input
+                  type="text"
+                  value={chassiVeiculo}
+                  className="form-control"
+                  onChange={(e) => setChassiVeiculo(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Concessionária: *">
+                <Select
+                  options={concessionarias}
+                  value={concessionaria}
+                  onChange={setConcessionaria}
+                  placeholder="Selecione uma concessionária"
+                  isSearchable
                 />
               </FormGroup>
               <br />
               <Stack spacing={1} padding={1} direction="row">
-                <button
-                  onClick={salvar}
-                  type="button"
-                  className="btn btn-success"
-                >
+                <button onClick={salvar} type="button" className="btn btn-success">
                   Salvar
                 </button>
-                <button
-                  onClick={inicializar}
-                  type="button"
-                  className="btn btn-danger"
-                >
+                <button onClick={cancelar} type="button" className="btn btn-danger">
                   Cancelar
                 </button>
               </Stack>

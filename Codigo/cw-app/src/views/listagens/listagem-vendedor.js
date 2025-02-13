@@ -71,6 +71,7 @@ function ListagemVendedor() {
                 <thead>
                   <tr>
                     <th scope="col">Nome</th>
+                    <th scope="col">Concessionária</th>
                     <th scope="col">CPF</th>
                     <th scope="col">Telefone</th>
                     <th scope="col">Email</th>
@@ -81,6 +82,7 @@ function ListagemVendedor() {
                   {dados.map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.nome}</td>
+                      <td>{dado.razaoSocialConcessionaria}</td>
                       <td>{dado.cpf}</td>
                       <td>{dado.telefone}</td>
                       <td>{dado.email}</td>

@@ -51,6 +51,10 @@ function CadastroFabricante() {
     }
   }
 
+  function cancelar() {
+    navigate(`/listagem-fabricante/`);
+  }
+
   async function buscar() {
     if (idParam) {
       try {
@@ -97,7 +101,7 @@ function CadastroFabricante() {
                   Salvar
                 </button>
                 <button
-                  onClick={inicializar}
+                  onClick={cancelar}
                   type="button"
                   className="btn btn-danger"
                 >

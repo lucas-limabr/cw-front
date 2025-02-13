@@ -66,6 +66,10 @@ function CadastroModelo() {
     }
   }
 
+  function cancelar() {
+    navigate(`/listagem-modelo/`);
+  }
+
   async function buscar() {
     if (idParam) {
       try {
@@ -130,7 +134,7 @@ function CadastroModelo() {
                   Salvar
                 </button>
                 <button
-                  onClick={inicializar}
+                  onClick={cancelar}
                   type="button"
                   className="btn btn-danger"
                 >

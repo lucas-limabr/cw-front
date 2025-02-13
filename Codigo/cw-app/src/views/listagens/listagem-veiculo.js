@@ -72,6 +72,7 @@ function ListagemVeiculo() {
               <table className="table table-hover">
                 <thead>
                   <tr>
+                    <th scope = "col">Tipo</th>
                     <th scope="col">Chassi</th>
                     <th scope="col">Modelo</th>
                     <th scope="col">Fabricante</th>
@@ -84,6 +85,7 @@ function ListagemVeiculo() {
                 <tbody>
                   {dados.map((dado) => (
                     <tr key={dado.id}>
+                      <td>{dado.tipo}</td>
                       <td>{dado.chassi}</td>
                       <td>{dado.modelo}</td>
                       <td>{dado.fabricante}</td>

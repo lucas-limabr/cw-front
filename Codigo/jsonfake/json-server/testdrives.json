@@ -1,41 +1,42 @@
 [
-  {
-    "id": 1,
-    "dataAgendada": "2024-12-05",
-    "horaAgendada": "13:00",
-    "dataEntregue": "2024-12-05",
-    "horaEntregue": "14:00",
-    "razaoSocialConcessionaria": "Auto Vendas Premium LTDA",
-    "idConcessionaria": 1,
-    "modeloVeiculo": "Civic",
-    "idModeloVeiculo": 1,
-    "idCliente": 1,
-    "cpfCliente": "123.456.789-00"
-  },
-  {
-    "id": 2,
-    "dataAgendada": "2024-12-06",
-    "horaAgendada": "16:30",
-    "dataEntregue": "2024-12-06",
-    "horaEntregue": "17:00",
-    "razaoSocialConcessionaria": "Super Veículos Brasil SA",
-    "idConcessionaria": 2,
-    "modeloVeiculo": "HB20",
-    "idModeloVeiculo": 3,
-    "idCliente": 2,
-    "cpfCliente": "987.654.321-11"
-  },
-  {
-    "id": 3,
-    "dataAgendada": "2024-12-07",
-    "horaAgendada": "10:15",
-    "dataEntregue": "2024-12-07",
-    "horaEntregue": "11:00",
-    "razaoSocialConcessionaria": "Carros e Companhia EIRELI",
-    "idConcessionaria": 3,
-    "modeloVeiculo": "Compass",
-    "idModeloVeiculo": 2,
-    "idCliente": 3,
-    "cpfCliente": "456.789.123-22"
-  }
+    {
+        "id": 1,
+        "dataAgendada": "2024-12-05",
+        "horaAgendada": "14:00",
+        "dataEntregue": "2024-12-05",
+        "horaEntregue": "15:00",
+        "razaoSocialConcessionaria": "Auto Vendas Premium LTDA",
+        "idConcessionaria": 1,
+        "modeloVeiculo": "Civic",
+        "idModeloVeiculo": 1,
+        "idCliente": 1,
+        "cpfCliente": "123.456.789-00",
+        "modelo": "Civic"
+    },
+    {
+        "id": 2,
+        "dataAgendada": "2024-12-06",
+        "horaAgendada": "16:30",
+        "dataEntregue": "2024-12-06",
+        "horaEntregue": "17:00",
+        "razaoSocialConcessionaria": "Super Veículos Brasil SA",
+        "idConcessionaria": 2,
+        "modeloVeiculo": "HB20",
+        "idModeloVeiculo": 3,
+        "idCliente": 2,
+        "cpfCliente": "987.654.321-11"
+    },
+    {
+        "id": 3,
+        "dataAgendada": "2024-12-07",
+        "horaAgendada": "10:15",
+        "dataEntregue": "2024-12-07",
+        "horaEntregue": "11:00",
+        "razaoSocialConcessionaria": "Carros e Companhia EIRELI",
+        "idConcessionaria": 3,
+        "modeloVeiculo": "Compass",
+        "idModeloVeiculo": 2,
+        "idCliente": 3,
+        "cpfCliente": "456.789.123-22"
+    }
 ]

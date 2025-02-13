@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import FormGroup from "../../components/form-group";
 import Stack from "@mui/material/Stack";
 
-const CadastroVeiculoUsado = ({ quilometragem, setQuilometragem, documentacao, setDocumentacao, sinistro, setSinistro }) => {
+const CadastroVeiculoUsado = ({ quilometragem, setQuilometragem, documentacao, setDocumentacao, sinistro, setSinistro, laudoVistoria , setLaudoVistoria , manutencao, setManutencao}) => {
 
     return (
         <div>
@@ -34,6 +34,28 @@ const CadastroVeiculoUsado = ({ quilometragem, setQuilometragem, documentacao, s
                     value={sinistro}
                     className="form-control"
                     onChange={(e) => setSinistro(e.target.value)}
+                />
+            </FormGroup>
+
+
+            <FormGroup label="Manutenção: *" htmlFor="inputManutencao">
+                <input
+                    type="text"
+                    id="inputManuntencao"
+                    value={manutencao}
+                    className="form-control"
+                    onChange={(e) => setManutencao(e.target.value)}
+                />
+            </FormGroup>
+
+
+            <FormGroup label="Laudo Vistoria: *" htmlFor="inputLaudoVistoria">
+                <input
+                    type="text"
+                    id="inputLaudoVistoria"
+                    value={laudoVistoria}
+                    className="form-control"
+                    onChange={(e) => setLaudoVistoria(e.target.value)}
                 />
             </FormGroup>
         </div>

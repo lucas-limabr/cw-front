@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
 import Stack from "@mui/material/Stack";
-
 import Card from "../../components/card";
 import FormGroup from "../../components/form-group";
-
 import { mensagemSucesso, mensagemErro } from "../../components/toastr";
-
 import axios from "axios";
 import { BASE_URL } from "../../config/axios";
 
 const baseURL = `${BASE_URL}/vendedores`;
+const concessionariasURL = `${BASE_URL}/concessionarias`;
 
 function CadastroVendedor() {
   const { idParam } = useParams();
   const navigate = useNavigate();
 
+  // Estados para armazenar os dados do vendedor
   const [id, setId] = useState("");
   const [nome, setNome] = useState("");
   const [cpf, setCpf] = useState("");
@@ -30,8 +28,22 @@ function CadastroVendedor() {
   const [bairro, setBairro] = useState("");
   const [cep, setCep] = useState("");
   const [uf, setUf] = useState("");
-  const [dados, setDados] = useState(null);
+  const [concessionaria, setConcessionaria] = useState("");
 
+  // Estados para armazenar dados adicionais
+  const [concessionarias, setConcessionarias] = useState([]);
+
+  // Função para carregar as concessionárias
+  async function carregarConcessionarias() {
+    try {
+      const response = await axios.get(`${concessionariasURL}`);
+      setConcessionarias(response.data);
+    } catch (error) {
+      console.error("Erro ao carregar concessionárias:", error);
+    }
+  }
+
+  // Função para inicializar os dados
   function inicializar() {
     setId("");
     setNome("");
@@ -46,8 +58,10 @@ function CadastroVendedor() {
     setBairro("");
     setCep("");
     setUf("");
+    setConcessionaria("");
   }
 
+  // Função para salvar os dados do vendedor
   async function salvar() {
     const data = {
       id,
@@ -63,6 +77,7 @@ function CadastroVendedor() {
       bairro,
       cep,
       uf,
+      concessionaria,
     };
 
     try {
@@ -83,6 +98,12 @@ function CadastroVendedor() {
     }
   }
 
+  // Função para cancelar o cadastro
+  function cancelar() {
+    navigate(`/listagem-vendedor/`);
+  }
+
+  // Função para buscar os dados do vendedor ao editar
   async function buscar() {
     if (idParam) {
       try {
@@ -101,7 +122,7 @@ function CadastroVendedor() {
         setBairro(vendedor.bairro);
         setCep(vendedor.cep);
         setUf(vendedor.uf);
-        setDados(vendedor);
+        setConcessionaria(vendedor.razaoSocialConcessionaria);
       } catch (error) {
         mensagemErro("Erro ao carregar os dados do vendedor.");
       }
@@ -111,6 +132,7 @@ function CadastroVendedor() {
   }
 
   useEffect(() => {
+    carregarConcessionarias();
     buscar();
   }, [idParam]);
 
@@ -201,7 +223,7 @@ function CadastroVendedor() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Complemento:" htmlFor="inputComplemento">
+              <FormGroup label="Complemento: *" htmlFor="inputComplemento">
                 <input
                   type="text"
                   id="inputComplemento"
@@ -221,7 +243,7 @@ function CadastroVendedor() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="CEP: *" htmlFor="inputCep">
+              <FormGroup label="CEP *" htmlFor="inputCep">
                 <input
                   type="text"
                   id="inputCep"
@@ -231,14 +253,30 @@ function CadastroVendedor() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="UF: *" htmlFor="inputConcessionaria">
+              <FormGroup label="UF *" htmlFor="inputUf">
                 <input
                   type="text"
-                  id="inputConcessionaria"
+                  id="inputUf"
                   value={uf}
                   className="form-control"
                   onChange={(e) => setUf(e.target.value)}
                 />
+              </FormGroup>
+              <br />
+              <FormGroup label="Concessionária: *" htmlFor="inputConcessionaria">
+                <select
+                  id="inputConcessionaria"
+                  value={concessionaria}
+                  className="form-control"
+                  onChange={(e) => setConcessionaria(e.target.value)}
+                >
+                  <option value="">Selecione uma concessionária</option>
+                  {concessionarias.map((m) => (
+                    <option key={m.id} value={m.razaoSocial}>
+                      {m.razaoSocial}
+                    </option>
+                  ))}
+                </select>
               </FormGroup>
               <br />
               <Stack spacing={1} padding={1} direction="row">
@@ -250,7 +288,7 @@ function CadastroVendedor() {
                   Salvar
                 </button>
                 <button
-                  onClick={inicializar}
+                  onClick={cancelar}
                   type="button"
                   className="btn btn-danger"
                 >
