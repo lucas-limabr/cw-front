@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import CadastroAcessorio from "./views/cadastros/cadastro-acessorio.js";
 import CadastroCliente from "./views/cadastros/cadastro-cliente.js";
-import CadastroCompra from "./views/cadastros/cadastro-compra.js";
+import CadastroCompra from "./views/cadastros/cadastro-venda.js";
 import CadastroConcessionaria from "./views/cadastros/cadastro-concessionaria.js";
 import CadastroEmpresa from "./views/cadastros/cadastro-empresa.js";
 import CadastroFabricante from "./views/cadastros/cadastro-fabricante.js";
@@ -16,7 +16,7 @@ import CadastroVendedor from "./views/cadastros/cadastro-vendedor.js";
 
 import ListagemAcessorio from "./views/listagens/listagem-acessorio.js";
 import ListagemCliente from "./views/listagens/listagem-cliente.js";
-import ListagemCompra from "./views/listagens/listagem-compra.js";
+import ListagemCompra from "./views/listagens/listagem-venda.js";
 import ListagemConcessionaria from "./views/listagens/listagem-concessionaria.js";
 import ListagemEmpresa from "./views/listagens/listagem-empresa.js";
 import ListagemFabricante from "./views/listagens/listagem-fabricante.js";
@@ -33,7 +33,7 @@ function Rotas() {
       <Routes>
         <Route path="/cadastro-acessorio/:idParam?" element={<CadastroAcessorio />} />
         <Route path="/cadastro-cliente/:idParam?" element={<CadastroCliente />} />
-        <Route path="/cadastro-compra/:idParam?" element={<CadastroCompra />} />
+        <Route path="/cadastro-venda/:idParam?" element={<CadastroCompra />} />
         <Route path="/cadastro-concessionaria/:idParam?" element={<CadastroConcessionaria />} />
         <Route path="/cadastro-empresa/:idParam?" element={<CadastroEmpresa />} />
         <Route path="/cadastro-fabricante/:idParam?" element={<CadastroFabricante />} />
@@ -46,7 +46,7 @@ function Rotas() {
 
         <Route path="/listagem-acessorio" element={<ListagemAcessorio />} />
         <Route path="/listagem-cliente" element={<ListagemCliente />} />
-        <Route path="/listagem-compra" element={<ListagemCompra />} />
+        <Route path="/listagem-venda" element={<ListagemCompra />} />
         <Route path="/listagem-concessionaria" element={<ListagemConcessionaria />} />
         <Route path="/listagem-empresa" element={<ListagemEmpresa />} />
         <Route path="/listagem-fabricante" element={<ListagemFabricante />} />

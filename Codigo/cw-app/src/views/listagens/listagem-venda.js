@@ -20,11 +20,11 @@ function ListagemCompras() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-compra`);
+    navigate(`/cadastro-venda`);
   };
 
   const editar = (id) => {
-    navigate(`/cadastro-compra/${id}`);
+    navigate(`/cadastro-venda/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);
@@ -38,7 +38,7 @@ function ListagemCompras() {
         headers: { "Content-Type": "application/json" },
       })
       .then(function (response) {
-        mensagemSucesso(`Compra excluída com sucesso!`);
+        mensagemSucesso(`Venda excluída com sucesso!`);
         setDados(
           dados.filter((dado) => {
             return dado.id !== id;
@@ -46,7 +46,7 @@ function ListagemCompras() {
         );
       })
       .catch(function (error) {
-        mensagemErro(`Erro ao excluir a compra`);
+        mensagemErro(`Erro ao excluir a venda`);
       });
   }
 
@@ -70,7 +70,7 @@ function ListagemCompras() {
                 className="btn btn-warning"
                 onClick={() => cadastrar()}
               >
-                Nova Compra
+                Nova Venda
               </button>
               <table className="table table-hover">
                 <thead>

@@ -60,17 +60,17 @@ function CadastroCompra() {
         await axios.post(`${baseURL}`, dadosCompra, {
           headers: { "Content-Type": "application/json" },
         });
-        mensagemSucesso(`Compra realizada com sucesso.`);
+        mensagemSucesso(`Venda realizada com sucesso.`);
       } else {
         await axios.put(`${baseURL}/${idParam}`, dadosCompra, {
           headers: { "Content-Type": "application/json" },
         });
-        mensagemSucesso(`Compra atualizada com sucesso.`);
+        mensagemSucesso(`Venda atualizada com sucesso.`);
       }
-      navigate("/listagem-compra");
+      navigate("/listagem-venda");
     } catch (error) {
       // Exiba uma mensagem de erro ao invés de um erro fatal
-      mensagemErro(error.response?.data || "Erro ao salvar a compra.");
+      mensagemErro(error.response?.data || "Erro ao salvar a venda.");
     }
   }
 
@@ -119,17 +119,17 @@ function CadastroCompra() {
     if (idParam) {
       try {
         const response = await axios.get(`${baseURL}/${idParam}`);
-        const compra = response.data;
-        setId(compra.id);
-        setData(compra.data);
-        setFormaPag(compra.formaPag);
-        setDesconto(compra.desconto);
-        setModelo(compra.modeloVeiculo);
-        setCpfCliente(compra.cpfCliente);
-        setChassiVeiculo(compra.chassiVeiculo);
-        setDados(compra);
+        const venda = response.data;
+        setId(venda.id);
+        setData(venda.data);
+        setFormaPag(venda.formaPag);
+        setDesconto(venda.desconto);
+        setModelo(venda.modeloVeiculo);
+        setCpfCliente(venda.cpfCliente);
+        setChassiVeiculo(venda.chassiVeiculo);
+        setDados(venda);
       } catch (error) {
-        mensagemErro("Erro ao carregar os dados da compra.");
+        mensagemErro("Erro ao carregar os dados da venda.");
       }
     } else {
       inicializar();
@@ -143,7 +143,7 @@ function CadastroCompra() {
 
   return (
     <div className="container">
-      <Card title="Cadastro de Compra">
+      <Card title="Cadastro de Venda">
         <div className="row">
           <div className="col-lg-12">
             <br />
@@ -161,7 +161,7 @@ function CadastroCompra() {
                 <select
                   id="inputModelo"
                   value={modelo}
-                  selected = {modelo}
+                  selected={modelo}
                   className="form-control"
                   onChange={(e) => setModelo(e.target.value)}
                 >
@@ -178,7 +178,7 @@ function CadastroCompra() {
                 <Select
                   options={cpfClientes}
                   value={cpfCliente}
-                  selected = {cpfCliente}
+                  selected={cpfCliente}
                   onChange={setCpfCliente}
                   placeholder="Selecione um CPF"
                   isSearchable
