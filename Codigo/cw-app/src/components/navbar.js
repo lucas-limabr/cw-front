@@ -5,12 +5,12 @@ import NavbarItem from "./navbarItem";
 
 function Navbar(props) {
   const navbarItems = [
+    { href: "/listagem-empresa", label: "Empresas" },
+    { href: "/listagem-concessionaria", label: "Concessionarias" },
     { href: "/listagem-gestor", label: "Gestores" },
     { href: "/listagem-vendedor", label: "Vendedores" },
     { href: "/listagem-fabricante", label: "Fabricantes" },
     { href: "/listagem-modelo", label: "Modelos" },
-    { href: "/listagem-empresa", label: "Empresas" },
-    { href: "/listagem-concessionaria", label: "Concessionarias" },
     { href: "/listagem-item-serie", label: "Itens" },
     { href: "/listagem-veiculo", label: "Veículos" },
     { href: "/listagem-testdrive", label: "Test-drive" },

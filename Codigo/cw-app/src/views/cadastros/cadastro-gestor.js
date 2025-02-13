@@ -12,7 +12,7 @@ import axios from "axios";
 import { BASE_URL } from "../../config/axios";
 
 const baseURL = `${BASE_URL}/gestores`;
-const concessionariasURL = `${BASE_URL}/concessionarias`; 
+const concessionariasURL = `${BASE_URL}/concessionarias`;
 
 function CadastroGestor() {
   const { idParam } = useParams();
@@ -39,7 +39,7 @@ function CadastroGestor() {
   async function carregarConcessionarias() {
     try {
       const response = await axios.get(`${concessionariasURL}`);
-      setConcessionarias(response.data); 
+      setConcessionarias(response.data);
     } catch (error) {
       console.error("Erro ao carregar concessionárias:", error);
     }
@@ -287,7 +287,7 @@ function CadastroGestor() {
                   Salvar
                 </button>
                 <button
-                  onClick={cancelar}
+                  onClick={inicializar}
                   type="button"
                   className="btn btn-danger"
                 >

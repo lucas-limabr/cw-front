@@ -221,7 +221,7 @@ function CadastroTestDrive() {
                 <button onClick={salvar} type="button" className="btn btn-success">
                   Salvar
                 </button>
-                <button onClick={cancelar} type="button" className="btn btn-danger">
+                <button onClick={inicializar} type="button" className="btn btn-danger">
                   Cancelar
                 </button>
               </Stack>

@@ -1,14 +1,14 @@
 [
-  {
-    "id": 1,
-    "descricao": "Ar condicionado"
-  },
-  {
-    "id": 2,
-    "descricao": "Teto solar"
-  },
-  {
-    "id": 3,
-    "descricao": "Banco em couro"
-  }
+    {
+        "id": 1,
+        "descricao": "Ar condicionado"
+    },
+    {
+        "id": 2,
+        "descricao": "Teto solar"
+    },
+    {
+        "id": 3,
+        "descricao": "Banco em couro"
+    }
 ]

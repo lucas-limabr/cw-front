@@ -288,7 +288,7 @@ function CadastroVendedor() {
                   Salvar
                 </button>
                 <button
-                  onClick={cancelar}
+                  onClick={inicializar}
                   type="button"
                   className="btn btn-danger"
                 >

@@ -94,7 +94,7 @@ function CadastroEmpresa() {
         setBairro(empresa.bairro);
         setCep(empresa.cep);
         setUf(empresa.uf);
-        
+
       } catch (error) {
         mensagemErro("Erro ao carregar os dados da empresa.");
       }
@@ -147,8 +147,8 @@ function CadastroEmpresa() {
                   onChange={(e) => setTelefone(e.target.value)}
                 />
               </FormGroup>
-              <br/>
-              
+              <br />
+
               <FormGroup label="E-mail: *" htmlFor="inputEmail">
                 <input
                   type="text"
@@ -158,7 +158,7 @@ function CadastroEmpresa() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </FormGroup>
-              <br/>
+              <br />
               <FormGroup label="Logradouro: *" htmlFor="inputLogradouro">
                 <input
                   type="text"
@@ -191,7 +191,7 @@ function CadastroEmpresa() {
                   onChange={(e) => setComplemento(e.target.value)}
                 />
               </FormGroup>
-              
+
               <br />
 
               <FormGroup label="Bairro: *" htmlFor="inputBairro">
@@ -203,7 +203,7 @@ function CadastroEmpresa() {
                   onChange={(e) => setBairro(e.target.value)}
                 />
               </FormGroup>
-              
+
               <br />
               <FormGroup label="UF: *" htmlFor="inputUf">
                 <input
@@ -224,7 +224,7 @@ function CadastroEmpresa() {
                   Salvar
                 </button>
                 <button
-                  onClick={cancelar}
+                  onClick={inicializar}
                   type="button"
                   className="btn btn-danger"
                 >

@@ -19,7 +19,7 @@ function CadastroModelo() {
   const navigate = useNavigate();
 
   const [id, setId] = useState("");
-  const [marca, setMarca] = useState(""); 
+  const [marca, setMarca] = useState("");
   const [nome, setNome] = useState("");
 
   const [dados, setDados] = useState(null);
@@ -29,7 +29,7 @@ function CadastroModelo() {
   async function carregarMarcas() {
     try {
       const response = await axios.get(`${marcasURL}`);
-      setMarcas(response.data); 
+      setMarcas(response.data);
     } catch (error) {
       console.error("Erro ao carregar marcas:", error);
     }
@@ -44,7 +44,7 @@ function CadastroModelo() {
   async function salvar() {
     const data = {
       id,
-      marca, 
+      marca,
       nome,
     };
 
@@ -134,7 +134,7 @@ function CadastroModelo() {
                   Salvar
                 </button>
                 <button
-                  onClick={cancelar}
+                  onClick={inicializar}
                   type="button"
                   className="btn btn-danger"
                 >
