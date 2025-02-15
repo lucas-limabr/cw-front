@@ -60,7 +60,7 @@ function ListagemItensSeries() {
 
   return (
     <div className="container">
-      <Card title="Listagem de Itens de Série">
+      <Card title="Listagem de Acessórios">
         <div className="row">
           <div className="col-lg-12">
             <br />
@@ -70,7 +70,7 @@ function ListagemItensSeries() {
                 className="btn btn-warning"
                 onClick={() => cadastrar()}
               >
-                Novo Item de Série
+                Novo Acessório
               </button>
               <table className="table table-hover">
                 <thead>

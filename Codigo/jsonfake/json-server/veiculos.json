@@ -75,5 +75,31 @@
         "tipoMotorMoto": "V2",
         "qtdMarcha": "4",
         "transmissaoMoto": " Corrente"
+    },
+    {
+        "id": 4,
+        "chassi": "1HGCM82633A123456",
+        "modelo": "Civic",
+        "fabricante": "Honda",
+        "precoAtual": "9000",
+        "cor": "Preto",
+        "razaoSocialConcessionaria": "Auto Vendas Premium LTDA",
+        "condicao": "Usado",
+        "tipo": "Carro",
+        "garantia": "5 anos",
+        "quilometragem": "8000",
+        "documentacao": "Regular",
+        "sinistro": "Leve",
+        "manutencao": "Revisão pendente",
+        "laudoVistoria": "Aprovado",
+        "categoriaCarro": "Sedan",
+        "potencia": "240",
+        "tipoMotorCarro": "100% Elétrico",
+        "transmissaoCarro": "Automático",
+        "categoriaMoto": null,
+        "cilindrada": null,
+        "tipoMotorMoto": null,
+        "qtdMarcha": null,
+        "transmissaoMoto": null
     }
 ]
