@@ -21,7 +21,9 @@
         "cilindrada": null,
         "tipoMotorMoto": null,
         "qtdMarcha": null,
-        "transmissaoMoto": null
+        "transmissaoMoto": null,
+        "manutencao": "1111",
+        "laudoVistoria": "1111"
     },
     {
         "id": 2,

@@ -28,7 +28,7 @@ function CadastroVendedor() {
   const [bairro, setBairro] = useState("");
   const [cep, setCep] = useState("");
   const [uf, setUf] = useState("");
-  const [concessionaria, setConcessionaria] = useState("");
+  const [razaoSocialConcessionaria, setConcessionaria] = useState("");
 
   // Estados para armazenar dados adicionais
   const [concessionarias, setConcessionarias] = useState([]);
@@ -77,7 +77,7 @@ function CadastroVendedor() {
       bairro,
       cep,
       uf,
-      concessionaria,
+      razaoSocialConcessionaria,
     };
 
     try {
@@ -266,7 +266,7 @@ function CadastroVendedor() {
               <FormGroup label="Concessionária: *" htmlFor="inputConcessionaria">
                 <select
                   id="inputConcessionaria"
-                  value={concessionaria}
+                  value={razaoSocialConcessionaria}
                   className="form-control"
                   onChange={(e) => setConcessionaria(e.target.value)}
                 >
