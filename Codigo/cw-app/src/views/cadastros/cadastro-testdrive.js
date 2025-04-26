@@ -20,42 +20,30 @@ function CadastroTestDrive() {
   const { idParam } = useParams();
   const navigate = useNavigate();
 
-  const [dados, setDados] = useState(null);
-
   const [id, setId] = useState("");
   const [dataAgendada, setDataAgendada] = useState("");
   const [horaAgendada, setHoraAgendada] = useState("");
   const [dataEntregue, setDataEntregue] = useState("");
   const [horaEntregue, setHoraEntregue] = useState("");
-  const [modelo, setModelo] = useState("");
+  const [modeloVeiculo, setModelo] = useState("");
   const [cpfCliente, setCpfCliente] = useState(null);
+  const [razaoSocialConcessionaria, setConcessionaria] = useState(null);
+
   const [clientes, setClientes] = useState([]);
   const [modelos, setModelos] = useState([]);
   const [concessionarias, setConcessionarias] = useState([]);
 
-  async function carregarModelos() {
-    try {
-      const response = await axios.get(`${modelosURL}`);
-      setModelos(response.data);
-    } catch (error) {
-      console.error("Erro ao carregar modelos:", error);
-    }
-  }
+  useEffect(() => {
+    carregarClientes();
+    carregarConcessionarias();
+  }, []);
 
-  async function carregarConcessionarias() {
-    try {
-      const response = await axios.get(`${concessionariasURL}`);
-      const concessionariasFormatadas = response.data.map((concessionaria) => ({
-        value: concessionaria.razaoSocial,
-        label: concessionaria.razaoSocial,
-      }));
-      setConcessionarias(concessionariasFormatadas);
-    } catch (error) {
-      console.error("Erro ao carregar concessionárias:", error);
-    }
-  }
+  useEffect(() => {
+    carregarModelos();
+    buscar();
+  }, [idParam]);
 
-  function inicializar() {
+  const inicializar = () => {
     setId("");
     setDataAgendada("");
     setHoraAgendada("");
@@ -63,86 +51,99 @@ function CadastroTestDrive() {
     setHoraEntregue("");
     setModelo("");
     setCpfCliente(null);
-  }
+    setConcessionaria(null);
+  };
 
-  // Carregar os clientes do JSON
-  useEffect(() => {
-    async function carregarClientes() {
-      try {
-        const response = await axios.get(`${clientesURL}`); // Ajuste conforme a API
-        const clientesFormatados = response.data.map((cliente) => ({
-          value: cliente.cpf,
-          label: cliente.cpf,
-        }));
-        setClientes(clientesFormatados);
-      } catch (error) {
-        mensagemErro("Erro ao carregar os clientes.");
-      }
+  const carregarModelos = async () => {
+    try {
+      const response = await axios.get(modelosURL);
+      setModelos(response.data);
+    } catch (error) {
+      mensagemErro("Erro ao carregar modelos.");
     }
+  };
 
-    carregarClientes();
-    carregarConcessionarias();
-  }, []);
+  const carregarConcessionarias = async () => {
+    try {
+      const response = await axios.get(concessionariasURL);
+      const formatadas = response.data.map((c) => ({
+        value: c.razaoSocial,
+        label: c.razaoSocial,
+      }));
+      setConcessionarias(formatadas);
+    } catch (error) {
+      mensagemErro("Erro ao carregar concessionárias.");
+    }
+  };
 
-  // Carregar o registro do test drive ou resetar os dados
-  async function buscar() {
-    if (idParam) {
-      try {
-        const response = await axios.get(`${baseURL}/${idParam}`);
-        const test_drive = response.data;
-        setId(test_drive.id);
-        setModelo(test_drive.modeloVeiculo);
-        setCpfCliente({ value: test_drive.cpfCliente, label: test_drive.cpfCliente });
-        setDataAgendada(test_drive.dataAgendada);
-        setHoraAgendada(test_drive.horaAgendada);
-        setDataEntregue(test_drive.dataEntregue);
-        setHoraEntregue(test_drive.horaEntregue);
-        setDados(test_drive);
-      } catch (error) {
-        mensagemErro("Erro ao carregar os dados do veículo.");
-      }
-    } else {
+  const carregarClientes = async () => {
+    try {
+      const response = await axios.get(clientesURL);
+      const formatados = response.data.map((c) => ({
+        value: c.cpf,
+        label: c.cpf,
+      }));
+      setClientes(formatados);
+    } catch (error) {
+      mensagemErro("Erro ao carregar os clientes.");
+    }
+  };
+
+  const buscar = async () => {
+    if (!idParam) {
       inicializar();
+      return;
     }
-  }
 
-  useEffect(() => {
-    carregarModelos();
-    buscar();
-  }, [idParam]);
+    try {
+      const response = await axios.get(`${baseURL}/${idParam}`);
+      const data = response.data;
 
-  async function salvar() {
-    const data = {
+      setId(data.id);
+      setModelo(data.modeloVeiculo);
+      setCpfCliente({ value: data.cpfCliente, label: data.cpfCliente });
+      setConcessionaria({
+        value: data.razaoSocialConcessionaria,
+        label: data.razaoSocialConcessionaria,
+      });
+      setDataAgendada(data.dataAgendada);
+      setHoraAgendada(data.horaAgendada);
+      setDataEntregue(data.dataEntregue);
+      setHoraEntregue(data.horaEntregue);
+    } catch (error) {
+      mensagemErro("Erro ao buscar dados do test drive.");
+    }
+  };
+
+  const salvar = async () => {
+    const payload = {
       id,
       dataAgendada,
       horaAgendada,
-      modelo,
-      cpfCliente: cpfCliente ? cpfCliente.value : "",
+      modeloVeiculo,
+      cpfCliente: cpfCliente?.value || "",
       dataEntregue,
       horaEntregue,
+      razaoSocialConcessionaria: razaoSocialConcessionaria?.value || "",
     };
 
     try {
-      if (!idParam) {
-        await axios.post(`${baseURL}`, data, {
-          headers: { "Content-Type": "application/json" },
-        });
-        mensagemSucesso(`Test drive cadastrado com sucesso!`);
+      if (idParam) {
+        await axios.put(`${baseURL}/${idParam}`, payload);
+        mensagemSucesso("Test drive atualizado com sucesso!");
       } else {
-        await axios.put(`${baseURL}/${idParam}`, data, {
-          headers: { "Content-Type": "application/json" },
-        });
-        mensagemSucesso(`Test drive atualizado com sucesso!`);
+        await axios.post(baseURL, payload);
+        mensagemSucesso("Test drive cadastrado com sucesso!");
       }
       navigate("/listagem-testdrive");
     } catch (error) {
       mensagemErro(error.response?.data || "Erro ao salvar test drive.");
     }
-  }
+  };
 
-  function cancelar() {
-    navigate(`/listagem-testdrive/`);
-  }
+  const cancelar = () => {
+    navigate("/listagem-testdrive");
+  };
 
   return (
     <div className="container">
@@ -151,7 +152,7 @@ function CadastroTestDrive() {
           <div className="col-lg-12">
             <br />
             <div className="bs-component">
-              <FormGroup label="Data Agendada: *" htmlFor="inputDataAgendada">
+              <FormGroup className="mb-3" label="Data Agendada: *" htmlFor="inputDataAgendada">
                 <input
                   type="date"
                   id="inputDataAgendada"
@@ -161,7 +162,7 @@ function CadastroTestDrive() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Hora Agendada: *" htmlFor="inputHoraAgendada">
+              <FormGroup className="mb-3" label="Hora Agendada: *" htmlFor="inputHoraAgendada">
                 <input
                   type="time"
                   id="inputHoraAgendada"
@@ -171,7 +172,37 @@ function CadastroTestDrive() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Data Entregue: *" htmlFor="inputDataEntregue">
+              <FormGroup label="Modelo do Veículo: *" htmlFor="inputModelo">
+                <Select
+                  id="inputModelo"
+                  options={modelos.map((m) => ({ label: m.nome, value: m.nome }))}
+                  value={modeloVeiculo ? { label: modeloVeiculo, value: modeloVeiculo } : null}
+                  onChange={(selected) => setModelo(selected?.value || "")}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="CPF do Cliente: *" htmlFor="inputCpfCliente">
+                <Select
+                  id="inputCpfCliente"
+                  options={clientes}
+                  value={cpfCliente}
+                  onChange={(selected) => setCpfCliente(selected)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup
+                label="Concessionária: *"
+                htmlFor="inputConcessionaria"
+              >
+                <Select
+                  id="inputConcessionaria"
+                  options={concessionarias}
+                  value={razaoSocialConcessionaria}
+                  onChange={(selected) => setConcessionaria(selected)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Data Entregue:" htmlFor="inputDataEntregue">
                 <input
                   type="date"
                   id="inputDataEntregue"
@@ -181,7 +212,7 @@ function CadastroTestDrive() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Hora Entregue: *" htmlFor="inputHoraEntregue">
+              <FormGroup label="Hora Entregue:" htmlFor="inputHoraEntregue">
                 <input
                   type="time"
                   id="inputHoraEntregue"
@@ -190,38 +221,19 @@ function CadastroTestDrive() {
                   onChange={(e) => setHoraEntregue(e.target.value)}
                 />
               </FormGroup>
+
               <br />
-              <FormGroup label="Modelo: *" htmlFor="inputModelo">
-                <select
-                  id="inputModelo"
-                  value={modelo}
-                  className="form-control"
-                  onChange={(e) => setModelo(e.target.value)}
+              <Stack direction="row" spacing={2}>
+                <button
+                  onClick={salvar}
+                  className="btn btn-success"
                 >
-                  <option value="">Selecione um modelo</option>
-                  {modelos.map((m) => (
-                    <option key={m.id} value={m.nome}>
-                      {m.nome}
-                    </option>
-                  ))}
-                </select>
-              </FormGroup>
-              <br />
-              <FormGroup label="CPF do Cliente: *">
-                <Select
-                  options={clientes}
-                  value={cpfCliente}
-                  onChange={setCpfCliente}
-                  placeholder="Selecione um CPF"
-                  isSearchable
-                />
-              </FormGroup>
-              <br />
-              <Stack spacing={1} padding={1} direction="row">
-                <button onClick={salvar} type="button" className="btn btn-success">
                   Salvar
                 </button>
-                <button onClick={inicializar} type="button" className="btn btn-danger">
+                <button
+                  onClick={cancelar}
+                  className="btn btn-danger"
+                >
                   Cancelar
                 </button>
               </Stack>
