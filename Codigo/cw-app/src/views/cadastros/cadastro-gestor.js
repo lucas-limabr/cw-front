@@ -98,10 +98,6 @@ function CadastroGestor() {
     }
   }
 
-  function cancelar() {
-    navigate(`/listagem-gestor/`);
-  }
-
   async function buscar() {
     if (idParam) {
       try {

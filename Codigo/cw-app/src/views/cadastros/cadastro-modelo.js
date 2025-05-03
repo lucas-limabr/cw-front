@@ -12,39 +12,39 @@ import axios from "axios";
 import { BASE_URL } from "../../config/axios";
 
 const baseURL = `${BASE_URL}/modelos`;
-const marcasURL = `${BASE_URL}/fabricantes`; // Endpoint para buscar as marcas
+const fabricantesURL = `${BASE_URL}/fabricantes`; // Endpoint para buscar as fabricantes
 
 function CadastroModelo() {
   const { idParam } = useParams();
   const navigate = useNavigate();
 
   const [id, setId] = useState("");
-  const [marca, setMarca] = useState("");
+  const [fabricante, setFabricante] = useState("");
   const [nome, setNome] = useState("");
 
   const [dados, setDados] = useState(null);
-  const [marcas, setMarcas] = useState([]); // Estado para armazenar as marcas
+  const [fabricantes, setFabricantes] = useState([]); // Estado para armazenar as fabricantes
 
-  // Função para buscar marcas disponíveis no servidor
-  async function carregarMarcas() {
+  // Função para buscar fabricantes disponíveis no servidor
+  async function carregarFabricantes() {
     try {
-      const response = await axios.get(`${marcasURL}`);
-      setMarcas(response.data);
+      const response = await axios.get(`${fabricantesURL}`);
+      setFabricantes(response.data);
     } catch (error) {
-      console.error("Erro ao carregar marcas:", error);
+      console.error("Erro ao carregar fabricantes:", error);
     }
   }
 
   function inicializar() {
     setId("");
-    setMarca("");
+    setFabricante("");
     setNome("");
   }
 
   async function salvar() {
     const data = {
       id,
-      marca,
+      fabricante,
       nome,
     };
 
@@ -74,11 +74,11 @@ function CadastroModelo() {
     if (idParam) {
       try {
         const response = await axios.get(`${baseURL}/${idParam}`);
-        const veiculo = response.data;
-        setId(veiculo.id);
-        setNome(veiculo.nome);
-        setMarca(veiculo.marca); // Preencher o select com a marca correta
-        setDados(veiculo);
+        const modelo = response.data;
+        setId(modelo.id);
+        setNome(modelo.nome);
+        setFabricante(modelo.fabricante); // Preencher o select com a fabricante correta
+        setDados(modelo);
       } catch (error) {
         mensagemErro("Erro ao carregar os dados do veículo.");
       }
@@ -88,7 +88,7 @@ function CadastroModelo() {
   }
 
   useEffect(() => {
-    carregarMarcas(); // Buscar marcas ao carregar a página
+    carregarFabricantes(); // Buscar fabricantes ao carregar a página
     buscar(); // Buscar dados do veículo se for edição
   }, [idParam]);
 
@@ -109,15 +109,15 @@ function CadastroModelo() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Marca: *" htmlFor="inputMarca">
+              <FormGroup label="Fabricante: *" htmlFor="inputFabricante">
                 <select
-                  id="inputMarca"
-                  value={marca}
+                  id="inputFabricante"
+                  value={fabricante}
                   className="form-control"
-                  onChange={(e) => setMarca(e.target.value)}
+                  onChange={(e) => setFabricante(e.target.value)}
                 >
-                  <option value="">Selecione uma marca</option>
-                  {marcas.map((m) => (
+                  <option value="">Selecione uma fabricante</option>
+                  {fabricantes.map((m) => (
                     <option key={m.id} value={m.nome}>
                       {m.nome}
                     </option>

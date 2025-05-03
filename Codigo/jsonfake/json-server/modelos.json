@@ -1,22 +1,22 @@
 [
     {
         "id": 1,
-        "marca": "Honda",
+        "fabricante": "Honda",
         "nome": "Civic"
     },
     {
         "id": 2,
-        "marca": "Jeep",
+        "fabricante": "Jeep",
         "nome": "Compass"
     },
     {
         "id": 3,
-        "marca": "Hyundai",
+        "fabricante": "Hyundai",
         "nome": "HB20"
     },
     {
         "id": 4,
-        "marca": "Honda",
+        "fabricante": "Honda",
         "nome": "CG 160 Fan"
     }
 ]

@@ -5,7 +5,7 @@
     "qtdMarcha": "6",
     "tipoMotorMoto": "4 tempos",
     "cilindrada": "1000cc",
-     "transmissaoMoto": "Manual"
+     "tipoPartidaMoto": "Manual"
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
     "qtdMarcha": "5",
     "tipoMotorMoto": "V2",
     "cilindrada": "1600cc",
-    "transmissaoMoto": "Manual"
+    "tipoPartidaMoto": "Manual"
 
   },
   {
@@ -22,6 +22,6 @@
     "qtdMarcha": "5",
     "tipoMotorMoto": "2 tempos",
     "cilindrada": "250cc",
-    "transmissaoMoto" : "Manual"
+    "tipoPartidaMoto" : "Manual"
   }
 ]

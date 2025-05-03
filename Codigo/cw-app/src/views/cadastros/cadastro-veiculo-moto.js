@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import FormGroup from "../../components/form-group";
 import Stack from "@mui/material/Stack";
 
-const CadastroVeiculoMoto = ({ categoriaMoto, setCategoriaMoto, tipoMotorMoto, setTipoMotorMoto, cilindrada, setCilindrada , qtdMarcha, setQtdMarcha , transmissaoMoto, setTransmissaoMoto  }) => {
+const CadastroVeiculoMoto = ({ categoriaMoto, setCategoriaMoto, tipoMotorMoto, setTipoMotorMoto, cilindrada, setCilindrada , qtdMarcha, setQtdMarcha , tipoPartidaMoto, setTipoPartidaMoto  }) => {
 
     return (
         <div>
@@ -50,13 +50,13 @@ const CadastroVeiculoMoto = ({ categoriaMoto, setCategoriaMoto, tipoMotorMoto, s
                 />
             </FormGroup>
             <br />
-            <FormGroup label="Transmissão: *" htmlFor="inputTransmissaoMoto">
+            <FormGroup label="Tipo de partida: *" htmlFor="inputTipoPartidaMoto">
                 <input
                     type="text"
-                    id="inputTransmissaoMoto"
-                    value={transmissaoMoto}
+                    id="inputTipoPartidaMoto"
+                    value={tipoPartidaMoto}
                     className="form-control"
-                    onChange={(e) => setTransmissaoMoto(e.target.value)}
+                    onChange={(e) => setTipoPartidaMoto(e.target.value)}
                 />
             </FormGroup>
             

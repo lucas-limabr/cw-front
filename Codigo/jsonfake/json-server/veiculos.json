@@ -21,7 +21,7 @@
         "cilindrada": null,
         "tipoMotorMoto": null,
         "qtdMarcha": null,
-        "transmissaoMoto": null,
+        "tipoPartidaMoto": null,
         "manutencao": "1111",
         "laudoVistoria": "1111"
     },
@@ -50,7 +50,7 @@
         "cilindrada": null,
         "tipoMotorMoto": null,
         "qtdMarcha": null,
-        "transmissaoMoto": null,
+        "tipoPartidaMoto": null,
         "manutencao": "Revisão pendente",
         "laudoVistoria": "Aprovado"
     },
@@ -76,7 +76,7 @@
         "cilindrada": "300",
         "tipoMotorMoto": "V2",
         "qtdMarcha": "4",
-        "transmissaoMoto": " Corrente"
+        "tipoPartidaMoto": " Corrente"
     },
     {
         "id": 4,
@@ -102,6 +102,6 @@
         "cilindrada": null,
         "tipoMotorMoto": null,
         "qtdMarcha": null,
-        "transmissaoMoto": null
+        "tipoPartidaMoto": null
     }
 ]

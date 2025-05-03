@@ -15,7 +15,7 @@ import CadastroVeiculoCarro from "./cadastro-veiculo-carro";
 import CadastroVeiculoMoto from "./cadastro-veiculo-moto";
 
 const baseURL = `${BASE_URL}/veiculos`;
-const modelosURL = `${BASE_URL}/modelos`; // Endpoint para buscar as marcas
+const modelosURL = `${BASE_URL}/modelos`; // Endpoint para buscar as Fabricantes
 const fabricantesURL = `${BASE_URL}/fabricantes`;
 const concessionariasURL = `${BASE_URL}/concessionarias`;
 
@@ -54,7 +54,7 @@ function CadastroVeiculo() {
   const [tipoMotorMoto, setTipoMotorMoto] = useState("");
   const [qtdMarcha, setQtdMarcha] = useState("");
   const [cilindrada, setCilindrada] = useState("");
-  const [transmissaoMoto, setTransmissaoMoto] = useState("");
+  const [tipoPartidaMoto, setTipoPartidaMoto] = useState("");
 
 
 
@@ -112,7 +112,7 @@ function CadastroVeiculo() {
     setCilindrada("");
     setCategoriaMoto("");
     setQtdMarcha("");
-    setTransmissaoMoto("");
+    setTipoPartidaMoto("");
     setTipoMotorMoto("");
 
     //carro
@@ -160,14 +160,14 @@ function CadastroVeiculo() {
           cilindrada,
           tipoMotorMoto,
           qtdMarcha,
-          transmissaoMoto
+          tipoPartidaMoto
         }
         : {
           categoriaMoto: null, // Removendo atributos de Moto se for Carro
           cilindrada: null,
           tipoMotorMoto: null,
           qtdMarcha: null,
-          transmissaoMoto: null
+          tipoPartidaMoto: null
         })
     };
 
@@ -222,7 +222,7 @@ function CadastroVeiculo() {
         setCategoriaCarro(veiculo.categoriaCarro);
         setCategoriaMoto(veiculo.categoriaMoto);
         setTransmissaoCarro(veiculo.transmissaoCarro);
-        setTransmissaoMoto(veiculo.transmissaoMoto);
+        setTipoPartidaMoto(veiculo.tipoPartidaMoto);
         setTipoMotorCarro(veiculo.tipoMotorCarro);
         setTipoMotorMoto(veiculo.tipoMotorMoto);
         setCategoriaMoto(veiculo.tipoMotorMoto);
@@ -430,8 +430,8 @@ function CadastroVeiculo() {
                   setCilindrada={setCilindrada}
                   categoriaMoto={categoriaMoto}
                   setCategoriaMoto={setCategoriaMoto}
-                  transmissaoMoto={transmissaoMoto}
-                  setTransmissaoMoto={setTransmissaoMoto}
+                  tipoPartidaMoto={tipoPartidaMoto}
+                  setTipoPartidaMoto={setTipoPartidaMoto}
                   tipoMotorMoto={tipoMotorMoto}
                   setTipoMotorMoto={setTipoMotorMoto}
                   qtdMarcha={qtdMarcha}

@@ -14,7 +14,6 @@ import { BASE_URL } from "../../config/axios";
 const baseURL = `${BASE_URL}/testdrives`;
 const clientesURL = `${BASE_URL}/clientes`;
 const modelosURL = `${BASE_URL}/modelos`;
-const concessionariasURL = `${BASE_URL}/concessionarias`;
 
 function CadastroTestDrive() {
   const { idParam } = useParams();
@@ -27,15 +26,12 @@ function CadastroTestDrive() {
   const [horaEntregue, setHoraEntregue] = useState("");
   const [modeloVeiculo, setModelo] = useState("");
   const [cpfCliente, setCpfCliente] = useState(null);
-  const [razaoSocialConcessionaria, setConcessionaria] = useState(null);
-
+  
   const [clientes, setClientes] = useState([]);
   const [modelos, setModelos] = useState([]);
-  const [concessionarias, setConcessionarias] = useState([]);
 
   useEffect(() => {
     carregarClientes();
-    carregarConcessionarias();
   }, []);
 
   useEffect(() => {
@@ -51,7 +47,6 @@ function CadastroTestDrive() {
     setHoraEntregue("");
     setModelo("");
     setCpfCliente(null);
-    setConcessionaria(null);
   };
 
   const carregarModelos = async () => {
@@ -60,19 +55,6 @@ function CadastroTestDrive() {
       setModelos(response.data);
     } catch (error) {
       mensagemErro("Erro ao carregar modelos.");
-    }
-  };
-
-  const carregarConcessionarias = async () => {
-    try {
-      const response = await axios.get(concessionariasURL);
-      const formatadas = response.data.map((c) => ({
-        value: c.razaoSocial,
-        label: c.razaoSocial,
-      }));
-      setConcessionarias(formatadas);
-    } catch (error) {
-      mensagemErro("Erro ao carregar concessionárias.");
     }
   };
 
@@ -102,10 +84,6 @@ function CadastroTestDrive() {
       setId(data.id);
       setModelo(data.modeloVeiculo);
       setCpfCliente({ value: data.cpfCliente, label: data.cpfCliente });
-      setConcessionaria({
-        value: data.razaoSocialConcessionaria,
-        label: data.razaoSocialConcessionaria,
-      });
       setDataAgendada(data.dataAgendada);
       setHoraAgendada(data.horaAgendada);
       setDataEntregue(data.dataEntregue);
@@ -123,8 +101,7 @@ function CadastroTestDrive() {
       modeloVeiculo,
       cpfCliente: cpfCliente?.value || "",
       dataEntregue,
-      horaEntregue,
-      razaoSocialConcessionaria: razaoSocialConcessionaria?.value || "",
+      horaEntregue
     };
 
     try {
@@ -187,18 +164,6 @@ function CadastroTestDrive() {
                   options={clientes}
                   value={cpfCliente}
                   onChange={(selected) => setCpfCliente(selected)}
-                />
-              </FormGroup>
-              <br />
-              <FormGroup
-                label="Concessionária: *"
-                htmlFor="inputConcessionaria"
-              >
-                <Select
-                  id="inputConcessionaria"
-                  options={concessionarias}
-                  value={razaoSocialConcessionaria}
-                  onChange={(selected) => setConcessionaria(selected)}
                 />
               </FormGroup>
               <br />
