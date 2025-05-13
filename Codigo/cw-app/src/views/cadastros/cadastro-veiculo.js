@@ -16,7 +16,6 @@ import CadastroVeiculoMoto from "./cadastro-veiculo-moto";
 
 const baseURL = `${BASE_URL}/veiculos`;
 const modelosURL = `${BASE_URL}/modelos`;
-const fabricantesURL = `${BASE_URL}/fabricantes`;
 const concessionariasURL = `${BASE_URL}/concessionarias`;
 
 function CadastroVeiculo() {
@@ -26,7 +25,6 @@ function CadastroVeiculo() {
   const [id, setId] = useState("");
   const [chassi, setChassi] = useState("");
   const [modelo, setModelo] = useState("");
-  const [fabricante, setFabricante] = useState("");
   const [precoAtual, setPrecoAtual] = useState("");
   const [cor, setCor] = useState("");
   const [razaoSocialConcessionaria, setConcessionaria] = useState("");
@@ -58,22 +56,12 @@ function CadastroVeiculo() {
 
   const [dados, setDados] = useState(null);
   const [modelos, setModelos] = useState([]);
-  const [fabricantes, setFabricantes] = useState([]);
   const [concessionarias, setConcessionarias] = useState([]);
 
   async function carregarModelos() {
     try {
       const response = await axios.get(`${modelosURL}`);
       setModelos(response.data);
-    } catch (error) {
-      console.error("Erro ao carregar modelos:", error);
-    }
-  }
-
-  async function carregarFabricantes() {
-    try {
-      const response = await axios.get(`${fabricantesURL}`);
-      setFabricantes(response.data);
     } catch (error) {
       console.error("Erro ao carregar modelos:", error);
     }
@@ -92,7 +80,6 @@ function CadastroVeiculo() {
     setId("");
     setChassi("");
     setModelo("");
-    setFabricante("");
     setPrecoAtual("");
     setCor("");
     setConcessionaria("");
@@ -123,7 +110,6 @@ function CadastroVeiculo() {
       id,
       chassi,
       modelo,
-      fabricante,
       precoAtual,
       cor,
       razaoSocialConcessionaria,
@@ -198,7 +184,6 @@ function CadastroVeiculo() {
         setId(veiculo.id);
         setChassi(veiculo.chassi);
         setModelo(veiculo.modelo);
-        setFabricante(veiculo.fabricante);
         setPrecoAtual(veiculo.precoAtual);
         setCor(veiculo.cor);
         setConcessionaria(veiculo.razaoSocialConcessionaria);
@@ -234,7 +219,6 @@ function CadastroVeiculo() {
   }
 
   useEffect(() => {
-    carregarFabricantes();
     carregarModelos();
     carregarConcessionarias();
     buscar();
@@ -266,7 +250,6 @@ function CadastroVeiculo() {
                 />
               </FormGroup>
               <br />
-
               <FormGroup label="Modelo: *" htmlFor="inputModelo">
                 <select
                   id="inputModelo"
@@ -276,22 +259,6 @@ function CadastroVeiculo() {
                 >
                   <option value="">Selecione um modelo</option>
                   {modelos.map((m) => (
-                    <option key={m.id} value={m.nome}>
-                      {m.nome}
-                    </option>
-                  ))}
-                </select>
-              </FormGroup>
-              <br />
-              <FormGroup label="Fabricante: *" htmlFor="inputFabricante">
-                <select
-                  id="inputFabricante"
-                  value={fabricante}
-                  className="form-control"
-                  onChange={(e) => setFabricante(e.target.value)}
-                >
-                  <option value="">Selecione uma fabricante</option>
-                  {fabricantes.map((m) => (
                     <option key={m.id} value={m.nome}>
                       {m.nome}
                     </option>
