@@ -12,7 +12,7 @@ import axios from "axios";
 import { BASE_URL } from "../../config/axios";
 
 const baseURL = `${BASE_URL}/modelos`;
-const fabricantesURL = `${BASE_URL}/fabricantes`; // Endpoint para buscar as fabricantes
+const fabricantesURL = `${BASE_URL}/fabricantes`;
 
 function CadastroModelo() {
   const { idParam } = useParams();
@@ -23,9 +23,8 @@ function CadastroModelo() {
   const [nome, setNome] = useState("");
 
   const [dados, setDados] = useState(null);
-  const [fabricantes, setFabricantes] = useState([]); // Estado para armazenar as fabricantes
+  const [fabricantes, setFabricantes] = useState([]);
 
-  // Função para buscar fabricantes disponíveis no servidor
   async function carregarFabricantes() {
     try {
       const response = await axios.get(`${fabricantesURL}`);
@@ -77,7 +76,7 @@ function CadastroModelo() {
         const modelo = response.data;
         setId(modelo.id);
         setNome(modelo.nome);
-        setFabricante(modelo.fabricante); // Preencher o select com a fabricante correta
+        setFabricante(modelo.fabricante);
         setDados(modelo);
       } catch (error) {
         mensagemErro("Erro ao carregar os dados do veículo.");
@@ -88,8 +87,8 @@ function CadastroModelo() {
   }
 
   useEffect(() => {
-    carregarFabricantes(); // Buscar fabricantes ao carregar a página
-    buscar(); // Buscar dados do veículo se for edição
+    carregarFabricantes();
+    buscar();
   }, [idParam]);
 
   return (

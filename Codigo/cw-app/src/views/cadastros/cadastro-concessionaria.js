@@ -20,8 +20,10 @@ function CadastroConcessionaria() {
   const [id, setId] = useState("");
   const [razaoSocial, setRazaoSocial] = useState("");
   const [cnpj, setCnpj] = useState("");
-  const [telefone, setTelefone] = useState("");
-  const [email, setEmail] = useState("");
+  const [telefone1, setTelefone1] = useState("");
+    const [telefone2, setTelefone2] = useState("");
+    const [email1, setEmail1] = useState("");
+    const [email2, setEmail2] = useState("");
   const [logradouro, setLogradouro] = useState("");
   const [numero, setNumero] = useState("");
   const [bairro, setBairro] = useState("");
@@ -35,14 +37,16 @@ function CadastroConcessionaria() {
     setId("");
     setRazaoSocial("");
     setCnpj("");
-    setTelefone("");
-    setEmail("");
+    setTelefone1("");
+    setTelefone2("");
+    setEmail1("");
+    setEmail2("");
     setLogradouro("");
     setNumero("");
     setBairro("");
     setCep("");
     setUf("");
-    setComplemento("");  // Limpeza do campo complemento
+    setComplemento("");
   }
 
   async function salvar() {
@@ -50,14 +54,16 @@ function CadastroConcessionaria() {
       id,
       razaoSocial,
       cnpj,
-      telefone,
-      email,
+      telefone1,
+      telefone2,
+      email1,
+      email2,
       logradouro,
       numero,
       bairro,
       cep,
       uf,
-      complemento,  // Incluído o campo complemento
+      complemento,
     };
 
     try {
@@ -88,14 +94,16 @@ function CadastroConcessionaria() {
         setId(concessionaria.id);
         setRazaoSocial(concessionaria.razaoSocial);
         setCnpj(concessionaria.cnpj);
-        setTelefone(concessionaria.telefone);
-        setEmail(concessionaria.email);
+        setTelefone1(concessionaria.telefone1);
+        setTelefone2(concessionaria.telefone2);
+        setEmail1(concessionaria.email1);
+        setEmail2(concessionaria.email2);
         setLogradouro(concessionaria.logradouro);
         setNumero(concessionaria.numero);
         setBairro(concessionaria.bairro);
         setCep(concessionaria.cep);
         setUf(concessionaria.uf);
-        setComplemento(concessionaria.complemento);  // Carregar complemento
+        setComplemento(concessionaria.complemento);
         setDados(concessionaria);
       } catch (error) {
         mensagemErro("Erro ao carregar os dados da concessionária.");
@@ -140,23 +148,43 @@ function CadastroConcessionaria() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Telefone: *" htmlFor="inputTelefone">
+              <FormGroup label="Telefone - 1: *" htmlFor="inputTelefone1">
                 <input
                   type="text"
-                  id="inputTelefone"
-                  value={telefone}
+                  id="inputTelefone1"
+                  value={telefone1}
                   className="form-control"
-                  onChange={(e) => setTelefone(e.target.value)}
+                  onChange={(e) => setTelefone1(e.target.value)}
                 />
               </FormGroup>
               <br />
-              <FormGroup label="E-mail: *" htmlFor="inputEmail">
+              <FormGroup label="Telefone - 2: *" htmlFor="inputTelefone1">
+                <input
+                  type="text"
+                  id="inputTelefone2"
+                  value={telefone2}
+                  className="form-control"
+                  onChange={(e) => setTelefone2(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Email - 1: *" htmlFor="inputEmail1">
                 <input
                   type="email"
-                  id="inputEmail"
-                  value={email}
+                  id="inputEmail1"
+                  value={email1}
                   className="form-control"
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setEmail1(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Email - 2: *" htmlFor="inputEmail2">
+                <input
+                  type="email"
+                  id="inputEmail2"
+                  value={email2}
+                  className="form-control"
+                  onChange={(e) => setEmail2(e.target.value)}
                 />
               </FormGroup>
               <br />

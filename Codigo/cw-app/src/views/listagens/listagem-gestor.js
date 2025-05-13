@@ -79,7 +79,7 @@ function ListagemGestores() {
                     <th scope="col">Concessionária</th>
                     <th scope="col">CPF</th>
                     <th scope="col">Login</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">Email Principal</th>
                     <th scope="col">Ações</th>
                   </tr>
                 </thead>
@@ -90,7 +90,7 @@ function ListagemGestores() {
                       <td>{dado.razaoSocialConcessionaria}</td>
                       <td>{dado.cpf}</td>
                       <td>{dado.login}</td>
-                      <td>{dado.email}</td>
+                      <td>{dado.email1}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton

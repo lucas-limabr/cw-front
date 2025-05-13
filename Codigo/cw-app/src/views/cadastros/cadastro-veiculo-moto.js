@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import FormGroup from "../../components/form-group";
 import Stack from "@mui/material/Stack";
 
-const CadastroVeiculoMoto = ({ categoriaMoto, setCategoriaMoto, tipoMotorMoto, setTipoMotorMoto, cilindrada, setCilindrada , qtdMarcha, setQtdMarcha , tipoPartidaMoto, setTipoPartidaMoto  }) => {
+const CadastroVeiculoMoto = ({ categoriaMoto, setCategoriaMoto, tipoMotorMoto, setTipoMotorMoto, cilindrada, setCilindrada, qtdMarcha, setQtdMarcha, tipoPartidaMoto, setTipoPartidaMoto }) => {
 
     return (
         <div>
@@ -17,7 +17,7 @@ const CadastroVeiculoMoto = ({ categoriaMoto, setCategoriaMoto, tipoMotorMoto, s
                     onChange={(e) => setCategoriaMoto(e.target.value)}
                 />
             </FormGroup>
-            <br/>
+            <br />
             <FormGroup label="Tipo de motor: *" htmlFor="inputTipoMotorMoto">
                 <input
                     type="text"
@@ -38,7 +38,7 @@ const CadastroVeiculoMoto = ({ categoriaMoto, setCategoriaMoto, tipoMotorMoto, s
                 />
             </FormGroup>
 
-            
+
             <br />
             <FormGroup label="Quantidade de Marchas: *" htmlFor="inputQntMarcha">
                 <input
@@ -59,8 +59,6 @@ const CadastroVeiculoMoto = ({ categoriaMoto, setCategoriaMoto, tipoMotorMoto, s
                     onChange={(e) => setTipoPartidaMoto(e.target.value)}
                 />
             </FormGroup>
-            
-
         </div>
     );
 };

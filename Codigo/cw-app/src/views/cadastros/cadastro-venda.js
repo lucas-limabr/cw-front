@@ -36,7 +36,6 @@ function CadastroVenda() {
   const [chassiVeiculo, setChassiVeiculo] = useState("");
   const [concessionaria, setConcessionaria] = useState(null);
 
-  // Carregar os dados das compras ou resetar os campos
   useEffect(() => {
     async function buscar() {
       if (idParam) {
@@ -56,7 +55,6 @@ function CadastroVenda() {
           mensagemErro("Erro ao carregar os dados da compra.");
         }
       } else {
-        // Limpa os campos se não houver idParam
         limparCampos();
       }
     }
@@ -64,7 +62,6 @@ function CadastroVenda() {
     buscar();
   }, [idParam]);
 
-  // Carregar clientes, modelos e concessionárias
   useEffect(() => {
     async function carregarClientes() {
       try {
@@ -120,7 +117,6 @@ function CadastroVenda() {
     carregarConcessionarias();
   }, []);
 
-  // Função para limpar os campos
   function limparCampos() {
     setId("");
     setData("");
@@ -132,7 +128,6 @@ function CadastroVenda() {
     setConcessionaria(null);
   }
 
-  // Função para salvar os dados da compra
   async function salvar() {
     const dataCompra = {
       id,
@@ -159,7 +154,6 @@ function CadastroVenda() {
       }
       navigate("/listagem-venda");
     } catch (error) {
-      // Exiba uma mensagem de erro ao invés de um erro fatal
       mensagemErro(error.response?.data || "Erro ao salvar a venda.");
     }
   }
@@ -173,7 +167,6 @@ function CadastroVenda() {
     }
   }
 
-  // Função para cancelar
   function cancelar() {
     navigate("/listagem-venda");
   }

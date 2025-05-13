@@ -76,7 +76,8 @@ function ListagemEmpresa() {
                   <tr>
                     <th scope="col">Razão Social</th>
                     <th scope="col">CNPJ</th>
-                    <th scope="col">Telefone</th>
+                    <th scope="col">Telefone Principal</th>
+                    <th scope="col">Telefone Secundário</th>
                     <th scope="col">UF</th>
                     <th scope="col">Logradouro</th>
                   </tr>
@@ -86,7 +87,8 @@ function ListagemEmpresa() {
                     <tr key={dado.id}>
                       <td>{dado.razaoSocial}</td>
                       <td>{dado.cnpj}</td>
-                      <td>{dado.telefone}</td>
+                      <td>{dado.telefone1}</td>
+                      <td>{dado.telefone2}</td>
                       <td>{dado.uf}</td>
                       <td>{dado.logradouro}</td>
                       <td>

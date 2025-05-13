@@ -73,8 +73,8 @@ function ListagemVendedor() {
                     <th scope="col">Nome</th>
                     <th scope="col">Concessionária</th>
                     <th scope="col">CPF</th>
-                    <th scope="col">Telefone</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">Telefone Principal</th>
+                    <th scope="col">Email Principal</th>
                     <th scope="col">Ações</th>
                   </tr>
                 </thead>
@@ -84,8 +84,8 @@ function ListagemVendedor() {
                       <td>{dado.nome}</td>
                       <td>{dado.razaoSocialConcessionaria}</td>
                       <td>{dado.cpf}</td>
-                      <td>{dado.telefone}</td>
-                      <td>{dado.email}</td>
+                      <td>{dado.telefone1}</td>
+                      <td>{dado.email1}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton

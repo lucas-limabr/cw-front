@@ -15,7 +15,7 @@ import CadastroVeiculoCarro from "./cadastro-veiculo-carro";
 import CadastroVeiculoMoto from "./cadastro-veiculo-moto";
 
 const baseURL = `${BASE_URL}/veiculos`;
-const modelosURL = `${BASE_URL}/modelos`; // Endpoint para buscar as Fabricantes
+const modelosURL = `${BASE_URL}/modelos`;
 const fabricantesURL = `${BASE_URL}/fabricantes`;
 const concessionariasURL = `${BASE_URL}/concessionarias`;
 
@@ -56,14 +56,11 @@ function CadastroVeiculo() {
   const [cilindrada, setCilindrada] = useState("");
   const [tipoPartidaMoto, setTipoPartidaMoto] = useState("");
 
-
-
   const [dados, setDados] = useState(null);
   const [modelos, setModelos] = useState([]);
   const [fabricantes, setFabricantes] = useState([]);
   const [concessionarias, setConcessionarias] = useState([]);
 
-  // Função para buscar modelos disponíveis no servidor
   async function carregarModelos() {
     try {
       const response = await axios.get(`${modelosURL}`);
@@ -106,7 +103,6 @@ function CadastroVeiculo() {
     setSinistro("");
     setLaudoVistoria("");
     setManutencao("");
-
 
     //moto
     setCilindrada("");

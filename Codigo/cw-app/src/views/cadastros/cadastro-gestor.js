@@ -23,8 +23,10 @@ function CadastroGestor() {
   const [cpf, setCpf] = useState("");
   const [login, setLogin] = useState("");
   const [senha, setSenha] = useState("");
-  const [telefone, setTelefone] = useState("");
-  const [email, setEmail] = useState("");
+  const [telefone1, setTelefone1] = useState("");
+  const [telefone2, setTelefone2] = useState("");
+  const [email1, setEmail1] = useState("");
+  const [email2, setEmail2] = useState("");
   const [logradouro, setLogradouro] = useState("");
   const [numero, setNumero] = useState("");
   const [complemento, setComplemento] = useState("");
@@ -51,8 +53,10 @@ function CadastroGestor() {
     setCpf("");
     setLogin("");
     setSenha("");
-    setTelefone("");
-    setEmail("");
+    setTelefone1("");
+    setTelefone2("");
+    setEmail1("");
+    setEmail2("");
     setLogradouro("");
     setNumero("");
     setComplemento("");
@@ -69,8 +73,10 @@ function CadastroGestor() {
       cpf,
       login,
       senha,
-      telefone,
-      email,
+      telefone1,
+      telefone2,
+      email1,
+      email2,
       logradouro,
       numero,
       complemento,
@@ -108,8 +114,10 @@ function CadastroGestor() {
         setCpf(gestor.cpf);
         setLogin(gestor.login);
         setSenha(gestor.senha);
-        setTelefone(gestor.telefone);
-        setEmail(gestor.email);
+        setTelefone1(gestor.telefone1);
+        setTelefone2(gestor.telefone2);
+        setEmail1(gestor.email1);
+        setEmail2(gestor.email2);
         setLogradouro(gestor.logradouro);
         setNumero(gestor.numero);
         setComplemento(gestor.complemento);
@@ -178,23 +186,43 @@ function CadastroGestor() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Telefone: *" htmlFor="inputTelefone">
+              <FormGroup label="Telefone - 1: *" htmlFor="inputTelefone1">
                 <input
                   type="text"
-                  id="inputTelefone"
-                  value={telefone}
+                  id="inputTelefone1"
+                  value={telefone1}
                   className="form-control"
-                  onChange={(e) => setTelefone(e.target.value)}
+                  onChange={(e) => setTelefone1(e.target.value)}
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Email: *" htmlFor="inputEmail">
+              <FormGroup label="Telefone - 2: *" htmlFor="inputTelefone1">
+                <input
+                  type="text"
+                  id="inputTelefone2"
+                  value={telefone2}
+                  className="form-control"
+                  onChange={(e) => setTelefone2(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Email - 1: *" htmlFor="inputEmail1">
                 <input
                   type="email"
-                  id="inputEmail"
-                  value={email}
+                  id="inputEmail1"
+                  value={email1}
                   className="form-control"
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setEmail1(e.target.value)}
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Email - 2: *" htmlFor="inputEmail2">
+                <input
+                  type="email"
+                  id="inputEmail2"
+                  value={email2}
+                  className="form-control"
+                  onChange={(e) => setEmail2(e.target.value)}
                 />
               </FormGroup>
               <br />
