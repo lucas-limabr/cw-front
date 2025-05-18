@@ -6,9 +6,8 @@ const CadastroVeiculoCarro = ({ categoriaCarro, setCategoriaCarro, tipoMotorCarr
 
     return (
         <div>
-            <h6>Informações de Carro</h6>
-
-            
+            <h5>Informações de Carro</h5>
+            <br />
             <FormGroup label="Categoria do carro: *" htmlFor="inputCategoriaCarro">
                 <input
                     type="text"
@@ -18,9 +17,7 @@ const CadastroVeiculoCarro = ({ categoriaCarro, setCategoriaCarro, tipoMotorCarr
                     onChange={(e) => setCategoriaCarro(e.target.value)}
                 />
             </FormGroup>
-
             <br/>
-
             <FormGroup label="Tipo de motor: *" htmlFor="inputTipoMotorMoto">
                 <input
                     type="text"
@@ -31,7 +28,6 @@ const CadastroVeiculoCarro = ({ categoriaCarro, setCategoriaCarro, tipoMotorCarr
                 />
             </FormGroup>
             <br/>
-
             <FormGroup label="Potência(cv): *" htmlFor="inputPotencia">
                 <input
                     type="number"
@@ -41,7 +37,6 @@ const CadastroVeiculoCarro = ({ categoriaCarro, setCategoriaCarro, tipoMotorCarr
                     onChange={(e) => setPotencia(e.target.value)}
                 />
             </FormGroup>
-
             <br/>
             <FormGroup label="Transmissão: *" htmlFor="inputTransmissaoCarro">
                 <input
@@ -52,8 +47,6 @@ const CadastroVeiculoCarro = ({ categoriaCarro, setCategoriaCarro, tipoMotorCarr
                     onChange={(e) => setTransmissaoCarro(e.target.value)}
                 />
             </FormGroup>
-            
-            
         </div>
         
     );

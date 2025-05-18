@@ -39,6 +39,9 @@ function CadastroVeiculo() {
   const [sinistro, setSinistro] = useState("");
   const [laudoVistoria, setLaudoVistoria] = useState("");
   const [manutencao, setManutencao] = useState("");
+  const [nomeProprietario, setNomeProprietario] = useState("");
+  const [emailProprietario, setEmailProprietario] = useState("");
+  const [telefoneProprietario, setTelefoneProprietario] = useState("");
 
 
   //para carros
@@ -90,6 +93,9 @@ function CadastroVeiculo() {
     setSinistro("");
     setLaudoVistoria("");
     setManutencao("");
+    setNomeProprietario("");
+    setEmailProprietario("");
+    setTelefoneProprietario("");
 
     //moto
     setCilindrada("");
@@ -121,7 +127,10 @@ function CadastroVeiculo() {
         documentacao,
         sinistro,
         manutencao,
-        laudoVistoria
+        laudoVistoria,
+        nomeProprietario,
+        emailProprietario,
+        telefoneProprietario
       }),
       ...(tipo === "Carro"
         ? {
@@ -196,6 +205,9 @@ function CadastroVeiculo() {
         setSinistro(veiculo.sinistro);
         setManutencao(veiculo.manutencao);
         setLaudoVistoria(veiculo.laudoVistoria);
+        setNomeProprietario(veiculo.nomeProprietario);
+        setEmailProprietario(veiculo.emailProprietario);
+        setTelefoneProprietario(veiculo.telefoneProprietario);
 
         //para motos e carros
         setPotencia(veiculo.potencia);
@@ -206,7 +218,6 @@ function CadastroVeiculo() {
         setTipoPartidaMoto(veiculo.tipoPartidaMoto);
         setTipoMotorCarro(veiculo.tipoMotorCarro);
         setTipoMotorMoto(veiculo.tipoMotorMoto);
-        setCategoriaMoto(veiculo.tipoMotorMoto);
         setQtdMarcha(veiculo.qtdMarcha);
 
         setDados(veiculo);
@@ -348,6 +359,12 @@ function CadastroVeiculo() {
                   setLaudoVistoria={setLaudoVistoria}
                   manutencao={manutencao}
                   setManutencao={setManutencao}
+                  nomeProprietario={nomeProprietario}
+                  setNomeProprietario={setNomeProprietario}
+                  telefoneProprietario={telefoneProprietario}
+                  setTelefoneProprietario={setTelefoneProprietario}
+                  emailProprietario={emailProprietario}
+                  setEmailProprietario={setEmailProprietario}
                 />
               )}
               <br />

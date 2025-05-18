@@ -6,8 +6,8 @@ const CadastroVeiculoMoto = ({ categoriaMoto, setCategoriaMoto, tipoMotorMoto, s
 
     return (
         <div>
-            <h6>Informações de Moto</h6>
-
+            <h5>Informações de Moto</h5>
+            <br />
             <FormGroup label="Categoria da moto: *" htmlFor="inputCategoriaMoto">
                 <input
                     type="text"
@@ -37,8 +37,6 @@ const CadastroVeiculoMoto = ({ categoriaMoto, setCategoriaMoto, tipoMotorMoto, s
                     onChange={(e) => setCilindrada(e.target.value)}
                 />
             </FormGroup>
-
-
             <br />
             <FormGroup label="Quantidade de Marchas: *" htmlFor="inputQntMarcha">
                 <input
