@@ -39,6 +39,7 @@ function CadastroVeiculo() {
   const [sinistro, setSinistro] = useState("");
   const [laudoVistoria, setLaudoVistoria] = useState("");
   const [manutencao, setManutencao] = useState("");
+  const [ultimaRevisao, setUltimaRevisao] = useState("");
   const [nomeProprietario, setNomeProprietario] = useState("");
   const [emailProprietario, setEmailProprietario] = useState("");
   const [telefoneProprietario, setTelefoneProprietario] = useState("");
@@ -93,6 +94,7 @@ function CadastroVeiculo() {
     setSinistro("");
     setLaudoVistoria("");
     setManutencao("");
+    setUltimaRevisao("");
     setNomeProprietario("");
     setEmailProprietario("");
     setTelefoneProprietario("");
@@ -128,6 +130,7 @@ function CadastroVeiculo() {
         sinistro,
         manutencao,
         laudoVistoria,
+        ultimaRevisao,
         nomeProprietario,
         emailProprietario,
         telefoneProprietario
@@ -205,6 +208,7 @@ function CadastroVeiculo() {
         setSinistro(veiculo.sinistro);
         setManutencao(veiculo.manutencao);
         setLaudoVistoria(veiculo.laudoVistoria);
+        setUltimaRevisao(veiculo.ultimaRevisao);
         setNomeProprietario(veiculo.nomeProprietario);
         setEmailProprietario(veiculo.emailProprietario);
         setTelefoneProprietario(veiculo.telefoneProprietario);
@@ -359,6 +363,8 @@ function CadastroVeiculo() {
                   setLaudoVistoria={setLaudoVistoria}
                   manutencao={manutencao}
                   setManutencao={setManutencao}
+                  ultimaRevisao={ultimaRevisao}
+                  setUltimaRevisao={setUltimaRevisao}
                   nomeProprietario={nomeProprietario}
                   setNomeProprietario={setNomeProprietario}
                   telefoneProprietario={telefoneProprietario}
