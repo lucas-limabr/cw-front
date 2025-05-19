@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import FormGroup from "../../components/form-group";
 import Stack from "@mui/material/Stack";
 
-const CadastroVeiculoCarro = ({ categoriaCarro, setCategoriaCarro, tipoMotorCarro, setTipoMotorCarro , potencia, setPotencia, transmissaoCarro, setTransmissaoCarro, }) => {
+const CadastroVeiculoCarro = ({ categoriaCarro, setCategoriaCarro, tipoMotorCarro, setTipoMotorCarro, potencia, setPotencia, transmissaoCarro, setTransmissaoCarro, }) => {
 
     return (
         <div>
             <h6>Informações de Carro</h6>
 
-            
+
             <FormGroup label="Categoria do carro: *" htmlFor="inputCategoriaCarro">
                 <input
                     type="text"
@@ -19,7 +19,7 @@ const CadastroVeiculoCarro = ({ categoriaCarro, setCategoriaCarro, tipoMotorCarr
                 />
             </FormGroup>
 
-            <br/>
+            <br />
 
             <FormGroup label="Tipo de motor: *" htmlFor="inputTipoMotorMoto">
                 <input
@@ -30,7 +30,7 @@ const CadastroVeiculoCarro = ({ categoriaCarro, setCategoriaCarro, tipoMotorCarr
                     onChange={(e) => setTipoMotorCarro(e.target.value)}
                 />
             </FormGroup>
-            <br/>
+            <br />
 
             <FormGroup label="Potência(cv): *" htmlFor="inputPotencia">
                 <input
@@ -38,11 +38,15 @@ const CadastroVeiculoCarro = ({ categoriaCarro, setCategoriaCarro, tipoMotorCarr
                     id="inputPotencia"
                     value={potencia}
                     className="form-control"
-                    onChange={(e) => setPotencia(e.target.value)}
+                    onChange={(e) => {
+                        const valor = e.target.value;
+                        setPotencia(valor === '' ? null : parseFloat(valor));
+                    }
+                    }
                 />
             </FormGroup>
 
-            <br/>
+            <br />
             <FormGroup label="Transmissão: *" htmlFor="inputTransmissaoCarro">
                 <input
                     type="text"
@@ -52,10 +56,10 @@ const CadastroVeiculoCarro = ({ categoriaCarro, setCategoriaCarro, tipoMotorCarr
                     onChange={(e) => setTransmissaoCarro(e.target.value)}
                 />
             </FormGroup>
-            
-            
+
+
         </div>
-        
+
     );
 };
 

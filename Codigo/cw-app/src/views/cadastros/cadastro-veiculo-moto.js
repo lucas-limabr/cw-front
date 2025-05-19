@@ -34,7 +34,10 @@ const CadastroVeiculoMoto = ({ categoriaMoto, setCategoriaMoto, tipoMotorMoto, s
                     id="inputCilindrada"
                     value={cilindrada}
                     className="form-control"
-                    onChange={(e) => setCilindrada(e.target.value)}
+                    onChange={(e) => {
+                        const valor = e.target.value;
+                        setCilindrada(valor === '' ? null : parseInt(valor));
+                    }}
                 />
             </FormGroup>
 
@@ -46,7 +49,10 @@ const CadastroVeiculoMoto = ({ categoriaMoto, setCategoriaMoto, tipoMotorMoto, s
                     id="inputQntMarcha"
                     value={qtdMarcha}
                     className="form-control"
-                    onChange={(e) => setQtdMarcha(e.target.value)}
+                    onChange={(e) => {
+                        const valor = e.target.value;
+                        setQtdMarcha(valor === '' ? null : parseInt(valor));
+                    }}
                 />
             </FormGroup>
             <br />

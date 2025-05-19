@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CadastroVeiculoUsado from "./cadastro-veiculo-usado";
+import CurrencyInput from "react-currency-input-field";
+import '../../App.css';
 
 import Stack from "@mui/material/Stack";
 
@@ -25,16 +27,18 @@ function CadastroVeiculo() {
   const [id, setId] = useState("");
   const [chassi, setChassi] = useState("");
   const [modelo, setModelo] = useState("");
-  const [precoAtual, setPrecoAtual] = useState("");
+  const [precoAtual, setPrecoAtual] = useState(null);
+  const [precoBase, setPrecoBase] = useState(null);
+  const [qtdEstoque, setQtdEstoque] = useState(null);
   const [cor, setCor] = useState("");
   const [razaoSocialConcessionaria, setConcessionaria] = useState("");
-  const [condicao, setCondicao] = useState("");
-  const [tipo, setTipo] = useState("");
+  const [condicao, setCondicao] = useState(true);
+  const [tipo, setTipo] = useState(null);
   const [garantia, setGarantia] = useState("");
 
 
   //para veiculos usados
-  const [quilometragem, setQuilometragem] = useState("");
+  const [quilometragem, setQuilometragem] = useState(null);
   const [documentacao, setDocumentacao] = useState("");
   const [sinistro, setSinistro] = useState("");
   const [laudoVistoria, setLaudoVistoria] = useState("");
@@ -42,7 +46,7 @@ function CadastroVeiculo() {
 
 
   //para carros
-  const [potencia, setPotencia] = useState("");
+  const [potencia, setPotencia] = useState(null);
   const [categoriaCarro, setCategoriaCarro] = useState("");
   const [tipoMotorCarro, setTipoMotorCarro] = useState("");
   const [transmissaoCarro, setTransmissaoCarro] = useState("");
@@ -50,8 +54,8 @@ function CadastroVeiculo() {
   //para motos
   const [categoriaMoto, setCategoriaMoto] = useState("");
   const [tipoMotorMoto, setTipoMotorMoto] = useState("");
-  const [qtdMarcha, setQtdMarcha] = useState("");
-  const [cilindrada, setCilindrada] = useState("");
+  const [qtdMarcha, setQtdMarcha] = useState(null);
+  const [cilindrada, setCilindrada] = useState(null);
   const [tipoPartidaMoto, setTipoPartidaMoto] = useState("");
 
   const [dados, setDados] = useState(null);
@@ -81,6 +85,8 @@ function CadastroVeiculo() {
     setChassi("");
     setModelo("");
     setPrecoAtual("");
+    setPrecoBase("");
+    setQtdEstoque("");
     setCor("");
     setConcessionaria("");
     setCondicao("");
@@ -106,11 +112,18 @@ function CadastroVeiculo() {
   }
 
   async function salvar() {
+
+    // Converte "1234,56" para "1234.56"
+    const precoAtualNumerico = parseFloat(precoAtual.replace(',', '.'));
+    const precoBaseNumerico = parseFloat(precoBase.replace(',', '.'));
+
     const data = {
       id,
       chassi,
       modelo,
-      precoAtual,
+      precoAtual: precoAtualNumerico, // envia como número para o backend
+      precoBase: precoBaseNumerico,
+      qtdEstoque,
       cor,
       razaoSocialConcessionaria,
       condicao,
@@ -171,7 +184,6 @@ function CadastroVeiculo() {
     }
   }
 
-
   function cancelar() {
     navigate(`/listagem-veiculo/`);
   }
@@ -185,6 +197,8 @@ function CadastroVeiculo() {
         setChassi(veiculo.chassi);
         setModelo(veiculo.modelo);
         setPrecoAtual(veiculo.precoAtual);
+        setPrecoBase(veiculo.precoBase);
+        setQtdEstoque(veiculo.qtdEstoque);
         setCor(veiculo.cor);
         setConcessionaria(veiculo.razaoSocialConcessionaria);
         setCondicao(veiculo.condicao);
@@ -282,16 +296,48 @@ function CadastroVeiculo() {
                 </select>
               </FormGroup>
               <br />
-              <FormGroup label="Preço Atual: *" htmlFor="inputPrecoAtual">
-                <input
-                  type="number"
-                  id="inputPrecoAtual"
-                  value={precoAtual}
-                  className="form-control"
-                  onChange={(e) => setPrecoAtual(e.target.value)}
+              <FormGroup label="Preço Base: *" htmlFor="inputPrecoBase">
+                <CurrencyInput
+                  id="inputPrecoBase"
+                  name="precoBase"
+                  placeholder="Digite o preço base"
+                  decimalsLimit={2}
+                  decimalSeparator=","
+                  groupSeparator="."
+                  prefix="R$ "
+                  onValueChange={(value) => setPrecoBase(value)}
+                  className="currency-input"
                 />
               </FormGroup>
               <br />
+              <FormGroup label="Preço Atual: *" htmlFor="inputPrecoAtual">
+                <CurrencyInput
+                  id="precoAtual"
+                  name="precoAtual"
+                  placeholder="Digite o preço atual"
+                  decimalsLimit={2}
+                  decimalSeparator=","
+                  groupSeparator="."
+                  prefix="R$ "
+                  onValueChange={(value) => setPrecoAtual(value)} // value é string ou null
+                  className="currency-input"
+                />
+
+              </FormGroup>
+              <br />
+              <FormGroup label="Quantidade em estoque: " htmlFor="quantidadeEstoque">
+                <input
+                  id="quantidadeEstoque"
+                  name="quantidadeEstoque"
+                  type="number"
+                  value={qtdEstoque}
+                  onChange={(e) => {
+                    const valor = e.target.value;
+                    setQtdEstoque(valor === '' ? null : parseInt(valor));
+                  }}
+                  className="currency-input"
+                />
+              </FormGroup>
               <FormGroup label="Cor: *" htmlFor="inputCor">
                 <input
                   type="text"
@@ -313,7 +359,7 @@ function CadastroVeiculo() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Condição: *" htmlFor="inputTipo">
+              <FormGroup label="Condição: *" htmlFor="inputCondicao">
                 <div>
                   <label>
                     <input
