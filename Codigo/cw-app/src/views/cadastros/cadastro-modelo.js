@@ -19,7 +19,7 @@ function CadastroModelo() {
   const navigate = useNavigate();
 
   const [id, setId] = useState("");
-  const [fabricante, setFabricante] = useState("");
+  const [fabricante, setFabricante] = useState(null);
   const [nome, setNome] = useState("");
 
   const [dados, setDados] = useState(null);
@@ -113,11 +113,11 @@ function CadastroModelo() {
                   id="inputFabricante"
                   value={fabricante}
                   className="form-control"
-                  onChange={(e) => setFabricante(e.target.value)}
+                  onChange={(e) => setFabricante(e.target.value, 10)}
                 >
                   <option value="">Selecione uma fabricante</option>
                   {fabricantes.map((m) => (
-                    <option key={m.id} value={m.nome}>
+                    <option key={m.id} value={m.id}>
                       {m.nome}
                     </option>
                   ))}

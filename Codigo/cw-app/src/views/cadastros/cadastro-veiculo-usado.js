@@ -23,7 +23,10 @@ const CadastroVeiculoUsado = ({
                     id="inputQuilometragem"
                     value={quilometragem}
                     className="form-control"
-                    onChange={(e) => setQuilometragem(e.target.value)}
+                    onChange={(e) => {
+                        const valor = e.target.value;
+                        setQuilometragem(valor === '' ? null : parseFloat(valor));
+                    }}
                 />
             </FormGroup>
             <br />

@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import FormGroup from "../../components/form-group";
 import Stack from "@mui/material/Stack";
 
-const CadastroVeiculoCarro = ({ categoriaCarro, setCategoriaCarro, tipoMotorCarro, setTipoMotorCarro , potencia, setPotencia, transmissaoCarro, setTransmissaoCarro, }) => {
+const CadastroVeiculoCarro = ({ categoriaCarro, setCategoriaCarro, tipoMotorCarro, setTipoMotorCarro, potencia, setPotencia, transmissaoCarro, setTransmissaoCarro, }) => {
 
     return (
         <div>
-            <h5>Informações de Carro</h5>
-            <br />
+            <h6>Informações de Carro</h6>
+
+
             <FormGroup label="Categoria do carro: *" htmlFor="inputCategoriaCarro">
                 <input
                     type="text"
@@ -17,7 +18,9 @@ const CadastroVeiculoCarro = ({ categoriaCarro, setCategoriaCarro, tipoMotorCarr
                     onChange={(e) => setCategoriaCarro(e.target.value)}
                 />
             </FormGroup>
-            <br/>
+
+            <br />
+
             <FormGroup label="Tipo de motor: *" htmlFor="inputTipoMotorMoto">
                 <input
                     type="text"
@@ -27,17 +30,23 @@ const CadastroVeiculoCarro = ({ categoriaCarro, setCategoriaCarro, tipoMotorCarr
                     onChange={(e) => setTipoMotorCarro(e.target.value)}
                 />
             </FormGroup>
-            <br/>
+            <br />
+
             <FormGroup label="Potência(cv): *" htmlFor="inputPotencia">
                 <input
                     type="number"
                     id="inputPotencia"
                     value={potencia}
                     className="form-control"
-                    onChange={(e) => setPotencia(e.target.value)}
+                    onChange={(e) => {
+                        const valor = e.target.value;
+                        setPotencia(valor === '' ? null : parseFloat(valor));
+                    }
+                    }
                 />
             </FormGroup>
-            <br/>
+
+            <br />
             <FormGroup label="Transmissão: *" htmlFor="inputTransmissaoCarro">
                 <input
                     type="text"
@@ -48,7 +57,7 @@ const CadastroVeiculoCarro = ({ categoriaCarro, setCategoriaCarro, tipoMotorCarr
                 />
             </FormGroup>
         </div>
-        
+
     );
 };
 
