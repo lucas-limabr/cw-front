@@ -14,7 +14,6 @@ import { BASE_URL } from "../../config/axios";
 const baseURL = `${BASE_URL}/compras`;
 const clientesURL = `${BASE_URL}/clientes`;
 const modelosURL = `${BASE_URL}/modelos`;
-const concessionariasURL = `${BASE_URL}/concessionarias`;
 const chassiURL = `${BASE_URL}/veiculos`;
 
 function CadastroVenda() {
@@ -24,7 +23,6 @@ function CadastroVenda() {
   const [dados, setDados] = useState(null);
   const [clientes, setClientes] = useState([]);
   const [modelos, setModelos] = useState([]);
-  const [concessionarias, setConcessionarias] = useState([]);
   const [chassiVeiculos, setChassiVeiculos] = useState([]);
 
   const [id, setId] = useState("");
@@ -85,19 +83,6 @@ function CadastroVenda() {
       }
     }
 
-    async function carregarConcessionarias() {
-      try {
-        const response = await axios.get(concessionariasURL);
-        const concessionariasFormatadas = response.data.map((concessionaria) => ({
-          value: concessionaria.id,
-          label: concessionaria.razaoSocial,
-        }));
-        setConcessionarias(concessionariasFormatadas);
-      } catch (error) {
-        mensagemErro("Erro ao carregar concessionárias.");
-      }
-    }
-
     async function carregarChassis() {
       try {
         const response = await axios.get(`${chassiURL}`); // Ajuste conforme a API
@@ -114,7 +99,6 @@ function CadastroVenda() {
     carregarChassis();
     carregarClientes();
     carregarModelos();
-    carregarConcessionarias();
   }, []);
 
   function limparCampos() {
@@ -247,16 +231,6 @@ function CadastroVenda() {
                   onChange={setChassiVeiculo}
                   placeholder="Selecione um Chassi"
                   isSearchable
-                />
-              </FormGroup>
-              <br />
-              <FormGroup label="Concessionária: *" htmlFor="inputConcessionaria">
-                <Select
-                  id="inputConcessionaria"
-                  options={concessionarias}
-                  value={concessionaria}
-                  onChange={setConcessionaria}
-                  placeholder="Selecione uma concessionária"
                 />
               </FormGroup>
               <br />
