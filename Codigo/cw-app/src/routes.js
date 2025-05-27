@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import CadastroAdmSuporte from "./views/cadastros/cadastro-admsuporte.js";
+import CadastroAdmEmpresa from "./views/cadastros/cadastro-admempresa.js";
 import CadastroAcessorio from "./views/cadastros/cadastro-acessorio.js";
 import CadastroCliente from "./views/cadastros/cadastro-cliente.js";
 import CadastroCompra from "./views/cadastros/cadastro-venda.js";
@@ -14,6 +16,8 @@ import CadastroTestDrive from "./views/cadastros/cadastro-testdrive.js";
 import CadastroVeiculo from "./views/cadastros/cadastro-veiculo.js";
 import CadastroVendedor from "./views/cadastros/cadastro-vendedor.js";
 
+import ListagemAdmSuporte from "./views/listagens/listagem-admsuporte.js";
+import ListagemAdmEmpresa from "./views/listagens/listagem-admempresa.js";
 import ListagemAcessorio from "./views/listagens/listagem-acessorio.js";
 import ListagemCliente from "./views/listagens/listagem-cliente.js";
 import ListagemCompra from "./views/listagens/listagem-venda.js";
@@ -31,6 +35,8 @@ function Rotas() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/cadastro-admsuporte/:idParam?" element={<CadastroAdmSuporte />} />
+        <Route path="/cadastro-admempresa/:idParam?" element={<CadastroAdmEmpresa />} />
         <Route path="/cadastro-acessorio/:idParam?" element={<CadastroAcessorio />} />
         <Route path="/cadastro-cliente/:idParam?" element={<CadastroCliente />} />
         <Route path="/cadastro-venda/:idParam?" element={<CadastroCompra />} />
@@ -44,6 +50,8 @@ function Rotas() {
         <Route path="/cadastro-veiculo/:idParam?" element={<CadastroVeiculo />} />
         <Route path="/cadastro-vendedor/:idParam?" element={<CadastroVendedor />} />
 
+        <Route path="/listagem-AdmSuporte" element={<ListagemAdmSuporte />} />
+        <Route path="/listagem-AdmEmpresa" element={<ListagemAdmEmpresa />} />
         <Route path="/listagem-acessorio" element={<ListagemAcessorio />} />
         <Route path="/listagem-cliente" element={<ListagemCliente />} />
         <Route path="/listagem-venda" element={<ListagemCompra />} />

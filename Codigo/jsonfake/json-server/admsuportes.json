@@ -1,0 +1,53 @@
+[
+    {
+        "id": 1,
+        "nome": "Renato Lima",
+        "cpf": "111.222.333-44",
+        "login": "renato.lima",
+        "senha": "novaSenha001",
+        "telefone1": "(11) 90000-1111",
+        "telefone2": "(11) 91111-2222",
+        "email1": "renato.lima@dominio.com",
+        "email2": "contato.renato@dominio.com",
+        "logradouro": "Alameda dos Jacarandás",
+        "numero": "321",
+        "complemento": "Casa 2",
+        "bairro": "Parque Verde",
+        "cep": "11111-111",
+        "uf": "SP"
+    },
+    {
+        "id": 2,
+        "nome": "Beatriz Mendes",
+        "cpf": "555.666.777-88",
+        "login": "beatriz.mendes",
+        "senha": "senhaSegura002",
+        "telefone1": "(21) 92222-3333",
+        "telefone2": "(21) 93333-4444",
+        "email1": "beatriz.mendes@dominio.com",
+        "email2": "beatriz.contato@dominio.com",
+        "logradouro": "Rua Marquês de São Vicente",
+        "numero": "654",
+        "complemento": "Ap 301",
+        "bairro": "Gávea",
+        "cep": "22222-222",
+        "uf": "RJ"
+    },
+    {
+        "id": 3,
+        "nome": "Tiago Rocha",
+        "cpf": "999.888.777-66",
+        "login": "tiago.rocha",
+        "senha": "senhaForte003",
+        "telefone1": "(31) 94444-5555",
+        "telefone2": "(31) 95555-6666",
+        "email1": "tiago.rocha@dominio.com",
+        "email2": "contato.tiago@dominio.com",
+        "logradouro": "Avenida dos Andradas",
+        "numero": "987",
+        "complemento": "Sala 5",
+        "bairro": "Funcionários",
+        "cep": "33333-333",
+        "uf": "MG"
+    }
+]

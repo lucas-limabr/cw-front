@@ -5,6 +5,8 @@ import NavbarItem from "./navbarItem";
 
 function Navbar(props) {
   const navbarItems = [
+    { href: "/listagem-admsuporte", label: "ADMSuporte" },
+    { href: "/listagem-admempresa", label: "ADMEmpresa" },
     { href: "/listagem-empresa", label: "Empresas" },
     { href: "/listagem-concessionaria", label: "Concessionarias" },
     { href: "/listagem-gestor", label: "Gestores" },
@@ -13,7 +15,7 @@ function Navbar(props) {
     { href: "/listagem-modelo", label: "Modelos" },
     { href: "/listagem-item-serie", label: "Acessórios" },
     { href: "/listagem-veiculo", label: "Veículos" },
-    { href: "/listagem-testdrive", label: "Test-drive" },
+    { href: "/listagem-testdrive", label: "TestDrive" },
     { href: "/listagem-venda", label: "Vendas" },
     { href: "/listagem-cliente", label: "Clientes" },
   ];
