@@ -50,8 +50,8 @@ function Rotas() {
         <Route path="/cadastro-veiculo/:idParam?" element={<CadastroVeiculo />} />
         <Route path="/cadastro-vendedor/:idParam?" element={<CadastroVendedor />} />
 
-        <Route path="/listagem-AdmSuporte" element={<ListagemAdmSuporte />} />
-        <Route path="/listagem-AdmEmpresa" element={<ListagemAdmEmpresa />} />
+        <Route path="/listagem-admsuporte" element={<ListagemAdmSuporte />} />
+        <Route path="/listagem-admempresa" element={<ListagemAdmEmpresa />} />
         <Route path="/listagem-acessorio" element={<ListagemAcessorio />} />
         <Route path="/listagem-cliente" element={<ListagemCliente />} />
         <Route path="/listagem-venda" element={<ListagemCompra />} />
