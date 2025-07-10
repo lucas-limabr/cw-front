@@ -111,9 +111,7 @@ function CadastroVeiculo() {
     setManutencao("");
     setDataUltimaRevisao("");
     setContatoProprietario("");
-    setEmailProprietario("");
-    setTelefoneProprietario("");
-
+   
     //moto
     setCilindrada("");
     setCategoriaMoto("");
