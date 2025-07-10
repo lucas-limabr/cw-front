@@ -84,7 +84,7 @@ function ListagemModelos() {
                   {dados.map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.nome}</td>
-                      <td>{dado.fabricante}</td>
+                      <td>{dado.nomeFabricante}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton

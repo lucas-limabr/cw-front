@@ -5,13 +5,11 @@ import Stack from "@mui/material/Stack";
 const CadastroVeiculoUsado = ({
     quilometragem, setQuilometragem,
     documentacao, setDocumentacao,
-    sinistro, setSinistro,
+    sinistroAcidente, setSinistroAcidente,
     laudoVistoria, setLaudoVistoria,
     manutencao, setManutencao,
-    ultimaRevisao, setUltimaRevisao,
-    nomeProprietario, setNomeProprietario,
-    emailProprietario, setEmailProprietario,
-    telefoneProprietario, setTelefoneProprietario
+    dataUltimaRevisao, setDataUltimaRevisao,
+    contatoProprietario, setContatoProprietario,
 }) => {
     return (
         <div>
@@ -23,10 +21,7 @@ const CadastroVeiculoUsado = ({
                     id="inputQuilometragem"
                     value={quilometragem}
                     className="form-control"
-                    onChange={(e) => {
-                        const valor = e.target.value;
-                        setQuilometragem(valor === '' ? null : parseFloat(valor));
-                    }}
+                    onChange={(e) => { setQuilometragem(e.target.value)}}
                 />
             </FormGroup>
             <br />
@@ -44,9 +39,9 @@ const CadastroVeiculoUsado = ({
                 <input
                     type="text"
                     id="inputSinistro"
-                    value={sinistro}
+                    value={sinistroAcidente}
                     className="form-control"
-                    onChange={(e) => setSinistro(e.target.value)}
+                    onChange={(e) => setSinistroAcidente(e.target.value)}
                 />
             </FormGroup>
             <br />
@@ -74,9 +69,9 @@ const CadastroVeiculoUsado = ({
                 <input
                     type="date"
                     id="inputUltimaRevisao"
-                    value={ultimaRevisao}
+                    value={dataUltimaRevisao}
                     className="form-control"
-                    onChange={(e) => setUltimaRevisao(e.target.value)}
+                    onChange={(e) => setDataUltimaRevisao(e.target.value)}
                 />
             </FormGroup>
             <br />
@@ -84,29 +79,9 @@ const CadastroVeiculoUsado = ({
                 <input
                     type="text"
                     id="inputNome"
-                    value={nomeProprietario}
+                    value={contatoProprietario}
                     className="form-control"
-                    onChange={(e) => setNomeProprietario(e.target.value)}
-                />
-            </FormGroup>
-            <br />
-            <FormGroup label="E-mail do Proprietário: *" htmlFor="inputEmailProprietario">
-                <input
-                    type="email"
-                    id="inputEmailProprietario"
-                    value={emailProprietario}
-                    className="form-control"
-                    onChange={(e) => setEmailProprietario(e.target.value)}
-                />
-            </FormGroup>
-            <br />
-            <FormGroup label="Telefone do Proprietário: *" htmlFor="inputTelefoneProprietario">
-                <input
-                    type="tel"
-                    id="inputTelefoneProprietario"
-                    value={telefoneProprietario}
-                    className="form-control"
-                    onChange={(e) => setTelefoneProprietario(e.target.value)}
+                    onChange={(e) => setContatoProprietario(e.target.value)}
                 />
             </FormGroup>
         </div>

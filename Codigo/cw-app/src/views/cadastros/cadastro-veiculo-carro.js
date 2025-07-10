@@ -38,11 +38,7 @@ const CadastroVeiculoCarro = ({ categoriaCarro, setCategoriaCarro, tipoMotorCarr
                     id="inputPotencia"
                     value={potencia}
                     className="form-control"
-                    onChange={(e) => {
-                        const valor = e.target.value;
-                        setPotencia(valor === '' ? null : parseFloat(valor));
-                    }
-                    }
+                    onChange={(e) => {setPotencia(e.target.value)}}
                 />
             </FormGroup>
 

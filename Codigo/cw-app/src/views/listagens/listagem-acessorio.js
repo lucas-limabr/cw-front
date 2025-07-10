@@ -51,7 +51,7 @@ function ListagemAcessorio() {
   }
 
   React.useEffect(() => {
-    axios.get(`${baseURL}/read`).then((response) => {
+    axios.get(`${baseURL}`).then((response) => {
       setDados(response.data);
     });
   }, []);

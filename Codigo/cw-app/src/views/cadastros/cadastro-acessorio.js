@@ -31,7 +31,7 @@ function CadastroAcessorio() {
 
     try {
       if (!idParam) {
-        await axios.post(`${baseURL}/${idParam}`, data, {
+        await axios.post(`${baseURL}`, data, {
           headers: { "Content-Type": "application/json" },
         });
         mensagemSucesso(`Acessório ${descricao} cadastrado com sucesso!`);

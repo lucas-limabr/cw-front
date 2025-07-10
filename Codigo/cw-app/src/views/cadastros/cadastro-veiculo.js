@@ -26,31 +26,36 @@ function CadastroVeiculo() {
 
   const [id, setId] = useState("");
   const [chassi, setChassi] = useState("");
-  const [modelo, setModelo] = useState("");
-  const [precoAtual, setPrecoAtual] = useState(null);
-  const [precoBase, setPrecoBase] = useState(null);
-  const [qtdEstoque, setQtdEstoque] = useState(null);
+  const [precoAtual, setPrecoAtual] = useState("");
   const [cor, setCor] = useState("");
-  const [razaoSocialConcessionaria, setConcessionaria] = useState("");
-  const [condicao, setCondicao] = useState(true);
-  const [tipo, setTipo] = useState(null);
+  const [concessionariaId, setConcessionariaId] = useState("");
+  const [condicao, setCondicao] = useState("");
+  const [tipo, setTipo] = useState("");
   const [garantia, setGarantia] = useState("");
 
+  const [acessorios, setAcessorios] = useState([]);
+
+
+  //atributos de modelo
+  const [anoFabricacao, setAnoFabricacao] = useState("");
+  const [modeloId, setModelo] = useState("");
+  const [precoBase, setPrecoBase] = useState("");
+  const [fotoModelo, setFotoModelo] = useState(null);
+  const [qtdEstoqueVenda, setQtdEstoqueVenda] = useState("");
+  const [permiteTestDrive, setPermiteTestDrive] = useState(false);
+  const [qtdEstoque, setQtdEstoque] = useState("");
 
   //para veiculos usados
-  const [quilometragem, setQuilometragem] = useState(null);
+  const [quilometragem, setQuilometragem] = useState("");
   const [documentacao, setDocumentacao] = useState("");
-  const [sinistro, setSinistro] = useState("");
+  const [sinistroAcidente, setSinistroAcidente] = useState("");
   const [laudoVistoria, setLaudoVistoria] = useState("");
   const [manutencao, setManutencao] = useState("");
-  const [ultimaRevisao, setUltimaRevisao] = useState("");
-  const [nomeProprietario, setNomeProprietario] = useState("");
-  const [emailProprietario, setEmailProprietario] = useState("");
-  const [telefoneProprietario, setTelefoneProprietario] = useState("");
-
+  const [dataUltimaRevisao, setDataUltimaRevisao] = useState("");
+  const [contatoProprietario, setContatoProprietario] = useState("");
 
   //para carros
-  const [potencia, setPotencia] = useState(null);
+  const [potencia, setPotencia] = useState("");
   const [categoriaCarro, setCategoriaCarro] = useState("");
   const [tipoMotorCarro, setTipoMotorCarro] = useState("");
   const [transmissaoCarro, setTransmissaoCarro] = useState("");
@@ -58,11 +63,11 @@ function CadastroVeiculo() {
   //para motos
   const [categoriaMoto, setCategoriaMoto] = useState("");
   const [tipoMotorMoto, setTipoMotorMoto] = useState("");
-  const [qtdMarcha, setQtdMarcha] = useState(null);
-  const [cilindrada, setCilindrada] = useState(null);
+  const [qtdMarcha, setQtdMarcha] = useState("");
+  const [cilindrada, setCilindrada] = useState("");
   const [tipoPartidaMoto, setTipoPartidaMoto] = useState("");
 
-  const [dados, setDados] = useState(null);
+  const [dados, setDados] = useState("");
   const [modelos, setModelos] = useState([]);
   const [concessionarias, setConcessionarias] = useState([]);
 
@@ -88,20 +93,24 @@ function CadastroVeiculo() {
     setId("");
     setChassi("");
     setModelo("");
+    setAnoFabricacao("");
     setPrecoAtual("");
     setPrecoBase("");
     setQtdEstoque("");
+    setQtdEstoqueVenda("");
+    setPermiteTestDrive(false);
     setCor("");
-    setConcessionaria("");
+    setConcessionariaId("");
     setCondicao("");
+    setFotoModelo(null);
     setGarantia("");
     setQuilometragem("");
     setDocumentacao("");
-    setSinistro("");
+    setSinistroAcidente("");
     setLaudoVistoria("");
     setManutencao("");
-    setUltimaRevisao("");
-    setNomeProprietario("");
+    setDataUltimaRevisao("");
+    setContatoProprietario("");
     setEmailProprietario("");
     setTelefoneProprietario("");
 
@@ -128,76 +137,78 @@ function CadastroVeiculo() {
     const data = {
       id,
       chassi,
-      modelo,
       precoAtual: precoAtualNumerico, // envia como número para o backend
-      precoBase: precoBaseNumerico,
-      qtdEstoque,
       cor,
-      razaoSocialConcessionaria,
       condicao,
-      tipo,
+      concessionariaId: concessionariaId === "" ? null : parseInt(concessionariaId),
       garantia,
-      ...(condicao === "Usado" && {
-        quilometragem,
-        documentacao,
-        sinistro,
-        manutencao,
-        laudoVistoria,
-        ultimaRevisao,
-        nomeProprietario,
-        emailProprietario,
-        telefoneProprietario
-      }),
-      ...(tipo === "Carro"
+      modeloVeiculo: {
+        precoBase: precoBaseNumerico,
+        qtdEstoque: qtdEstoque === "" ? null : parseInt(qtdEstoque),
+        qtdEstoqueVenda: qtdEstoqueVenda === "" ? null : parseInt(qtdEstoqueVenda),
+        fotoModelo,
+        modeloId: modeloId === "" ? null : Number(qtdEstoque),
+        anoFabricacao,
+        permiteTestDrive,
+        tipoVeiculo: {
+          tipo,
+          ...(tipo === "Carro" &&
+          {
+            carro: {
+              categoria: categoriaCarro,
+              potencia: potencia === "" ? null : parseFloat(potencia),
+              motorizacao: tipoMotorCarro,
+              transmissao: transmissaoCarro
+            },
+            moto: null
+          }),
+          ...(tipo === "Moto"
+            && {
+            moto: {
+              categoria: categoriaMoto,
+              cilindrada: cilindrada === "" ? null : parseFloat(cilindrada),
+              tipoMotor: tipoMotorMoto,
+              qtdMarcha: qtdMarcha === "" ? null : parseInt(qtdMarcha),
+              tipoPartida: tipoPartidaMoto
+            },
+            carro: null
+          })
+        }
+      },
+      ...(condicao === "Usado"
         ? {
-          categoriaCarro,
-          potencia,
-          tipoMotorCarro,
-          transmissaoCarro
+          veiculoUsado: {
+            quilometragem: quilometragem === "" ? null : parseFloat(quilometragem),
+            documentacao: documentacao,
+            sinistroAcidente: sinistroAcidente,
+            manutencao: manutencao,
+            laudoVistoria: laudoVistoria,
+            dataUltimaRevisao: dataUltimaRevisao,
+            contatoProprietario: contatoProprietario
+          }
         }
         : {
-          categoriaCarro: null, // Removendo atributos de Carro se for Moto
-          potencia: null,
-          tipoMotorCarro: null,
-          transmissaoCarro: null
-        }),
-      ...(tipo === "Moto"
-        ? {
-          categoriaMoto,
-          cilindrada,
-          tipoMotorMoto,
-          qtdMarcha,
-          tipoPartidaMoto
+          veiculoUsado: null
         }
-        : {
-          categoriaMoto: null, // Removendo atributos de Moto se for Carro
-          cilindrada: null,
-          tipoMotorMoto: null,
-          qtdMarcha: null,
-          tipoPartidaMoto: null
-        })
+      )
     };
 
     try {
       if (!idParam) {
-        await axios.post(`${baseURL}/${idParam}`, data, {
+        await axios.post(`${baseURL}`, data, {
           headers: { "Content-Type": "application/json" }
         });
-        mensagemSucesso(`Veículo ${modelo} cadastrado com sucesso!`);
+        mensagemSucesso(`Veículo de chassi ${data.chassi} cadastrado com sucesso!`);
       } else {
         await axios.put(`${baseURL}/${idParam}`, data, {
           headers: { "Content-Type": "application/json" }
         });
-        mensagemSucesso(`Veículo ${modelo} alterado com sucesso!`);
+        mensagemSucesso(`Veículo de chassi ${data.chassi} alterado com sucesso!`);
       }
       navigate("/listagem-veiculo");
     } catch (error) {
       mensagemErro(error.response?.data || "Erro ao salvar veículo.");
     }
-  }
-
-  function cancelar() {
-    navigate(`/listagem-veiculo/`);
   }
 
   async function buscar() {
@@ -207,36 +218,45 @@ function CadastroVeiculo() {
         const veiculo = response.data;
         setId(veiculo.id);
         setChassi(veiculo.chassi);
-        setModelo(veiculo.modelo);
+        setConcessionariaId(veiculo.concessionariaId);
         setPrecoAtual(veiculo.precoAtual);
-        setPrecoBase(veiculo.precoBase);
-        setQtdEstoque(veiculo.qtdEstoque);
         setCor(veiculo.cor);
-        setConcessionaria(veiculo.razaoSocialConcessionaria);
-        setCondicao(veiculo.condicao);
-        setTipo(veiculo.tipo);
         setGarantia(veiculo.garantia);
+        setCondicao(veiculo.condicao);
 
-        setQuilometragem(veiculo.quilometragem);
-        setDocumentacao(veiculo.documentacao);
-        setSinistro(veiculo.sinistro);
-        setManutencao(veiculo.manutencao);
-        setLaudoVistoria(veiculo.laudoVistoria);
-        setUltimaRevisao(veiculo.ultimaRevisao);
-        setNomeProprietario(veiculo.nomeProprietario);
-        setEmailProprietario(veiculo.emailProprietario);
-        setTelefoneProprietario(veiculo.telefoneProprietario);
+        if (veiculo.condicao == "Usado") {
+          setQuilometragem(veiculo.veiculoUsado.quilometragem);
+          setDocumentacao(veiculo.veiculoUsado.documentacao);
+          setSinistroAcidente(veiculo.veiculoUsado.sinistroAcidente);
+          setManutencao(veiculo.veiculoUsado.manutencao);
+          setLaudoVistoria(veiculo.veiculoUsado.laudoVistoria);
+          setDataUltimaRevisao(veiculo.veiculoUsado.dataUltimaRevisao);
+          setContatoProprietario(veiculo.veiculoUsado.contatoProprietario);
+        }
 
-        //para motos e carros
-        setPotencia(veiculo.potencia);
-        setCilindrada(veiculo.cilindrada);
-        setCategoriaCarro(veiculo.categoriaCarro);
-        setCategoriaMoto(veiculo.categoriaMoto);
-        setTransmissaoCarro(veiculo.transmissaoCarro);
-        setTipoPartidaMoto(veiculo.tipoPartidaMoto);
-        setTipoMotorCarro(veiculo.tipoMotorCarro);
-        setTipoMotorMoto(veiculo.tipoMotorMoto);
-        setQtdMarcha(veiculo.qtdMarcha);
+        setAnoFabricacao(veiculo.modeloVeiculo.anoFabricacao);
+        setPrecoBase(veiculo.modeloVeiculo.precoBase);
+        setFotoModelo(veiculo.modeloVeiculo.fotoModelo);
+        setQtdEstoqueVenda(veiculo.modeloVeiculo.qtdEstoqueVenda)
+        setQtdEstoque(veiculo.modeloVeiculo.qtdEstoque);
+        setPermiteTestDrive(veiculo.modeloVeiculo.permiteTestDrive);
+        setModelo(veiculo.modeloVeiculo.modeloId);
+
+        setTipo(veiculo.modeloVeiculo.tipoVeiculo.tipo);
+
+        if (veiculo.modeloVeiculo.tipoVeiculo.tipo == "Carro") {
+          setPotencia(veiculo.modeloVeiculo.tipoVeiculo.carro.potencia);
+          setCategoriaCarro(veiculo.modeloVeiculo.tipoVeiculo.carro.categoria);
+          setTransmissaoCarro(veiculo.categoria.transmissao);
+          setTipoMotorCarro(veiculo.modeloVeiculo.tipoVeiculo.carro.motorizacao);
+        }
+        else if (veiculo.modeloVeiculo.tipoVeiculo.tipo == "Moto") {
+          setTipoMotorMoto(veiculo.modeloVeiculo.tipoVeiculo.moto.tipoMotor);
+          setCilindrada(veiculo.modeloVeiculo.tipoVeiculo.moto.cilindrada);
+          setQtdMarcha(veiculo.modeloVeiculo.tipoVeiculo.moto.qtdMarcha);
+          setTipoPartidaMoto(veiculo.modeloVeiculo.tipoVeiculo.moto.tipoPartida);
+          setCategoriaMoto(veiculo.modeloVeiculo.tipoVeiculo.moto.categoria);
+        }
 
         setDados(veiculo);
       } catch (error) {
@@ -260,35 +280,36 @@ function CadastroVeiculo() {
           <div className="col-lg-12">
             <br />
             <div className="bs-component">
-              <FormGroup label="Chassi: *" htmlFor="inputVin">
+              <FormGroup label="Chassi: *" htmlFor="inputChassi">
                 <input
                   type="text"
-                  id="inputVin"
+                  id="inputChassi"
                   value={chassi}
                   className="form-control"
                   onChange={(e) => setChassi(e.target.value)}
                 />
               </FormGroup>
               <br />
-
-              <FormGroup label="Foto: " htmlFor="inputFoto">
+              {/* <FormGroup label="Foto: " htmlFor="inputFoto">
                 <input
                   type="file"
                   id="inputFoto"
                   className="form-control"
+                  onChange={(e) => setFotoModelo(e.target.files[0])}
                 />
               </FormGroup>
-              <br />
+
+              <br /> */}
               <FormGroup label="Modelo: *" htmlFor="inputModelo">
                 <select
                   id="inputModelo"
-                  value={modelo}
+                  value={modeloId}
                   className="form-control"
                   onChange={(e) => setModelo(e.target.value)}
                 >
                   <option value="">Selecione um modelo</option>
                   {modelos.map((m) => (
-                    <option key={m.id} value={m.nome}>
+                    <option key={m.id} value={m.id}>
                       {m.nome}
                     </option>
                   ))}
@@ -298,17 +319,27 @@ function CadastroVeiculo() {
               <FormGroup label="Concessionária: *" htmlFor="inputConcessionaria">
                 <select
                   id="inputConcessionaria"
-                  value={razaoSocialConcessionaria}
+                  value={concessionariaId}
                   className="form-control"
-                  onChange={(e) => setConcessionaria(e.target.value)}
+                  onChange={(e) => setConcessionariaId(e.target.value)}
                 >
                   <option value="">Selecione uma concessionária</option>
                   {concessionarias.map((m) => (
-                    <option key={m.id} value={m.razaoSocialConcessionaria}>
+                    <option key={m.id} value={m.id}>
                       {m.razaoSocial}
                     </option>
                   ))}
                 </select>
+              </FormGroup>
+              <br />
+              <FormGroup label="Ano de fabricação: *" htmlFor="inputAnoFabricacao">
+                <input
+                  type="text"
+                  id="inputAnoFabricacao"
+                  value={anoFabricacao}
+                  className="form-control"
+                  onChange={(e) => setAnoFabricacao(e.target.value)}
+                />
               </FormGroup>
               <br />
               <FormGroup label="Preço Base: *" htmlFor="inputPrecoBase">
@@ -337,7 +368,32 @@ function CadastroVeiculo() {
                   onValueChange={(value) => setPrecoAtual(value)} // value é string ou null
                   className="currency-input"
                 />
-
+                <br />
+              </FormGroup>
+              <br />
+              <FormGroup label="Permite test-drive? *" htmlFor="inputPermiteTestDrive">
+                <div>
+                  <label>
+                    <input
+                      id="inputPermiteTestDrive"
+                      type="radio"
+                      value="Sim"
+                      checked={permiteTestDrive === "Sim"}
+                      onChange={() => setPermiteTestDrive("Sim")}
+                    />
+                    Sim
+                  </label>
+                  <label style={{ marginLeft: "20px" }}>
+                    <input
+                      id="inputPermiteTestDrive"
+                      type="radio"
+                      value="Não"
+                      checked={permiteTestDrive === "Não"}
+                      onChange={() => setPermiteTestDrive("Não")}
+                    />
+                    Não
+                  </label>
+                </div>
               </FormGroup>
               <br />
               <FormGroup label="Quantidade em estoque: " htmlFor="quantidadeEstoque">
@@ -346,10 +402,18 @@ function CadastroVeiculo() {
                   name="quantidadeEstoque"
                   type="number"
                   value={qtdEstoque}
-                  onChange={(e) => {
-                    const valor = e.target.value;
-                    setQtdEstoque(valor === '' ? null : parseInt(valor));
-                  }}
+                  onChange={(e) => { setQtdEstoque(e.target.value) }}
+                  className="currency-input"
+                />
+              </FormGroup>
+              <br />
+              <FormGroup label="Defina a quantidade mínima em estoque que quando atingida permitirá somente a venda do veículo e inativará o test-drive: " htmlFor="qtdEstoqueVenda">
+                <input
+                  id="qtdEstoqueVenda"
+                  name="qtdEstoqueVenda"
+                  type="number"
+                  value={qtdEstoqueVenda}
+                  onChange={(e) => { setQtdEstoque(e.target.value) }}
                   className="currency-input"
                 />
               </FormGroup>
@@ -403,20 +467,16 @@ function CadastroVeiculo() {
                   setQuilometragem={setQuilometragem}
                   documentacao={documentacao}
                   setDocumentacao={setDocumentacao}
-                  sinistro={sinistro}
-                  setSinistro={setSinistro}
+                  sinistroAcidente={sinistroAcidente}
+                  setSinistroAcidente={setSinistroAcidente}
                   laudoVistoria={laudoVistoria}
                   setLaudoVistoria={setLaudoVistoria}
                   manutencao={manutencao}
                   setManutencao={setManutencao}
-                  ultimaRevisao={ultimaRevisao}
-                  setUltimaRevisao={setUltimaRevisao}
-                  nomeProprietario={nomeProprietario}
-                  setNomeProprietario={setNomeProprietario}
-                  telefoneProprietario={telefoneProprietario}
-                  setTelefoneProprietario={setTelefoneProprietario}
-                  emailProprietario={emailProprietario}
-                  setEmailProprietario={setEmailProprietario}
+                  dataUltimaRevisao={dataUltimaRevisao}
+                  setDataUltimaRevisao={setDataUltimaRevisao}
+                  contatoProprietario={contatoProprietario}
+                  setContatoProprietario={setContatoProprietario}
                 />
               )}
               <br />

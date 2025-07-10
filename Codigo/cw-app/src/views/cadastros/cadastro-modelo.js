@@ -19,7 +19,7 @@ function CadastroModelo() {
   const navigate = useNavigate();
 
   const [id, setId] = useState("");
-  const [fabricante, setFabricante] = useState(null);
+  const [nomeFabricante, setNomeFabricante] = useState(null);
   const [nome, setNome] = useState("");
 
   const [dados, setDados] = useState(null);
@@ -36,14 +36,14 @@ function CadastroModelo() {
 
   function inicializar() {
     setId("");
-    setFabricante("");
+    setNomeFabricante("");
     setNome("");
   }
 
   async function salvar() {
     const data = {
       id,
-      fabricante,
+      nomeFabricante,
       nome,
     };
 
@@ -76,7 +76,7 @@ function CadastroModelo() {
         const modelo = response.data;
         setId(modelo.id);
         setNome(modelo.nome);
-        setFabricante(modelo.fabricante);
+        setNomeFabricante(modelo.nomeFabricante);
         setDados(modelo);
       } catch (error) {
         mensagemErro("Erro ao carregar os dados do veículo.");
@@ -111,9 +111,9 @@ function CadastroModelo() {
               <FormGroup label="Fabricante: *" htmlFor="inputFabricante">
                 <select
                   id="inputFabricante"
-                  value={fabricante}
+                  value={nomeFabricante}
                   className="form-control"
-                  onChange={(e) => setFabricante(e.target.value, 10)}
+                  onChange={(e) => setNomeFabricante(e.target.value)}
                 >
                   <option value="">Selecione uma fabricante</option>
                   {fabricantes.map((m) => (

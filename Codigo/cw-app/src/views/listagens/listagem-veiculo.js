@@ -87,11 +87,11 @@ function ListagemVeiculo() {
                     <tr key={dado.id}>
                       <td>{dado.tipo}</td>
                       <td>{dado.chassi}</td>
-                      <td>{dado.modelo}</td>
-                      <td>{dado.fabricante}</td>
+                      <td>{dado.nomeModelo}</td>
+                      <td>{dado.nomeFabricante}</td>
                       <td>{dado.precoAtual}</td>
                       <td>{dado.condicao}</td>
-                      <td>{dado.razaoSocialConcessionaria}</td>
+                      <td>{dado.nomeConcessionaria}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton
