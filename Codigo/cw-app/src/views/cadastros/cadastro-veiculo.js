@@ -111,7 +111,7 @@ function CadastroVeiculo() {
     setManutencao("");
     setDataUltimaRevisao("");
     setContatoProprietario("");
-   
+
     //moto
     setCilindrada("");
     setCategoriaMoto("");
@@ -344,6 +344,7 @@ function CadastroVeiculo() {
                 <CurrencyInput
                   id="inputPrecoBase"
                   name="precoBase"
+                  value={precoBase}
                   placeholder="Digite o preço base"
                   decimalsLimit={2}
                   decimalSeparator=","
@@ -358,6 +359,7 @@ function CadastroVeiculo() {
                 <CurrencyInput
                   id="precoAtual"
                   name="precoAtual"
+                  value={precoAtual}
                   placeholder="Digite o preço atual"
                   decimalsLimit={2}
                   decimalSeparator=","
@@ -368,7 +370,6 @@ function CadastroVeiculo() {
                 />
                 <br />
               </FormGroup>
-              <br />
               <FormGroup label="Permite test-drive? *" htmlFor="inputPermiteTestDrive">
                 <div>
                   <label>
@@ -411,7 +412,7 @@ function CadastroVeiculo() {
                   name="qtdEstoqueVenda"
                   type="number"
                   value={qtdEstoqueVenda}
-                  onChange={(e) => { setQtdEstoque(e.target.value) }}
+                  onChange={(e) => { setQtdEstoqueVenda(e.target.value) }}
                   className="currency-input"
                 />
               </FormGroup>
@@ -422,17 +423,6 @@ function CadastroVeiculo() {
                   value={cor}
                   className="form-control"
                   onChange={(e) => setCor(e.target.value)}
-                />
-              </FormGroup>
-              <br />
-
-              <FormGroup label="Garantia: *" htmlFor="inputGarantia">
-                <input
-                  type="text"
-                  id="inputGarantia"
-                  value={garantia}
-                  className="form-control"
-                  onChange={(e) => setGarantia(e.target.value)}
                 />
               </FormGroup>
               <br />
@@ -475,6 +465,8 @@ function CadastroVeiculo() {
                   setDataUltimaRevisao={setDataUltimaRevisao}
                   contatoProprietario={contatoProprietario}
                   setContatoProprietario={setContatoProprietario}
+                  garantia={garantia}
+                  setGarantia={setGarantia}
                 />
               )}
               <br />

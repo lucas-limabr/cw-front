@@ -18,8 +18,7 @@ function CadastroModelo() {
   const { idParam } = useParams();
   const navigate = useNavigate();
 
-  const [id, setId] = useState("");
-  const [nomeFabricante, setNomeFabricante] = useState(null);
+  const [fabricante, setFabricante] = useState(null);
   const [nome, setNome] = useState("");
 
   const [dados, setDados] = useState(null);
@@ -35,16 +34,14 @@ function CadastroModelo() {
   }
 
   function inicializar() {
-    setId("");
-    setNomeFabricante("");
+    setFabricante("");
     setNome("");
   }
 
   async function salvar() {
     const data = {
-      id,
-      nomeFabricante,
-      nome,
+      nome: nome,
+      fabricanteId:  parseInt(fabricante)
     };
 
     try {
@@ -74,9 +71,8 @@ function CadastroModelo() {
       try {
         const response = await axios.get(`${baseURL}/${idParam}`);
         const modelo = response.data;
-        setId(modelo.id);
         setNome(modelo.nome);
-        setNomeFabricante(modelo.nomeFabricante);
+        setFabricante(modelo.fabricanteId);
         setDados(modelo);
       } catch (error) {
         mensagemErro("Erro ao carregar os dados do veículo.");
@@ -111,9 +107,9 @@ function CadastroModelo() {
               <FormGroup label="Fabricante: *" htmlFor="inputFabricante">
                 <select
                   id="inputFabricante"
-                  value={nomeFabricante}
+                  value={fabricante}
                   className="form-control"
-                  onChange={(e) => setNomeFabricante(e.target.value)}
+                  onChange={(e) => setFabricante(e.target.value)}
                 >
                   <option value="">Selecione uma fabricante</option>
                   {fabricantes.map((m) => (
