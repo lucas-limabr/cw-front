@@ -62,10 +62,6 @@ function CadastroModelo() {
     }
   }
 
-  function cancelar() {
-    navigate(`/listagem-modelo/`);
-  }
-
   async function buscar() {
     if (idParam) {
       try {

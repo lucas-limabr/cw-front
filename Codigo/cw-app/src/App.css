@@ -1,4 +1,6 @@
-.App {
+.span-padding {
+  padding-left: 8px;
+}.App {
   text-align: center;
 }
 

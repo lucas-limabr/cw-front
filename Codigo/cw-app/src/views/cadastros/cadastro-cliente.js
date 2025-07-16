@@ -93,10 +93,6 @@ function CadastroCliente() {
     }
   }
 
-  function cancelar() {
-    navigate(`/listagem-cliente/`);
-  }
-
   async function buscar() {
     if (idParam) {
       try {

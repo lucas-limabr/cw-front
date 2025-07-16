@@ -1,4 +1,5 @@
 import React from "react";
+import "../../App.css";
 import FormGroup from "../../components/form-group";
 import Stack from "@mui/material/Stack";
 
@@ -9,8 +10,7 @@ const CadastroVeiculoUsado = ({
     laudoVistoria, setLaudoVistoria,
     manutencao, setManutencao,
     dataUltimaRevisao, setDataUltimaRevisao,
-    contatoProprietario, setContatoProprietario,
-    garantia, setGarantia,
+    contatoProprietario, setContatoProprietario
 }) => {
     return (
         <div>
@@ -26,88 +26,6 @@ const CadastroVeiculoUsado = ({
                 />
             </FormGroup>
             <br />
-            <FormGroup label="Garantia *" htmlFor="garantia">
-                <div>
-                    <label>
-                        <input
-                            id="garantia"
-                            type="radio"
-                            value="Em vigencia"
-                            checked={garantia === "Em vigencia"}
-                            onChange={() => setGarantia("Em vigencia")}
-                        />
-                        Em vigência
-                    </label>
-                    < br />
-                    <label>
-                        <input
-                            id="garantia"
-                            type="radio"
-                            value="Expirada"
-                            checked={garantia === "Expirada"}
-                            onChange={() => setGarantia("Expirada")}
-                        />
-                        Expirada
-                    </label>
-                    < br />
-                    <label>
-                        <input
-                            id="garantia"
-                            type="radio"
-                            value="Próxima do vencimento"
-                            checked={garantia === "Proxima do vencimento"}
-                            onChange={() => setGarantia("Proxima do vencimento")}
-                        />
-                        Próxima do vencimento
-                    </label>
-                    < br />
-                    <label>
-                        <input
-                            id="garantia"
-                            type="radio"
-                            value="Estendida"
-                            checked={garantia === "Estendida"}
-                            onChange={() => setGarantia("Estendida")}
-                        />
-                        Estendida
-                    </label>
-                    < br />
-                    <label>
-                        <input
-                            id="garantia"
-                            type="radio"
-                            value="Nao disponivel"
-                            checked={garantia === "Nao disponivel"}
-                            onChange={() => setGarantia("Nao disponivel")}
-                        />
-                        Não disponível (caso o veículo não tenha garantia)
-                    </label>
-                    < br />
-                    <label>
-                        <input
-                            id="garantia"
-                            type="radio"
-                            value="Garantia de fabrica"
-                            checked={garantia === "Garantia de fabrica"}
-                            onChange={() => setGarantia("Garantia de fabrica")}
-                        />
-                        Garantia de fábrica
-                    </label>
-                    < br />
-                    <label>
-                        <input
-                            id="garantia"
-                            type="radio"
-                            value="Garantia de concessionaria"
-                            checked={garantia === "Garantia de concessionaria"}
-                            onChange={() => setGarantia("Garantia de concessionaria")}
-                        />
-                        Garantia de concessionária
-                    </label>
-                    < br />
-                </div>
-            </FormGroup>
-            <br />
             <FormGroup label="Documentação *" htmlFor="documentacao">
                 <div>
                     <label>
@@ -118,7 +36,7 @@ const CadastroVeiculoUsado = ({
                             checked={documentacao === "Regular"}
                             onChange={() => setDocumentacao("Regular")}
                         />
-                        Regular
+                        <span className="span-padding">Regular</span>
                     </label>
                     < br />
                     <label>
@@ -129,7 +47,7 @@ const CadastroVeiculoUsado = ({
                             checked={documentacao === "Pendente (algum documento em aberto)"}
                             onChange={() => setDocumentacao("Pendente (algum documento em aberto)")}
                         />
-                        Pendente (algum documento em aberto)
+                        <span className="span-padding">Pendente (algum documento em aberto)</span>
                     </label>
                     < br />
                     <label>
@@ -140,7 +58,7 @@ const CadastroVeiculoUsado = ({
                             checked={documentacao === "Aguardando renovação (em vias de renovação, como licenciamento)"}
                             onChange={() => setDocumentacao("Aguardando renovação (em vias de renovação, como licenciamento)")}
                         />
-                        Aguardando renovação (em vias de renovação, como licenciamento)
+                        <span className="span-padding">Aguardando renovação (em vias de renovação, como licenciamento)</span>
                     </label>
                     < br />
                     <label>
@@ -148,10 +66,10 @@ const CadastroVeiculoUsado = ({
                             id="documentacao"
                             type="radio"
                             value="Atrasada (documentação não renovada no prazo)"
-                            checked={documentacao === `Atrasada (documentação não renovada no prazo)`}
-                            onChange={() => setDocumentacao(`Atrasada (documentação não renovada no prazo)`)}
+                            checked={documentacao === "Atrasada (documentação não renovada no prazo)"}
+                            onChange={() => setDocumentacao("Atrasada (documentação não renovada no prazo)")}
                         />
-                        Atrasada (documentação não renovada no prazo)
+                        <span className="span-padding">Atrasada (documentação não renovada no prazo)</span>
                     </label>
                     < br />
                     <label>
@@ -162,7 +80,7 @@ const CadastroVeiculoUsado = ({
                             checked={documentacao === "Em processo de transferência (caso o veículo esteja mudando de proprietário)"}
                             onChange={() => setDocumentacao("Em processo de transferência (caso o veículo esteja mudando de proprietário)")}
                         />
-                        Em processo de transferência (caso o veículo esteja mudando de proprietário)
+                        <span className="span-padding">Em processo de transferência (caso o veículo esteja mudando de proprietário)</span>
                     </label>
                     < br />
                     <label>
@@ -173,7 +91,7 @@ const CadastroVeiculoUsado = ({
                             checked={documentacao === "Suspensa (algum impedimento legal)"}
                             onChange={() => setDocumentacao("Suspensa (algum impedimento legal)")}
                         />
-                        Suspensa (algum impedimento legal)
+                        <span className="span-padding">Suspensa (algum impedimento legal)</span>
                     </label>
                     < br />
                 </div>
@@ -189,7 +107,7 @@ const CadastroVeiculoUsado = ({
                             checked={manutencao === "Manutenção em dia"}
                             onChange={() => setManutencao("Manutenção em dia")}
                         />
-                        Manutenção em dia
+                        <span className="span-padding">Manutenção em dia</span>
                     </label>
                     < br />
                     <label>
@@ -200,7 +118,7 @@ const CadastroVeiculoUsado = ({
                             checked={manutencao === `Atrasada (documentação não renovada no prazo)`}
                             onChange={() => setManutencao(`Atrasada (documentação não renovada no prazo)`)}
                         />
-                        Atrasada (documentação não renovada no prazo)
+                        <span className="span-padding">Atrasada (documentação não renovada no prazo)</span>
                     </label>
                     < br />
                     <label>
@@ -211,7 +129,7 @@ const CadastroVeiculoUsado = ({
                             checked={manutencao === "Revisão de fábrica realizada"}
                             onChange={() => setManutencao("Revisão de fábrica realizada")}
                         />
-                        Revisão de fábrica realizada
+                        <span className="span-padding">Revisão de fábrica realizada</span>
                     </label>
                     < br />
                     <label>
@@ -222,7 +140,7 @@ const CadastroVeiculoUsado = ({
                             checked={manutencao === "Revisão pendente"}
                             onChange={() => setManutencao("Revisão pendente")}
                         />
-                        Revisão pendente
+                        <span className="span-padding">Revisão pendente</span>
                     </label>
                     < br />
                     <label>
@@ -233,7 +151,7 @@ const CadastroVeiculoUsado = ({
                             checked={manutencao === "Manutenção corretiva realizada (conserto de algum defeito)"}
                             onChange={() => setManutencao("Manutenção corretiva realizada (conserto de algum defeito)")}
                         />
-                        Manutenção corretiva realizada (conserto de algum defeito)
+                        <span className="span-padding">Manutenção corretiva realizada (conserto de algum defeito)</span>
                     </label>
                     < br />
                     <label>
@@ -244,7 +162,7 @@ const CadastroVeiculoUsado = ({
                             checked={manutencao === "Manutenção preventiva realizada"}
                             onChange={() => setManutencao("Manutenção preventiva realizada")}
                         />
-                        Manutenção preventiva realizada
+                        <span className="span-padding">Manutenção preventiva realizada</span>
                     </label>
                     < br />
                     <label>
@@ -255,7 +173,7 @@ const CadastroVeiculoUsado = ({
                             checked={manutencao === "Nenhuma manutenção registrada"}
                             onChange={() => setManutencao("Nenhuma manutenção registrada")}
                         />
-                        Nenhuma manutenção registrada
+                        <span className="span-padding">Nenhuma manutenção registrada</span>
                     </label>
                     < br />
                 </div>
@@ -271,7 +189,7 @@ const CadastroVeiculoUsado = ({
                             checked={sinistroAcidente === "Sem histórico de sinistros"}
                             onChange={() => setSinistroAcidente("Sem histórico de sinistros")}
                         />
-                        Sem histórico de sinistros
+                        <span className="span-padding">Sem histórico de sinistros</span>
                     </label>
                     < br />
                     <label>
@@ -282,7 +200,7 @@ const CadastroVeiculoUsado = ({
                             checked={sinistroAcidente === "Acidente leve (Pequenos danos, como arranhões ou amassados)"}
                             onChange={() => setSinistroAcidente("Acidente leve (Pequenos danos, como arranhões ou amassados)")}
                         />
-                        Acidente leve (Pequenos danos, como arranhões ou amassados)
+                        <span className="span-padding">Acidente leve (Pequenos danos, como arranhões ou amassados)</span>
                     </label>
                     < br />
                     <label>
@@ -293,7 +211,7 @@ const CadastroVeiculoUsado = ({
                             checked={sinistroAcidente === "Acidente moderado (Danos maiores, mas sem comprometimento estrutural)"}
                             onChange={() => setSinistroAcidente("Acidente moderado (Danos maiores, mas sem comprometimento estrutural)")}
                         />
-                        Acidente moderado (Danos maiores, mas sem comprometimento estrutural)
+                        <span className="span-padding">Acidente moderado (Danos maiores, mas sem comprometimento estrutural)</span>
                     </label>
                     < br />
                     <label>
@@ -304,7 +222,7 @@ const CadastroVeiculoUsado = ({
                             checked={sinistroAcidente === "Acidente grave (Danos significativos, envolvendo partes estruturais)"}
                             onChange={() => setSinistroAcidente("Acidente grave (Danos significativos, envolvendo partes estruturais)")}
                         />
-                        Acidente grave (Danos significativos, envolvendo partes estruturais)
+                        <span className="span-padding">Acidente grave (Danos significativos, envolvendo partes estruturais)</span>
                     </label>
                     < br />
                     <label>
@@ -315,7 +233,7 @@ const CadastroVeiculoUsado = ({
                             checked={sinistroAcidente === "Recuperado de sinistro (Veículo reparado após sinistro)"}
                             onChange={() => setSinistroAcidente("Recuperado de sinistro (Veículo reparado após sinistro)")}
                         />
-                        Recuperado de sinistro (Veículo reparado após sinistro)
+                        <span className="span-padding">Recuperado de sinistro (Veículo reparado após sinistro)</span>
                     </label>
                     < br />
                 </div>
@@ -331,7 +249,7 @@ const CadastroVeiculoUsado = ({
                             checked={laudoVistoria === "Laudo 100% Aprovado"}
                             onChange={() => setLaudoVistoria("Laudo 100% Aprovado")}
                         />
-                        Laudo 100% Aprovado
+                        <span className="span-padding">Laudo 100% Aprovado</span>
                     </label>
                     < br />
                     <label>
@@ -342,7 +260,7 @@ const CadastroVeiculoUsado = ({
                             checked={laudoVistoria === "Aprovado com Observações"}
                             onChange={() => setLaudoVistoria("Aprovado com Observações")}
                         />
-                        Aprovado com Observações
+                        <span className="span-padding">Aprovado com Observações</span>
                     </label>
                     < br />
                     <label>
@@ -353,7 +271,7 @@ const CadastroVeiculoUsado = ({
                             checked={laudoVistoria === "Reprovado – Danos Estruturais"}
                             onChange={() => setLaudoVistoria("Reprovado – Danos Estruturais")}
                         />
-                        Reprovado – Danos Estruturais
+                        <span className="span-padding">Reprovado – Danos Estruturais</span>
                     </label>
                     < br />
                     <label>
@@ -364,7 +282,7 @@ const CadastroVeiculoUsado = ({
                             checked={laudoVistoria === "Em análise"}
                             onChange={() => setLaudoVistoria("Em análise")}
                         />
-                        Em análise
+                        <span className="span-padding">Em análise</span>
                     </label>
                     < br />
                 </div>
@@ -380,10 +298,10 @@ const CadastroVeiculoUsado = ({
                 />
             </FormGroup>
             <br />
-            <FormGroup label="Nome do Proprietário: *" htmlFor="inputNome">
+            <FormGroup label="Contato do Proprietário: " htmlFor="inputContato">
                 <input
                     type="text"
-                    id="inputNome"
+                    id="inputContato"
                     value={contatoProprietario}
                     className="form-control"
                     onChange={(e) => setContatoProprietario(e.target.value)}

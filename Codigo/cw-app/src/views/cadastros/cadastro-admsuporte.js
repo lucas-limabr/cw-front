@@ -90,10 +90,6 @@ function CadastroAdmSuporte() {
         }
     }
 
-    function cancelar() {
-        navigate(`/listagem-admsuporte/`);
-    }
-
     async function buscar() {
         if (idParam) {
             try {

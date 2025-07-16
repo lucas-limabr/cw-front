@@ -51,10 +51,6 @@ function CadastroItemSerie() {
     }
   }
 
-  function cancelar() {
-    navigate(`/listagem-item-serie/`);
-  }
-
   async function buscar() {
     if (idParam) {
       try {

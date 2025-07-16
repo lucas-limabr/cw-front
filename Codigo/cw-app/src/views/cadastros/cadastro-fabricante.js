@@ -51,10 +51,6 @@ function CadastroFabricante() {
     }
   }
 
-  function cancelar() {
-    navigate(`/listagem-fabricante/`);
-  }
-
   async function buscar() {
     if (idParam) {
       try {

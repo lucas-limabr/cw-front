@@ -24,7 +24,6 @@ function CadastroVeiculo() {
   const { idParam } = useParams();
   const navigate = useNavigate();
 
-  const [id, setId] = useState("");
   const [chassi, setChassi] = useState("");
   const [precoAtual, setPrecoAtual] = useState("");
   const [cor, setCor] = useState("");
@@ -35,10 +34,9 @@ function CadastroVeiculo() {
 
   const [acessorios, setAcessorios] = useState([]);
 
-
   //atributos de modelo
   const [anoFabricacao, setAnoFabricacao] = useState("");
-  const [modeloId, setModelo] = useState("");
+  const [modeloId, setModeloId] = useState("");
   const [precoBase, setPrecoBase] = useState("");
   const [fotoModelo, setFotoModelo] = useState(null);
   const [qtdEstoqueVenda, setQtdEstoqueVenda] = useState("");
@@ -68,13 +66,13 @@ function CadastroVeiculo() {
   const [tipoPartidaMoto, setTipoPartidaMoto] = useState("");
 
   const [dados, setDados] = useState("");
-  const [modelos, setModelos] = useState([]);
+  const [modelos, setModeloIds] = useState([]);
   const [concessionarias, setConcessionarias] = useState([]);
 
   async function carregarModelos() {
     try {
       const response = await axios.get(`${modelosURL}`);
-      setModelos(response.data);
+      setModeloIds(response.data);
     } catch (error) {
       console.error("Erro ao carregar modelos:", error);
     }
@@ -90,9 +88,8 @@ function CadastroVeiculo() {
   }
 
   function inicializar() {
-    setId("");
     setChassi("");
-    setModelo("");
+    setModeloId("");
     setAnoFabricacao("");
     setPrecoAtual("");
     setPrecoBase("");
@@ -128,26 +125,34 @@ function CadastroVeiculo() {
 
   async function salvar() {
 
-    // Converte "1234,56" para "1234.56"
-    const precoAtualNumerico = parseFloat(precoAtual.replace(',', '.'));
-    const precoBaseNumerico = parseFloat(precoBase.replace(',', '.'));
+    var precoAtualInput = precoAtual;
+    var precoBaseInput = precoBase;
+    if (typeof precoAtualInput === 'number') {
+      precoAtualInput = precoAtual.toString();
+    }
+
+    if (typeof precoBaseInput === 'number') {
+      precoBaseInput = precoBase.toString();
+    }
+
+    const precoAtualNumerico = parseFloat(precoAtualInput.replace(',', '.'));
+    const precoBaseNumerico = parseFloat(precoBaseInput.replace(',', '.'));
 
     const data = {
-      id,
-      chassi,
+      chassi: chassi,
       precoAtual: precoAtualNumerico, // envia como número para o backend
-      cor,
-      condicao,
+      cor: cor,
+      condicao: condicao,
       concessionariaId: concessionariaId === "" ? null : parseInt(concessionariaId),
-      garantia,
+      garantia: garantia,
       modeloVeiculo: {
         precoBase: precoBaseNumerico,
         qtdEstoque: qtdEstoque === "" ? null : parseInt(qtdEstoque),
         qtdEstoqueVenda: qtdEstoqueVenda === "" ? null : parseInt(qtdEstoqueVenda),
         fotoModelo,
-        modeloId: modeloId === "" ? null : Number(qtdEstoque),
-        anoFabricacao,
-        permiteTestDrive,
+        modeloId: modeloId === "" ? null : Number(modeloId),
+        anoFabricacao: anoFabricacao,
+        permiteTestDrive: permiteTestDrive,
         tipoVeiculo: {
           tipo,
           ...(tipo === "Carro" &&
@@ -191,6 +196,8 @@ function CadastroVeiculo() {
       )
     };
 
+    console.log(data);
+
     try {
       if (!idParam) {
         await axios.post(`${baseURL}`, data, {
@@ -214,7 +221,6 @@ function CadastroVeiculo() {
       try {
         const response = await axios.get(`${baseURL}/${idParam}`);
         const veiculo = response.data;
-        setId(veiculo.id);
         setChassi(veiculo.chassi);
         setConcessionariaId(veiculo.concessionariaId);
         setPrecoAtual(veiculo.precoAtual);
@@ -238,14 +244,14 @@ function CadastroVeiculo() {
         setQtdEstoqueVenda(veiculo.modeloVeiculo.qtdEstoqueVenda)
         setQtdEstoque(veiculo.modeloVeiculo.qtdEstoque);
         setPermiteTestDrive(veiculo.modeloVeiculo.permiteTestDrive);
-        setModelo(veiculo.modeloVeiculo.modeloId);
+        setModeloId(veiculo.modeloVeiculo.modeloId);
 
         setTipo(veiculo.modeloVeiculo.tipoVeiculo.tipo);
 
         if (veiculo.modeloVeiculo.tipoVeiculo.tipo == "Carro") {
           setPotencia(veiculo.modeloVeiculo.tipoVeiculo.carro.potencia);
           setCategoriaCarro(veiculo.modeloVeiculo.tipoVeiculo.carro.categoria);
-          setTransmissaoCarro(veiculo.categoria.transmissao);
+          setTransmissaoCarro(veiculo.modeloVeiculo.tipoVeiculo.carro.transmissao);
           setTipoMotorCarro(veiculo.modeloVeiculo.tipoVeiculo.carro.motorizacao);
         }
         else if (veiculo.modeloVeiculo.tipoVeiculo.tipo == "Moto") {
@@ -303,7 +309,7 @@ function CadastroVeiculo() {
                   id="inputModelo"
                   value={modeloId}
                   className="form-control"
-                  onChange={(e) => setModelo(e.target.value)}
+                  onChange={(e) => setModeloId(e.target.value)}
                 >
                   <option value="">Selecione um modelo</option>
                   {modelos.map((m) => (
@@ -406,16 +412,19 @@ function CadastroVeiculo() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Defina a quantidade mínima em estoque que quando atingida permitirá somente a venda do veículo e inativará o test-drive: " htmlFor="qtdEstoqueVenda">
-                <input
-                  id="qtdEstoqueVenda"
-                  name="qtdEstoqueVenda"
-                  type="number"
-                  value={qtdEstoqueVenda}
-                  onChange={(e) => { setQtdEstoqueVenda(e.target.value) }}
-                  className="currency-input"
-                />
-              </FormGroup>
+              {permiteTestDrive === "Sim" && (
+                <FormGroup label="Defina a quantidade mínima em estoque que quando atingida permitirá somente a venda do veículo e inativará o test-drive: " htmlFor="qtdEstoqueVenda">
+                  <input
+                    id="qtdEstoqueVenda"
+                    name="qtdEstoqueVenda"
+                    type="number"
+                    value={qtdEstoqueVenda}
+                    onChange={(e) => { setQtdEstoqueVenda(e.target.value) }}
+                    className="currency-input"
+                  />
+                  <br />
+                </FormGroup>
+              )}
               <FormGroup label="Cor: *" htmlFor="inputCor">
                 <input
                   type="text"
@@ -426,6 +435,88 @@ function CadastroVeiculo() {
                 />
               </FormGroup>
               <br />
+              <FormGroup label="Garantia *" htmlFor="garantia">
+                <div>
+                  <label>
+                    <input
+                      id="garantia"
+                      type="radio"
+                      value="Em vigência"
+                      checked={garantia === "Em vigência"}
+                      onChange={() => setGarantia("Em vigência")}
+                    />
+                    <span className="span-padding">Em vigência</span>
+                  </label>
+                  < br />
+                  <label>
+                    <input
+                      id="garantia"
+                      type="radio"
+                      value="Expirada"
+                      checked={garantia === "Expirada"}
+                      onChange={() => setGarantia("Expirada")}
+                    />
+                    <span className="span-padding">Expirada</span>
+                  </label>
+                  < br />
+                  <label>
+                    <input
+                      id="garantia"
+                      type="radio"
+                      value="Próxima do vencimento"
+                      checked={garantia === "Próxima do vencimento"}
+                      onChange={() => setGarantia("Próxima do vencimento")}
+                    />
+                    <span className="span-padding">Próxima do vencimento</span>
+                  </label>
+                  < br />
+                  <label>
+                    <input
+                      id="garantia"
+                      type="radio"
+                      value="Estendida"
+                      checked={garantia === "Estendida"}
+                      onChange={() => setGarantia("Estendida")}
+                    />
+                    <span className="span-padding">Estendida</span>
+                  </label>
+                  < br />
+                  <label>
+                    <input
+                      id="garantia"
+                      type="radio"
+                      value="Não disponível (caso o veículo não tenha garantia)"
+                      checked={garantia === "Não disponível (caso o veículo não tenha garantia)"}
+                      onChange={() => setGarantia("Não disponível (caso o veículo não tenha garantia)")}
+                    />
+                    <span className="span-padding">Não disponível (caso o veículo não tenha garantia)</span>
+                  </label>
+                  < br />
+                  <label>
+                    <input
+                      id="garantia"
+                      type="radio"
+                      value="Garantia de fábrica"
+                      checked={garantia === "Garantia de fábrica"}
+                      onChange={() => setGarantia("Garantia de fábrica")}
+                    />
+                    <span className="span-padding">Garantia de fábrica</span>
+                  </label>
+                  < br />
+                  <label>
+                    <input
+                      id="garantia"
+                      type="radio"
+                      value="Garantia de concessionária"
+                      checked={garantia === "Garantia de concessionária"}
+                      onChange={() => setGarantia("Garantia de concessionária")}
+                    />
+                    <span className="span-padding">Garantia de concessionária</span>
+                  </label>
+                  < br />
+                </div>
+              </FormGroup>
+              <br />
               <FormGroup label="Condição: *" htmlFor="inputCondicao">
                 <div>
                   <label>
@@ -433,6 +524,7 @@ function CadastroVeiculo() {
                       type="radio"
                       value="Novo"
                       checked={condicao === "Novo"}
+                      disabled={condicao === "Usado" && idParam != null}
                       onChange={() => setCondicao("Novo")}
                     />
                     Novo
@@ -442,6 +534,7 @@ function CadastroVeiculo() {
                       type="radio"
                       value="Usado"
                       checked={condicao === "Usado"}
+                      disabled={condicao === "Novo" && idParam != null}
                       onChange={() => setCondicao("Usado")}
                     />
                     Usado
@@ -465,8 +558,6 @@ function CadastroVeiculo() {
                   setDataUltimaRevisao={setDataUltimaRevisao}
                   contatoProprietario={contatoProprietario}
                   setContatoProprietario={setContatoProprietario}
-                  garantia={garantia}
-                  setGarantia={setGarantia}
                 />
               )}
               <br />
@@ -477,6 +568,7 @@ function CadastroVeiculo() {
                       type="radio"
                       value="Carro"
                       checked={tipo === "Carro"}
+                      disabled={tipo === "Moto" && idParam != null}
                       onChange={() => setTipo("Carro")}
                     />
                     Carro
@@ -486,6 +578,7 @@ function CadastroVeiculo() {
                       type="radio"
                       value="Moto"
                       checked={tipo === "Moto"}
+                      disabled={tipo === "Carro" && idParam != null}
                       onChange={() => setTipo("Moto")}
                     />
                     Moto

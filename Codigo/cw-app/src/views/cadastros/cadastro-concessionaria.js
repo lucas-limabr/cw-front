@@ -113,10 +113,6 @@ function CadastroConcessionaria() {
     }
   }
 
-  function cancelar() {
-    navigate(`/listagem-concessionaria/`);
-  }
-
   useEffect(() => {
     buscar();
   }, [idParam]);

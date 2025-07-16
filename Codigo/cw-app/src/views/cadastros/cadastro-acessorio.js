@@ -47,10 +47,6 @@ function CadastroAcessorio() {
     }
   }
 
-  function cancelar() {
-    navigate(`/listagem-acessorio/`);
-  }
-
   async function buscar() {
     if (idParam) {
       try {

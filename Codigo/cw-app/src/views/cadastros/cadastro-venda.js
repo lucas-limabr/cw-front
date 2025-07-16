@@ -53,7 +53,7 @@ function CadastroVenda() {
           mensagemErro("Erro ao carregar os dados da compra.");
         }
       } else {
-        limparCampos();
+        inicializar();
       }
     }
 
@@ -101,7 +101,7 @@ function CadastroVenda() {
     carregarModelos();
   }, []);
 
-  function limparCampos() {
+  function inicializar() {
     setId("");
     setData("");
     setFormaPag("");
@@ -149,10 +149,6 @@ function CadastroVenda() {
     } catch (error) {
       console.error("Erro ao carregar modelos:", error);
     }
-  }
-
-  function cancelar() {
-    navigate("/listagem-venda");
   }
 
   return (
@@ -238,7 +234,7 @@ function CadastroVenda() {
                 <button onClick={salvar} type="button" className="btn btn-success">
                   Salvar
                 </button>
-                <button onClick={limparCampos} type="button" className="btn btn-danger">
+                <button onClick={inicializar} type="button" className="btn btn-danger">
                   Cancelar
                 </button>
               </Stack>

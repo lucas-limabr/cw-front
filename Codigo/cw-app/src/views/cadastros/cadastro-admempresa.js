@@ -90,10 +90,6 @@ function CadastroAdmEmpresa() {
       }
     }
   
-    function cancelar() {
-      navigate(`/listagem-admempresa/`);
-    }
-  
     async function buscar() {
       if (idParam) {
         try {

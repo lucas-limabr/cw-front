@@ -99,10 +99,6 @@ function CadastroVendedor() {
     }
   }
 
-  function cancelar() {
-    navigate(`/listagem-vendedor/`);
-  }
-
   async function buscar() {
     if (idParam) {
       try {

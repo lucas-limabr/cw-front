@@ -118,10 +118,6 @@ function CadastroTestDrive() {
     }
   };
 
-  const cancelar = () => {
-    navigate("/listagem-testdrive");
-  };
-
   return (
     <div className="container">
       <Card title="Cadastro de Test Drive">
@@ -196,7 +192,7 @@ function CadastroTestDrive() {
                   Salvar
                 </button>
                 <button
-                  onClick={cancelar}
+                  onClick={inicializar}
                   className="btn btn-danger"
                 >
                   Cancelar
