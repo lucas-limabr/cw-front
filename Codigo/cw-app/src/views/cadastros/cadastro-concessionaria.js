@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
 import Stack from "@mui/material/Stack";
-
 import Card from "../../components/card";
 import FormGroup from "../../components/form-group";
-
 import { mensagemSucesso, mensagemErro } from "../../components/toastr";
-
 import axios from "axios";
 import { BASE_URL } from "../../config/axios";
 
 const baseURL = `${BASE_URL}/concessionarias`;
+const empresasURL = `${BASE_URL}/empresas`;
 
 function CadastroConcessionaria() {
   const { idParam } = useParams();
@@ -21,19 +18,20 @@ function CadastroConcessionaria() {
   const [razaoSocial, setRazaoSocial] = useState("");
   const [cnpj, setCnpj] = useState("");
   const [telefone1, setTelefone1] = useState("");
-    const [telefone2, setTelefone2] = useState("");
-    const [email1, setEmail1] = useState("");
-    const [email2, setEmail2] = useState("");
+  const [telefone2, setTelefone2] = useState("");
+  const [email1, setEmail1] = useState("");
+  const [email2, setEmail2] = useState("");
   const [logradouro, setLogradouro] = useState("");
   const [numero, setNumero] = useState("");
   const [bairro, setBairro] = useState("");
   const [cep, setCep] = useState("");
   const [uf, setUf] = useState("");
-  const [complemento, setComplemento] = useState("");  // Adicionado o estado para complemento
+  const [complemento, setComplemento] = useState("");
+  const [empresaId, setEmpresaId] = useState("");
 
-  const [dados, setDados] = useState(null);
+  const [empresas, setEmpresas] = useState([]);
 
-  function inicializar() {
+  const inicializar = () => {
     setId("");
     setRazaoSocial("");
     setCnpj("");
@@ -47,46 +45,19 @@ function CadastroConcessionaria() {
     setCep("");
     setUf("");
     setComplemento("");
-  }
+    setEmpresaId("");
+  };
 
-  async function salvar() {
-    const data = {
-      id,
-      razaoSocial,
-      cnpj,
-      telefone1,
-      telefone2,
-      email1,
-      email2,
-      logradouro,
-      numero,
-      bairro,
-      cep,
-      uf,
-      complemento,
-    };
-
+  const fetchEmpresas = async () => {
     try {
-      if (!idParam) {
-        await axios.post(`${baseURL}/${idParam}`, data, {
-          headers: { "Content-Type": "application/json" },
-        });
-        mensagemSucesso(
-          `Concessionária ${razaoSocial} cadastrada com sucesso!`,
-        );
-      } else {
-        await axios.put(`${baseURL}/${idParam}`, data, {
-          headers: { "Content-Type": "application/json" },
-        });
-        mensagemSucesso(`Concessionária ${razaoSocial} alterado com sucesso!`);
-      }
-      navigate("/listagem-concessionaria");
+      const response = await axios.get(empresasURL);
+      setEmpresas(response.data);
     } catch (error) {
-      mensagemErro(error.response?.data || "Erro ao salvar concessionária.");
+      mensagemErro("Erro ao carregar a lista de empresas.");
     }
-  }
+  };
 
-  async function buscar() {
+  const buscar = async () => {
     if (idParam) {
       try {
         const response = await axios.get(`${baseURL}/${idParam}`);
@@ -104,36 +75,67 @@ function CadastroConcessionaria() {
         setCep(concessionaria.cep);
         setUf(concessionaria.uf);
         setComplemento(concessionaria.complemento);
-        setDados(concessionaria);
+        setEmpresaId(concessionaria.empresaId);
       } catch (error) {
         mensagemErro("Erro ao carregar os dados da concessionária.");
       }
     } else {
       inicializar();
     }
-  }
-
-  function cancelar() {
-    navigate(`/listagem-concessionaria/`);
-  }
+  };
 
   useEffect(() => {
+    fetchEmpresas();
     buscar();
   }, [idParam]);
+
+  const salvar = async () => {
+    const data = {
+      razaoSocial,
+      cnpj,
+      telefone1,
+      telefone2,
+      email1,
+      email2,
+      logradouro,
+      numero,
+      bairro,
+      cep,
+      uf,
+      complemento,
+      empresaId,
+    };
+
+    try {
+      if (idParam) {
+        await axios.put(`${baseURL}/${idParam}`, data);
+        mensagemSucesso(`Concessionária ${razaoSocial} alterada com sucesso!`);
+      } else {
+        await axios.post(baseURL, data);
+        mensagemSucesso(
+          `Concessionária ${razaoSocial} cadastrada com sucesso!`
+        );
+      }
+      navigate("/listagem-concessionarias");
+    } catch (error) {
+      mensagemErro(error.response?.data || "Erro ao salvar a concessionária.");
+    }
+  };
 
   return (
     <div className="container">
       <Card title="Cadastro de Concessionária">
         <div className="row">
           <div className="col-lg-12">
-            <br />
             <div className="bs-component">
+              <br />
               <FormGroup label="Razão Social: *" htmlFor="inputRazaoSocial">
                 <input
                   type="text"
                   id="inputRazaoSocial"
                   value={razaoSocial}
                   className="form-control"
+                  name="razaoSocial"
                   onChange={(e) => setRazaoSocial(e.target.value)}
                 />
               </FormGroup>
@@ -144,11 +146,28 @@ function CadastroConcessionaria() {
                   id="inputCnpj"
                   value={cnpj}
                   className="form-control"
+                  name="cnpj"
                   onChange={(e) => setCnpj(e.target.value)}
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Telefone - 1: *" htmlFor="inputTelefone1">
+              <FormGroup label="Empresa Matriz: *" htmlFor="selectEmpresa">
+                <select
+                  className="form-control"
+                  id="selectEmpresa"
+                  value={empresaId}
+                  onChange={(e) => setEmpresaId(e.target.value)}
+                >
+                  <option value="">Selecione...</option>
+                  {empresas.map((empresa) => (
+                    <option key={empresa.id} value={empresa.id}>
+                      {empresa.razaoSocial}
+                    </option>
+                  ))}
+                </select>
+              </FormGroup>
+              <br />
+              <FormGroup label="Telefone 1: *" htmlFor="inputTelefone1">
                 <input
                   type="text"
                   id="inputTelefone1"
@@ -158,7 +177,7 @@ function CadastroConcessionaria() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Telefone - 2: *" htmlFor="inputTelefone1">
+              <FormGroup label="Telefone 2:" htmlFor="inputTelefone2">
                 <input
                   type="text"
                   id="inputTelefone2"
@@ -168,7 +187,7 @@ function CadastroConcessionaria() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Email - 1: *" htmlFor="inputEmail1">
+              <FormGroup label="Email 1: *" htmlFor="inputEmail1">
                 <input
                   type="email"
                   id="inputEmail1"
@@ -178,7 +197,7 @@ function CadastroConcessionaria() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Email - 2: *" htmlFor="inputEmail2">
+              <FormGroup label="Email 2:" htmlFor="inputEmail2">
                 <input
                   type="email"
                   id="inputEmail2"
@@ -257,7 +276,7 @@ function CadastroConcessionaria() {
                   Salvar
                 </button>
                 <button
-                  onClick={inicializar}
+                  onClick={() => navigate("/listagem-concessionarias")}
                   type="button"
                   className="btn btn-danger"
                 >

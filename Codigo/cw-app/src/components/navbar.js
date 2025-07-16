@@ -13,7 +13,7 @@ function Navbar(props) {
     { href: "/listagem-vendedor", label: "Vendedores" },
     { href: "/listagem-fabricante", label: "Fabricantes" },
     { href: "/listagem-modelo", label: "Modelos" },
-    { href: "/listagem-item-serie", label: "Acessórios" },
+    { href: "/listagem-acessorio", label: "Acessórios" },
     { href: "/listagem-veiculo", label: "Veículos" },
     { href: "/listagem-testdrive", label: "TestDrive" },
     { href: "/listagem-venda", label: "Vendas" },

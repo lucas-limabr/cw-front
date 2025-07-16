@@ -1,23 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import Card from "../../components/card";
-
 import { mensagemSucesso, mensagemErro } from "../../components/toastr";
-
-import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../config/axios";
 
 import Stack from "@mui/material/Stack";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
-import axios from "axios";
-import { BASE_URL } from "../../config/axios";
-
-const baseURL = `${BASE_URL}/compras`;
+const baseURL = `${BASE_URL}/vendas`;
 
 function ListagemVenda() {
   const navigate = useNavigate();
+  const [dados, setDados] = React.useState(null);
 
   const cadastrar = () => {
     navigate(`/cadastro-venda`);
@@ -27,31 +25,18 @@ function ListagemVenda() {
     navigate(`/cadastro-venda/${id}`);
   };
 
-  const [dados, setDados] = React.useState(null);
-
-  async function excluir(id) {
-    let data = JSON.stringify({ id });
-    let url = `${baseURL}/${id}`;
-    console.log(url);
-    await axios
-      .delete(url, data, {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then(function (response) {
-        mensagemSucesso(`Venda excluída com sucesso!`);
-        setDados(
-          dados.filter((dado) => {
-            return dado.id !== id;
-          }),
-        );
-      })
-      .catch(function (error) {
-        mensagemErro(`Erro ao excluir a venda`);
-      });
-  }
+  const excluir = async (id) => {
+    try {
+      await axios.delete(`${baseURL}/${id}`);
+      mensagemSucesso(`Venda excluída com sucesso!`);
+      setDados(dados.filter((dado) => dado.id !== id));
+    } catch (error) {
+      mensagemErro(`Erro ao excluir a venda.`);
+    }
+  };
 
   React.useEffect(() => {
-    axios.get(`${baseURL}`).then((response) => {
+    axios.get(baseURL).then((response) => {
       setDados(response.data);
     });
   }, []);
@@ -63,12 +48,11 @@ function ListagemVenda() {
       <Card title="Listagem de Vendas">
         <div className="row">
           <div className="col-lg-12">
-            <br />
             <div className="bs-component">
               <button
                 type="button"
-                className="btn btn-warning"
-                onClick={() => cadastrar()}
+                className="btn btn-warning my-3"
+                onClick={cadastrar}
               >
                 Nova Venda
               </button>
@@ -77,10 +61,9 @@ function ListagemVenda() {
                   <tr>
                     <th scope="col">Data</th>
                     <th scope="col">Forma de Pagamento</th>
-                    <th scope="col">Cliente</th>
-                    <th scope="col">Modelo Veículo</th>
-                    <th scope="col">Chassi</th>
-                    <th scope="col">Concessionária</th>
+                    <th scope="col">CPF Cliente</th>
+                    <th scope="col">Modelos dos Veículos</th>
+                    <th scope="col">Valor Total</th>
                     <th scope="col">Ações</th>
                   </tr>
                 </thead>
@@ -90,9 +73,8 @@ function ListagemVenda() {
                       <td>{dado.data}</td>
                       <td>{dado.formaPag}</td>
                       <td>{dado.cpfCliente}</td>
-                      <td>{dado.modeloVeiculo}</td>
-                      <td>{dado.chassiVeiculo}</td>
-                      <td>{dado.razaoSocialConcessionaria}</td>
+                      <td>{dado.modelosVeiculos}</td>
+                      <td>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(dado.valorTotal)}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction="row">
                           <IconButton

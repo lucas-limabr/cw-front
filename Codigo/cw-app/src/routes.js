@@ -10,7 +10,6 @@ import CadastroConcessionaria from "./views/cadastros/cadastro-concessionaria.js
 import CadastroEmpresa from "./views/cadastros/cadastro-empresa.js";
 import CadastroFabricante from "./views/cadastros/cadastro-fabricante.js";
 import CadastroGestor from "./views/cadastros/cadastro-gestor.js";
-import CadastroItemSerie from "./views/cadastros/cadastro-item-serie.js";
 import CadastroModelo from "./views/cadastros/cadastro-modelo.js";
 import CadastroTestDrive from "./views/cadastros/cadastro-testdrive.js";
 import CadastroVeiculo from "./views/cadastros/cadastro-veiculo.js";
@@ -25,7 +24,6 @@ import ListagemConcessionaria from "./views/listagens/listagem-concessionaria.js
 import ListagemEmpresa from "./views/listagens/listagem-empresa.js";
 import ListagemFabricante from "./views/listagens/listagem-fabricante.js";
 import ListagemGestor from "./views/listagens/listagem-gestor.js";
-import ListagemItensSeries from "./views/listagens/listagem-item-serie.js";
 import ListagemModelo from "./views/listagens/listagem-modelo.js";
 import ListagemTestDrive from "./views/listagens/listagem-testdrive.js";
 import ListagemVeiculo from "./views/listagens/listagem-veiculo.js";
@@ -44,7 +42,6 @@ function Rotas() {
         <Route path="/cadastro-empresa/:idParam?" element={<CadastroEmpresa />} />
         <Route path="/cadastro-fabricante/:idParam?" element={<CadastroFabricante />} />
         <Route path="/cadastro-gestor/:idParam?" element={<CadastroGestor />} />
-        <Route path="/cadastro-item-serie/:idParam?" element={<CadastroItemSerie />} />
         <Route path="/cadastro-modelo/:idParam?" element={<CadastroModelo />} />
         <Route path="/cadastro-testdrive/:idParam?" element={<CadastroTestDrive />} />
         <Route path="/cadastro-veiculo/:idParam?" element={<CadastroVeiculo />} />
@@ -59,7 +56,6 @@ function Rotas() {
         <Route path="/listagem-empresa" element={<ListagemEmpresa />} />
         <Route path="/listagem-fabricante" element={<ListagemFabricante />} />
         <Route path="/listagem-gestor" element={<ListagemGestor />} />
-        <Route path="/listagem-item-serie" element={<ListagemItensSeries />} />
         <Route path="/listagem-modelo" element={<ListagemModelo />} />
         <Route path="/listagem-testdrive" element={<ListagemTestDrive />} />
         <Route path="/listagem-veiculo" element={<ListagemVeiculo />} />
