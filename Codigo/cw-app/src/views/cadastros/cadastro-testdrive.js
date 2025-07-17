@@ -32,11 +32,13 @@ function CadastroTestDrive() {
 
   useEffect(() => {
     carregarClientes();
+    carregarModelos();
   }, []);
 
   useEffect(() => {
-    carregarModelos();
-    buscar();
+    if (idParam) {
+      buscar();
+    }
   }, [idParam]);
 
   const inicializar = () => {
@@ -73,10 +75,8 @@ function CadastroTestDrive() {
 
   const buscar = async () => {
     if (!idParam) {
-      inicializar();
       return;
     }
-
     try {
       const response = await axios.get(`${baseURL}/${idParam}`);
       const data = response.data;
@@ -84,24 +84,35 @@ function CadastroTestDrive() {
       setId(data.id);
       setModelo(data.modeloVeiculo);
       setCpfCliente({ value: data.cpfCliente, label: data.cpfCliente });
-      setDataAgendada(data.dataAgendada);
-      setHoraAgendada(data.horaAgendada);
-      setDataEntregue(data.dataEntregue);
-      setHoraEntregue(data.horaEntregue);
+      setDataAgendada(data.dataAgendada || "");
+      setHoraAgendada(data.horaAgendada || "");
+      setDataEntregue(data.dataEntregue || "");
+      setHoraEntregue(data.horaEntregue || "");
     } catch (error) {
       mensagemErro("Erro ao buscar dados do test drive.");
     }
   };
 
   const salvar = async () => {
+    // Nova validação de datas no front-end
+    if (dataAgendada && horaAgendada && dataEntregue && horaEntregue) {
+      const dataHoraAgendada = new Date(`${dataAgendada}T${horaAgendada}`);
+      const dataHoraEntregue = new Date(`${dataEntregue}T${horaEntregue}`);
+
+      if (dataHoraEntregue < dataHoraAgendada) {
+        mensagemErro("A data e hora de entrega não podem ser anteriores à data e hora agendada.");
+        return; // Impede o envio para a API
+      }
+    }
+
     const payload = {
       id,
       dataAgendada,
       horaAgendada,
       modeloVeiculo,
       cpfCliente: cpfCliente?.value || "",
-      dataEntregue,
-      horaEntregue
+      dataEntregue: dataEntregue || null, // Envia null se estiver vazio
+      horaEntregue: horaEntregue || null, // Envia null se estiver vazio
     };
 
     try {
