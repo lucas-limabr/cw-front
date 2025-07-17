@@ -47,6 +47,7 @@ function CadastroEmpresa() {
     setBairro("");
     setCep("");
     setUf("");
+    
   }
 
   async function salvar() {

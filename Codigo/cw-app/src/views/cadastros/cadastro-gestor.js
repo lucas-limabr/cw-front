@@ -34,6 +34,7 @@ function CadastroGestor() {
   const [cep, setCep] = useState("");
   const [uf, setUf] = useState("");
   const [razaoSocialConcessionaria, setConcessionaria] = useState("");
+  const [cargo, setCargo] = useState("");
 
   const [dados, setDados] = useState(null);
   const [concessionarias, setConcessionarias] = useState([]);
@@ -63,6 +64,7 @@ function CadastroGestor() {
     setBairro("");
     setCep("");
     setUf("");
+    setCargo("");
     setConcessionaria("");
   }
 
@@ -83,6 +85,7 @@ function CadastroGestor() {
       bairro,
       cep,
       uf,
+      cargo,
       razaoSocialConcessionaria,
     };
 
@@ -124,6 +127,7 @@ function CadastroGestor() {
         setBairro(gestor.bairro);
         setCep(gestor.cep);
         setUf(gestor.uf);
+        setCargo("Gestor");
         setConcessionaria(gestor.razaoSocialConcessionaria);
         setDados(gestor);
       } catch (error) {

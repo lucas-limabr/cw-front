@@ -22,7 +22,7 @@ function CadastroCliente() {
   const [cpf, setCpf] = useState("");
   const [login, setLogin] = useState("");
   const [senha, setSenha] = useState("");
-  const [datanascimento, setDatanascimento] = useState("");
+  const [dataNascimento, setDatanascimento] = useState("");
   const [telefone1, setTelefone1] = useState("");
   const [telefone2, setTelefone2] = useState("");
   const [email1, setEmail1] = useState("");
@@ -33,7 +33,7 @@ function CadastroCliente() {
   const [bairro, setBairro] = useState("");
   const [cep, setCep] = useState("");
   const [uf, setUf] = useState("");
-
+  
   const [dados, setDados] = useState(null);
 
   function inicializar() {
@@ -62,7 +62,7 @@ function CadastroCliente() {
       cpf,
       login,
       senha,
-      datanascimento,
+      dataNascimento,
       telefone1,
       telefone2,
       email1,
@@ -74,6 +74,8 @@ function CadastroCliente() {
       cep,
       uf,
     };
+
+  console.log("Enviando para o backend:", dataNascimento);
 
     try {
       if (!idParam) {
@@ -181,7 +183,7 @@ function CadastroCliente() {
                 <input
                   type="date"
                   id="inputDataNascimento"
-                  value={datanascimento}
+                  value={dataNascimento}
                   className="form-control"
                   onChange={(e) => setDatanascimento(e.target.value)}
                 />

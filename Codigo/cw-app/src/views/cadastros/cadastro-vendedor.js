@@ -29,7 +29,10 @@ function CadastroVendedor() {
   const [bairro, setBairro] = useState("");
   const [cep, setCep] = useState("");
   const [uf, setUf] = useState("");
-  const [razaoSocialConcessionaria, setConcessionaria] = useState("");
+  const [cargo, setCargo] = useState("");
+
+  // Agora armazenamos o ID da concessionária (como o DTO espera)
+  const [idConcessionaria, setIdConcessionaria] = useState("");
 
   const [concessionarias, setConcessionarias] = useState([]);
 
@@ -58,7 +61,8 @@ function CadastroVendedor() {
     setBairro("");
     setCep("");
     setUf("");
-    setConcessionaria("");
+    setCargo("");
+    setIdConcessionaria("");
   }
 
   async function salvar() {
@@ -78,7 +82,8 @@ function CadastroVendedor() {
       bairro,
       cep,
       uf,
-      razaoSocialConcessionaria,
+      cargo,
+      idConcessionaria: parseInt(idConcessionaria), 
     };
 
     try {
@@ -119,7 +124,8 @@ function CadastroVendedor() {
         setBairro(vendedor.bairro);
         setCep(vendedor.cep);
         setUf(vendedor.uf);
-        setConcessionaria(vendedor.razaoSocialConcessionaria);
+        setCargo("Vendedor");
+        setIdConcessionaria(vendedor.idConcessionaria || ""); 
       } catch (error) {
         mensagemErro("Erro ao carregar os dados do vendedor.");
       }
@@ -190,7 +196,7 @@ function CadastroVendedor() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="Telefone - 2: *" htmlFor="inputTelefone1">
+              <FormGroup label="Telefone - 2: *" htmlFor="inputTelefone2">
                 <input
                   type="text"
                   id="inputTelefone2"
@@ -260,7 +266,7 @@ function CadastroVendedor() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="CEP *" htmlFor="inputCep">
+              <FormGroup label="CEP: *" htmlFor="inputCep">
                 <input
                   type="text"
                   id="inputCep"
@@ -270,7 +276,7 @@ function CadastroVendedor() {
                 />
               </FormGroup>
               <br />
-              <FormGroup label="UF *" htmlFor="inputUf">
+              <FormGroup label="UF: *" htmlFor="inputUf">
                 <input
                   type="text"
                   id="inputUf"
@@ -283,14 +289,14 @@ function CadastroVendedor() {
               <FormGroup label="Concessionária: *" htmlFor="inputConcessionaria">
                 <select
                   id="inputConcessionaria"
-                  value={razaoSocialConcessionaria}
+                  value={idConcessionaria}
                   className="form-control"
-                  onChange={(e) => setConcessionaria(e.target.value)}
+                  onChange={(e) => setIdConcessionaria(e.target.value)}
                 >
                   <option value="">Selecione uma concessionária</option>
-                  {concessionarias.map((m) => (
-                    <option key={m.id} value={m.razaoSocial}>
-                      {m.razaoSocial}
+                  {concessionarias.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.razaoSocial}
                     </option>
                   ))}
                 </select>
@@ -315,8 +321,8 @@ function CadastroVendedor() {
             </div>
           </div>
         </div>
-      </Card >
-    </div >
+      </Card>
+    </div>
   );
 }
 

@@ -9,7 +9,7 @@ function Navbar(props) {
     { href: "/listagem-admempresa", label: "ADMEmpresa" },
     { href: "/listagem-empresa", label: "Empresas" },
     { href: "/listagem-concessionaria", label: "Concessionarias" },
-    { href: "/listagem-gestor", label: "Gestores" },
+    //{ href: "/listagem-gestor", label: "Gestores" },
     { href: "/listagem-vendedor", label: "Vendedores" },
     { href: "/listagem-fabricante", label: "Fabricantes" },
     { href: "/listagem-modelo", label: "Modelos" },

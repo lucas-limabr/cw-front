@@ -11,7 +11,7 @@ import { mensagemSucesso, mensagemErro } from "../../components/toastr";
 import axios from "axios";
 import { BASE_URL } from "../../config/axios";
 
-const baseURL = `${BASE_URL}/admempresas`;
+const baseURL = `${BASE_URL}/admsempresa`;
 
 function CadastroAdmEmpresa() {
     const { idParam } = useParams();
