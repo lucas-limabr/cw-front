@@ -82,7 +82,7 @@ function ListagemVendedor() {
                   {dados.map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.nome}</td>
-                      <td>{dado.razaoSocialConcessionaria}</td>
+                      <td>{dado.concessionaria}</td>
                       <td>{dado.cpf}</td>
                       <td>{dado.telefone1}</td>
                       <td>{dado.email1}</td>
