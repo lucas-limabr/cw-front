@@ -51,3 +51,22 @@
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
 }
+
+.dual-listbox {
+  min-height: 300px;
+}
+
+.scrollbox {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.list-group-item {
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.list-group-item:hover {
+  background-color: #e2e6ea;
+}

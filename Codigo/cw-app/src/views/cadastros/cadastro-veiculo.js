@@ -8,6 +8,7 @@ import Stack from "@mui/material/Stack";
 
 import Card from "../../components/card";
 import FormGroup from "../../components/form-group";
+import SeletorAcessorios from "../../components/SeletorAcessorios";
 
 import { mensagemSucesso, mensagemErro } from "../../components/toastr";
 
@@ -18,6 +19,7 @@ import CadastroVeiculoMoto from "./cadastro-veiculo-moto";
 
 const baseURL = `${BASE_URL}/veiculos`;
 const modelosURL = `${BASE_URL}/modelos`;
+const acessoriosURL = `${BASE_URL}/acessorios`;
 const concessionariasURL = `${BASE_URL}/concessionarias`;
 
 function CadastroVeiculo() {
@@ -31,8 +33,7 @@ function CadastroVeiculo() {
   const [condicao, setCondicao] = useState("");
   const [tipo, setTipo] = useState("");
   const [garantia, setGarantia] = useState("");
-
-  const [acessorios, setAcessorios] = useState([]);
+  const [acessoriosIds, setAcessoriosIds] = useState([]);
 
   //atributos de modelo
   const [anoFabricacao, setAnoFabricacao] = useState("");
@@ -68,6 +69,7 @@ function CadastroVeiculo() {
   const [dados, setDados] = useState("");
   const [modelos, setModeloIds] = useState([]);
   const [concessionarias, setConcessionarias] = useState([]);
+  const [acessorios, setAcessorios] = useState([]);
 
   async function carregarModelos() {
     try {
@@ -75,6 +77,15 @@ function CadastroVeiculo() {
       setModeloIds(response.data);
     } catch (error) {
       console.error("Erro ao carregar modelos:", error);
+    }
+  }
+
+  async function carregarAcessorios() {
+    try {
+      const response = await axios.get(`${acessoriosURL}`);
+      setAcessorios(response.data);
+    } catch (error) {
+      console.error("Erro ao carregar acessórios:", error);
     }
   }
 
@@ -145,6 +156,7 @@ function CadastroVeiculo() {
       condicao: condicao,
       concessionariaId: concessionariaId === "" ? null : parseInt(concessionariaId),
       garantia: garantia,
+      acessoriosIds: acessoriosIds,
       modeloVeiculo: {
         precoBase: precoBaseNumerico,
         qtdEstoque: qtdEstoque === "" ? null : parseInt(qtdEstoque),
@@ -227,6 +239,7 @@ function CadastroVeiculo() {
         setCor(veiculo.cor);
         setGarantia(veiculo.garantia);
         setCondicao(veiculo.condicao);
+        setAcessoriosIds(veiculo.acessoriosIds);
 
         if (veiculo.condicao == "Usado") {
           setQuilometragem(veiculo.veiculoUsado.quilometragem);
@@ -274,6 +287,7 @@ function CadastroVeiculo() {
   useEffect(() => {
     carregarModelos();
     carregarConcessionarias();
+    carregarAcessorios();
     buscar();
   }, [idParam]);
 
@@ -434,6 +448,13 @@ function CadastroVeiculo() {
                   onChange={(e) => setCor(e.target.value)}
                 />
               </FormGroup>
+              <br />
+
+              <SeletorAcessorios
+                acessorios={acessorios}
+                selecionados={acessoriosIds}
+                onSelecionadosChange={setAcessoriosIds}
+              />
               <br />
               <FormGroup label="Garantia *" htmlFor="garantia">
                 <div>
