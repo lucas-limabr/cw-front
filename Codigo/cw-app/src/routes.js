@@ -37,7 +37,7 @@ function Rotas() {
       <Routes>
         <Route path="/cadastro-admsuporte/:idParam?" element={<CadastroAdmSuporte />} />
         <Route path="/cadastro-admempresa/:idParam?" element={<CadastroAdmEmpresa />} />
-        {/* <Route path="/cadastro-acessorio/:idParam?" element={<CadastroAcessorio />} /> */}
+        <Route path="/cadastro-acessorio/:idParam?" element={<CadastroAcessorio />} />
         <Route path="/cadastro-cliente/:idParam?" element={<CadastroCliente />} />
         <Route path="/cadastro-venda/:idParam?" element={<CadastroCompra />} />
         <Route path="/cadastro-concessionaria/:idParam?" element={<CadastroConcessionaria />} />
@@ -49,10 +49,9 @@ function Rotas() {
         <Route path="/cadastro-testdrive/:idParam?" element={<CadastroTestDrive />} />
         <Route path="/cadastro-veiculo/:idParam?" element={<CadastroVeiculo />} />
         <Route path="/cadastro-vendedor/:idParam?" element={<CadastroVendedor />} />
-
         <Route path="/listagem-admsuporte" element={<ListagemAdmSuporte />} />
         <Route path="/listagem-admempresa" element={<ListagemAdmEmpresa />} />
-        {/* <Route path="/listagem-acessorio" element={<ListagemAcessorio />} /> */}
+        <Route path="/listagem-acessorio" element={<ListagemAcessorio />} />
         <Route path="/listagem-cliente" element={<ListagemCliente />} />
         <Route path="/listagem-venda" element={<ListagemCompra />} />
         <Route path="/listagem-concessionaria" element={<ListagemConcessionaria />} />
