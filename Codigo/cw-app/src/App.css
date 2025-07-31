@@ -1,18 +1,12 @@
-.span-padding {
-  padding-left: 8px;
-}.App {
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Climate+Crisis&family=Michroma&family=Stalinist+One&display=swap');
+
+body {
+  padding-top: 80px;
+  font-family: 'Cairo', sans-serif;
+}
+
+.App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
 
 .App-header {
@@ -26,34 +20,30 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.bg-blue-royal {
+  background-color: #4169e1 !important;
 }
 
-.currency-input {
-  display: block;
-  width: 100%;
-  margin-top: 0.5rem;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
+.navbar-brand.navbar-brand-custom {
+  font-family: 'Climate Crisis', sans-serif;
+  font-size: 1.2rem;
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.4),
+               0 0 5px rgba(255, 255, 255, 0.2);
 }
 
-body {
-  padding-top: 80px;
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+  color: white !important;
+}
+
+.navbar-brand.navbar-brand-custom:hover,
+.navbar-brand.navbar-brand-custom:focus {
+  color: white !important;
 }
 
 .dual-listbox {
@@ -73,4 +63,40 @@ body {
 
 .list-group-item:hover {
   background-color: #e2e6ea;
+}
+
+.currency-input {
+  display: block;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+.span-padding {
+  padding-left: 8px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

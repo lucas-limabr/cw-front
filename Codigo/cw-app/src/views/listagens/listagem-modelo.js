@@ -63,11 +63,10 @@ function ListagemModelos() {
       <Card title="Listagem de Modelos">
         <div className="row">
           <div className="col-lg-12">
-            <br />
             <div className="bs-component">
               <button
                 type="button"
-                className="btn btn-warning"
+                className="btn btn-warning mb-3"
                 onClick={() => cadastrar()}
               >
                 Novo Modelo

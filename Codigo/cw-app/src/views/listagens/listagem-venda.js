@@ -135,13 +135,13 @@ function ListagemVenda() {
         <div className="row">
           <div className="col-lg-12">
             <div className="bs-component">
-              <button type="button" className="btn btn-warning my-3" onClick={cadastrar}>
+              <button type="button" className="btn btn-warning mb-3" onClick={cadastrar}>
                 Nova Venda
               </button>
 
               <div className="row mb-3">
                 <div className="col-md-5">
-                  <FormGroup label="Cliente:">
+                  <FormGroup label={<b>Cliente:</b>}>
                     <Select
                       options={clienteOptions}
                       value={filtroCliente}
@@ -152,7 +152,7 @@ function ListagemVenda() {
                   </FormGroup>
                 </div>
                 <div className="col-md-5">
-                  <FormGroup label="Vendedor:">
+                  <FormGroup label={<b>Vendedor:</b>}>
                     <Select
                       options={vendedorOptions}
                       value={filtroVendedor}

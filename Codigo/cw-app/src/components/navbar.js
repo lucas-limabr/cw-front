@@ -21,10 +21,10 @@ function Navbar(props) {
   ];
 
   return (
-    <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+    <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-blue-royal">
       <div className="container">
-        <a href="/" className="navbar-brand">
-          <img src="/logo.png" alt="Logo" />
+        <a href="/" className="navbar-brand navbar-brand-custom">
+          CONCESSWEB
         </a>
         <button
           className="navbar-toggler"
