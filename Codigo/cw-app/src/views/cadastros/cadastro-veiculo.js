@@ -8,7 +8,7 @@ import Stack from "@mui/material/Stack";
 
 import Card from "../../components/card";
 import FormGroup from "../../components/form-group";
-import SeletorAcessorios from "../../components/SeletorAcessorios";
+import SeletorItens from "../../components/SeletorItens";
 
 import { mensagemSucesso, mensagemErro } from "../../components/toastr";
 
@@ -450,10 +450,12 @@ function CadastroVeiculo() {
               </FormGroup>
               <br />
 
-              <SeletorAcessorios
-                acessorios={acessorios}
+              <SeletorItens
+                itens={acessorios}
                 selecionados={acessoriosIds}
                 onSelecionadosChange={setAcessoriosIds}
+                nomeAtributo="descricao"
+                nomeCategoria="Acessórios"
               />
               <br />
               <FormGroup label="Garantia *" htmlFor="garantia">
