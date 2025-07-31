@@ -56,6 +56,21 @@ body {
   padding-top: 80px;
 }
 
-.bg-dark-blue {
-  background-color: #00054b;
+.dual-listbox {
+  min-height: 300px;
+}
+
+.scrollbox {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.list-group-item {
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.list-group-item:hover {
+  background-color: #e2e6ea;
 }
