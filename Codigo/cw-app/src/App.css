@@ -51,3 +51,11 @@
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
 }
+
+body {
+  padding-top: 80px;
+}
+
+.bg-dark-blue {
+  background-color: #00054b;
+}

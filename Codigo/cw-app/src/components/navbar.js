@@ -16,7 +16,7 @@ function Navbar(props) {
     // { href: "/listagem-acessorio", label: "Acessórios" },
     { href: "/listagem-veiculo", label: "Veículos" },
     { href: "/listagem-testdrive", label: "TestDrive" },
-    // { href: "/listagem-venda", label: "Vendas" },
+    { href: "/listagem-venda", label: "Vendas" },
     { href: "/listagem-cliente", label: "Clientes" },
   ];
 
@@ -24,7 +24,7 @@ function Navbar(props) {
     <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
       <div className="container">
         <a href="/" className="navbar-brand">
-          ConcessWeb
+          <img src="/logo.png" alt="Logo" />
         </a>
         <button
           className="navbar-toggler"

@@ -8,7 +8,7 @@ import Rotas from "./routes.js";
 class App extends React.Component {
   render() {
     return (
-      <div className="container">
+        <div className="container mt-5">
         <Rotas />
         <Navbar />
       </div>
