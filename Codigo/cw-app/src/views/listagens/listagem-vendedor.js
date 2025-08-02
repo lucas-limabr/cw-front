@@ -1,21 +1,66 @@
-import React from "react";
+import React, { useState, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Select from "react-select";
 
 import Card from "../../components/card";
+import FormGroup from "../../components/form-group";
+import { mensagemSucesso, mensagemErro } from "../../components/toastr";
+import { BASE_URL } from "../../config/axios";
 
 import Stack from "@mui/material/Stack";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
-import axios from "axios";
-import { BASE_URL } from "../../config/axios";
-import { useNavigate } from "react-router-dom";
-
 const baseURL = `${BASE_URL}/vendedores`;
 
 function ListagemVendedor() {
   const navigate = useNavigate();
-  const [dados, setDados] = React.useState(null);
+
+  const [vendedoresOriginais, setVendedoresOriginais] = useState([]);
+  const [dados, setDados] = useState([]);
+  const [filtroConcessionaria, setFiltroConcessionaria] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(baseURL)
+      .then((response) => {
+        const vendedoresOrdenados = response.data.sort((a, b) => a.nome.localeCompare(b.nome));
+        setVendedoresOriginais(vendedoresOrdenados);
+        setDados(vendedoresOrdenados);
+      })
+      .catch((error) => {
+        mensagemErro("Erro ao carregar a listagem de vendedores.");
+      });
+  }, []);
+
+  const concessionariaOptions = useMemo(() => {
+    // Cria uma lista de concessionárias únicas a partir dos dados originais
+    const concessionariasUnicas = [
+      ...new Set(vendedoresOriginais.map((v) => v.concessionaria)),
+    ];
+    // Formata a lista para o formato exigido pelo react-select
+    return concessionariasUnicas.map((concessionaria) => ({
+      value: concessionaria,
+      label: concessionaria,
+    }));
+  }, [vendedoresOriginais]);
+
+  const handleFiltrar = () => {
+    let vendedoresFiltrados = [...vendedoresOriginais];
+    if (filtroConcessionaria) {
+      vendedoresFiltrados = vendedoresFiltrados.filter(
+        (v) => v.concessionaria === filtroConcessionaria.value
+      );
+    }
+    setDados(vendedoresFiltrados);
+  };
+
+  const handleLimparFiltros = () => {
+    setFiltroConcessionaria(null);
+    setDados(vendedoresOriginais);
+  };
 
   const cadastrar = () => {
     navigate(`/cadastro-vendedor`);
@@ -25,31 +70,18 @@ function ListagemVendedor() {
     navigate(`/cadastro-vendedor/${id}`);
   };
 
-  async function excluir(id) {
-    let data = JSON.stringify({ id });
-    let url = `${baseURL}/${id}`;
-    await axios
-      .delete(url, data, {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then(function (response) {
-        alert("Vendedor excluído com sucesso!");
-        setDados(
-          dados.filter((dado) => {
-            return dado.id !== id;
-          }),
-        );
-      })
-      .catch(function (error) {
-        alert("Erro ao excluir o vendedor");
-      });
-  }
-
-  React.useEffect(() => {
-    axios.get(`${baseURL}`).then((response) => {
-      setDados(response.data);
-    });
-  }, []);
+  const excluir = async (id) => {
+    try {
+      await axios.delete(`${baseURL}/${id}`);
+      mensagemSucesso("Vendedor excluído com sucesso!");
+      // Atualiza ambas as listas após a exclusão
+      const novosVendedores = vendedoresOriginais.filter((dado) => dado.id !== id);
+      setVendedoresOriginais(novosVendedores);
+      setDados(novosVendedores);
+    } catch (error) {
+      mensagemErro("Erro ao excluir o vendedor.");
+    }
+  };
 
   if (!dados) return null;
 
@@ -66,6 +98,39 @@ function ListagemVendedor() {
               >
                 Novo Vendedor
               </button>
+
+              {/* Seção de Filtro */}
+              <div className="row mb-3">
+                <div className="col-md-10">
+                  <FormGroup label={<b>Concessionária:</b>}>
+                    <Select
+                      options={concessionariaOptions}
+                      value={filtroConcessionaria}
+                      onChange={setFiltroConcessionaria}
+                      placeholder="Selecione uma concessionária para filtrar..."
+                      isClearable
+                    />
+                  </FormGroup>
+                </div>
+                <div className="col-md-2 d-flex align-items-end">
+                  <button
+                    onClick={handleFiltrar}
+                    type="button"
+                    className="btn btn-primary me-2"
+                  >
+                    Filtrar
+                  </button>
+                  <button
+                    onClick={handleLimparFiltros}
+                    type="button"
+                    className="btn btn-secondary"
+                  >
+                    Limpar
+                  </button>
+                </div>
+              </div>
+
+              {/* Tabela de Dados */}
               <table className="table table-hover">
                 <thead>
                   <tr>

@@ -212,7 +212,6 @@ function CadastroVenda() {
   return (
     <div className="container">
       <Card title={idParam ? "Edição de Venda" : "Cadastro de Venda"}>
-        <br />
         <div className="row mb-3">
           <div className="col-md-6">
             <FormGroup label="Data: *" htmlFor="inputData">

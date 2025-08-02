@@ -146,7 +146,7 @@ function ListagemVenda() {
                       options={clienteOptions}
                       value={filtroCliente}
                       onChange={setFiltroCliente}
-                      placeholder="Selecione um cliente..."
+                      placeholder="Todos"
                       isClearable
                     />
                   </FormGroup>
@@ -157,7 +157,7 @@ function ListagemVenda() {
                       options={vendedorOptions}
                       value={filtroVendedor}
                       onChange={setFiltroVendedor}
-                      placeholder="Selecione um vendedor..."
+                      placeholder="Todos"
                       isClearable
                     />
                   </FormGroup>
