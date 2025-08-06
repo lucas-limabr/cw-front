@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import SeletorItens from "../../components/SeletorItens";
 
 import Stack from "@mui/material/Stack";
 
@@ -12,6 +13,7 @@ import axios from "axios";
 import { BASE_URL } from "../../config/axios";
 
 const baseURL = `${BASE_URL}/admsempresa`;
+const concessionariasURL = `${BASE_URL}/concessionarias`;
 
 function CadastroAdmEmpresa() {
     const { idParam } = useParams();
@@ -32,9 +34,20 @@ function CadastroAdmEmpresa() {
     const [bairro, setBairro] = useState("");
     const [cep, setCep] = useState("");
     const [uf, setUf] = useState("");
-  
+    const [concessionariasIds, setConcessionariasIds] = useState([]);
+    const [concessionarias, setConcessionarias] = useState([]);
+
     const [dados, setDados] = useState(null);
   
+     async function carregarConcessionarias() {
+    try {
+      const response = await axios.get(`${concessionariasURL}`);
+      setConcessionarias(response.data);
+    } catch (error) {
+      console.error("Erro ao carregar concessionárias:", error);
+    }
+  }
+
     function inicializar() {
       setId("");
       setNome("");
@@ -64,6 +77,7 @@ function CadastroAdmEmpresa() {
         telefone2,
         email1,
         email2,
+        concessionariasIds: concessionariasIds,
         logradouro,
         numero,
         complemento,
@@ -110,7 +124,9 @@ function CadastroAdmEmpresa() {
           setBairro(admempresa.bairro);
           setCep(admempresa.cep);
           setUf(admempresa.uf);
+          setConcessionariasIds(admempresa.concessionariasIds);
           setDados(admempresa);
+          
         } catch (error) {
           mensagemErro("Erro ao carregar os dados do admempresa.");
         }
@@ -120,6 +136,7 @@ function CadastroAdmEmpresa() {
     }
   
     useEffect(() => {
+       carregarConcessionarias();
       buscar();
     }, [idParam]);
   
@@ -270,6 +287,15 @@ function CadastroAdmEmpresa() {
                   />
                 </FormGroup>
                 <br />
+
+                 <SeletorItens
+                  itens={concessionarias}
+                  selecionados={concessionariasIds}
+                  onSelecionadosChange={setConcessionariasIds}
+                  nomeAtributo="razaoSocial"
+                  nomeCategoria="Concessionarias"
+              />
+              <br/>
                 <Stack spacing={1} padding={1} direction="row">
                   <button
                     onClick={salvar}
