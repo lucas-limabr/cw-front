@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CadastroVeiculoUsado from "./cadastro-veiculo-usado";
 import CurrencyInput from "react-currency-input-field";
@@ -35,6 +35,7 @@ function CadastroVeiculo() {
   const [garantia, setGarantia] = useState("");
   const [acessoriosIds, setAcessoriosIds] = useState([]);
 
+  //atributos de modelo
   const [anoFabricacao, setAnoFabricacao] = useState("");
   const [modeloId, setModeloId] = useState("");
   const [precoBase, setPrecoBase] = useState("");
@@ -43,6 +44,7 @@ function CadastroVeiculo() {
   const [permiteTestDrive, setPermiteTestDrive] = useState(false);
   const [qtdEstoque, setQtdEstoque] = useState("");
 
+  //para veiculos usados
   const [quilometragem, setQuilometragem] = useState("");
   const [documentacao, setDocumentacao] = useState("");
   const [sinistroAcidente, setSinistroAcidente] = useState("");
@@ -51,49 +53,66 @@ function CadastroVeiculo() {
   const [dataUltimaRevisao, setDataUltimaRevisao] = useState("");
   const [contatoProprietario, setContatoProprietario] = useState("");
 
+  //para carros
   const [potencia, setPotencia] = useState("");
   const [categoriaCarro, setCategoriaCarro] = useState("");
   const [tipoMotorCarro, setTipoMotorCarro] = useState("");
   const [transmissaoCarro, setTransmissaoCarro] = useState("");
 
+  //para motos
   const [categoriaMoto, setCategoriaMoto] = useState("");
   const [tipoMotorMoto, setTipoMotorMoto] = useState("");
   const [qtdMarcha, setQtdMarcha] = useState("");
   const [cilindrada, setCilindrada] = useState("");
   const [tipoPartidaMoto, setTipoPartidaMoto] = useState("");
 
+  const [dados, setDados] = useState("");
   const [modelos, setModeloIds] = useState([]);
   const [concessionarias, setConcessionarias] = useState([]);
   const [acessorios, setAcessorios] = useState([]);
 
-  const carregarModelos = useCallback(async () => {
+  const token = localStorage.getItem("token");
+  
+  async function carregarModelos() {
     try {
-      const response = await axios.get(`${modelosURL}`);
+      const response = await axios.get(`${modelosURL}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setModeloIds(response.data);
     } catch (error) {
       console.error("Erro ao carregar modelos:", error);
     }
-  }, []);
+  }
 
-  const carregarAcessorios = useCallback(async () => {
+  async function carregarAcessorios() {
     try {
-      const response = await axios.get(`${acessoriosURL}`);
+      const response = await axios.get(`${acessoriosURL}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setAcessorios(response.data);
     } catch (error) {
       console.error("Erro ao carregar acessórios:", error);
     }
-  }, []);
+  }
 
-  const carregarConcessionarias = useCallback(async () => {
+  async function carregarConcessionarias() {
     try {
-      const response = await axios.get(`${concessionariasURL}`);
+      const response = await axios.get(`${concessionariasURL}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setConcessionarias(response.data);
     } catch (error) {
       console.error("Erro ao carregar concessionárias:", error);
     }
-  }, []);
+  }
 
-  const inicializar = useCallback(() => {
+  function inicializar() {
     setChassi("");
     setModeloId("");
     setAnoFabricacao("");
@@ -114,18 +133,23 @@ function CadastroVeiculo() {
     setManutencao("");
     setDataUltimaRevisao("");
     setContatoProprietario("");
+
+    //moto
     setCilindrada("");
     setCategoriaMoto("");
     setQtdMarcha("");
     setTipoPartidaMoto("");
     setTipoMotorMoto("");
+
+    //carro
     setCategoriaCarro("");
     setTransmissaoCarro("");
     setPotencia("");
     setTipoMotorCarro("");
-  }, []);
+  }
 
   async function salvar() {
+
     var precoAtualInput = precoAtual;
     var precoBaseInput = precoBase;
     if (typeof precoAtualInput === 'number') {
@@ -141,7 +165,7 @@ function CadastroVeiculo() {
 
     const data = {
       chassi: chassi,
-      precoAtual: precoAtualNumerico,
+      precoAtual: precoAtualNumerico, // envia como número para o backend
       cor: cor,
       condicao: condicao,
       concessionariaId: concessionariaId === "" ? null : parseInt(concessionariaId),
@@ -198,15 +222,19 @@ function CadastroVeiculo() {
       )
     };
 
+    console.log(data);
+
+    const token = localStorage.getItem("token");
+
     try {
       if (!idParam) {
         await axios.post(`${baseURL}`, data, {
-          headers: { "Content-Type": "application/json" }
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
         });
         mensagemSucesso(`Veículo de chassi ${data.chassi} cadastrado com sucesso!`);
       } else {
         await axios.put(`${baseURL}/${idParam}`, data, {
-          headers: { "Content-Type": "application/json" }
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
         });
         mensagemSucesso(`Veículo de chassi ${data.chassi} alterado com sucesso!`);
       }
@@ -216,10 +244,14 @@ function CadastroVeiculo() {
     }
   }
 
-  const buscar = useCallback(async () => {
+  async function buscar() {
     if (idParam) {
       try {
-        const response = await axios.get(`${baseURL}/${idParam}`);
+        const response = await axios.get(`${baseURL}/${idParam}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const veiculo = response.data;
         setChassi(veiculo.chassi);
         setConcessionariaId(veiculo.concessionariaId);
@@ -229,7 +261,7 @@ function CadastroVeiculo() {
         setCondicao(veiculo.condicao);
         setAcessoriosIds(veiculo.acessoriosIds);
 
-        if (veiculo.condicao === "Usado") {
+        if (veiculo.condicao == "Usado") {
           setQuilometragem(veiculo.veiculoUsado.quilometragem);
           setDocumentacao(veiculo.veiculoUsado.documentacao);
           setSinistroAcidente(veiculo.veiculoUsado.sinistroAcidente);
@@ -249,13 +281,13 @@ function CadastroVeiculo() {
 
         setTipo(veiculo.modeloVeiculo.tipoVeiculo.tipo);
 
-        if (veiculo.modeloVeiculo.tipoVeiculo.tipo === "Carro") {
+        if (veiculo.modeloVeiculo.tipoVeiculo.tipo == "Carro") {
           setPotencia(veiculo.modeloVeiculo.tipoVeiculo.carro.potencia);
           setCategoriaCarro(veiculo.modeloVeiculo.tipoVeiculo.carro.categoria);
           setTransmissaoCarro(veiculo.modeloVeiculo.tipoVeiculo.carro.transmissao);
           setTipoMotorCarro(veiculo.modeloVeiculo.tipoVeiculo.carro.motorizacao);
         }
-        else if (veiculo.modeloVeiculo.tipoVeiculo.tipo === "Moto") {
+        else if (veiculo.modeloVeiculo.tipoVeiculo.tipo == "Moto") {
           setTipoMotorMoto(veiculo.modeloVeiculo.tipoVeiculo.moto.tipoMotor);
           setCilindrada(veiculo.modeloVeiculo.tipoVeiculo.moto.cilindrada);
           setQtdMarcha(veiculo.modeloVeiculo.tipoVeiculo.moto.qtdMarcha);
@@ -263,20 +295,21 @@ function CadastroVeiculo() {
           setCategoriaMoto(veiculo.modeloVeiculo.tipoVeiculo.moto.categoria);
         }
 
+        setDados(veiculo);
       } catch (error) {
         mensagemErro("Erro ao carregar os dados do veículo.");
       }
     } else {
       inicializar();
     }
-  }, [idParam, inicializar]);
+  }
 
   useEffect(() => {
     carregarModelos();
     carregarConcessionarias();
     carregarAcessorios();
     buscar();
-  }, [buscar, carregarAcessorios, carregarConcessionarias, carregarModelos]);
+  }, [idParam]);
 
   return (
     <div className="container">
@@ -295,6 +328,16 @@ function CadastroVeiculo() {
                 />
               </FormGroup>
               <br />
+              {/* <FormGroup label="Foto: " htmlFor="inputFoto">
+                <input
+                  type="file"
+                  id="inputFoto"
+                  className="form-control"
+                  onChange={(e) => setFotoModelo(e.target.files[0])}
+                />
+              </FormGroup>
+
+              <br /> */}
               <FormGroup label="Modelo: *" htmlFor="inputModelo">
                 <select
                   id="inputModelo"
@@ -362,7 +405,7 @@ function CadastroVeiculo() {
                   decimalSeparator=","
                   groupSeparator="."
                   prefix="R$ "
-                  onValueChange={(value) => setPrecoAtual(value)}
+                  onValueChange={(value) => setPrecoAtual(value)} // value é string ou null
                   className="currency-input"
                 />
                 <br />
@@ -377,7 +420,7 @@ function CadastroVeiculo() {
                       checked={permiteTestDrive === "Sim"}
                       onChange={() => setPermiteTestDrive("Sim")}
                     />
-                    &nbsp;Sim
+                    Sim
                   </label>
                   <label style={{ marginLeft: "20px" }}>
                     <input
@@ -387,7 +430,7 @@ function CadastroVeiculo() {
                       checked={permiteTestDrive === "Não"}
                       onChange={() => setPermiteTestDrive("Não")}
                     />
-                    &nbsp;Não
+                    Não
                   </label>
                 </div>
               </FormGroup>
@@ -524,20 +567,20 @@ function CadastroVeiculo() {
                       type="radio"
                       value="Novo"
                       checked={condicao === "Novo"}
-                      disabled={condicao === "Usado" && idParam !== null}
+                      disabled={condicao === "Usado" && idParam != null}
                       onChange={() => setCondicao("Novo")}
                     />
-                    &nbsp;Novo
+                    Novo
                   </label>
                   <label style={{ marginLeft: "20px" }}>
                     <input
                       type="radio"
                       value="Usado"
                       checked={condicao === "Usado"}
-                      disabled={condicao === "Novo" && idParam !== null}
+                      disabled={condicao === "Novo" && idParam != null}
                       onChange={() => setCondicao("Usado")}
                     />
-                    &nbsp;Usado
+                    Usado
                   </label>
                 </div>
               </FormGroup>
@@ -568,20 +611,20 @@ function CadastroVeiculo() {
                       type="radio"
                       value="Carro"
                       checked={tipo === "Carro"}
-                      disabled={tipo === "Moto" && idParam !== null}
+                      disabled={tipo === "Moto" && idParam != null}
                       onChange={() => setTipo("Carro")}
                     />
-                    &nbsp;Carro
+                    Carro
                   </label>
                   <label style={{ marginLeft: "20px" }}>
                     <input
                       type="radio"
                       value="Moto"
                       checked={tipo === "Moto"}
-                      disabled={tipo === "Carro" && idParam !== null}
+                      disabled={tipo === "Carro" && idParam != null}
                       onChange={() => setTipo("Moto")}
                     />
-                    &nbsp;Moto
+                    Moto
                   </label>
                 </div>
               </FormGroup>

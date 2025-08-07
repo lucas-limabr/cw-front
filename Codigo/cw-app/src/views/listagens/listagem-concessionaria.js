@@ -22,9 +22,15 @@ function ListagemConcessionarias() {
   const [dados, setDados] = useState([]);
   const [filtroEmpresa, setFiltroEmpresa] = useState(null);
 
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
     axios
-      .get(baseURL)
+      .get(baseURL, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => {
         const concessionariasOrdenadas = response.data.sort((a, b) =>
           a.razaoSocial.localeCompare(b.razaoSocial)
@@ -74,7 +80,11 @@ function ListagemConcessionarias() {
 
   const excluir = async (id) => {
     try {
-      await axios.delete(`${baseURL}/${id}`);
+      await axios.delete(`${baseURL}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       mensagemSucesso("Concessionária excluída com sucesso!");
       // Atualiza ambas as listas após a exclusão
       const novasConcessionarias = concessionariasOriginais.filter(

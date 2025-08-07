@@ -75,7 +75,9 @@ function CadastroEmpresa() {
         mensagemSucesso(`Empresa ${razaoSocial} cadastrada com sucesso!`);
       } else {
         await axios.put(`${baseURL}/${idParam}`, data, {
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+           },
         });
         mensagemSucesso(`Empresa ${razaoSocial} alterada com sucesso!`);
       }
@@ -85,10 +87,16 @@ function CadastroEmpresa() {
     }
   }
 
+  const token = localStorage.getItem("token");
+
   async function buscar() {
     if (idParam) {
       try {
-        const response = await axios.get(`${baseURL}/${idParam}`);
+        const response = await axios.get(`${baseURL}/${idParam}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const empresa = response.data;
         setId(empresa.id);
         setRazaoSocial(empresa.razaoSocial);

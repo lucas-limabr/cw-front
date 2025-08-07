@@ -41,7 +41,7 @@ function CadastroItemSerie() {
         mensagemSucesso(`Item de série ${descricao} cadastrado com sucesso!`);
       } else {
         await axios.put(`${baseURL}/${idParam}`, data, {
-          headers: { "Content-Type": "application/json" },
+          headers: {     "Content-Type": "application/json",     Authorization: `Bearer ${token}`   },
         });
         mensagemSucesso(`Item de série ${descricao} alterado com sucesso!`);
       }
@@ -51,10 +51,16 @@ function CadastroItemSerie() {
     }
   }
 
+  const token = localStorage.getItem("token");
+
   async function buscar() {
     if (idParam) {
       try {
-        const response = await axios.get(`${baseURL}/${idParam}`);
+        const response = await axios.get(`${baseURL}/${idParam}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const item_serie = response.data;
         setId(item_serie.id);
         setDescricao(item_serie.descricao);

@@ -36,12 +36,17 @@ function CadastroFabricante() {
     try {
       if (!idParam) {
         await axios.post(`${baseURL}`, data, {
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+          },
+         
         });
         mensagemSucesso(`Fabricante ${nome} cadastrado com sucesso!`);
       } else {
         await axios.put(`${baseURL}/${idParam}`, data, {
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+          },
         });
         mensagemSucesso(`Fabricante ${nome} alterado com sucesso!`);
       }
@@ -51,10 +56,16 @@ function CadastroFabricante() {
     }
   }
 
+  const token = localStorage.getItem("token");
+
   async function buscar() {
     if (idParam) {
       try {
-        const response = await axios.get(`${baseURL}/${idParam}`);
+        const response = await axios.get(`${baseURL}/${idParam}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const fabricante = response.data;
         setId(fabricante.id);
         setNome(fabricante.nome);

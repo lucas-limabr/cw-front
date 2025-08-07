@@ -80,7 +80,10 @@ function CadastroAdmSuporte() {
                 mensagemSucesso(`admsuporte ${nome} cadastrado com sucesso!`);
             } else {
                 await axios.put(`${baseURL}/${idParam}`, data, {
-                    headers: { "Content-Type": "application/json" },
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
                 });
                 mensagemSucesso(`admsuporte ${nome} alterado com sucesso!`);
             }
@@ -90,10 +93,16 @@ function CadastroAdmSuporte() {
         }
     }
 
+    const token = localStorage.getItem("token");
+
     async function buscar() {
         if (idParam) {
             try {
-                const response = await axios.get(`${baseURL}/${idParam}`);
+                const response = await axios.get(`${baseURL}/${idParam}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 const admsuporte = response.data;
                 setId(admsuporte.id);
                 setNome(admsuporte.nome);

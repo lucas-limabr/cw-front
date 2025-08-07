@@ -22,9 +22,15 @@ function ListagemVendedor() {
   const [dados, setDados] = useState([]);
   const [filtroConcessionaria, setFiltroConcessionaria] = useState(null);
 
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
     axios
-      .get(baseURL)
+      .get(baseURL, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => {
         const vendedoresOrdenados = response.data.sort((a, b) => a.nome.localeCompare(b.nome));
         setVendedoresOriginais(vendedoresOrdenados);
@@ -72,7 +78,11 @@ function ListagemVendedor() {
 
   const excluir = async (id) => {
     try {
-      await axios.delete(`${baseURL}/${id}`);
+      await axios.delete(`${baseURL}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       mensagemSucesso("Vendedor excluído com sucesso!");
       // Atualiza ambas as listas após a exclusão
       const novosVendedores = vendedoresOriginais.filter((dado) => dado.id !== id);

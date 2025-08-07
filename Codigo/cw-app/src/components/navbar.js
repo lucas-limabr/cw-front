@@ -2,22 +2,28 @@ import React from "react";
 import "bootswatch/dist/flatly/bootstrap.css";
 
 import NavbarItem from "./navbarItem";
+import "../helper/verificaPermissao";
+import { hasRole } from "../helper/verificaPermissao";
 
 function Navbar(props) {
+
+  const roles = localStorage.getItem("roles");
+
   const navbarItems = [
-    { href: "/listagem-admsuporte", label: "ADMSuporte" },
-    { href: "/listagem-admempresa", label: "ADMEmpresa" },
-    { href: "/listagem-empresa", label: "Empresas" },
-    { href: "/listagem-concessionaria", label: "Concessionarias" },
+    { href: "/login", label: "Login/logout", role: '' },
+    { href: "/listagem-admsuporte", label: "ADMSuporte", role: 'ROLE_ADMIN' },
+    { href: "/listagem-admempresa", label: "ADMEmpresa", role: 'ROLE_ADMIN' },
+    { href: "/listagem-empresa", label: "Empresas", role: 'ROLE_ADMIN' },
+    { href: "/listagem-concessionaria", label: "Concessionarias", role: 'ROLE_USER' },
     //{ href: "/listagem-gestor", label: "Gestores" },
-    { href: "/listagem-vendedor", label: "Vendedores" },
-    { href: "/listagem-fabricante", label: "Fabricantes" },
-    { href: "/listagem-modelo", label: "Modelos" },
-    { href: "/listagem-acessorio", label: "Acessórios" },
-    { href: "/listagem-veiculo", label: "Veículos" },
-    { href: "/listagem-testdrive", label: "TestDrive" },
-    { href: "/listagem-venda", label: "Vendas" },
-    { href: "/listagem-cliente", label: "Clientes" },
+    { href: "/listagem-vendedor", label: "Vendedores", role: 'ROLE_ADMIN' },
+    { href: "/listagem-fabricante", label: "Fabricantes", role: 'ROLE_USER' },
+    { href: "/listagem-modelo", label: "Modelos", role: 'ROLE_USER' },
+    { href: "/listagem-acessorio", label: "Acessórios", role: 'ROLE_USER' },
+    { href: "/listagem-veiculo", label: "Veículos", role: 'ROLE_USER' },
+    { href: "/listagem-testdrive", label: "TestDrive", role: 'ROLE_USER' },
+    { href: "/listagem-venda", label: "Vendas", role: 'ROLE_USER' },
+    { href: "/listagem-cliente", label: "Clientes", role: 'ROLE_USER' },
   ];
 
   return (
@@ -39,11 +45,18 @@ function Navbar(props) {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarResponsive">
-          {navbarItems.map((item, index) => (
-            <ul className="navbar-nav" key={index}>
-              <NavbarItem render="true" href={item.href} label={item.label} />
-            </ul>
-          ))}
+
+          <ul className="navbar-nav">
+            <NavbarItem key={0} render="true" href={navbarItems[0].href} label={navbarItems[0].label} />
+          </ul>
+
+          <ul className="navbar-nav">
+            {navbarItems.map((item, index) =>
+              hasRole(item.role) && (
+                <NavbarItem key={index} render="true" href={item.href} label={item.label} />
+              )
+            )}
+          </ul>
         </div>
       </div>
     </div>

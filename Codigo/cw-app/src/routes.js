@@ -30,6 +30,7 @@ import ListagemModelo from "./views/listagens/listagem-modelo.js";
 import ListagemTestDrive from "./views/listagens/listagem-testdrive.js";
 import ListagemVeiculo from "./views/listagens/listagem-veiculo.js";
 import ListagemVendedor from "./views/listagens/listagem-vendedor.js";
+import Login from "./views/login.js";
 
 function Rotas() {
   return (
@@ -49,6 +50,9 @@ function Rotas() {
         <Route path="/cadastro-testdrive/:idParam?" element={<CadastroTestDrive />} />
         <Route path="/cadastro-veiculo/:idParam?" element={<CadastroVeiculo />} />
         <Route path="/cadastro-vendedor/:idParam?" element={<CadastroVendedor />} />
+        
+        
+        <Route path="/login" element={<Login />} />
         <Route path="/listagem-admsuporte" element={<ListagemAdmSuporte />} />
         <Route path="/listagem-admempresa" element={<ListagemAdmEmpresa />} />
         <Route path="/listagem-acessorio" element={<ListagemAcessorio />} />

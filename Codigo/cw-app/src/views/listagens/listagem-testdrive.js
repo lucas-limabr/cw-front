@@ -31,10 +31,16 @@ function ListagemTestDrive() {
     return `${dia}/${mes}/${ano}`;
   };
 
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
     const carregarTestDrives = async () => {
       try {
-        const response = await axios.get(baseURL);
+        const response = await axios.get(baseURL, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const dadosOrdenados = response.data.sort(
           (a, b) => new Date(b.dataAgendada) - new Date(a.dataAgendada)
         );
@@ -84,7 +90,11 @@ function ListagemTestDrive() {
 
   const excluir = async (id) => {
     try {
-      await axios.delete(`${baseURL}/${id}`);
+      await axios.delete(`${baseURL}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       mensagemSucesso("Test Drive excluído com sucesso!");
       const novosDados = testDrivesOriginais.filter((dado) => dado.id !== id);
       setTestDrivesOriginais(novosDados);

@@ -26,7 +26,7 @@ function CadastroTestDrive() {
   const [horaEntregue, setHoraEntregue] = useState("");
   const [modeloVeiculo, setModelo] = useState("");
   const [cpfCliente, setCpfCliente] = useState(null);
-  
+
   const [clientes, setClientes] = useState([]);
   const [modelos, setModelos] = useState([]);
 
@@ -51,9 +51,15 @@ function CadastroTestDrive() {
     setCpfCliente(null);
   };
 
+  const token = localStorage.getItem("token");
+
   const carregarModelos = async () => {
     try {
-      const response = await axios.get(modelosURL);
+      const response = await axios.get(modelosURL, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setModelos(response.data);
     } catch (error) {
       mensagemErro("Erro ao carregar modelos.");
@@ -62,7 +68,11 @@ function CadastroTestDrive() {
 
   const carregarClientes = async () => {
     try {
-      const response = await axios.get(clientesURL);
+      const response = await axios.get(clientesURL, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const formatados = response.data.map((c) => ({
         value: c.cpf,
         label: c.cpf,
@@ -78,7 +88,11 @@ function CadastroTestDrive() {
       return;
     }
     try {
-      const response = await axios.get(`${baseURL}/${idParam}`);
+      const response = await axios.get(`${baseURL}/${idParam}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const data = response.data;
 
       setId(data.id);
@@ -117,7 +131,12 @@ function CadastroTestDrive() {
 
     try {
       if (idParam) {
-        await axios.put(`${baseURL}/${idParam}`, payload);
+        await axios.put(`${baseURL}/${idParam}`, payload, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          }
+        });
         mensagemSucesso("Test drive atualizado com sucesso!");
       } else {
         await axios.post(baseURL, payload);

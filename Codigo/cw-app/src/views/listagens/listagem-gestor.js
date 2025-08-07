@@ -34,8 +34,11 @@ function ListagemGestores() {
     let url = `${baseURL}/${id}`;
     console.log(url);
     await axios
-      .delete(url, data, {
-        headers: { "Content-Type": "application/json" },
+      .delete(url, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       })
       .then(function (response) {
         mensagemSucesso(`Gestor excluído com sucesso!`);
@@ -50,8 +53,14 @@ function ListagemGestores() {
       });
   }
 
+  const token = localStorage.getItem("token");
+
   React.useEffect(() => {
-    axios.get(`${baseURL}`).then((response) => {
+    axios.get(`${baseURL}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((response) => {
       setDados(response.data);
     });
   }, []);

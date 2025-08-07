@@ -27,9 +27,15 @@ function ListagemVeiculo() {
   const [filtroCondicao, setFiltroCondicao] = useState(null);
   const [filtroConcessionaria, setFiltroConcessionaria] = useState(null);
 
+  const token = localStorage.getItem("token");
+  
   useEffect(() => {
     axios
-      .get(baseURL)
+      .get(baseURL, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => {
         const veiculosOrdenados = response.data.sort((a, b) =>
           a.nomeModelo.localeCompare(b.nomeModelo)
@@ -110,7 +116,11 @@ function ListagemVeiculo() {
 
   const excluir = async (id) => {
     try {
-      await axios.delete(`${baseURL}/${id}`);
+      await axios.delete(`${baseURL}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       mensagemSucesso("Veículo excluído com sucesso!");
       const novosVeiculos = veiculosOriginais.filter((dado) => dado.id !== id);
       setVeiculosOriginais(novosVeiculos);

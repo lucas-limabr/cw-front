@@ -34,8 +34,11 @@ function ListagemItensSeries() {
     let url = `${baseURL}/${id}`;
     console.log(url);
     await axios
-      .delete(url, data, {
-        headers: { "Content-Type": "application/json" },
+      .delete(url, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       })
       .then(function (response) {
         mensagemSucesso(`Item de série excluído com sucesso!`);
@@ -50,8 +53,14 @@ function ListagemItensSeries() {
       });
   }
 
+  const token = localStorage.getItem("token");
+
   React.useEffect(() => {
-    axios.get(`${baseURL}`).then((response) => {
+    axios.get(`${baseURL}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((response) => {
       setDados(response.data);
     });
   }, []);
@@ -63,10 +72,11 @@ function ListagemItensSeries() {
       <Card title="Listagem de Acessórios">
         <div className="row">
           <div className="col-lg-12">
+            <br />
             <div className="bs-component">
               <button
                 type="button"
-                className="btn btn-warning mb-3"
+                className="btn btn-warning"
                 onClick={() => cadastrar()}
               >
                 Novo Acessório

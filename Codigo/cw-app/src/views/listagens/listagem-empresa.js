@@ -33,8 +33,11 @@ function ListagemEmpresa() {
     let data = JSON.stringify({ id });
     let url = `${baseURL}/${id}`;
     await axios
-      .delete(url, data, {
-        headers: { "Content-Type": "application/json" },
+      .delete(url, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       })
       .then(function (response) {
         mensagemSucesso(`Empresa excluída com sucesso!`);
@@ -49,8 +52,14 @@ function ListagemEmpresa() {
       });
   }
 
+  const token = localStorage.getItem("token");
+
   React.useEffect(() => {
-    axios.get(`${baseURL}`).then((response) => {
+    axios.get(`${baseURL}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((response) => {
       setDados(response.data);
     });
   }, []);
@@ -62,10 +71,11 @@ function ListagemEmpresa() {
       <Card title="Listagem de Empresas">
         <div className="row">
           <div className="col-lg-12">
+            <br />
             <div className="bs-component">
               <button
                 type="button"
-                className="btn btn-warning mb-3"
+                className="btn btn-warning"
                 onClick={() => cadastrar()}
               >
                 Nova Empresa

@@ -32,12 +32,14 @@ function CadastroAcessorio() {
     try {
       if (!idParam) {
         await axios.post(`${baseURL}`, data, {
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+           },
         });
         mensagemSucesso(`Acessório ${descricao} cadastrado com sucesso!`);
       } else {
         await axios.put(`${baseURL}/${idParam}`, data, {
-          headers: { "Content-Type": "application/json" },
+          headers: {     "Content-Type": "application/json",  Authorization: `Bearer ${token}`},
         });
         mensagemSucesso(`Acessório ${descricao} alterado com sucesso!`);
       }
@@ -47,10 +49,16 @@ function CadastroAcessorio() {
     }
   }
 
+  const token = localStorage.getItem("token");
+
   async function buscar() {
     if (idParam) {
       try {
-        const response = await axios.get(`${baseURL}/${idParam}`);
+        const response = await axios.get(`${baseURL}/${idParam}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const acessorio = response.data;
         setId(acessorio.id);
         setDescricao(acessorio.descricao);

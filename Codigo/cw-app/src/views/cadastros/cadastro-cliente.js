@@ -85,7 +85,7 @@ function CadastroCliente() {
         mensagemSucesso(`Cliente ${nome} cadastrado com sucesso!`);
       } else {
         await axios.put(`${baseURL}/${idParam}`, data, {
-          headers: { "Content-Type": "application/json" },
+          headers: {     "Content-Type": "application/json",     Authorization: `Bearer ${token}`   },
         });
         mensagemSucesso(`Cliente ${nome} alterado com sucesso!`);
       }
@@ -95,10 +95,16 @@ function CadastroCliente() {
     }
   }
 
+  const token = localStorage.getItem("token");
+
   async function buscar() {
     if (idParam) {
       try {
-        const response = await axios.get(`${baseURL}/${idParam}`);
+        const response = await axios.get(`${baseURL}/${idParam}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const cliente = response.data;
         setId(cliente.id);
         setNome(cliente.nome);

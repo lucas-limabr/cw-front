@@ -41,7 +41,11 @@ function CadastroGestor() {
 
   async function carregarConcessionarias() {
     try {
-      const response = await axios.get(`${concessionariasURL}`);
+      const response = await axios.get(`${concessionariasURL}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setConcessionarias(response.data);
     } catch (error) {
       console.error("Erro ao carregar concessionárias:", error);
@@ -97,7 +101,7 @@ function CadastroGestor() {
         mensagemSucesso(`Gestor ${nome} cadastrado com sucesso!`);
       } else {
         await axios.put(`${baseURL}/${idParam}`, data, {
-          headers: { "Content-Type": "application/json" },
+          headers: {     "Content-Type": "application/json",     Authorization: `Bearer ${token}`   },
         });
         mensagemSucesso(`Gestor ${nome} alterado com sucesso!`);
       }
@@ -107,10 +111,16 @@ function CadastroGestor() {
     }
   }
 
+  const token = localStorage.getItem("token");
+
   async function buscar() {
     if (idParam) {
       try {
-        const response = await axios.get(`${baseURL}/${idParam}`);
+        const response = await axios.get(`${baseURL}/${idParam}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const gestor = response.data;
         setId(gestor.id);
         setNome(gestor.nome);

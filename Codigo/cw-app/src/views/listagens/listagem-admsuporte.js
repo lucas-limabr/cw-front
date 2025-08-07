@@ -30,28 +30,37 @@ function ListagemAdmSuporte() {
     const [dados, setDados] = React.useState(null);
 
     async function excluir(id) {
-    let url = `${baseURL}/${id}`;
-    console.log(url);
-    await axios
-        .delete(url, {
-            headers: { "Content-Type": "application/json" },
-        })
-        .then(function (response) {
-            mensagemSucesso(`AdmSuporte excluído com sucesso!`);
-            setDados(
-                dados.filter((dado) => {
-                    return dado.id !== id;
-                }),
-            );
-        })
-        .catch(function (error) {
-            mensagemErro(`Erro ao excluir o AdmSuporte`);
-            console.error("Erro detalhado:", error);
-        });
-}
+        let url = `${baseURL}/${id}`;
+        console.log(url);
+        await axios
+            .delete(url, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then(function (response) {
+                mensagemSucesso(`AdmSuporte excluído com sucesso!`);
+                setDados(
+                    dados.filter((dado) => {
+                        return dado.id !== id;
+                    }),
+                );
+            })
+            .catch(function (error) {
+                mensagemErro(`Erro ao excluir o AdmSuporte`);
+                console.error("Erro detalhado:", error);
+            });
+    }
+
+    const token = localStorage.getItem("token");
 
     React.useEffect(() => {
-        axios.get(`${baseURL}`).then((response) => {
+        axios.get(`${baseURL}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then((response) => {
             setDados(response.data);
         });
     }, []);

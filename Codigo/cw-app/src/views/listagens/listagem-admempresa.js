@@ -30,28 +30,38 @@ function ListagemAdmEmpresa() {
     const [dados, setDados] = React.useState(null);
 
     async function excluir(id) {
-    let url = `${baseURL}/${id}`;
-    console.log(url);
-    await axios
-        .delete(url, {
-            headers: { "Content-Type": "application/json" },
-        })
-        .then(function (response) {
-            mensagemSucesso(`ADMEmpresa excluído com sucesso!`);
-            setDados(
-                dados.filter((dado) => {
-                    return dado.id !== id;
-                }),
-            );
-        })
-        .catch(function (error) {
-            mensagemErro(`Erro ao excluir o ADMEmpresa`);
-            console.error("Erro detalhado:", error);
-        });
-}
+        let url = `${baseURL}/${id}`;
+        console.log(url);
+        await axios
+            .delete(url, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+
+            })
+            .then(function (response) {
+                mensagemSucesso(`ADMEmpresa excluído com sucesso!`);
+                setDados(
+                    dados.filter((dado) => {
+                        return dado.id !== id;
+                    }),
+                );
+            })
+            .catch(function (error) {
+                mensagemErro(`Erro ao excluir o ADMEmpresa`);
+                console.error("Erro detalhado:", error);
+            });
+    }
+
+    const token = localStorage.getItem("token");
 
     React.useEffect(() => {
-        axios.get(`${baseURL}`).then((response) => {
+        axios.get(`${baseURL}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then((response) => {
             setDados(response.data);
         });
     }, []);
@@ -63,10 +73,11 @@ function ListagemAdmEmpresa() {
             <Card title="Listagem de ADMEmpresa">
                 <div className="row">
                     <div className="col-lg-12">
+                        <br />
                         <div className="bs-component">
                             <button
                                 type="button"
-                                className="btn btn-warning mb-3"
+                                className="btn btn-warning"
                                 onClick={() => cadastrar()}
                             >
                                 Novo ADMEmpresa

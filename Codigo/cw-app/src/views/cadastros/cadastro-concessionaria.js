@@ -30,8 +30,14 @@ function CadastroConcessionaria() {
   const [empresaId, setEmpresaId] = useState("");
   const [empresas, setEmpresas] = useState([]);
 
+  const token = localStorage.getItem("token");
+  
   useEffect(() => {
-    axios.get(empresasURL)
+    axios.get(empresasURL, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then(response => {
         setEmpresas(response.data);
       })
@@ -87,7 +93,7 @@ function CadastroConcessionaria() {
         mensagemSucesso(`Concessionária ${razaoSocial} cadastrada com sucesso!`);
       } else {
         await axios.put(`${baseURL}/${idParam}`, data, {
-          headers: { "Content-Type": "application/json" },
+          headers: {     "Content-Type": "application/json",     Authorization: `Bearer ${token}`   },
         });
         mensagemSucesso(`Concessionária ${razaoSocial} alterada com sucesso!`);
       }

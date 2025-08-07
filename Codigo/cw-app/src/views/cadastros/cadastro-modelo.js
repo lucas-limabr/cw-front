@@ -24,9 +24,15 @@ function CadastroModelo() {
   const [dados, setDados] = useState(null);
   const [fabricantes, setFabricantes] = useState([]);
 
+  const token = localStorage.getItem("token");
+
   async function carregarFabricantes() {
     try {
-      const response = await axios.get(`${fabricantesURL}`);
+      const response = await axios.get(`${fabricantesURL}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setFabricantes(response.data);
     } catch (error) {
       console.error("Erro ao carregar fabricantes:", error);
@@ -47,12 +53,12 @@ function CadastroModelo() {
     try {
       if (!idParam) {
         await axios.post(`${baseURL}`, data, {
-          headers: { "Content-Type": "application/json" },
+          headers: {     "Content-Type": "application/json",     Authorization: `Bearer ${token}`   },
         });
         mensagemSucesso(`Modelo ${nome} cadastrado com sucesso!`);
       } else {
         await axios.put(`${baseURL}/${idParam}`, data, {
-          headers: { "Content-Type": "application/json" },
+          headers: {     "Content-Type": "application/json",     Authorization: `Bearer ${token}`   },
         });
         mensagemSucesso(`Modelo ${nome} alterado com sucesso!`);
       }
@@ -65,7 +71,11 @@ function CadastroModelo() {
   async function buscar() {
     if (idParam) {
       try {
-        const response = await axios.get(`${baseURL}/${idParam}`);
+        const response = await axios.get(`${baseURL}/${idParam}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const modelo = response.data;
         setNome(modelo.nome);
         setFabricante(modelo.fabricanteId);

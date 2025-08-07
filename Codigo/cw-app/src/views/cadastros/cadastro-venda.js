@@ -52,14 +52,36 @@ function CadastroVenda() {
     'PIX',
   ];
 
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
     const loadOptions = async () => {
       try {
         const [clientesRes, vendedoresRes, veiculosRes, modelosRes] = await Promise.all([
-          axios.get(clientesURL),
-          axios.get(vendedoresURL),
-          axios.get(veiculosURL),
-          axios.get(modelosURL),
+          axios.get(clientesURL, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }),
+          axios.get(vendedoresURL, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }),
+          axios.get(veiculosURL, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }),
+          axios.get(modelosURL, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }),
         ]);
 
         setClientesOptions(clientesRes.data.map((c) => ({ value: c.id, label: `${c.nome} (${c.cpf})` })));
@@ -78,7 +100,12 @@ function CadastroVenda() {
 
     const loadVenda = async () => {
       try {
-        const response = await axios.get(`${vendasURL}/${idParam}`);
+        const response = await axios.get(`${vendasURL}/${idParam}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const venda = response.data;
         
         setData(venda.data);
@@ -199,7 +226,17 @@ function CadastroVenda() {
     };
 
     try {
-      const promise = idParam ? axios.put(`${vendasURL}/${idParam}`, payload) : axios.post(vendasURL, payload);
+      const promise = idParam ? axios.put(`${vendasURL}/${idParam}`, payload, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }) : axios.post(vendasURL, payload, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       await promise;
       mensagemSucesso(`Venda ${idParam ? 'atualizada' : 'cadastrada'} com sucesso!`);
       navigate("/listagem-venda");

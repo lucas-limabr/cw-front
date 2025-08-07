@@ -36,9 +36,15 @@ function CadastroVendedor() {
 
   const [concessionarias, setConcessionarias] = useState([]);
 
+  const token = localStorage.getItem("token");
+
   async function carregarConcessionarias() {
     try {
-      const response = await axios.get(`${concessionariasURL}`);
+      const response = await axios.get(`${concessionariasURL}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setConcessionarias(response.data);
     } catch (error) {
       console.error("Erro ao carregar concessionárias:", error);
@@ -94,7 +100,7 @@ function CadastroVendedor() {
         mensagemSucesso(`Vendedor ${nome} cadastrado com sucesso!`);
       } else {
         await axios.put(`${baseURL}/${idParam}`, data, {
-          headers: { "Content-Type": "application/json" },
+          headers: {     "Content-Type": "application/json",     Authorization: `Bearer ${token}`   },
         });
         mensagemSucesso(`Vendedor ${nome} alterado com sucesso!`);
       }
@@ -107,7 +113,11 @@ function CadastroVendedor() {
   async function buscar() {
     if (idParam) {
       try {
-        const response = await axios.get(`${baseURL}/${idParam}`);
+        const response = await axios.get(`${baseURL}/${idParam}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const vendedor = response.data;
         setId(vendedor.id);
         setNome(vendedor.nome);

@@ -28,12 +28,22 @@ function ListagemVenda() {
   const [filtroCliente, setFiltroCliente] = useState(null);
   const [filtroVendedor, setFiltroVendedor] = useState(null);
 
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
     const carregarDadosIniciais = async () => {
       try {
         const [vendasRes, veiculosRes] = await Promise.all([
-          axios.get(baseURL),
-          axios.get(veiculosURL)
+          axios.get(baseURL, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }),
+          axios.get(veiculosURL, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
         ]);
         const vendasOrdenadas = vendasRes.data.sort((a, b) => b.id - a.id);
         setVendasOriginais(vendasOrdenadas);
@@ -94,7 +104,11 @@ function ListagemVenda() {
 
   const excluir = async (id) => {
     try {
-      await axios.delete(`${baseURL}/${id}`);
+      await axios.delete(`${baseURL}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       mensagemSucesso(`Venda excluída com sucesso!`);
       const novasVendas = vendasOriginais.filter((dado) => dado.id !== id);
       setVendasOriginais(novasVendas);
@@ -110,7 +124,11 @@ function ListagemVenda() {
   const visualizarDetalhes = async (id) => {
     setDetalhesVenda(null);
     try {
-      const response = await axios.get(`${baseURL}/${id}`);
+      const response = await axios.get(`${baseURL}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setDetalhesVenda(response.data);
     } catch (error) {
       mensagemErro("Erro ao buscar detalhes da venda.");
