@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import SeletorItens from "../../components/SeletorItens";
 
 import Stack from "@mui/material/Stack";
 
@@ -12,6 +13,7 @@ import axios from "axios";
 import { BASE_URL } from "../../config/axios";
 
 const baseURL = `${BASE_URL}/admsempresa`;
+const concessionariasURL = `${BASE_URL}/concessionarias`;
 
 function CadastroAdmEmpresa() {
   const { idParam } = useParams();
